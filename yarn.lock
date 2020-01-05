@@ -618,31 +618,31 @@
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.1.7.tgz#4336c4b06d0b5608ff1215464b66fcf9f4795284"
 
-"@fortawesome/fontawesome-free-brands@^5.0.13":
+"@fortawesome/fontawesome-free-brands@5.0.13":
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-5.0.13.tgz#4d15ff4e1e862d5e4a4df3654f8e8acbd47e9c09"
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
-"@fortawesome/fontawesome-free-regular@^5.0.13":
+"@fortawesome/fontawesome-free-regular@5.0.13":
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-regular/-/fontawesome-free-regular-5.0.13.tgz#eb78c30184e3f456a423a1dcfa0f682f7b50de4a"
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
-"@fortawesome/fontawesome-free-solid@^5.0.13":
+"@fortawesome/fontawesome-free-solid@5.0.13":
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-5.0.13.tgz#24b61aaf471a9d34a5364b052d64a516285ba894"
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
-"@fortawesome/fontawesome@^1.1.8":
+"@fortawesome/fontawesome@1.1.8":
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-1.1.8.tgz#75fe66a60f95508160bb16bd781ad7d89b280f5b"
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
-"@rails/webpacker@4.2":
+"@rails/webpacker@4.2.2":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-4.2.2.tgz#b9dd3235fdf4d0badbda8e33f6ebee742a9f3abb"
   dependencies:
@@ -1107,7 +1107,7 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
-axios@^0.18.1:
+axios@0.18.1:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
   dependencies:
@@ -1345,11 +1345,11 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bulma-extensions@^6.2.7:
+bulma-extensions@6.2.7:
   version "6.2.7"
   resolved "https://registry.yarnpkg.com/bulma-extensions/-/bulma-extensions-6.2.7.tgz#f9f4d1478a7ac1606ae8db1e765aa45e3f12bb31"
 
-bulma@^0.8.0:
+bulma@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.8.0.tgz#ac1606431703a4761b18a4a2d5cc1fa864a2aece"
 
@@ -2671,7 +2671,7 @@ follow-redirects@1.5.10, follow-redirects@^1.0.0:
   dependencies:
     debug "=3.1.0"
 
-font-awesome@^4.7.0:
+font-awesome@4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
@@ -3796,7 +3796,7 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-mdi@^2.2.43:
+mdi@2.2.43:
   version "2.2.43"
   resolved "https://registry.yarnpkg.com/mdi/-/mdi-2.2.43.tgz#c5e419a6e5f48c82c7109328f52530fd187a0ec0"
 
@@ -5364,7 +5364,7 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
 
-qs@^6.9.1:
+qs@6.9.1:
   version "6.9.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.1.tgz#20082c65cb78223635ab1a9eaca8875a29bf8ec9"
 
@@ -6568,7 +6568,7 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
 
-vue-chartkick@^0.6.0:
+vue-chartkick@0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/vue-chartkick/-/vue-chartkick-0.6.0.tgz#fed022406ce1541dea96da6ad55089558e3b408d"
   dependencies:
@@ -6580,7 +6580,7 @@ vue-hot-reload-api@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
 
-vue-loader@^15.4.2:
+vue-loader@15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.4.2.tgz#812bb26e447dd3b84c485eb634190d914ce125e2"
   dependencies:
@@ -6605,7 +6605,7 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tables-2@^1.6.17:
+vue-tables-2@1.6.17:
   version "1.6.17"
   resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-1.6.17.tgz#390b49f8170cd323ad5e58e7368f2d97cb4247bd"
   dependencies:
@@ -6617,7 +6617,7 @@ vue-tables-2@^1.6.17:
     vue "^2.6.10"
     vue-pagination-2 "^1.6.3"
 
-vue-template-compiler@^2.6.10:
+vue-template-compiler@2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.10.tgz#323b4f3495f04faa3503337a82f5d6507799c9cc"
   dependencies:
@@ -6628,11 +6628,11 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@>=2.0.0, vue@^2.6.10:
+vue@2.6.10, vue@>=2.0.0, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 
-vuejs-datepicker@^1.6.2:
+vuejs-datepicker@1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-1.6.2.tgz#83c1e8fd4108e7f1d01c061a7e344918f25e47ae"
 
@@ -6692,7 +6692,7 @@ webpack-dev-middleware@^3.7.2:
     range-parser "^1.2.1"
     webpack-log "^2.0.0"
 
-webpack-dev-server@^3.9.0:
+webpack-dev-server@3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.9.0.tgz#27c3b5d0f6b6677c4304465ac817623c8b27b89c"
   dependencies:
