@@ -2,25 +2,25 @@
   "name": "touhou_arrangement_chronicle",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome": "^1.1.8",
-    "@fortawesome/fontawesome-free-brands": "^5.0.13",
-    "@fortawesome/fontawesome-free-regular": "^5.0.13",
-    "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@rails/webpacker": "4.2",
-    "axios": "^0.18.1",
-    "bulma": "^0.8.0",
-    "bulma-extensions": "^6.2.7",
-    "font-awesome": "^4.7.0",
-    "mdi": "^2.2.43",
-    "qs": "^6.9.1",
-    "vue": "^2.6.10",
-    "vue-chartkick": "^0.6.0",
-    "vue-loader": "^15.4.2",
-    "vue-tables-2": "^1.6.17",
-    "vue-template-compiler": "^2.6.10",
-    "vuejs-datepicker": "^1.6.2"
+    "@fortawesome/fontawesome": "1.1.8",
+    "@fortawesome/fontawesome-free-brands": "5.0.13",
+    "@fortawesome/fontawesome-free-regular": "5.0.13",
+    "@fortawesome/fontawesome-free-solid": "5.0.13",
+    "@rails/webpacker": "4.2.2",
+    "axios": "0.18.1",
+    "bulma": "0.8.0",
+    "bulma-extensions": "6.2.7",
+    "font-awesome": "4.7.0",
+    "mdi": "2.2.43",
+    "qs": "6.9.1",
+    "vue": "2.6.10",
+    "vue-chartkick": "0.6.0",
+    "vue-loader": "15.4.2",
+    "vue-tables-2": "1.6.17",
+    "vue-template-compiler": "2.6.10",
+    "vuejs-datepicker": "1.6.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "3.9.0"
   }
 }
