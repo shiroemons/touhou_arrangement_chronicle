@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "4.2",
     "axios": "^0.18.1",
     "bulma": "^0.8.0",
     "bulma-extensions": "^6.2.7",
