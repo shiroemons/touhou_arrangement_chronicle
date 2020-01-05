@@ -6601,9 +6601,9 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tables-2@1.6.17:
-  version "1.6.17"
-  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-1.6.17.tgz#390b49f8170cd323ad5e58e7368f2d97cb4247bd"
+vue-tables-2@1.6.22:
+  version "1.6.22"
+  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-1.6.22.tgz#710c7fe8bb0b3ccdd919379777bb2be3d89f8335"
   dependencies:
     array-intersect "^0.0.1"
     babel-helper-vue-jsx-merge-props "^2.0.3"
