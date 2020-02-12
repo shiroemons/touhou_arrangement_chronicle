@@ -6573,9 +6573,9 @@ vue-loader@15.9.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-pagination-2@^1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/vue-pagination-2/-/vue-pagination-2-1.6.3.tgz#f03225afc17654d485932c97346c4279944d593c"
+vue-pagination-2@^2.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue-pagination-2/-/vue-pagination-2-2.0.3.tgz#5010d7c47761bff126a7172b49bf66fd3dad9ada"
   dependencies:
     merge "^1.2.0"
     vue ">=2.0.0"
@@ -6588,9 +6588,9 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tables-2@1.6.25:
-  version "1.6.25"
-  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-1.6.25.tgz#cc9465c2a792a9e65d8498393956a8c9b16c4c68"
+vue-tables-2@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-2.0.0.tgz#bd83b2d699a52aa81161199b68860c322988f7c4"
   dependencies:
     array-intersect "^0.0.1"
     babel-helper-vue-jsx-merge-props "^2.0.3"
@@ -6598,7 +6598,7 @@ vue-tables-2@1.6.25:
     debounce "^1.1"
     merge "^1.2.0"
     vue "^2.6.10"
-    vue-pagination-2 "^1.6.3"
+    vue-pagination-2 "^2.0"
 
 vue-template-compiler@2.6.11:
   version "2.6.11"
