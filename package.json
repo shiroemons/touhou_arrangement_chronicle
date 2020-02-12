@@ -15,7 +15,7 @@
     "qs": "6.9.1",
     "vue": "2.6.11",
     "vue-chartkick": "0.6.0",
-    "vue-loader": "15.8.3",
+    "vue-loader": "15.9.0",
     "vue-tables-2": "1.6.25",
     "vue-template-compiler": "2.6.11",
     "vuejs-datepicker": "1.6.2"
