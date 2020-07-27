@@ -6551,9 +6551,9 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
 
-vue-chartkick@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/vue-chartkick/-/vue-chartkick-0.6.0.tgz#fed022406ce1541dea96da6ad55089558e3b408d"
+vue-chartkick@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/vue-chartkick/-/vue-chartkick-0.6.1.tgz#e48044b8b74160fb39a47a2278c37d73511f9357"
   dependencies:
     chartkick "^3.2.0"
     deep-equal "^1.0.1"
