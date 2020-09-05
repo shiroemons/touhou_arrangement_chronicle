@@ -13,11 +13,11 @@
     "font-awesome": "4.7.0",
     "mdi": "2.2.43",
     "qs": "6.9.1",
-    "vue": "2.6.11",
+    "vue": "2.6.12",
     "vue-chartkick": "0.6.0",
     "vue-loader": "15.9.0",
     "vue-tables-2": "2.0.0",
-    "vue-template-compiler": "2.6.11",
+    "vue-template-compiler": "2.6.12",
     "vuejs-datepicker": "1.6.2"
   },
   "devDependencies": {
