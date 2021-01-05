@@ -7,7 +7,7 @@ end
 
 ruby '2.6.5'
 
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.1.0'
 
 gem 'action_args'
 gem 'active_decorator'
