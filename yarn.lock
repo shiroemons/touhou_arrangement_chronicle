@@ -1126,6 +1126,11 @@ babel-loader@^8.0.6:
     mkdirp "^0.5.1"
     pify "^4.0.1"
 
+babel-plugin-add-module-exports@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-add-module-exports/-/babel-plugin-add-module-exports-0.2.1.tgz#9ae9a1f4a8dc67f0cdec4f4aeda1e43a5ff65e25"
+  integrity sha1-mumh9KjcZ/DN7E9K7aHkOl/2XiU=
+
 babel-plugin-dynamic-import-node@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.0.tgz#f00f507bdaa3c3e3ff6e7e5e98d90a7acab96f7f"
@@ -1613,10 +1618,6 @@ clone-deep@^4.0.1:
     is-plain-object "^2.0.4"
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
-
-clone@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
 
 co@^4.6.0:
   version "4.6.0"
@@ -3676,6 +3677,11 @@ locate-path@^5.0.0:
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
 lodash.get@^4.0:
   version "4.4.2"
@@ -6573,10 +6579,12 @@ vue-loader@15.9.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-pagination-2@^2.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vue-pagination-2/-/vue-pagination-2-2.0.3.tgz#5010d7c47761bff126a7172b49bf66fd3dad9ada"
+vue-pagination-2@^3.0:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/vue-pagination-2/-/vue-pagination-2-3.0.8.tgz#3ae6c7283817a6369517460cf28d798ba752fba4"
+  integrity sha512-vYP0QHuVn163tlylZTUeUjZ8k589+vSYrvDkmC/8c1HMbFY+mSuVryJ8KYuzculVkf2sXwls/rX70DL/sWn+Ng==
   dependencies:
+    babel-plugin-add-module-exports "^0.2.1"
     merge "^1.2.0"
     vue ">=2.0.0"
     vuex "^2.0.0"
@@ -6588,17 +6596,18 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tables-2@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-2.0.0.tgz#bd83b2d699a52aa81161199b68860c322988f7c4"
+vue-tables-2@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-2.2.0.tgz#c734e77bc1b27681ea915d48f448d0658585d635"
+  integrity sha512-8BKt84TPSW66a02T2ZzCosu4UwxdmbjxIbR2Lb6NH4iBu5iDcHOLlxeTXTYncMWP6Rx0UAyBGydU8N9xkdfOkw==
   dependencies:
     array-intersect "^0.0.1"
     babel-helper-vue-jsx-merge-props "^2.0.3"
-    clone "^2.1.1"
     debounce "^1.1"
+    lodash.clonedeep "^4.5.0"
     merge "^1.2.0"
     vue "^2.6.10"
-    vue-pagination-2 "^2.0"
+    vue-pagination-2 "^3.0"
 
 vue-template-compiler@2.6.11:
   version "2.6.11"
