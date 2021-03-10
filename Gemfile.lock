@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: 0b23942feb1166678c85c015f875faa2edf6627c
+  revision: e746f2e370259bac0f86e80f3c1456c2caf86805
   branch: master
   specs:
-    shoulda-matchers (4.2.0)
-      activesupport (>= 4.2.0)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 5.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -111,7 +111,7 @@ GEM
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     coderay (1.1.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.8)
     counter_culture (2.3.0)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
@@ -150,7 +150,7 @@ GEM
       activesupport (>= 4.0.1)
       hamlit (>= 1.2.0)
       railties (>= 4.0.1)
-    i18n (1.8.2)
+    i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     i18n_generators (2.2.2)
       activerecord (>= 3.0.0)
@@ -193,7 +193,7 @@ GEM
     mimemagic (0.3.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.0)
+    minitest (5.14.4)
     moji (1.6)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
@@ -360,7 +360,7 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.6)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
