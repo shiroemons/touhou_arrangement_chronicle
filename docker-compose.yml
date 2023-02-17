@@ -31,5 +31,24 @@ services:
     profiles:
       - extra
 
+  seeder:
+    image: golang:1.19
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    profiles:
+      - extra
+    environment:
+      CONNECT_URL: "postgres://postgres:@db:5432/touhou_arrangement_chronicle_development?sslmode=disable"
+      BUNDEBUG: 1
+    volumes:
+      - .:/app
+    working_dir: /app
+    command:
+      - "go"
+      - "run"
+      - "cmd/seeder/main.go"
+
 volumes:
   postgres:
