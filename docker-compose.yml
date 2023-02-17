@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: touhou_arrangement_chronicle_development
+    ports:
+      - '15432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: .
+      dockerfile: "./docker/psqldef/Dockerfile"
+    volumes:
+      - ./db:/app/db
+    working_dir: /app
+    command:
+      - "./psqldef"
+      - "--file"
+      - "./db/schema/schema.sql"
+      - "--host"
+      - "db"
+      - "--port"
+      - "15432"
+      - "touhou_arrangement_chronicle_development"
+    depends_on:
+      - db
+    profiles:
+      - extra
+
+volumes:
+  postgres:
