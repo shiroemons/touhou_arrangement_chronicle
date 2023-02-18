@@ -85,6 +85,7 @@ create table original_song_distribution_service_urls (
     created_at       timestamp with time zone not null default current_timestamp,
     updated_at       timestamp with time zone not null default current_timestamp
 );
+create unique index uk_osdsu_original_song_id_service on original_song_distribution_service_urls (original_song_id, service);
 comment on table  original_song_distribution_service_urls is '原曲配信サービスURL';
 comment on column original_song_distribution_service_urls.original_song_id is '原曲ID';
 comment on column original_song_distribution_service_urls.service is '配信サービス';

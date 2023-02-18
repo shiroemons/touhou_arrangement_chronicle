@@ -49,8 +49,26 @@ type ProductDistributionServiceUrl struct {
 	URL       string `bun:"url,nullzero,notnull"`
 }
 
+type OriginalSongDistributionServiceUrl struct {
+	bun.BaseModel `bun:"table:original_song_distribution_service_urls,alias:osdsu"`
+
+	ID             string `bun:",pk"`
+	OriginalSongID string `bun:"original_song_id,nullzero,notnull"`
+	Service        string `bun:"service,nullzero,notnull"`
+	URL            string `bun:"url,nullzero,notnull"`
+}
+
 type PDSUcsv struct {
 	ProductID       string `csv:"product_id"`
+	Name            string `csv:"name"`
+	SpotifyURL      string `csv:"spotify_url"`
+	AppleMusicURL   string `csv:"apple_music_url"`
+	YouTubeMusicURL string `csv:"youtube_music_url"`
+	LineMusicURL    string `csv:"line_music_url"`
+}
+
+type OSDSUcsv struct {
+	OriginalSongID  string `csv:"original_song_id"`
 	Name            string `csv:"name"`
 	SpotifyURL      string `csv:"spotify_url"`
 	AppleMusicURL   string `csv:"apple_music_url"`
@@ -73,6 +91,7 @@ func main() {
 	importProducts(ctx, db)
 	importOriginalSongs(ctx, db)
 	importPDSU(ctx, db)
+	importOSDSU(ctx, db)
 }
 
 func initDB() *bun.DB {
@@ -216,4 +235,61 @@ func importPDSU(ctx context.Context, db *bun.DB) {
 	}
 
 	log.Println("finish product_distribution_service_urls import.")
+}
+
+func importOSDSU(ctx context.Context, db *bun.DB) {
+	log.Println("start original_song_distribution_service_urls import.")
+
+	f, err := os.Open("./db/fixtures/original_song_distribution_service_urls.tsv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	var lines []OSDSUcsv
+	if err = gocsv.UnmarshalFile(f, &lines); err != nil {
+		log.Fatal(err)
+	}
+
+	var osdsus []OriginalSongDistributionServiceUrl
+	for _, l := range lines {
+		am := OriginalSongDistributionServiceUrl{
+			ID:             xid.New().String(),
+			OriginalSongID: l.OriginalSongID,
+			Service:        "apple_music",
+			URL:            l.AppleMusicURL,
+		}
+		lm := OriginalSongDistributionServiceUrl{
+			ID:             xid.New().String(),
+			OriginalSongID: l.OriginalSongID,
+			Service:        "line_music",
+			URL:            l.LineMusicURL,
+		}
+		s := OriginalSongDistributionServiceUrl{
+			ID:             xid.New().String(),
+			OriginalSongID: l.OriginalSongID,
+			Service:        "spotify",
+			URL:            l.SpotifyURL,
+		}
+		ym := OriginalSongDistributionServiceUrl{
+			ID:             xid.New().String(),
+			OriginalSongID: l.OriginalSongID,
+			Service:        "youtube_music",
+			URL:            l.YouTubeMusicURL,
+		}
+		osdsus = append(osdsus, am)
+		osdsus = append(osdsus, lm)
+		osdsus = append(osdsus, s)
+		osdsus = append(osdsus, ym)
+	}
+
+	_, err = db.NewInsert().Model(&osdsus).
+		On("CONFLICT (original_song_id, service) DO UPDATE").
+		Set("url = EXCLUDED.url").
+		Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println("finish original_song_distribution_service_urls import.")
 }
