@@ -7,8 +7,8 @@ require (
 	github.com/jackc/pgx/v5 v5.3.0
 	github.com/rs/xid v1.4.0
 	github.com/spkg/bom v1.0.0
-	github.com/uptrace/bun v1.1.11
-	github.com/uptrace/bun/dialect/pgdialect v1.1.11
+	github.com/uptrace/bun v1.1.12
+	github.com/uptrace/bun/dialect/pgdialect v1.1.12
 	github.com/uptrace/bun/extra/bundebug v1.1.11
 )
 
