@@ -1,0 +1,4 @@
+er:
+  # Add table/column comment to ER diagram
+  # Default is false
+  comment: true
