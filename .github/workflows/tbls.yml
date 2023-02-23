@@ -1,0 +1,80 @@
+name: tbls
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - db/schema/**
+      - db/tbls.yml
+
+jobs:
+  tbls:
+    name: generate-and-push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # github-actions[bot]のcommit&pushに必要
+      pull-requests: write # pull requestのコメントを記載に必要
+    services:
+      postgres:
+        image: postgres:15-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: touhou_arrangement_chronicle
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      TBLS_DSN: "postgres://postgres:@127.0.0.1:5432/touhou_arrangement_chronicle?sslmode=disable"
+      TBLS_DOC_PATH: "db/dbdoc"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.19
+      - name: Execute migration
+        run: |
+          go install github.com/k0kubun/sqldef/cmd/psqldef@latest
+          psqldef --file schema.sql touhou_arrangement_chronicle
+        working-directory: ./db/schema
+      - uses: k1low/setup-tbls@v1
+      - name: Run tbls for generate database document
+        run: |
+          tbls doc -c ./db/tbls.yml -f
+      - name: Count uncommit files
+        id: check_diff
+        run: |
+          git status --porcelain | wc -l
+          file_count=$(git status --porcelain | wc -l)
+          echo "file_count=$file_count" >> $GITHUB_OUTPUT
+        working-directory: ./db
+      - name: Commit ER graph
+        if: ${{ steps.check_diff.outputs.file_count != '0' }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "generate er graphs from actions"
+      - name: Report commit on pull request
+        if: ${{ steps.check_diff.outputs.file_count != '0' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Actions committed new ER files🤖'
+            })
