@@ -50,5 +50,18 @@ services:
       - "run"
       - "cmd/seeder/main.go"
 
+  meilisearch:
+    image: getmeili/meilisearch:v1.0.2
+    volumes:
+      - meili-data:/meili_data
+    ports:
+      - '17700:7700'
+    command:
+      - "meilisearch"
+      - "--master-key=MASTER_KEY"
+      - "--no-analytics"
+
 volumes:
   postgres:
+  meili-data:
+    driver: local
