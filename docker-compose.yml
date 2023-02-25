@@ -59,7 +59,6 @@ services:
     command:
       - "meilisearch"
       - "--master-key=MASTER_KEY"
-      - "--no-analytics"
 
 volumes:
   postgres:
