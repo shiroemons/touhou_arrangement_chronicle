@@ -50,6 +50,28 @@ services:
       - "run"
       - "cmd/seeder/main.go"
 
+  indexer:
+    image: golang:1.20
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    profiles:
+      - extra
+    environment:
+      CONNECT_URL: "postgres://postgres:@db:5432/touhou_arrangement_chronicle_development?sslmode=disable"
+      BUNDEBUG: 1
+      MEILISEARCH_HOST: "http://meilisearch:7700"
+      MEILISEARCH_API_KEY: "MASTER_KEY"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command:
+      - "go"
+      - "run"
+      - "cmd/indexer/main.go"
+      - "cmd/indexer/original_songs.go"
+
   meilisearch:
     image: getmeili/meilisearch:v1.0.2
     volumes:
