@@ -28,6 +28,9 @@ migrate: ## db migrate
 seeder: ## db seed
 	docker compose run --rm seeder
 
+indexer: ## indexer
+	docker compose run --rm indexer
+
 all-clean:
 	docker compose down --rmi all --volumes --remove-orphans
 
