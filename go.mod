@@ -3,7 +3,7 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
-	github.com/gocarina/gocsv v0.0.0-20230223115542-dc4ee9de5fe2
+	github.com/gocarina/gocsv v0.0.0-20230226133904-70c27cb2918a
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/meilisearch/meilisearch-go v0.23.0
 	github.com/rs/xid v1.4.0
