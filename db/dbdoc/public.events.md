@@ -11,6 +11,7 @@
 | id | text |  | false | [public.event_details](public.event_details.md) [public.sub_events](public.sub_events.md) |  |  |
 | event_series_id | text |  | false |  | [public.event_series](public.event_series.md) | イベントシリーズID |
 | name | text |  | false |  |  | 名前 |
+| display_name | text |  | false |  |  | 表示名 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
