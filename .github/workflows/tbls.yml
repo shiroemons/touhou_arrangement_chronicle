@@ -45,6 +45,10 @@ jobs:
           go install github.com/k0kubun/sqldef/cmd/psqldef@latest
           psqldef --file schema.sql touhou_arrangement_chronicle
         working-directory: ./db/schema
+      - name: Remove dbdocs
+        run: |
+          rm -rf ./*.md ./*.svg
+        working-directory: ./db/dbdoc
       - uses: k1low/setup-tbls@v1
       - name: Run tbls for generate database document
         run: |

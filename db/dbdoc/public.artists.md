@@ -8,10 +8,16 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.artist_details](public.artist_details.md) [public.tracks_composers](public.tracks_composers.md) [public.tracks_arrangers](public.tracks_arrangers.md) [public.tracks_rearrangers](public.tracks_rearrangers.md) [public.tracks_lyricists](public.tracks_lyricists.md) [public.tracks_vocalists](public.tracks_vocalists.md) |  |  |
+| id | text |  | false | [public.tracks_composers](public.tracks_composers.md) [public.tracks_arrangers](public.tracks_arrangers.md) [public.tracks_rearrangers](public.tracks_rearrangers.md) [public.tracks_lyricists](public.tracks_lyricists.md) [public.tracks_vocalists](public.tracks_vocalists.md) |  |  |
 | name | text |  | false |  |  | 名前 |
+| name_reading | text | ''::text | false |  |  | 名前読み方 |
 | initial_letter_type | initial_letter_type |  | false |  |  | 頭文字の文字種別(symbol,number,alphabet,kana,kanji,other) |
-| initial_letter_detail | text | ''::text | false |  |  | 開催日 |
+| initial_letter_detail | text | ''::text | false |  |  | 頭文字の文字種別詳細 |
+| description | text | ''::text | false |  |  | 説明 |
+| url | text | ''::text | false |  |  | URL |
+| blog_url | text | ''::text | false |  |  | ブログ URL |
+| twitter_url | text | ''::text | false |  |  | Twitter URL |
+| youtube_channel_url | text | ''::text | false |  |  | YouTubeチャンネル URL |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

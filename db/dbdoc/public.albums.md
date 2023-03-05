@@ -8,13 +8,19 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.album_details](public.album_details.md) [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.tracks](public.tracks.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
+| id | text |  | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.tracks](public.tracks.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | release_circle_name | text | ''::text | false |  |  | 頒布サークル名 |
 | release_date | date |  | true |  |  | 頒布日 |
 | event_id | text | ''::text | false |  |  | イベントID |
 | sub_event_id | text | ''::text | false |  |  | サブイベントID |
 | search_enabled | boolean | true | false |  |  | 検索対象とするか |
+| album_number | text | ''::text | false |  |  |  |
+| event_price | numeric |  | true |  |  | イベント価格 |
+| currency | text | 'JPY'::text | false |  |  | 通貨(default: JPY) |
+| credit | text | ''::text | false |  |  | クレジット |
+| introduction | text | ''::text | false |  |  | 紹介 |
+| url | text | ''::text | false |  |  | URL |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
