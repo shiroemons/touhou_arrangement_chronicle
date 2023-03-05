@@ -11,10 +11,12 @@ import (
 type EventSeries struct {
 	bun.BaseModel `bun:"table:event_series,alias:es"`
 
-	ID        string    `bun:",pk"`
-	Name      string    `bun:"name,nullzero,notnull"`
-	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `bun:"updated_at,notnull,default:current_timestamp"`
+	ID          string    `bun:",pk"`
+	Name        string    `bun:"name,nullzero,notnull,unique"`
+	DisplayName string    `bun:"display_name,nullzero,notnull"`
+	Events      []*Event  `bun:"rel:has-many,join:id=event_id"`
+	CreatedAt   time.Time `bun:"created_at,notnull,default:current_timestamp"`
+	UpdatedAt   time.Time `bun:"updated_at,notnull,default:current_timestamp"`
 }
 
 var _ bun.BeforeAppendModelHook = (*EventSeries)(nil)
