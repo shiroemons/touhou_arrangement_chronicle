@@ -16,6 +16,7 @@ services:
       dockerfile: "./docker/psqldef/Dockerfile"
     volumes:
       - ./db:/app/db
+      - go_pkg:/go/pkg
     working_dir: /app
     command:
       - "./psqldef"
@@ -44,6 +45,7 @@ services:
       BUNDEBUG: 1
     volumes:
       - .:/app
+      - go_pkg:/go/pkg
     working_dir: /app
     command:
       - "go"
@@ -65,6 +67,7 @@ services:
       MEILISEARCH_API_KEY: "MASTER_KEY"
     volumes:
       - .:/app
+      - go_pkg:/go/pkg
     working_dir: /app
     command:
       - "go"
@@ -83,6 +86,7 @@ services:
       - "--master-key=MASTER_KEY"
 
 volumes:
+  go_pkg:
   postgres:
   meili-data:
     driver: local
