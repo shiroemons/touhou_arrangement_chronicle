@@ -106,21 +106,6 @@ comment on column event_series.display_name is '表示名';
 comment on column event_series.created_at is '作成日時';
 comment on column event_series.updated_at is '更新日時';
 
-create table events (
-    id              text                     not null primary key,
-    event_series_id text                     not null references event_series(id),
-    name            text                     not null unique,
-    display_name    text                     not null,
-    created_at      timestamp with time zone not null default current_timestamp,
-    updated_at      timestamp with time zone not null default current_timestamp
-);
-comment on table  events is 'イベント';
-comment on column events.event_series_id is 'イベントシリーズID';
-comment on column events.name is '名前';
-comment on column events.display_name is '表示名';
-comment on column events.created_at is '作成日時';
-comment on column events.updated_at is '更新日時';
-
 create type event_status as enum (
     'scheduled',    -- 開催済み
     'cancelled',    -- 中止
@@ -136,60 +121,57 @@ create type event_format as enum (
     'mixed'   -- オフライン・オンライン両方開催
 );
 
-create table event_details (
-    event_id     text                     not null primary key references events(id),
-    event_dates  daterange,
-    event_status event_status             not null default 'scheduled'::event_status,
-    format       event_format             not null default 'offline'::event_format,
-    region_code  text                     not null default 'JP',
-    address      text                     not null default '',
-    description  text                     not null default '',
-    url          text                     not null default '',
-    twitter_url  text                     not null default '',
-    created_at   timestamp with time zone not null default current_timestamp,
-    updated_at   timestamp with time zone not null default current_timestamp
+create table events (
+    id              text                     not null primary key,
+    event_series_id text                     not null references event_series(id),
+    name            text                     not null unique,
+    display_name    text                     not null,
+    event_dates     daterange,
+    event_status    event_status             not null default 'scheduled'::event_status,
+    format          event_format             not null default 'offline'::event_format,
+    region_code     text                     not null default 'JP',
+    address         text                     not null default '',
+    description     text                     not null default '',
+    url             text                     not null default '',
+    twitter_url     text                     not null default '',
+    created_at      timestamp with time zone not null default current_timestamp,
+    updated_at      timestamp with time zone not null default current_timestamp
 );
-comment on table  event_details is 'イベント詳細';
-comment on column event_details.event_id is 'イベントID';
-comment on column event_details.event_dates is 'イベント開催期間';
-comment on column event_details.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
-comment on column event_details.format is '形式/offline: オフライン開催, online: オフライン開催, mixed: 両方開催/default: offline';
-comment on column event_details.region_code is 'リージョンコード/default: JP';
-comment on column event_details.address is '開催場所';
-comment on column event_details.description is '説明';
-comment on column event_details.url is 'URL';
-comment on column event_details.twitter_url is 'Twitter URL';
-comment on column event_details.created_at is '作成日時';
-comment on column event_details.updated_at is '更新日時';
+comment on table  events is 'イベント';
+comment on column events.event_series_id is 'イベントシリーズID';
+comment on column events.name is '名前';
+comment on column events.display_name is '表示名';
+comment on column events.event_dates is 'イベント開催期間';
+comment on column events.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
+comment on column events.format is '形式/offline: オフライン開催, online: オフライン開催, mixed: 両方開催/default: offline';
+comment on column events.region_code is 'リージョンコード/default: JP';
+comment on column events.address is '開催場所';
+comment on column events.description is '説明';
+comment on column events.url is 'URL';
+comment on column events.twitter_url is 'Twitter URL';
+comment on column events.created_at is '作成日時';
+comment on column events.updated_at is '更新日時';
 
 create table sub_events (
-    id         text                     not null primary key,
-    event_id   text                     not null references events(id),
-    name       text                     not null,
-    created_at timestamp with time zone not null default current_timestamp,
-    updated_at timestamp with time zone not null default current_timestamp
-);
-comment on table  sub_events is 'サブイベント';
-comment on column sub_events.event_id is 'イベントID';
-comment on column sub_events.name is '名前(例: 〇〇 2日目)';
-comment on column sub_events.created_at is '作成日時';
-comment on column sub_events.updated_at is '更新日時';
-
-create table sub_event_details (
-    sub_event_id text                     not null primary key references sub_events(id),
+    id           text                     not null primary key,
+    event_id     text                     not null references events(id),
+    name         text                     not null,
+    display_name text                     not null,
     event_date   date,
     event_status event_status             not null default 'scheduled'::event_status,
     description  text                     not null default '',
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
-comment on table  sub_event_details is 'サブイベント詳細';
-comment on column sub_event_details.sub_event_id is 'サブイベントID';
-comment on column sub_event_details.event_date is '開催日';
-comment on column sub_event_details.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
-comment on column sub_event_details.description is '説明';
-comment on column sub_event_details.created_at is '作成日時';
-comment on column sub_event_details.updated_at is '更新日時';
+comment on table  sub_events is 'サブイベント';
+comment on column sub_events.event_id is 'イベントID';
+comment on column sub_events.name is '名前(例: 〇〇 2日目)';
+comment on column sub_events.display_name is '表示名';
+comment on column sub_events.event_date is '開催日';
+comment on column sub_events.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
+comment on column sub_events.description is '説明';
+comment on column sub_events.created_at is '作成日時';
+comment on column sub_events.updated_at is '更新日時';
 
 create type initial_letter_type as enum (
     'symbol',   -- 記号
@@ -204,72 +186,56 @@ create type initial_letter_type as enum (
 create table artists (
     id                    text                     not null primary key,
     name                  text                     not null,
+    name_reading          text                     not null default '',
     initial_letter_type   initial_letter_type      not null,
     initial_letter_detail text                     not null default '',
+    description           text                     not null default '',
+    url                   text                     not null default '',
+    blog_url              text                     not null default '',
+    twitter_url           text                     not null default '',
+    youtube_channel_url   text                     not null default '',
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
 comment on table  artists is 'アーティスト';
 comment on column artists.name is '名前';
+comment on column artists.name_reading is '名前読み方';
 comment on column artists.initial_letter_type is '頭文字の文字種別(symbol,number,alphabet,kana,kanji,other)';
-comment on column artists.initial_letter_detail is '開催日';
+comment on column artists.initial_letter_detail is '頭文字の文字種別詳細';
+comment on column artists.description is '説明';
+comment on column artists.url is 'URL';
+comment on column artists.blog_url is 'ブログ URL';
+comment on column artists.twitter_url is 'Twitter URL';
+comment on column artists.youtube_channel_url is 'YouTubeチャンネル URL';
 comment on column artists.created_at is '作成日時';
 comment on column artists.updated_at is '更新日時';
 
-create table artist_details (
-    artist_id             text                     not null primary key references artists(id),
+create table circles (
+    id                    text                     not null primary key,
+    name                  text                     not null,
+    name_reading          text                     not null default '',
+    initial_letter_type   initial_letter_type      not null,
+    initial_letter_detail text                     not null,
     description           text                     not null default '',
     url                   text                     not null default '',
     blog_url              text                     not null default '',
     twitter_url           text                     not null default '',
     youtube_channel_url   text                     not null default '',
-    created_at            timestamp with time zone not null default current_timestamp,
-    updated_at            timestamp with time zone not null default current_timestamp
-);
-comment on table  artist_details is 'アーティスト詳細';
-comment on column artist_details.artist_id is 'アーティストID';
-comment on column artist_details.description is '説明';
-comment on column artist_details.url is 'URL';
-comment on column artist_details.blog_url is 'ブログ URL';
-comment on column artist_details.twitter_url is 'Twitter URL';
-comment on column artist_details.youtube_channel_url is 'YouTubeチャンネル URL';
-comment on column artist_details.created_at is '作成日時';
-comment on column artist_details.updated_at is '更新日時';
-
-create table circles (
-    id                    text                     not null primary key,
-    name                  text                     not null,
-    initial_letter_type   initial_letter_type      not null,
-    initial_letter_detail text                     not null,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
 comment on table  circles is 'サークル';
 comment on column circles.name is '名前';
+comment on column circles.name_reading is '名前読み方';
 comment on column circles.initial_letter_type is '頭文字の文字種別(symbol,number,alphabet,kana,kanji,other)';
-comment on column circles.initial_letter_detail is '開催日';
+comment on column circles.initial_letter_detail is '頭文字の文字種別詳細';
+comment on column circles.description is '説明';
+comment on column circles.url is 'URL';
+comment on column circles.blog_url is 'ブログ URL';
+comment on column circles.twitter_url is 'Twitter URL';
+comment on column circles.youtube_channel_url is 'YouTubeチャンネル URL';
 comment on column circles.created_at is '作成日時';
 comment on column circles.updated_at is '更新日時';
-
-create table circle_details (
-    circle_id             text                     not null primary key references circles(id),
-    description           text                     not null default '',
-    url                   text                     not null default '',
-    blog_url              text                     not null default '',
-    twitter_url           text                     not null default '',
-    youtube_channel_url   text                     not null default '',
-    created_at            timestamp with time zone not null default current_timestamp,
-    updated_at            timestamp with time zone not null default current_timestamp
-);
-comment on table  circle_details is 'サークル詳細';
-comment on column circle_details.circle_id is 'サークルID';
-comment on column circle_details.description is '説明';
-comment on column circle_details.url is 'URL';
-comment on column circle_details.blog_url is 'ブログ URL';
-comment on column circle_details.twitter_url is 'Twitter URL';
-comment on column circle_details.youtube_channel_url is 'YouTubeチャンネル URL';
-comment on column circle_details.created_at is '作成日時';
-comment on column circle_details.updated_at is '更新日時';
 
 create table albums (
     id                    text                     not null primary key,
@@ -279,6 +245,12 @@ create table albums (
     event_id              text                     not null default '',
     sub_event_id          text                     not null default '',
     search_enabled        bool                     not null default true,
+    album_number          text                     not null default '',
+    event_price           numeric,
+    currency              text                     not null default 'JPY',
+    credit                text                     not null default '',
+    introduction          text                     not null default '',
+    url                   text                     not null default '',
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -289,29 +261,13 @@ comment on column albums.release_date is '頒布日';
 comment on column albums.event_id is 'イベントID';
 comment on column albums.sub_event_id is 'サブイベントID';
 comment on column albums.search_enabled is '検索対象とするか';
+comment on column albums.event_price is 'イベント価格';
+comment on column albums.currency is '通貨(default: JPY)';
+comment on column albums.credit is 'クレジット';
+comment on column albums.introduction is '紹介';
+comment on column albums.url is 'URL';
 comment on column albums.created_at is '作成日時';
 comment on column albums.updated_at is '更新日時';
-
-create table album_details (
-    album_id       text                     not null primary key references albums(id),
-    album_number   text                     not null default '',
-    event_price    numeric,
-    currency       text                     not null default 'JPY',
-    credit         text                     not null default '',
-    introduction   text                     not null default '',
-    url            text                     not null default '',
-    created_at     timestamp with time zone not null default current_timestamp,
-    updated_at     timestamp with time zone not null default current_timestamp
-);
-comment on table  album_details is 'アルバム詳細';
-comment on column album_details.album_id is 'アルバムID';
-comment on column album_details.event_price is 'イベント価格';
-comment on column album_details.currency is '通貨(default: JPY)';
-comment on column album_details.credit is 'クレジット';
-comment on column album_details.introduction is '紹介';
-comment on column album_details.url is 'URL';
-comment on column album_details.created_at is '作成日時';
-comment on column album_details.updated_at is '更新日時';
 
 create table albums_circles (
     album_id   text                     not null references albums(id),
@@ -390,28 +346,14 @@ comment on column album_upcs.created_at is '作成日時';
 comment on column album_upcs.updated_at is '更新日時';
 
 create table tracks (
-    id             text                     not null primary key,
-    album_id       text                     not null references albums(id),
-    name           text                     not null,
-    disc_number    integer                  not null default 1,
-    track_number   integer                  not null,
-    release_date   date,
-    search_enabled bool                     not null default true,
-    created_at     timestamp with time zone not null default current_timestamp,
-    updated_at     timestamp with time zone not null default current_timestamp
-);
-comment on table  tracks is 'トラック';
-comment on column tracks.album_id is 'アルバムID';
-comment on column tracks.name is '名前';
-comment on column tracks.disc_number is 'ディスク番号(default: 1)';
-comment on column tracks.track_number is 'トラック番号';
-comment on column tracks.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';
-comment on column tracks.search_enabled is '検索対象とするか(default: true)';
-comment on column tracks.created_at is '作成日時';
-comment on column tracks.updated_at is '更新日時';
-
-create table track_details (
-    track_id              text                     not null primary key references tracks(id),
+    id                    text                     not null primary key,
+    album_id              text                     not null references albums(id),
+    name                  text                     not null,
+    name_reading          text                     not null default '',
+    disc_number           integer                  not null default 1,
+    track_number          integer                  not null,
+    release_date          date,
+    search_enabled        bool                     not null default true,
     length                integer,
     bpm                   integer,
     display_composer      text                     not null default '',
@@ -420,21 +362,27 @@ create table track_details (
     display_lyricist      text                     not null default '',
     display_vocalist      text                     not null default '',
     display_original_song text                     not null default '',
-    created_at            timestamp with time zone not null default current_timestamp,
-    updated_at            timestamp with time zone not null default current_timestamp
+    created_at     timestamp with time zone not null default current_timestamp,
+    updated_at     timestamp with time zone not null default current_timestamp
 );
-comment on table  track_details is 'トラック詳細';
-comment on column track_details.track_id is 'トラックID';
-comment on column track_details.length is '曲の長さ(秒)';
-comment on column track_details.bpm is 'BPM';
-comment on column track_details.display_composer is '作曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column track_details.display_arranger is '編曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column track_details.display_rearranger is '再編曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column track_details.display_lyricist is '作詞者表示用(1度しか使用しない別名義などで使用する)';
-comment on column track_details.display_vocalist is 'ボーカリスト表示用(1度しか使用しない別名義などで使用する)';
-comment on column track_details.display_original_song is '原曲表示用(東方以外の原曲などで使用する)';
-comment on column track_details.created_at is '作成日時';
-comment on column track_details.updated_at is '更新日時';
+comment on table  tracks is 'トラック';
+comment on column tracks.album_id is 'アルバムID';
+comment on column tracks.name is '名前';
+comment on column tracks.name_reading is '名前読み方';
+comment on column tracks.disc_number is 'ディスク番号(default: 1)';
+comment on column tracks.track_number is 'トラック番号';
+comment on column tracks.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';
+comment on column tracks.search_enabled is '検索対象とするか(default: true)';
+comment on column tracks.length is '曲の長さ(秒)';
+comment on column tracks.bpm is 'BPM';
+comment on column tracks.display_composer is '作曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column tracks.display_arranger is '編曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column tracks.display_rearranger is '再編曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column tracks.display_lyricist is '作詞者表示用(1度しか使用しない別名義などで使用する)';
+comment on column tracks.display_vocalist is 'ボーカリスト表示用(1度しか使用しない別名義などで使用する)';
+comment on column tracks.display_original_song is '原曲表示用(東方以外の原曲などで使用する)';
+comment on column tracks.created_at is '作成日時';
+comment on column tracks.updated_at is '更新日時';
 
 create table track_distribution_service_urls (
     id         text                     not null primary key,
