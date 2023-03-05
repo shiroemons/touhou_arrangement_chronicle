@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/gocarina/gocsv v0.0.0-20230226133904-70c27cb2918a
 	github.com/jackc/pgx/v5 v5.3.1
+	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/meilisearch/meilisearch-go v0.23.0
 	github.com/rs/xid v1.4.0
 	github.com/shopspring/decimal v1.3.1
