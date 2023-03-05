@@ -5,13 +5,17 @@ on:
       - v*
     branches:
       - main
+    paths:
+      - cmd/**/*.go
+      - pkg/**/*.go
   pull_request:
     types:
       - opened
       - synchronize
       - reopened
     paths:
-      - './**'
+      - cmd/**/*.go
+      - pkg/**/*.go
 permissions:
   contents: read
   # Optional: allow read access to pull request. Use with `only-new-issues` option.
