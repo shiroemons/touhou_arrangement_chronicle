@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder all-clean
+.PHONY: help init build-local db-up up down logs ps migrate seeder all-clean test lint
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -33,6 +33,12 @@ indexer: ## indexer
 
 all-clean:
 	docker compose down --rmi all --volumes --remove-orphans
+
+test: ## Execute tests
+	go test -race -shuffle=on ./...
+
+lint:
+	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run -v --timeout 5m
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
