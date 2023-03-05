@@ -8,8 +8,8 @@
 | [public.original_songs](public.original_songs.md) | 10 | 原曲 | BASE TABLE |
 | [public.product_distribution_service_urls](public.product_distribution_service_urls.md) | 6 | 原作(音楽)配信サービスURL | BASE TABLE |
 | [public.original_song_distribution_service_urls](public.original_song_distribution_service_urls.md) | 6 | 原曲配信サービスURL | BASE TABLE |
-| [public.event_series](public.event_series.md) | 4 | イベントシリーズ | BASE TABLE |
-| [public.events](public.events.md) | 5 | イベント | BASE TABLE |
+| [public.event_series](public.event_series.md) | 5 | イベントシリーズ | BASE TABLE |
+| [public.events](public.events.md) | 6 | イベント | BASE TABLE |
 | [public.event_details](public.event_details.md) | 11 | イベント詳細 | BASE TABLE |
 | [public.sub_events](public.sub_events.md) | 5 | サブイベント | BASE TABLE |
 | [public.sub_event_details](public.sub_event_details.md) | 6 | サブイベント詳細 | BASE TABLE |
