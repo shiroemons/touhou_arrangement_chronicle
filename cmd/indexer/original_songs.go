@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/uptrace/bun"
 
@@ -17,13 +18,13 @@ func setupOriginalSongs(ctx context.Context, db *bun.DB, cli *meilisearch.Client
 	index := cli.Index("original_songs")
 	documents := getOriginalSongDocs(ctx, db)
 
-	task, err := index.AddDocuments(documents)
+	task, err := index.AddDocuments(documents, "id")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	fmt.Println(task.TaskUID)
+	pp.Println(task)
 }
 
 func getOriginalSongDocs(ctx context.Context, db *bun.DB) []map[string]interface{} {
