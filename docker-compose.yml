@@ -75,6 +75,29 @@ services:
       - "cmd/indexer/main.go"
       - "cmd/indexer/original_songs.go"
 
+  importer:
+    image: golang:1.20
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    profiles:
+      - extra
+    environment:
+      CONNECT_URL: "postgres://postgres:@db:5432/touhou_arrangement_chronicle_development?sslmode=disable"
+      BUNDEBUG: 1
+    volumes:
+      - .:/app
+      - go_pkg:/go/pkg
+    working_dir: /app
+    command:
+      - "go"
+      - "run"
+      - "cmd/importer/main.go"
+      - "cmd/importer/import_events.go"
+      - "cmd/importer/import_circles.go"
+      - "cmd/importer/import_artists.go"
+
   meilisearch:
     image: getmeili/meilisearch:v1.0.2
     volumes:

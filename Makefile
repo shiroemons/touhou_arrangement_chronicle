@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder all-clean test lint
+.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -30,6 +30,9 @@ seeder: ## db seed
 
 indexer: ## indexer
 	docker compose run --rm indexer
+
+importer: ## importer
+	docker compose run --rm importer
 
 all-clean:
 	docker compose down --rmi all --volumes --remove-orphans

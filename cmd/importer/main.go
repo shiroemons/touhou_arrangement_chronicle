@@ -1,0 +1,60 @@
+package main
+
+import (
+	"context"
+	"encoding/csv"
+	"io"
+	"os"
+	"time"
+
+	"github.com/gocarina/gocsv"
+	"github.com/spkg/bom"
+	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/infra/store"
+)
+
+func main() {
+	run()
+}
+
+func initDB() *bun.DB {
+	return store.NewDB(os.Getenv("CONNECT_URL"))
+}
+
+func run() {
+	ctx := context.Background()
+	db := initDB()
+
+	fn := func(in io.Reader) gocsv.CSVReader {
+		r := csv.NewReader(bom.NewReader(in)) // BOMの回避
+		r.Comma = '\t'                        // 区切り文字をタブに変更
+		r.Comment = '#'                       // #で始まる行はコメントと見なしスキップ
+		r.LazyQuotes = true
+		return r
+	}
+	gocsv.SetCSVReader(fn)
+
+	importEvents(ctx, db)
+	importCircles(ctx, db)
+	importArtists(ctx, db)
+}
+
+type DateTime struct {
+	time.Time
+}
+
+const layout = "2006-01-02"
+
+func (date *DateTime) MarshalCSV() (string, error) {
+	return date.Time.Format(layout), nil
+}
+
+func (date *DateTime) String() string {
+	return date.Format(layout) // Redundant, just for example
+}
+
+func (date *DateTime) UnmarshalCSV(csv string) (err error) {
+	date.Time, err = time.Parse(layout, csv)
+	return err
+}

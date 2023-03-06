@@ -24,9 +24,9 @@ type Event struct {
 	Description   string      `bun:"description,nullzero,notnull,default:''"`
 	URL           string      `bun:"url,nullzero,notnull,default:''"`
 	TwitterURL    string      `bun:"twitter_url,nullzero,notnull,default:''"`
+	SubEvents     []*SubEvent `bun:"rel:has-many,join:id=sub_event_id"`
 	CreatedAt     time.Time   `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt     time.Time   `bun:"updated_at,notnull,default:current_timestamp"`
-	SubEvents     []*SubEvent `bun:"rel:has-many,join:id=sub_event_id"`
 }
 
 var _ bun.BeforeAppendModelHook = (*Event)(nil)
