@@ -15,7 +15,7 @@ type Artist struct {
 	Name                string    `bun:"name,nullzero,notnull"`
 	NameReading         string    `bun:"name_reading,nullzero,notnull,default:''"`
 	InitialLetterType   string    `bun:"initial_letter_type,type:initial_letter_type,nullzero,notnull"`
-	InitialLetterDetail string    `bun:"initial_letter_detail,nullzero,notnull,default:''"`
+	InitialLetterDetail string    `bun:"initial_letter_detail,notnull"`
 	Description         string    `bun:"description,nullzero,notnull,default:''"`
 	URL                 string    `bun:"url,nullzero,notnull,default:''"`
 	BlogURL             string    `bun:"blog_url,nullzero,notnull,default:''"`
