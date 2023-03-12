@@ -58,6 +58,7 @@ services:
     tty: true
     depends_on:
       - db
+      - meilisearch
     profiles:
       - extra
     environment:
