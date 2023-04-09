@@ -14,7 +14,7 @@ require (
 	github.com/uptrace/bun v1.1.12
 	github.com/uptrace/bun/dialect/pgdialect v1.1.12
 	github.com/uptrace/bun/extra/bundebug v1.1.12
-	golang.org/x/text v0.7.0
+	golang.org/x/text v0.9.0
 )
 
 require (
