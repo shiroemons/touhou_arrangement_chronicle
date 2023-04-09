@@ -9,6 +9,8 @@ import (
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/entity"
 )
 
 func NewDB(connString string) *bun.DB {
@@ -28,6 +30,8 @@ func NewDB(connString string) *bun.DB {
 
 		// bundebug.WithWriter(&zapio.Writer{Log: logger}),
 	))
+	// Add Models
+	AddRegisterModels(conn)
 
 	var v string
 	if err = conn.NewSelect().ColumnExpr("version()").Scan(context.Background(), &v); err != nil {
@@ -36,4 +40,20 @@ func NewDB(connString string) *bun.DB {
 	log.Println(v)
 
 	return conn
+}
+
+func AddRegisterModels(db *bun.DB) {
+	db.RegisterModel((*entity.AlbumsCircles)(nil))
+	db.RegisterModel((*entity.AlbumsTags)(nil))
+	db.RegisterModel((*entity.AlbumsGenres)(nil))
+	db.RegisterModel((*entity.CirclesTags)(nil))
+	db.RegisterModel((*entity.TracksArrangeCircles)(nil))
+	db.RegisterModel((*entity.TracksArrangers)(nil))
+	db.RegisterModel((*entity.TracksComposers)(nil))
+	db.RegisterModel((*entity.TracksGenres)(nil))
+	db.RegisterModel((*entity.TracksLyricists)(nil))
+	db.RegisterModel((*entity.TracksOriginalSongs)(nil))
+	db.RegisterModel((*entity.TracksRearrangers)(nil))
+	db.RegisterModel((*entity.TracksTags)(nil))
+	db.RegisterModel((*entity.TracksVocalists)(nil))
 }
