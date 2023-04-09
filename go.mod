@@ -3,7 +3,8 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
-	github.com/gocarina/gocsv v0.0.0-20230226133904-70c27cb2918a
+	github.com/goark/kkconv v0.3.3
+	github.com/gocarina/gocsv v0.0.0-20230406101422-6445c2b15027
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/meilisearch/meilisearch-go v0.23.0
@@ -13,12 +14,12 @@ require (
 	github.com/uptrace/bun v1.1.12
 	github.com/uptrace/bun/dialect/pgdialect v1.1.12
 	github.com/uptrace/bun/extra/bundebug v1.1.12
+	golang.org/x/text v0.7.0
 )
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/fatih/color v1.14.1 // indirect
-	github.com/goark/kkconv v0.3.3 // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.3 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
@@ -35,5 +36,4 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
 )
