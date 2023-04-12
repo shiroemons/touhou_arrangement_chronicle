@@ -11,7 +11,7 @@ import (
 	"github.com/spkg/bom"
 	"github.com/uptrace/bun"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/infra/store"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infra/store"
 )
 
 func main() {

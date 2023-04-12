@@ -5,7 +5,7 @@ import (
 
 	"github.com/uptrace/bun"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type OriginalSongRepository struct {

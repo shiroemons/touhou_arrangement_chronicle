@@ -8,8 +8,9 @@ import (
 
 	"github.com/gocarina/gocsv"
 	"github.com/rs/xid"
-	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/domain"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 )
 
 type ArtistCSV struct {

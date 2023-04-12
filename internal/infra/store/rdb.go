@@ -10,7 +10,7 @@ import (
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/pkg/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func NewDB(connString string) *bun.DB {
