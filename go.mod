@@ -8,7 +8,7 @@ require (
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/meilisearch/meilisearch-go v0.24.0
-	github.com/rs/xid v1.4.0
+	github.com/rs/xid v1.5.0
 	github.com/shopspring/decimal v1.3.1
 	github.com/spkg/bom v1.0.0
 	github.com/uptrace/bun v1.1.12
