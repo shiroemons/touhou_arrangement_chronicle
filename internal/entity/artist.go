@@ -6,6 +6,8 @@ import (
 
 	"github.com/rs/xid"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 )
 
 type Artist struct {
@@ -32,6 +34,17 @@ func (e *Artist) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	case *bun.InsertQuery:
 		if e.ID == "" {
 			e.ID = xid.New().String()
+		}
+		if e.Name != "" {
+			ilType, ilDetail := domain.InitialLetter(e.Name)
+			e.InitialLetterType = string(ilType)
+			e.InitialLetterDetail = ilDetail
+		}
+	case *bun.UpdateQuery:
+		if e.Name != "" {
+			ilType, ilDetail := domain.InitialLetter(e.Name)
+			e.InitialLetterType = string(ilType)
+			e.InitialLetterDetail = ilDetail
 		}
 	}
 	return nil

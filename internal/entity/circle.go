@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/rs/xid"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/uptrace/bun"
 )
 
@@ -21,8 +22,8 @@ type Circle struct {
 	BlogURL             string    `bun:"blog_url,nullzero,notnull,default:''"`
 	TwitterURL          string    `bun:"twitter_url,nullzero,notnull,default:''"`
 	YoutubeChannelURL   string    `bun:"youtube_channel_url,nullzero,notnull,default:''"`
-	Albums              []Album   `bun:"m2m:albums_circles,join:Circle=Album"`
-	Tags                []Tag     `bun:"m2m:circles_tags,join:Circle=Tag"`
+	Albums              []*Album  `bun:"m2m:albums_circles,join:Circle=Album"`
+	Tags                []*Tag    `bun:"m2m:circles_tags,join:Circle=Tag"`
 	CreatedAt           time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt           time.Time `bun:"updated_at,notnull,default:current_timestamp"`
 }
@@ -34,6 +35,17 @@ func (e *Circle) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	case *bun.InsertQuery:
 		if e.ID == "" {
 			e.ID = xid.New().String()
+		}
+		if e.Name != "" {
+			ilType, ilDetail := domain.InitialLetter(e.Name)
+			e.InitialLetterType = string(ilType)
+			e.InitialLetterDetail = ilDetail
+		}
+	case *bun.UpdateQuery:
+		if e.Name != "" {
+			ilType, ilDetail := domain.InitialLetter(e.Name)
+			e.InitialLetterType = string(ilType)
+			e.InitialLetterDetail = ilDetail
 		}
 	}
 	return nil
