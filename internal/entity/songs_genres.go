@@ -6,11 +6,11 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type TracksGenres struct {
-	bun.BaseModel `bun:"table:tracks_genres,alias:tg"`
+type SongsGenres struct {
+	bun.BaseModel `bun:"table:songs_genres,alias:sg"`
 
-	TrackID   string    `bun:"track_id,pk,nullzero,notnull"`
-	Track     *Track    `bun:"rel:belongs-to,join:track_id=id"`
+	SongID    string    `bun:"song_id,pk,nullzero,notnull"`
+	Song      *Song     `bun:"rel:belongs-to,join:song_id=id"`
 	TagID     string    `bun:"tag_id,pk,nullzero,notnull"`
 	GenreTag  *Tag      `bun:"rel:belongs-to,join:tag_id=id"`
 	Locked    bool      `bun:"locked,nullzero,notnull,default:false"`

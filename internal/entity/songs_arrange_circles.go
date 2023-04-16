@@ -6,11 +6,11 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type TracksArrangeCircles struct {
-	bun.BaseModel `bun:"table:tracks_arrange_circles,alias:tac"`
+type SongsArrangeCircles struct {
+	bun.BaseModel `bun:"table:songs_arrange_circles,alias:sac"`
 
-	TrackID   string    `bun:"track_id,pk,nullzero,notnull"`
-	Track     *Track    `bun:"rel:belongs-to,join:track_id=id"`
+	SongID    string    `bun:"song_id,pk,nullzero,notnull"`
+	Song      *Song     `bun:"rel:belongs-to,join:song_id=id"`
 	CircleID  string    `bun:"circle_id,pk,nullzero,notnull"`
 	Circle    *Circle   `bun:"rel:belongs-to,join:circle_id=id"`
 	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`

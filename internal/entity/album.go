@@ -30,7 +30,7 @@ type Album struct {
 	AlbumConsignmentShops        []*AlbumConsignmentShop        `bun:"rel:has-many,join:id=album_id"`
 	AlbumDistributionServiceURLs []*AlbumDistributionServiceURL `bun:"rel:has-many,join:id=album_id"`
 	AlbumUPCs                    []*AlbumUPC                    `bun:"rel:has-many,join:id=album_id"`
-	Tracks                       []*Track                       `bun:"rel:has-many,join:id=album_id"`
+	Songs                        []*Song                        `bun:"rel:has-many,join:id=album_id"`
 	Circles                      []*Circle                      `bun:"m2m:albums_circles,join:Album=Circle"`
 	GenreTags                    []*Tag                         `bun:"m2m:albums_genres,join:Album=GenreTag"`
 	Tags                         []*Tag                         `bun:"m2m:albums_tags,join:Album=Tag"`

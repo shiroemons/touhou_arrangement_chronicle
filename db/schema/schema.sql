@@ -118,7 +118,7 @@ create type event_status as enum (
 create type event_format as enum (
     'offline', -- オフライン開催
     'online',  -- オンライン開催
-    'mixed'   -- オフライン・オンライン両方開催
+    'mixed'    -- オフライン・オンライン両方開催
 );
 
 create table events (
@@ -345,7 +345,7 @@ comment on column album_upcs.upc is 'UPC(JAN)コード';
 comment on column album_upcs.created_at is '作成日時';
 comment on column album_upcs.updated_at is '更新日時';
 
-create table tracks (
+create table songs (
     id                    text                     not null primary key,
     album_id              text                     not null references albums(id),
     name                  text                     not null,
@@ -365,144 +365,144 @@ create table tracks (
     created_at     timestamp with time zone not null default current_timestamp,
     updated_at     timestamp with time zone not null default current_timestamp
 );
-comment on table  tracks is 'トラック';
-comment on column tracks.album_id is 'アルバムID';
-comment on column tracks.name is '名前';
-comment on column tracks.name_reading is '名前読み方';
-comment on column tracks.disc_number is 'ディスク番号(default: 1)';
-comment on column tracks.track_number is 'トラック番号';
-comment on column tracks.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';
-comment on column tracks.search_enabled is '検索対象とするか(default: true)';
-comment on column tracks.length is '曲の長さ(秒)';
-comment on column tracks.bpm is 'BPM';
-comment on column tracks.display_composer is '作曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column tracks.display_arranger is '編曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column tracks.display_rearranger is '再編曲者表示用(1度しか使用しない別名義などで使用する)';
-comment on column tracks.display_lyricist is '作詞者表示用(1度しか使用しない別名義などで使用する)';
-comment on column tracks.display_vocalist is 'ボーカリスト表示用(1度しか使用しない別名義などで使用する)';
-comment on column tracks.display_original_song is '原曲表示用(東方以外の原曲などで使用する)';
-comment on column tracks.created_at is '作成日時';
-comment on column tracks.updated_at is '更新日時';
+comment on table  songs is '楽曲';
+comment on column songs.album_id is 'アルバムID';
+comment on column songs.name is '名前';
+comment on column songs.name_reading is '名前読み方';
+comment on column songs.disc_number is 'ディスク番号(default: 1)';
+comment on column songs.track_number is 'トラック番号';
+comment on column songs.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';
+comment on column songs.search_enabled is '検索対象とするか(default: true)';
+comment on column songs.length is '曲の長さ(秒)';
+comment on column songs.bpm is 'BPM';
+comment on column songs.display_composer is '作曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column songs.display_arranger is '編曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column songs.display_rearranger is '再編曲者表示用(1度しか使用しない別名義などで使用する)';
+comment on column songs.display_lyricist is '作詞者表示用(1度しか使用しない別名義などで使用する)';
+comment on column songs.display_vocalist is 'ボーカリスト表示用(1度しか使用しない別名義などで使用する)';
+comment on column songs.display_original_song is '原曲表示用(東方以外の原曲などで使用する)';
+comment on column songs.created_at is '作成日時';
+comment on column songs.updated_at is '更新日時';
 
-create table track_distribution_service_urls (
+create table song_distribution_service_urls (
     id         text                     not null primary key,
-    track_id   text                     not null references tracks(id),
+    song_id    text                     not null references songs(id),
     service    distribution_service     not null,
     url        text                     not null,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
-comment on table  track_distribution_service_urls is '楽曲配信サービスURL';
-comment on column track_distribution_service_urls.track_id is 'トラックID';
-comment on column track_distribution_service_urls.service is '配信サービス';
-comment on column track_distribution_service_urls.url is 'URL';
-comment on column track_distribution_service_urls.created_at is '作成日時';
-comment on column track_distribution_service_urls.updated_at is '更新日時';
+comment on table  song_distribution_service_urls is '楽曲配信サービスURL';
+comment on column song_distribution_service_urls.song_id is '楽曲ID';
+comment on column song_distribution_service_urls.service is '配信サービス';
+comment on column song_distribution_service_urls.url is 'URL';
+comment on column song_distribution_service_urls.created_at is '作成日時';
+comment on column song_distribution_service_urls.updated_at is '更新日時';
 
-create table track_isrcs (
+create table song_isrcs (
     id         text                     not null primary key,
-    track_id   text                     not null references tracks(id),
+    song_id    text                     not null references songs(id),
     isrc       text                     not null,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
-create unique index uk_track_isrcs_track_id_isrc on track_isrcs (track_id, isrc);
-comment on table  track_isrcs is '楽曲ISRC';
-comment on column track_isrcs.track_id is 'トラックID';
-comment on column track_isrcs.isrc is 'ISRC(International Standard Recording Code): 国際標準レコーディングコード';
-comment on column track_isrcs.created_at is '作成日時';
-comment on column track_isrcs.updated_at is '更新日時';
+create unique index uk_song_isrcs_song_id_isrc on song_isrcs (song_id, isrc);
+comment on table  song_isrcs is '楽曲ISRC';
+comment on column song_isrcs.song_id is '楽曲ID';
+comment on column song_isrcs.isrc is 'ISRC(International Standard Recording Code): 国際標準レコーディングコード';
+comment on column song_isrcs.created_at is '作成日時';
+comment on column song_isrcs.updated_at is '更新日時';
 
-create table tracks_arrange_circles (
-    track_id   text                     not null references tracks(id),
+create table songs_arrange_circles (
+    song_id    text                     not null references songs(id),
     circle_id  text                     not null references circles(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, circle_id)
+    primary key (song_id, circle_id)
 );
-comment on table  tracks_arrange_circles is '楽曲編曲サークル';
-comment on column tracks_arrange_circles.track_id is 'トラックID';
-comment on column tracks_arrange_circles.circle_id is 'サークルID';
-comment on column tracks_arrange_circles.created_at is '作成日時';
-comment on column tracks_arrange_circles.updated_at is '更新日時';
+comment on table  songs_arrange_circles is '楽曲編曲サークル';
+comment on column songs_arrange_circles.song_id is '楽曲ID';
+comment on column songs_arrange_circles.circle_id is 'サークルID';
+comment on column songs_arrange_circles.created_at is '作成日時';
+comment on column songs_arrange_circles.updated_at is '更新日時';
 
-create table tracks_composers (
-    track_id   text                     not null references tracks(id),
+create table songs_composers (
+    song_id    text                     not null references songs(id),
     artist_id  text                     not null references artists(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, artist_id)
+    primary key (song_id, artist_id)
 );
-comment on table  tracks_composers is '楽曲作曲者';
-comment on column tracks_composers.track_id is 'トラックID';
-comment on column tracks_composers.artist_id is '作曲者ID(アーティストID)';
-comment on column tracks_composers.created_at is '作成日時';
-comment on column tracks_composers.updated_at is '更新日時';
+comment on table  songs_composers is '楽曲作曲者';
+comment on column songs_composers.song_id is '楽曲ID';
+comment on column songs_composers.artist_id is '作曲者ID(アーティストID)';
+comment on column songs_composers.created_at is '作成日時';
+comment on column songs_composers.updated_at is '更新日時';
 
-create table tracks_arrangers (
-    track_id   text                     not null references tracks(id),
+create table songs_arrangers (
+    song_id    text                     not null references songs(id),
     artist_id  text                     not null references artists(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, artist_id)
+    primary key (song_id, artist_id)
 );
-comment on table  tracks_arrangers is '楽曲編曲者';
-comment on column tracks_arrangers.track_id is 'トラックID';
-comment on column tracks_arrangers.artist_id is '編曲者ID(アーティストID)';
-comment on column tracks_arrangers.created_at is '作成日時';
-comment on column tracks_arrangers.updated_at is '更新日時';
+comment on table  songs_arrangers is '楽曲編曲者';
+comment on column songs_arrangers.song_id is '楽曲ID';
+comment on column songs_arrangers.artist_id is '編曲者ID(アーティストID)';
+comment on column songs_arrangers.created_at is '作成日時';
+comment on column songs_arrangers.updated_at is '更新日時';
 
-create table tracks_rearrangers (
-    track_id   text                     not null references tracks(id),
+create table songs_rearrangers (
+    song_id    text                     not null references songs(id),
     artist_id  text                     not null references artists(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, artist_id)
+    primary key (song_id, artist_id)
 );
-comment on table  tracks_rearrangers is '楽曲再編曲者';
-comment on column tracks_rearrangers.track_id is 'トラックID';
-comment on column tracks_rearrangers.artist_id is '再編曲者ID(アーティストID)';
-comment on column tracks_rearrangers.created_at is '作成日時';
-comment on column tracks_rearrangers.updated_at is '更新日時';
+comment on table  songs_rearrangers is '楽曲再編曲者';
+comment on column songs_rearrangers.song_id is '楽曲ID';
+comment on column songs_rearrangers.artist_id is '再編曲者ID(アーティストID)';
+comment on column songs_rearrangers.created_at is '作成日時';
+comment on column songs_rearrangers.updated_at is '更新日時';
 
-create table tracks_lyricists (
-    track_id   text                     not null references tracks(id),
+create table songs_lyricists (
+    song_id    text                     not null references songs(id),
     artist_id  text                     not null references artists(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, artist_id)
+    primary key (song_id, artist_id)
 );
-comment on table  tracks_lyricists is '楽曲作詞者';
-comment on column tracks_lyricists.track_id is 'トラックID';
-comment on column tracks_lyricists.artist_id is '作詞者ID(アーティストID)';
-comment on column tracks_lyricists.created_at is '作成日時';
-comment on column tracks_lyricists.updated_at is '更新日時';
+comment on table  songs_lyricists is '楽曲作詞者';
+comment on column songs_lyricists.song_id is '楽曲ID';
+comment on column songs_lyricists.artist_id is '作詞者ID(アーティストID)';
+comment on column songs_lyricists.created_at is '作成日時';
+comment on column songs_lyricists.updated_at is '更新日時';
 
-create table tracks_vocalists (
-    track_id   text                     not null references tracks(id),
+create table songs_vocalists (
+    song_id    text                     not null references songs(id),
     artist_id  text                     not null references artists(id),
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, artist_id)
+    primary key (song_id, artist_id)
 );
-comment on table  tracks_vocalists is '楽曲ボーカリスト';
-comment on column tracks_vocalists.track_id is 'トラックID';
-comment on column tracks_vocalists.artist_id is 'ボーカリストID(アーティストID)';
-comment on column tracks_vocalists.created_at is '作成日時';
-comment on column tracks_vocalists.updated_at is '更新日時';
+comment on table  songs_vocalists is '楽曲ボーカリスト';
+comment on column songs_vocalists.song_id is '楽曲ID';
+comment on column songs_vocalists.artist_id is 'ボーカリストID(アーティストID)';
+comment on column songs_vocalists.created_at is '作成日時';
+comment on column songs_vocalists.updated_at is '更新日時';
 
-create table tracks_original_songs (
-    track_id         text                     not null references tracks(id),
+create table songs_original_songs (
+    song_id          text                     not null references songs(id),
     original_song_id text                     not null references original_songs(id),
     created_at       timestamp with time zone not null default current_timestamp,
     updated_at       timestamp with time zone not null default current_timestamp,
-    primary key (track_id, original_song_id)
+    primary key (song_id, original_song_id)
 );
-comment on table  tracks_original_songs is '楽曲原曲';
-comment on column tracks_original_songs.track_id is 'トラックID';
-comment on column tracks_original_songs.original_song_id is '原曲ID';
-comment on column tracks_original_songs.created_at is '作成日時';
-comment on column tracks_original_songs.updated_at is '更新日時';
+comment on table  songs_original_songs is '楽曲原曲';
+comment on column songs_original_songs.song_id is '楽曲ID';
+comment on column songs_original_songs.original_song_id is '原曲ID';
+comment on column songs_original_songs.created_at is '作成日時';
+comment on column songs_original_songs.updated_at is '更新日時';
 
 create type tag_type as enum (
     'unknown',   -- 不明
@@ -554,35 +554,35 @@ comment on column albums_tags.locked is 'ロック有無(true: ロック、false
 comment on column albums_tags.created_at is '作成日時';
 comment on column albums_tags.updated_at is '更新日時';
 
-create table tracks_genres (
-    track_id   text                     not null references tracks(id),
+create table songs_genres (
+    song_id    text                     not null references songs(id),
     tag_id     text                     not null references tags(id),
     locked     bool                     not null default false,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, tag_id)
+    primary key (song_id, tag_id)
 );
-comment on table  tracks_genres is '楽曲ジャンル';
-comment on column tracks_genres.track_id is 'トラックID';
-comment on column tracks_genres.tag_id is 'タグID';
-comment on column tracks_genres.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
-comment on column tracks_genres.created_at is '作成日時';
-comment on column tracks_genres.updated_at is '更新日時';
+comment on table  songs_genres is '楽曲ジャンル';
+comment on column songs_genres.song_id is '楽曲ID';
+comment on column songs_genres.tag_id is 'タグID';
+comment on column songs_genres.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
+comment on column songs_genres.created_at is '作成日時';
+comment on column songs_genres.updated_at is '更新日時';
 
-create table tracks_tags (
-    track_id   text                     not null references tracks(id),
+create table songs_tags (
+    song_id    text                     not null references songs(id),
     tag_id     text                     not null references tags(id),
     locked     bool                     not null default false,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp,
-    primary key (track_id, tag_id)
+    primary key (song_id, tag_id)
 );
-comment on table  tracks_tags is '楽曲タグ';
-comment on column tracks_tags.track_id is 'トラックID';
-comment on column tracks_tags.tag_id is 'タグID';
-comment on column tracks_tags.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
-comment on column tracks_tags.created_at is '作成日時';
-comment on column tracks_tags.updated_at is '更新日時';
+comment on table  songs_tags is '楽曲タグ';
+comment on column songs_tags.song_id is '楽曲ID';
+comment on column songs_tags.tag_id is 'タグID';
+comment on column songs_tags.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
+comment on column songs_tags.created_at is '作成日時';
+comment on column songs_tags.updated_at is '更新日時';
 
 create table circles_tags (
     circle_id  text                     not null references circles(id),

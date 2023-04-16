@@ -19,7 +19,7 @@ type OriginalSong struct {
 	Original                            bool                                  `bun:"is_original,notnull"`
 	SourceID                            string                                `bun:"source_id,nullzero,notnull,default:''"`
 	OriginalSongDistributionServiceURLs []*OriginalSongDistributionServiceURL `bun:"rel:has-many,join:id=original_song_id"`
-	Tracks                              []*Track                              `bun:"m2m:tracks_original_songs,join:OriginalSong=Track"`
+	Songs                               []*Song                               `bun:"m2m:tracks_original_songs,join:OriginalSong=Song"`
 	CreatedAt                           time.Time                             `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                           time.Time                             `bun:"updated_at,notnull,default:current_timestamp"`
 }

@@ -6,11 +6,11 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type TracksOriginalSongs struct {
-	bun.BaseModel `bun:"table:tracks_original_songs,alias:tos"`
+type SongsOriginalSongs struct {
+	bun.BaseModel `bun:"table:songs_original_songs,alias:sos"`
 
-	TrackID        string        `bun:"track_id,pk,nullzero,notnull"`
-	Track          *Track        `bun:"rel:belongs-to,join:track_id=id"`
+	SongID         string        `bun:"song_id,pk,nullzero,notnull"`
+	Song           *Song         `bun:"rel:belongs-to,join:song_id=id"`
 	OriginalSongID string        `bun:"original_song_id,pk,nullzero,notnull"`
 	OriginalSong   *OriginalSong `bun:"rel:belongs-to,join:original_song_id=id"`
 	CreatedAt      time.Time     `bun:"created_at,notnull,default:current_timestamp"`
