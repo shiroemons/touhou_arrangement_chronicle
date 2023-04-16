@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.tracks](public.tracks.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
+| id | text |  | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.songs](public.songs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | release_circle_name | text | ''::text | false |  |  | 頒布サークル名 |
 | release_date | date |  | true |  |  | 頒布日 |

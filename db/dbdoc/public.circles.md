@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.albums_circles](public.albums_circles.md) [public.tracks_arrange_circles](public.tracks_arrange_circles.md) [public.circles_tags](public.circles_tags.md) |  |  |
+| id | text |  | false | [public.albums_circles](public.albums_circles.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.circles_tags](public.circles_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text | ''::text | false |  |  | 名前読み方 |
 | initial_letter_type | initial_letter_type |  | false |  |  | 頭文字の文字種別(symbol,number,alphabet,kana,kanji,other) |
