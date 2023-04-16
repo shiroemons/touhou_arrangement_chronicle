@@ -98,6 +98,7 @@ services:
       - "cmd/importer/import_events.go"
       - "cmd/importer/import_circles.go"
       - "cmd/importer/import_artists.go"
+      - "cmd/importer/import_albums_and_tracks.go"
 
   meilisearch:
     image: getmeili/meilisearch:v1.1.0

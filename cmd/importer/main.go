@@ -38,6 +38,7 @@ func run() {
 	importEvents(ctx, db)
 	importCircles(ctx, db)
 	importArtists(ctx, db)
+	importAlbums(ctx, db)
 }
 
 type DateTime struct {
