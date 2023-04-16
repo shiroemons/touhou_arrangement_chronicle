@@ -4,9 +4,9 @@ import (
 	"context"
 	"log"
 	"os"
-	"time"
 
 	"github.com/gocarina/gocsv"
+	"github.com/jackc/pgtype"
 	"github.com/rs/xid"
 	"github.com/uptrace/bun"
 
@@ -67,11 +67,22 @@ func importEvents(ctx context.Context, db *bun.DB) {
 			ID:            xid.New().String(),
 			EventSeriesID: eSeries.ID,
 			Name:          line.EventName,
-			EventDates:    []time.Time{line.StartDate.Time, line.EndDate.Time},
-			DisplayName:   line.EventName,
-			EventStatus:   line.Status,
-			Format:        line.Mode,
-			RegionCode:    line.AddressRegion,
+			EventDates: pgtype.Daterange{
+				Lower: pgtype.Date{
+					Time:   line.StartDate.Time,
+					Status: pgtype.Present,
+				},
+				Upper: pgtype.Date{
+					Time:   line.EndDate.Time.AddDate(0, 0, 1),
+					Status: pgtype.Present,
+				},
+				LowerType: pgtype.Inclusive,
+				UpperType: pgtype.Exclusive,
+			},
+			DisplayName: line.EventName,
+			EventStatus: line.Status,
+			Format:      line.Mode,
+			RegionCode:  line.AddressRegion,
 		}
 		events = append(events, e)
 	}
