@@ -1,4 +1,4 @@
-# public.tracks_original_songs
+# public.songs_original_songs
 
 ## Description
 
@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| track_id | text |  | false |  | [public.tracks](public.tracks.md) | トラックID |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | original_song_id | text |  | false |  | [public.original_songs](public.original_songs.md) | 原曲ID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
@@ -17,19 +17,19 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| tracks_original_songs_original_song_id_fkey | FOREIGN KEY | FOREIGN KEY (original_song_id) REFERENCES original_songs(id) |
-| tracks_original_songs_track_id_fkey | FOREIGN KEY | FOREIGN KEY (track_id) REFERENCES tracks(id) |
-| tracks_original_songs_pkey | PRIMARY KEY | PRIMARY KEY (track_id, original_song_id) |
+| songs_original_songs_original_song_id_fkey | FOREIGN KEY | FOREIGN KEY (original_song_id) REFERENCES original_songs(id) |
+| songs_original_songs_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
+| songs_original_songs_pkey | PRIMARY KEY | PRIMARY KEY (song_id, original_song_id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| tracks_original_songs_pkey | CREATE UNIQUE INDEX tracks_original_songs_pkey ON public.tracks_original_songs USING btree (track_id, original_song_id) |
+| songs_original_songs_pkey | CREATE UNIQUE INDEX songs_original_songs_pkey ON public.songs_original_songs USING btree (song_id, original_song_id) |
 
 ## Relations
 
-![er](public.tracks_original_songs.svg)
+![er](public.songs_original_songs.svg)
 
 ---
 

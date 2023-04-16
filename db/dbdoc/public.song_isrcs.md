@@ -1,4 +1,4 @@
-# public.track_isrcs
+# public.song_isrcs
 
 ## Description
 
@@ -9,7 +9,7 @@
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text |  | false |  |  |  |
-| track_id | text |  | false |  | [public.tracks](public.tracks.md) | トラックID |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | isrc | text |  | false |  |  | ISRC(International Standard Recording Code): 国際標準レコーディングコード |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
@@ -18,19 +18,19 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| track_isrcs_track_id_fkey | FOREIGN KEY | FOREIGN KEY (track_id) REFERENCES tracks(id) |
-| track_isrcs_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| song_isrcs_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
+| song_isrcs_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| track_isrcs_pkey | CREATE UNIQUE INDEX track_isrcs_pkey ON public.track_isrcs USING btree (id) |
-| uk_track_isrcs_track_id_isrc | CREATE UNIQUE INDEX uk_track_isrcs_track_id_isrc ON public.track_isrcs USING btree (track_id, isrc) |
+| song_isrcs_pkey | CREATE UNIQUE INDEX song_isrcs_pkey ON public.song_isrcs USING btree (id) |
+| uk_song_isrcs_song_id_isrc | CREATE UNIQUE INDEX uk_song_isrcs_song_id_isrc ON public.song_isrcs USING btree (song_id, isrc) |
 
 ## Relations
 
-![er](public.track_isrcs.svg)
+![er](public.song_isrcs.svg)
 
 ---
 

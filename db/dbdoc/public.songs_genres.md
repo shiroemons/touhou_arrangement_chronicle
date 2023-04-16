@@ -1,4 +1,4 @@
-# public.tracks_genres
+# public.songs_genres
 
 ## Description
 
@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| track_id | text |  | false |  | [public.tracks](public.tracks.md) | トラックID |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック・削除不可、false: アンロック) |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
@@ -18,19 +18,19 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| tracks_genres_track_id_fkey | FOREIGN KEY | FOREIGN KEY (track_id) REFERENCES tracks(id) |
-| tracks_genres_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
-| tracks_genres_pkey | PRIMARY KEY | PRIMARY KEY (track_id, tag_id) |
+| songs_genres_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
+| songs_genres_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
+| songs_genres_pkey | PRIMARY KEY | PRIMARY KEY (song_id, tag_id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| tracks_genres_pkey | CREATE UNIQUE INDEX tracks_genres_pkey ON public.tracks_genres USING btree (track_id, tag_id) |
+| songs_genres_pkey | CREATE UNIQUE INDEX songs_genres_pkey ON public.songs_genres USING btree (song_id, tag_id) |
 
 ## Relations
 
-![er](public.tracks_genres.svg)
+![er](public.songs_genres.svg)
 
 ---
 

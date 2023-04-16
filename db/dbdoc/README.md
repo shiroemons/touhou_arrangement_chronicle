@@ -18,21 +18,21 @@
 | [public.album_consignment_shops](public.album_consignment_shops.md) | 9 | アルバム委託販売ショップ | BASE TABLE |
 | [public.album_distribution_service_urls](public.album_distribution_service_urls.md) | 6 | アルバム配信サービスURL | BASE TABLE |
 | [public.album_upcs](public.album_upcs.md) | 5 | アルバムUPC | BASE TABLE |
-| [public.tracks](public.tracks.md) | 18 | トラック | BASE TABLE |
-| [public.track_distribution_service_urls](public.track_distribution_service_urls.md) | 6 | 楽曲配信サービスURL | BASE TABLE |
-| [public.track_isrcs](public.track_isrcs.md) | 5 | 楽曲ISRC | BASE TABLE |
-| [public.tracks_arrange_circles](public.tracks_arrange_circles.md) | 4 | 楽曲編曲サークル | BASE TABLE |
-| [public.tracks_composers](public.tracks_composers.md) | 4 | 楽曲作曲者 | BASE TABLE |
-| [public.tracks_arrangers](public.tracks_arrangers.md) | 4 | 楽曲編曲者 | BASE TABLE |
-| [public.tracks_rearrangers](public.tracks_rearrangers.md) | 4 | 楽曲再編曲者 | BASE TABLE |
-| [public.tracks_lyricists](public.tracks_lyricists.md) | 4 | 楽曲作詞者 | BASE TABLE |
-| [public.tracks_vocalists](public.tracks_vocalists.md) | 4 | 楽曲ボーカリスト | BASE TABLE |
-| [public.tracks_original_songs](public.tracks_original_songs.md) | 4 | 楽曲原曲 | BASE TABLE |
+| [public.songs](public.songs.md) | 18 | 楽曲 | BASE TABLE |
+| [public.song_distribution_service_urls](public.song_distribution_service_urls.md) | 6 | 楽曲配信サービスURL | BASE TABLE |
+| [public.song_isrcs](public.song_isrcs.md) | 5 | 楽曲ISRC | BASE TABLE |
+| [public.songs_arrange_circles](public.songs_arrange_circles.md) | 4 | 楽曲編曲サークル | BASE TABLE |
+| [public.songs_composers](public.songs_composers.md) | 4 | 楽曲作曲者 | BASE TABLE |
+| [public.songs_arrangers](public.songs_arrangers.md) | 4 | 楽曲編曲者 | BASE TABLE |
+| [public.songs_rearrangers](public.songs_rearrangers.md) | 4 | 楽曲再編曲者 | BASE TABLE |
+| [public.songs_lyricists](public.songs_lyricists.md) | 4 | 楽曲作詞者 | BASE TABLE |
+| [public.songs_vocalists](public.songs_vocalists.md) | 4 | 楽曲ボーカリスト | BASE TABLE |
+| [public.songs_original_songs](public.songs_original_songs.md) | 4 | 楽曲原曲 | BASE TABLE |
 | [public.tags](public.tags.md) | 5 | タグ | BASE TABLE |
 | [public.albums_genres](public.albums_genres.md) | 5 | アルバムジャンル | BASE TABLE |
 | [public.albums_tags](public.albums_tags.md) | 5 | アルバムタグ | BASE TABLE |
-| [public.tracks_genres](public.tracks_genres.md) | 5 | 楽曲ジャンル | BASE TABLE |
-| [public.tracks_tags](public.tracks_tags.md) | 5 | 楽曲タグ | BASE TABLE |
+| [public.songs_genres](public.songs_genres.md) | 5 | 楽曲ジャンル | BASE TABLE |
+| [public.songs_tags](public.songs_tags.md) | 5 | 楽曲タグ | BASE TABLE |
 | [public.circles_tags](public.circles_tags.md) | 5 | サークルタグ | BASE TABLE |
 
 ## Relations

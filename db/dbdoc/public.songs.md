@@ -1,14 +1,14 @@
-# public.tracks
+# public.songs
 
 ## Description
 
-トラック
+楽曲
 
 ## Columns
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.track_distribution_service_urls](public.track_distribution_service_urls.md) [public.track_isrcs](public.track_isrcs.md) [public.tracks_arrange_circles](public.tracks_arrange_circles.md) [public.tracks_composers](public.tracks_composers.md) [public.tracks_arrangers](public.tracks_arrangers.md) [public.tracks_rearrangers](public.tracks_rearrangers.md) [public.tracks_lyricists](public.tracks_lyricists.md) [public.tracks_vocalists](public.tracks_vocalists.md) [public.tracks_original_songs](public.tracks_original_songs.md) [public.tracks_genres](public.tracks_genres.md) [public.tracks_tags](public.tracks_tags.md) |  |  |
+| id | text |  | false | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) [public.song_isrcs](public.song_isrcs.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) [public.songs_original_songs](public.songs_original_songs.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) |  |  |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text | ''::text | false |  |  | 名前読み方 |
@@ -31,18 +31,18 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| tracks_album_id_fkey | FOREIGN KEY | FOREIGN KEY (album_id) REFERENCES albums(id) |
-| tracks_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| songs_album_id_fkey | FOREIGN KEY | FOREIGN KEY (album_id) REFERENCES albums(id) |
+| songs_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| tracks_pkey | CREATE UNIQUE INDEX tracks_pkey ON public.tracks USING btree (id) |
+| songs_pkey | CREATE UNIQUE INDEX songs_pkey ON public.songs USING btree (id) |
 
 ## Relations
 
-![er](public.tracks.svg)
+![er](public.songs.svg)
 
 ---
 

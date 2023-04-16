@@ -1,4 +1,4 @@
-# public.tracks_arrange_circles
+# public.songs_arrange_circles
 
 ## Description
 
@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| track_id | text |  | false |  | [public.tracks](public.tracks.md) | トラックID |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
@@ -17,19 +17,19 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| tracks_arrange_circles_circle_id_fkey | FOREIGN KEY | FOREIGN KEY (circle_id) REFERENCES circles(id) |
-| tracks_arrange_circles_track_id_fkey | FOREIGN KEY | FOREIGN KEY (track_id) REFERENCES tracks(id) |
-| tracks_arrange_circles_pkey | PRIMARY KEY | PRIMARY KEY (track_id, circle_id) |
+| songs_arrange_circles_circle_id_fkey | FOREIGN KEY | FOREIGN KEY (circle_id) REFERENCES circles(id) |
+| songs_arrange_circles_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
+| songs_arrange_circles_pkey | PRIMARY KEY | PRIMARY KEY (song_id, circle_id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| tracks_arrange_circles_pkey | CREATE UNIQUE INDEX tracks_arrange_circles_pkey ON public.tracks_arrange_circles USING btree (track_id, circle_id) |
+| songs_arrange_circles_pkey | CREATE UNIQUE INDEX songs_arrange_circles_pkey ON public.songs_arrange_circles USING btree (song_id, circle_id) |
 
 ## Relations
 
-![er](public.tracks_arrange_circles.svg)
+![er](public.songs_arrange_circles.svg)
 
 ---
 

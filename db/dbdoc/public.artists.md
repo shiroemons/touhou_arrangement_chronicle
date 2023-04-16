@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.tracks_composers](public.tracks_composers.md) [public.tracks_arrangers](public.tracks_arrangers.md) [public.tracks_rearrangers](public.tracks_rearrangers.md) [public.tracks_lyricists](public.tracks_lyricists.md) [public.tracks_vocalists](public.tracks_vocalists.md) |  |  |
+| id | text |  | false | [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text | ''::text | false |  |  | 名前読み方 |
 | initial_letter_type | initial_letter_type |  | false |  |  | 頭文字の文字種別(symbol,number,alphabet,kana,kanji,other) |

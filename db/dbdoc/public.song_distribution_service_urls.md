@@ -1,4 +1,4 @@
-# public.track_distribution_service_urls
+# public.song_distribution_service_urls
 
 ## Description
 
@@ -9,7 +9,7 @@
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text |  | false |  |  |  |
-| track_id | text |  | false |  | [public.tracks](public.tracks.md) | トラックID |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | service | distribution_service |  | false |  |  | 配信サービス |
 | url | text |  | false |  |  | URL |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
@@ -19,18 +19,18 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| track_distribution_service_urls_track_id_fkey | FOREIGN KEY | FOREIGN KEY (track_id) REFERENCES tracks(id) |
-| track_distribution_service_urls_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| song_distribution_service_urls_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
+| song_distribution_service_urls_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| track_distribution_service_urls_pkey | CREATE UNIQUE INDEX track_distribution_service_urls_pkey ON public.track_distribution_service_urls USING btree (id) |
+| song_distribution_service_urls_pkey | CREATE UNIQUE INDEX song_distribution_service_urls_pkey ON public.song_distribution_service_urls USING btree (id) |
 
 ## Relations
 
-![er](public.track_distribution_service_urls.svg)
+![er](public.song_distribution_service_urls.svg)
 
 ---
 
