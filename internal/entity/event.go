@@ -17,7 +17,7 @@ type Event struct {
 	EventSeries   *EventSeries     `bun:"rel:belongs-to,join:event_series_id=id"`
 	Name          string           `bun:"name,nullzero,notnull,unique"`
 	DisplayName   string           `bun:"display_name,nullzero,notnull"`
-	EventDates    pgtype.Daterange `bun:"event_dates,nullzero"`
+	EventDates    pgtype.Daterange `bun:"event_dates,type:daterange,nullzero"`
 	EventStatus   string           `bun:"event_status,nullzero,notnull,default:'scheduled'::event_status"`
 	Format        string           `bun:"format,nullzero,notnull,default:'offline'::event_format"`
 	RegionCode    string           `bun:"region_code,nullzero,notnull,default:'JP'"`

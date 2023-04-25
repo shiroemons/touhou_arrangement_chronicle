@@ -1,20 +1,21 @@
 package main
 
 import (
-	"context"
+	"database/sql"
+	"errors"
 	"log"
 	"os"
 
 	"github.com/gocarina/gocsv"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
-	"github.com/uptrace/bun"
 )
 
 type CircleCSV struct {
 	CircleName string `csv:"circle_name"`
 }
 
-func importCircles(ctx context.Context, db *bun.DB) {
+func (imp *Importer) importCircles() {
 	log.Println("start circles import.")
 
 	f, err := os.Open("./tmp/circles.tsv")
@@ -30,17 +31,25 @@ func importCircles(ctx context.Context, db *bun.DB) {
 
 	var circles []entity.Circle
 	for _, line := range lines {
-		c := entity.Circle{
-			Name: line.CircleName,
+		circle := entity.Circle{}
+		err = imp.db.NewSelect().Model(&circle).Where("name = ?", line.CircleName).Limit(1).Scan(imp.ctx)
+		if err != nil && errors.Is(err, sql.ErrNoRows) {
+			c := entity.Circle{
+				Name: line.CircleName,
+			}
+			circles = append(circles, c)
 		}
-		circles = append(circles, c)
 	}
 
-	_, err = db.NewInsert().Model(&circles).
+	if len(circles) == 0 {
+		return
+	}
+
+	_, err = imp.db.NewInsert().Model(&circles).
 		Ignore().
-		Exec(ctx)
+		Exec(imp.ctx)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	log.Println("finish circles import.")
