@@ -101,7 +101,7 @@ services:
       - "cmd/importer/import_albums_and_songs.go"
 
   meilisearch:
-    image: getmeili/meilisearch:v1.1.0
+    image: getmeili/meilisearch:v1.1.1
     volumes:
       - meili-data:/meili_data
     ports:
