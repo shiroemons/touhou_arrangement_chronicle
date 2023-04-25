@@ -14,6 +14,11 @@ import (
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infra/store"
 )
 
+type Importer struct {
+	ctx context.Context
+	db  *bun.DB
+}
+
 func main() {
 	run()
 }
@@ -35,10 +40,15 @@ func run() {
 	}
 	gocsv.SetCSVReader(fn)
 
-	importEvents(ctx, db)
-	importCircles(ctx, db)
-	importArtists(ctx, db)
-	importAlbums(ctx, db)
+	imp := &Importer{
+		ctx: ctx,
+		db:  db,
+	}
+
+	imp.importEvents()
+	imp.importCircles()
+	imp.importArtists()
+	imp.importAlbums()
 }
 
 type DateTime struct {

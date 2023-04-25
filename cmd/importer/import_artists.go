@@ -1,12 +1,12 @@
 package main
 
 import (
-	"context"
+	"database/sql"
+	"errors"
 	"log"
 	"os"
 
 	"github.com/gocarina/gocsv"
-	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
@@ -16,7 +16,7 @@ type ArtistCSV struct {
 	ArtistType string `csv:"artist_type"`
 }
 
-func importArtists(ctx context.Context, db *bun.DB) {
+func (imp *Importer) importArtists() {
 	log.Println("start artists import.")
 
 	f, err := os.Open("./tmp/artists.tsv")
@@ -32,17 +32,25 @@ func importArtists(ctx context.Context, db *bun.DB) {
 
 	var artists []entity.Artist
 	for _, line := range lines {
-		c := entity.Artist{
-			Name: line.ArtistName,
+		artist := entity.Artist{}
+		err = imp.db.NewSelect().Model(&artist).Where("name = ?", line.ArtistName).Limit(1).Scan(imp.ctx)
+		if err != nil && errors.Is(err, sql.ErrNoRows) {
+			c := entity.Artist{
+				Name: line.ArtistName,
+			}
+			artists = append(artists, c)
 		}
-		artists = append(artists, c)
 	}
 
-	_, err = db.NewInsert().Model(&artists).
+	if len(artists) == 0 {
+		return
+	}
+
+	_, err = imp.db.NewInsert().Model(&artists).
 		Ignore().
-		Exec(ctx)
+		Exec(imp.ctx)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	log.Println("finish artists import.")

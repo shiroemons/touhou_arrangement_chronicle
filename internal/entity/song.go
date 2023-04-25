@@ -17,7 +17,7 @@ type Song struct {
 	Name                        string                        `bun:"name,nullzero,notnull"`
 	DiscNumber                  int                           `bun:"disc_number,nullzero,notnull,default:1"`
 	TrackNumber                 int                           `bun:"track_number,nullzero,notnull"`
-	ReleaseDate                 time.Time                     `bun:"release_date"`
+	ReleaseDate                 *time.Time                    `bun:"release_date"`
 	SearchEnabled               bool                          `bun:"search_enabled,nullzero,notnull,default:true"`
 	Length                      int                           `bun:"length,nullzero"`
 	BPM                         int                           `bun:"bpm,nullzero"`

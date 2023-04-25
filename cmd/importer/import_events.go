@@ -1,29 +1,28 @@
 package main
 
 import (
-	"context"
 	"log"
 	"os"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/gocarina/gocsv"
 	"github.com/jackc/pgtype"
 	"github.com/rs/xid"
-	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type EventCSV struct {
-	EventName       string   `csv:"event_name"`
-	EventSeriesName string   `csv:"event_series_name"`
-	Status          string   `csv:"status"`
-	StartDate       DateTime `csv:"start_date"`
-	EndDate         DateTime `csv:"end_date"`
-	Mode            string   `csv:"mode"`
-	AddressRegion   string   `csv:"address_region"`
+	EventName       string   `csv:"event_name" validate:"required"`
+	EventSeriesName string   `csv:"event_series_name" validate:"required"`
+	Status          string   `csv:"status" validate:"required"`
+	StartDate       DateTime `csv:"start_date" validate:"required"`
+	EndDate         DateTime `csv:"end_date" validate:"required"`
+	Mode            string   `csv:"mode" validate:"required"`
+	AddressRegion   string   `csv:"address_region" validate:"required"`
 }
 
-func importEvents(ctx context.Context, db *bun.DB) {
+func (imp *Importer) importEvents() {
 	log.Println("start events import.")
 
 	f, err := os.Open("./tmp/events.tsv")
@@ -37,8 +36,34 @@ func importEvents(ctx context.Context, db *bun.DB) {
 		log.Fatal(err)
 	}
 
+	// データの検証
+	validate := validator.New()
+	for i, line := range lines {
+		if err := validate.Struct(line); err != nil {
+			log.Printf("Invalid data at line %d: %v", i+1, err)
+			continue
+		}
+	}
+
+	imp.insertEventSeries(lines)
+
+	imp.insertEvents(lines)
+
+	log.Println("finish events import.")
+}
+
+func (imp *Importer) insertEventSeries(lines []EventCSV) {
 	var eventSeries []entity.EventSeries
 	for _, line := range lines {
+		eSeries := new(entity.EventSeries)
+		err := imp.db.NewSelect().Model(eSeries).
+			Where("name = ?", line.EventSeriesName).
+			Limit(1).
+			Scan(imp.ctx)
+		if err == nil {
+			continue
+		}
+
 		es := entity.EventSeries{
 			ID:          xid.New().String(),
 			Name:        line.EventSeriesName,
@@ -47,17 +72,26 @@ func importEvents(ctx context.Context, db *bun.DB) {
 		eventSeries = append(eventSeries, es)
 	}
 
-	_, err = db.NewInsert().Model(&eventSeries).
-		Ignore().
-		Exec(ctx)
-	if err != nil {
-		panic(err)
+	if len(eventSeries) == 0 {
+		return
 	}
 
+	_, err := imp.db.NewInsert().Model(&eventSeries).
+		Ignore().
+		Exec(imp.ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (imp *Importer) insertEvents(lines []EventCSV) {
 	var events []entity.Event
 	for _, line := range lines {
 		eSeries := new(entity.EventSeries)
-		err = db.NewSelect().Model(eSeries).Where("name = ?", line.EventSeriesName).Limit(1).Scan(ctx)
+		err := imp.db.NewSelect().Model(eSeries).
+			Where("name = ?", line.EventSeriesName).
+			Limit(1).
+			Scan(imp.ctx)
 		if err != nil {
 			log.Println(line.EventName, err)
 			continue
@@ -78,6 +112,7 @@ func importEvents(ctx context.Context, db *bun.DB) {
 				},
 				LowerType: pgtype.Inclusive,
 				UpperType: pgtype.Exclusive,
+				Status:    pgtype.Present,
 			},
 			DisplayName: line.EventName,
 			EventStatus: line.Status,
@@ -87,12 +122,14 @@ func importEvents(ctx context.Context, db *bun.DB) {
 		events = append(events, e)
 	}
 
-	_, err = db.NewInsert().Model(&events).
-		Ignore().
-		Exec(ctx)
-	if err != nil {
-		panic(err)
+	if len(events) == 0 {
+		return
 	}
 
-	log.Println("finish events import.")
+	_, err := imp.db.NewInsert().Model(&events).
+		Ignore().
+		Exec(imp.ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
