@@ -94,9 +94,12 @@ func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album) error {
 	}
 
 	for _, album := range albums {
-		eAlbum, err := FindOrCreateAlbum(ctx, db, album)
+		eAlbum, exist, err := FindOrCreateAlbum(ctx, db, album)
 		if err != nil {
 			return err
+		}
+		if exist {
+			continue
 		}
 
 		if len(eAlbum.Circles) == 0 {
@@ -135,7 +138,7 @@ func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album) error {
 	return nil
 }
 
-func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album, error) {
+func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album, bool, error) {
 	existing := new(entity.Album)
 	err := db.NewSelect().
 		Model(existing).
@@ -152,17 +155,17 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 		Limit(1).
 		Scan(ctx)
 	if err == nil {
-		return existing, nil
+		return existing, true, nil
 	}
 	if err != sql.ErrNoRows {
-		return nil, err
+		return nil, false, err
 	}
 
 	var event *entity.Event
 	if al.Event.Name != "" {
 		event, err = FindEventByName(ctx, db, al.Event.Name)
 		if err != nil {
-			return nil, err
+			return nil, false, err
 		}
 	}
 
@@ -174,7 +177,7 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 		parsedTime, err := time.Parse("2006-01-02", al.ReleaseDate)
 		if err != nil {
 			fmt.Println("error:", err)
-			return nil, err
+			return nil, false, err
 		}
 		album.ReleaseDate = &parsedTime
 	}
@@ -188,10 +191,10 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 		Exec(ctx)
 
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 
-	return album, nil
+	return album, false, nil
 }
 
 func FindEventByName(ctx context.Context, db *bun.DB, name string) (*entity.Event, error) {
