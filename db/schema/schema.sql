@@ -324,6 +324,7 @@ create table album_distribution_service_urls (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_adsu_album_id_service on album_distribution_service_urls (album_id, service);
 comment on table  album_distribution_service_urls is 'アルバム配信サービスURL';
 comment on column album_distribution_service_urls.album_id is 'アルバムID';
 comment on column album_distribution_service_urls.service is '配信サービス';
@@ -392,6 +393,7 @@ create table song_distribution_service_urls (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_sdsu_song_id_service on song_distribution_service_urls (song_id, service);
 comment on table  song_distribution_service_urls is '楽曲配信サービスURL';
 comment on column song_distribution_service_urls.song_id is '楽曲ID';
 comment on column song_distribution_service_urls.service is '配信サービス';
