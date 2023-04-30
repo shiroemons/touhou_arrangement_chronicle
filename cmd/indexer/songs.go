@@ -8,13 +8,24 @@ import (
 
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 const (
 	limit = 10000
 )
+
+var ProductTypeMap = map[string]string{
+	"pc98":                  "02. PC98作品",
+	"windows":               "01. Windows作品",
+	"zuns_music_collection": "03. ZUN's Music Collection",
+	"akyus_untouched_score": "04. 幺樂団の歴史　～ Akyu's Untouched Score",
+	"commercial_books":      "05. 商業書籍",
+	"tasofro":               "06. 黄昏フロンティア作品",
+	"other":                 "07. その他",
+}
 
 func setupSongs(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {
 	// An index is where the documents are stored.
@@ -163,12 +174,27 @@ func convertOriginalSongsToMaps(originalSongs []*entity.OriginalSong) []map[stri
 		maps[i] = map[string]interface{}{
 			"id":                 originalSong.ID,
 			"name":               originalSong.Name,
+			"original_song.lvl0": generateLevel0(originalSong),
+			"original_song.lvl1": generateLevel1(originalSong),
+			"original_song.lvl2": generateLevel2(originalSong),
 			"product_name":       originalSong.Product.Name,
 			"product_short_name": originalSong.Product.ShortName,
 		}
 	}
 
 	return maps
+}
+
+func generateLevel0(song *entity.OriginalSong) string {
+	return ProductTypeMap[song.Product.ProductType]
+}
+
+func generateLevel1(song *entity.OriginalSong) string {
+	return fmt.Sprintf("%s > %04.1f. %s", ProductTypeMap[song.Product.ProductType], song.Product.SeriesNumber, song.Product.ShortName)
+}
+
+func generateLevel2(song *entity.OriginalSong) string {
+	return fmt.Sprintf("%s > %04.1f. %s > %02d. %s", ProductTypeMap[song.Product.ProductType], song.Product.SeriesNumber, song.Product.ShortName, song.TrackNumber, song.Name)
 }
 
 func convertAlbumServiceUrlsToMaps(serviceUrls []*entity.AlbumDistributionServiceURL) []map[string]interface{} {
