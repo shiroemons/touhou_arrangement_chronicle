@@ -27,6 +27,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | song_distribution_service_urls_pkey | CREATE UNIQUE INDEX song_distribution_service_urls_pkey ON public.song_distribution_service_urls USING btree (id) |
+| uk_sdsu_song_id_service | CREATE UNIQUE INDEX uk_sdsu_song_id_service ON public.song_distribution_service_urls USING btree (song_id, service) |
 
 ## Relations
 
