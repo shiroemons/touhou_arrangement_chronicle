@@ -9,7 +9,7 @@ import (
 )
 
 type Tag struct {
-	bun.BaseModel `bun:"table:tag"`
+	bun.BaseModel `bun:"table:tags"`
 
 	ID        string    `bun:",pk"`
 	Name      string    `bun:"name,nullzero,notnull"`
