@@ -100,6 +100,7 @@ services:
       - "cmd/importer/import_circles.go"
       - "cmd/importer/import_artists.go"
       - "cmd/importer/import_albums_and_songs.go"
+      - "cmd/importer/import_album_service_urls.go"
 
   meilisearch:
     image: getmeili/meilisearch:v1.1.1

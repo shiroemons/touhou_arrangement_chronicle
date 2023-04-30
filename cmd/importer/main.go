@@ -36,6 +36,7 @@ func run() {
 		r.Comma = '\t'                        // 区切り文字をタブに変更
 		r.Comment = '#'                       // #で始まる行はコメントと見なしスキップ
 		r.LazyQuotes = true
+		r.FieldsPerRecord = -1
 		return r
 	}
 	gocsv.SetCSVReader(fn)
@@ -49,6 +50,7 @@ func run() {
 	imp.importCircles()
 	imp.importArtists()
 	imp.importAlbums()
+	imp.importAlbumServiceUrl()
 }
 
 type DateTime struct {
