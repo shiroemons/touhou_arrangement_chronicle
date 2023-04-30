@@ -27,6 +27,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | album_distribution_service_urls_pkey | CREATE UNIQUE INDEX album_distribution_service_urls_pkey ON public.album_distribution_service_urls USING btree (id) |
+| uk_adsu_album_id_service | CREATE UNIQUE INDEX uk_adsu_album_id_service ON public.album_distribution_service_urls USING btree (album_id, service) |
 
 ## Relations
 
