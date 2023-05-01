@@ -90,7 +90,7 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 		var isTouhouArrange bool
 		if s.OriginalSongs != nil {
 			for _, oSong := range s.OriginalSongs {
-				isTouhouArrange = oSong.Product.ProductType != "other"
+				isTouhouArrange = oSong.ID != "07990001" && oSong.ID != "07990003"
 				if isTouhouArrange {
 					break
 				}
