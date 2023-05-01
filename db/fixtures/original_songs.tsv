@@ -149,7 +149,7 @@ id	product_id	track_number	name	composer	arranger	source_id	is_original
 02030002	0203	2	東方妖恋談	ZUN	NKZ	01030003	0
 02030003	0203	3	少女綺想曲　～ Capriccio	ZUN	U2	01040010	0
 02030004	0203	4	恋色マジック	ZUN	NKZ	01020009	0
-02030005	0203	5	魔女達の舞踏会　～ Magus	ZUN	U2		1
+02030005	0203	5	魔女達の舞踏会　～ Magus	ZUN	U2	07020017	0
 02030006	0203	6	メイドと血の懐中時計	ZUN	NKZ	02010010	0
 02030007	0203	7	月時計　～ ルナ・ダイアル	ZUN	U2	02010011	0
 02030008	0203	8	ブクレシュティの人形師	ZUN	NKZ	02020006	0
@@ -1142,7 +1142,7 @@ id	product_id	track_number	name	composer	arranger	source_id	is_original
 07020014	0702	14	幻想科学　～ Doll's Phantom	ZUN			1
 07020015	0702	15	少女神性　～ Pandora's Box	ZUN			1
 07020016	0702	16	シルクロードアリス	ZUN			1
-07020017	0702	17	魔女達の舞踏会	ZUN			1
+07020017	0702	17	魔女達の舞踏会　～ Magus	ZUN			1
 07020018	0702	18	二色蓮花蝶　～ Ancients	ZUN			1
 07020019	0702	19	ハーセルヴズ	ZUN			1
 07020020	0702	20	タイトルドメイド	ZUN			1
