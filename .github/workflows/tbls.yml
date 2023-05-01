@@ -40,6 +40,11 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: ^1.19
+      - name: xid setup
+        run: |
+          psql --version
+          psql --host 127.0.0.1 --port 5432 --user postgres -d touhou_arrangement_chronicle < xid.sql
+        working-directory: ./db/schema
       - name: Execute migration
         run: |
           go install github.com/k0kubun/sqldef/cmd/psqldef@latest
