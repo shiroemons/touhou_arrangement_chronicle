@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) [public.circles_tags](public.circles_tags.md) |  |  |
+| id | text | xid() | false | [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) [public.circles_tags](public.circles_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | tag_type | tag_type | 'unknown'::tag_type | false |  |  | タグ種別 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |

@@ -35,6 +35,19 @@
 | [public.songs_tags](public.songs_tags.md) | 5 | 楽曲タグ | BASE TABLE |
 | [public.circles_tags](public.circles_tags.md) | 5 | サークルタグ | BASE TABLE |
 
+## Stored procedures and functions
+
+| Name | ReturnType | Arguments | Type |
+| ---- | ------- | ------- | ---- |
+| public._xid_machine_id | int4 |  | FUNCTION |
+| public.xid_encode | xid | _id integer[] | FUNCTION |
+| public.xid_decode | _int4 | _xid public.xid | FUNCTION |
+| public.xid | xid | _at timestamp with time zone DEFAULT CURRENT_TIMESTAMP | FUNCTION |
+| public.xid_time | timestamptz | _xid public.xid | FUNCTION |
+| public.xid_machine | _int4 | _xid public.xid | FUNCTION |
+| public.xid_pid | int4 | _xid public.xid | FUNCTION |
+| public.xid_counter | int4 | _xid public.xid | FUNCTION |
+
 ## Relations
 
 ![er](schema.svg)
