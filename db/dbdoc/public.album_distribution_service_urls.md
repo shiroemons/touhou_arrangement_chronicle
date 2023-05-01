@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false |  |  |  |
+| id | text | xid() | false |  |  |  |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | service | distribution_service |  | false |  |  | 配信サービス |
 | url | text |  | false |  |  | URL |

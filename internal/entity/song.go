@@ -1,17 +1,15 @@
 package entity
 
 import (
-	"context"
 	"time"
 
-	"github.com/rs/xid"
 	"github.com/uptrace/bun"
 )
 
 type Song struct {
 	bun.BaseModel `bun:"table:songs,alias:t"`
 
-	ID                          string                        `bun:",pk"`
+	ID                          string                        `bun:",pk,default:xid()"`
 	AlbumID                     string                        `bun:"album_id,nullzero,notnull"`
 	Album                       *Album                        `bun:"rel:belongs-to,join:album_id=id"`
 	Name                        string                        `bun:"name,nullzero,notnull"`
@@ -40,16 +38,4 @@ type Song struct {
 	Tags                        []*Tag                        `bun:"m2m:songs_tags,join:Song=Tag"`
 	CreatedAt                   time.Time                     `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                   time.Time                     `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-var _ bun.BeforeAppendModelHook = (*Song)(nil)
-
-func (e *Song) BeforeAppendModel(_ context.Context, query bun.Query) error {
-	switch query.(type) {
-	case *bun.InsertQuery:
-		if e.ID == "" {
-			e.ID = xid.New().String()
-		}
-	}
-	return nil
 }

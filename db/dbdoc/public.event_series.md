@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false | [public.events](public.events.md) |  |  |
+| id | text | xid() | false | [public.events](public.events.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |

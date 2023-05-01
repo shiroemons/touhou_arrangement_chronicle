@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text |  | false |  |  |  |
+| id | text | xid() | false |  |  |  |
 | event_id | text |  | false |  | [public.events](public.events.md) | イベントID |
 | name | text |  | false |  |  | 名前(例: 〇〇 2日目) |
 | display_name | text |  | false |  |  | 表示名 |

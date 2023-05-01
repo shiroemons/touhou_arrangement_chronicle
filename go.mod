@@ -3,8 +3,10 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
+	github.com/go-playground/validator/v10 v10.12.0
 	github.com/goark/kkconv v0.3.3
 	github.com/gocarina/gocsv v0.0.0-20230406101422-6445c2b15027
+	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/meilisearch/meilisearch-go v0.24.0
@@ -22,12 +24,10 @@ require (
 	github.com/fatih/color v1.14.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.12.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgtype v1.14.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.6 // indirect
