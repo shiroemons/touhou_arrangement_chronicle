@@ -31,4 +31,5 @@ func run() {
 	cli := initMeilisearch()
 	setupOriginalSongs(ctx, db, cli)
 	setupSongs(ctx, db, cli)
+	setup(cli)
 }
