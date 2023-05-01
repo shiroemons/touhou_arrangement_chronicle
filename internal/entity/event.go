@@ -1,18 +1,16 @@
 package entity
 
 import (
-	"context"
 	"time"
 
 	"github.com/jackc/pgtype"
-	"github.com/rs/xid"
 	"github.com/uptrace/bun"
 )
 
 type Event struct {
 	bun.BaseModel `bun:"table:events,alias:e"`
 
-	ID            string           `bun:",pk"`
+	ID            string           `bun:",pk,default:xid()"`
 	EventSeriesID string           `bun:"event_series_id,nullzero,notnull"`
 	EventSeries   *EventSeries     `bun:"rel:belongs-to,join:event_series_id=id"`
 	Name          string           `bun:"name,nullzero,notnull,unique"`
@@ -28,16 +26,4 @@ type Event struct {
 	SubEvents     []*SubEvent      `bun:"rel:has-many,join:id=event_id"`
 	CreatedAt     time.Time        `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt     time.Time        `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-var _ bun.BeforeAppendModelHook = (*Event)(nil)
-
-func (e *Event) BeforeAppendModel(_ context.Context, query bun.Query) error {
-	switch query.(type) {
-	case *bun.InsertQuery:
-		if e.ID == "" {
-			e.ID = xid.New().String()
-		}
-	}
-	return nil
 }

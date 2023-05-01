@@ -4,15 +4,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/rs/xid"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 )
 
 type Circle struct {
 	bun.BaseModel `bun:"table:circles,alias:c"`
 
-	ID                  string    `bun:",pk"`
+	ID                  string    `bun:",pk,default:xid()"`
 	Name                string    `bun:"name,nullzero,notnull"`
 	NameReading         string    `bun:"name_reading,nullzero,notnull,default:''"`
 	InitialLetterType   string    `bun:"initial_letter_type,type:initial_letter_type,nullzero,notnull"`
@@ -33,9 +33,6 @@ var _ bun.BeforeAppendModelHook = (*Circle)(nil)
 func (e *Circle) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	switch query.(type) {
 	case *bun.InsertQuery:
-		if e.ID == "" {
-			e.ID = xid.New().String()
-		}
 		if e.Name != "" {
 			ilType, ilDetail := domain.InitialLetter(e.Name)
 			e.InitialLetterType = string(ilType)

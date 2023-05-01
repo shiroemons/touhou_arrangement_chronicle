@@ -1,10 +1,8 @@
 package entity
 
 import (
-	"context"
 	"time"
 
-	"github.com/rs/xid"
 	"github.com/shopspring/decimal"
 	"github.com/uptrace/bun"
 )
@@ -12,7 +10,7 @@ import (
 type Album struct {
 	bun.BaseModel `bun:"table:albums,alias:al"`
 
-	ID                           string                         `bun:",pk"`
+	ID                           string                         `bun:",pk,default:xid()"`
 	Name                         string                         `bun:"name,nullzero,notnull"`
 	ReleaseCircleName            string                         `bun:"release_circle_name,nullzero,notnull,default:''"`
 	ReleaseDate                  *time.Time                     `bun:"release_date"`
@@ -36,16 +34,4 @@ type Album struct {
 	Tags                         []*Tag                         `bun:"m2m:albums_tags,join:Album=Tag"`
 	CreatedAt                    time.Time                      `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                    time.Time                      `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-var _ bun.BeforeAppendModelHook = (*Album)(nil)
-
-func (e *Album) BeforeAppendModel(_ context.Context, query bun.Query) error {
-	switch query.(type) {
-	case *bun.InsertQuery:
-		if e.ID == "" {
-			e.ID = xid.New().String()
-		}
-	}
-	return nil
 }

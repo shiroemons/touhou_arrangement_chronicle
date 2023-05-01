@@ -22,6 +22,9 @@ logs: ## Tail docker compose logs
 ps: ## Check container status
 	docker compose ps
 
+db-setup: ## db setup
+	cat db/schema/xid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+
 migrate: ## db migrate
 	docker compose run --rm migrate
 

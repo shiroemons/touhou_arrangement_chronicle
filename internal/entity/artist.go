@@ -4,7 +4,6 @@ import (
 	"context"
 	"time"
 
-	"github.com/rs/xid"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
@@ -13,7 +12,7 @@ import (
 type Artist struct {
 	bun.BaseModel `bun:"table:artists,alias:a"`
 
-	ID                  string    `bun:",pk"`
+	ID                  string    `bun:",pk,default:xid()"`
 	Name                string    `bun:"name,nullzero,notnull"`
 	NameReading         string    `bun:"name_reading,nullzero,notnull,default:''"`
 	InitialLetterType   string    `bun:"initial_letter_type,type:initial_letter_type,nullzero,notnull"`
@@ -32,9 +31,6 @@ var _ bun.BeforeAppendModelHook = (*Artist)(nil)
 func (e *Artist) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	switch query.(type) {
 	case *bun.InsertQuery:
-		if e.ID == "" {
-			e.ID = xid.New().String()
-		}
 		if e.Name != "" {
 			ilType, ilDetail := domain.InitialLetter(e.Name)
 			e.InitialLetterType = string(ilType)
