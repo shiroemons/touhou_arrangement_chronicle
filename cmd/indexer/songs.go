@@ -174,9 +174,9 @@ func convertOriginalSongsToMaps(originalSongs []*entity.OriginalSong) []map[stri
 		maps[i] = map[string]interface{}{
 			"id":                 originalSong.ID,
 			"name":               originalSong.Name,
-			"original_song.lvl0": generateLevel0(originalSong),
-			"original_song.lvl1": generateLevel1(originalSong),
-			"original_song.lvl2": generateLevel2(originalSong),
+			"lvl0":               generateLevel0(originalSong),
+			"lvl1":               generateLevel1(originalSong),
+			"lvl2":               generateLevel2(originalSong),
 			"product_name":       originalSong.Product.Name,
 			"product_short_name": originalSong.Product.ShortName,
 		}
