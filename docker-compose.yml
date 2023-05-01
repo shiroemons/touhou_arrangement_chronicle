@@ -76,6 +76,7 @@ services:
       - "cmd/indexer/main.go"
       - "cmd/indexer/original_songs.go"
       - "cmd/indexer/songs.go"
+      - "cmd/indexer/setup.go"
 
   importer:
     image: golang:1.20
