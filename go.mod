@@ -3,7 +3,7 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
-	github.com/go-playground/validator/v10 v10.12.0
+	github.com/go-playground/validator/v10 v10.13.0
 	github.com/goark/kkconv v0.3.3
 	github.com/gocarina/gocsv v0.0.0-20230406101422-6445c2b15027
 	github.com/jackc/pgtype v1.14.0
@@ -31,7 +31,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.6 // indirect
-	github.com/leodido/go-urn v1.2.2 // indirect
+	github.com/leodido/go-urn v1.2.3 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
