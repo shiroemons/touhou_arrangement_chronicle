@@ -6,8 +6,8 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type SongsLyricists struct {
-	bun.BaseModel `bun:"table:songs_lyricists,alias:sl"`
+type SongComposer struct {
+	bun.BaseModel `bun:"table:songs_composers,alias:sc"`
 
 	SongID    string    `bun:"song_id,pk,nullzero,notnull"`
 	Song      *Song     `bun:"rel:belongs-to,join:song_id=id"`

@@ -6,7 +6,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type AlbumsCircles struct {
+type AlbumCircle struct {
 	bun.BaseModel `bun:"table:albums_circles,alias:alc"`
 
 	AlbumID   string    `bun:"album_id,pk,nullzero,notnull"`
