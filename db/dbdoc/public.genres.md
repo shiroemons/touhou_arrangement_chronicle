@@ -1,16 +1,15 @@
-# public.tags
+# public.genres
 
 ## Description
 
-タグ
+ジャンル
 
 ## Columns
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false | [public.albums_tags](public.albums_tags.md) [public.songs_tags](public.songs_tags.md) [public.circles_tags](public.circles_tags.md) |  | ID |
+| id | text | xid() | false | [public.albums_genres](public.albums_genres.md) [public.songs_genres](public.songs_genres.md) [public.circles_genres](public.circles_genres.md) |  | ID |
 | name | text |  | false |  |  | 名前 |
-| tag_type | tag_type | 'unknown'::tag_type | false |  |  | タグ種別 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
@@ -18,17 +17,17 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| tags_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| genres_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| tags_pkey | CREATE UNIQUE INDEX tags_pkey ON public.tags USING btree (id) |
+| genres_pkey | CREATE UNIQUE INDEX genres_pkey ON public.genres USING btree (id) |
 
 ## Relations
 
-![er](public.tags.svg)
+![er](public.genres.svg)
 
 ---
 

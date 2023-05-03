@@ -235,7 +235,7 @@ func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.A
 				fmt.Println("Not Found circle:", name)
 				continue
 			}
-			albumCircle := &entity.AlbumsCircles{
+			albumCircle := &entity.AlbumCircle{
 				AlbumID:  album.ID,
 				CircleID: circle.ID,
 			}
@@ -251,7 +251,7 @@ func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.A
 		return nil
 	}
 
-	albumCircle := &entity.AlbumsCircles{
+	albumCircle := &entity.AlbumCircle{
 		AlbumID:  album.ID,
 		CircleID: circle.ID,
 	}
@@ -351,7 +351,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found vocalist artist:", vocalist.Name)
 					return nil
 				}
-				songArtist := &entity.SongsVocalists{
+				songArtist := &entity.SongVocalist{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -377,7 +377,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found arranger artist:", arranger.Name)
 					return nil
 				}
-				songArtist := &entity.SongsArrangers{
+				songArtist := &entity.SongArranger{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -403,7 +403,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found lyricist artist:", lyricist.Name)
 					return nil
 				}
-				songArtist := &entity.SongsLyricists{
+				songArtist := &entity.SongLyricist{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -457,7 +457,7 @@ func createSongOriginalSongRelations(ctx context.Context, db *bun.DB, song *enti
 						return nil
 					}
 				}
-				songOS := &entity.SongsOriginalSongs{
+				songOS := &entity.SongOriginalSong{
 					SongID:         song.ID,
 					OriginalSongID: oSong.ID,
 				}

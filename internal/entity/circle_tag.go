@@ -6,12 +6,13 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type AlbumsTags struct {
-	bun.BaseModel `bun:"table:albums_tags,alias:alt"`
+type CircleTag struct {
+	bun.BaseModel `bun:"table:circles_tags,alias:ct"`
 
-	AlbumID   string    `bun:"album_id,pk,nullzero,notnull"`
-	Album     *Album    `bun:"rel:belongs-to,join:album_id=id"`
-	TagID     string    `bun:"tag_id,pk,nullzero,notnull"`
+	ID        string    `bun:",pk,default:xid()"`
+	CircleID  string    `bun:"circle_id,nullzero,notnull"`
+	Circle    *Circle   `bun:"rel:belongs-to,join:circle_id=id"`
+	TagID     string    `bun:"tag_id,nullzero,notnull"`
 	Tag       *Tag      `bun:"rel:belongs-to,join:tag_id=id"`
 	Locked    bool      `bun:"locked,nullzero,notnull,default:false"`
 	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`

@@ -8,6 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
+| id | text | xid() | false |  |  | サークルID |
 | circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック、false: アンロック) |
@@ -20,13 +21,13 @@
 | ---- | ---- | ---------- |
 | circles_tags_circle_id_fkey | FOREIGN KEY | FOREIGN KEY (circle_id) REFERENCES circles(id) |
 | circles_tags_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
-| circles_tags_pkey | PRIMARY KEY | PRIMARY KEY (circle_id, tag_id) |
+| circles_tags_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| circles_tags_pkey | CREATE UNIQUE INDEX circles_tags_pkey ON public.circles_tags USING btree (circle_id, tag_id) |
+| circles_tags_pkey | CREATE UNIQUE INDEX circles_tags_pkey ON public.circles_tags USING btree (id) |
 
 ## Relations
 

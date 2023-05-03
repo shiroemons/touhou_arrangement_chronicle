@@ -6,7 +6,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
-type SongsOriginalSongs struct {
+type SongOriginalSong struct {
 	bun.BaseModel `bun:"table:songs_original_songs,alias:sos"`
 
 	SongID         string        `bun:"song_id,pk,nullzero,notnull"`

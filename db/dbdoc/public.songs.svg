@@ -476,76 +476,84 @@
 <!-- public.songs_genres -->
 <g id="node11" class="node">
 <title>public.songs_genres</title>
-<polygon fill="#efefef" stroke="transparent" points="4522.5,-1540 4522.5,-1586 5021.5,-1586 5021.5,-1540 4522.5,-1540"/>
-<polygon fill="none" stroke="#000000" points="4522.5,-1540 4522.5,-1586 5021.5,-1586 5021.5,-1540 4522.5,-1540"/>
-<text text-anchor="start" x="4625.6905" y="-1563.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.songs_genres</text>
-<text text-anchor="start" x="4790.7415" y="-1563.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
-<text text-anchor="start" x="4824.9463" y="-1563.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
-<text text-anchor="start" x="4720.0159" y="-1549.4" font-family="Arial" font-size="14.00" fill="#333333">楽曲ジャンル</text>
-<polygon fill="none" stroke="#000000" points="4522.5,-1510 4522.5,-1540 5021.5,-1540 5021.5,-1510 4522.5,-1510"/>
-<text text-anchor="start" x="4529.5" y="-1521.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
-<text text-anchor="start" x="4612.7244" y="-1521.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="4643.0694" y="-1521.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
-<polygon fill="none" stroke="#000000" points="4522.5,-1480 4522.5,-1510 5021.5,-1510 5021.5,-1480 4522.5,-1480"/>
-<text text-anchor="start" x="4529.5" y="-1491.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="4601.8324" y="-1491.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="4632.1774" y="-1491.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
-<polygon fill="none" stroke="#000000" points="4522.5,-1450 4522.5,-1480 5021.5,-1480 5021.5,-1450 4522.5,-1450"/>
-<text text-anchor="start" x="4529.4703" y="-1461.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
-<text text-anchor="start" x="4604.1295" y="-1461.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="4661.7129" y="-1461.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
-<polygon fill="none" stroke="#000000" points="4522.5,-1420 4522.5,-1450 5021.5,-1450 5021.5,-1420 4522.5,-1420"/>
-<text text-anchor="start" x="4529.5" y="-1431.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="4629.8422" y="-1431.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="4795.5266" y="-1431.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
-<polygon fill="none" stroke="#000000" points="4522.5,-1390 4522.5,-1420 5021.5,-1420 5021.5,-1390 4522.5,-1390"/>
-<text text-anchor="start" x="4529.5" y="-1401.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="4633.7468" y="-1401.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="4799.4312" y="-1401.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<polygon fill="#efefef" stroke="transparent" points="4522.5,-1555 4522.5,-1601 5021.5,-1601 5021.5,-1555 4522.5,-1555"/>
+<polygon fill="none" stroke="#000000" points="4522.5,-1555 4522.5,-1601 5021.5,-1601 5021.5,-1555 4522.5,-1555"/>
+<text text-anchor="start" x="4625.6905" y="-1578.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.songs_genres</text>
+<text text-anchor="start" x="4790.7415" y="-1578.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
+<text text-anchor="start" x="4824.9463" y="-1578.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
+<text text-anchor="start" x="4720.0159" y="-1564.4" font-family="Arial" font-size="14.00" fill="#333333">楽曲ジャンル</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1525 4522.5,-1555 5021.5,-1555 5021.5,-1525 4522.5,-1525"/>
+<text text-anchor="start" x="4529.5" y="-1536.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
+<text text-anchor="start" x="4574.594" y="-1536.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="4604.939" y="-1536.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1495 4522.5,-1525 5021.5,-1525 5021.5,-1495 4522.5,-1495"/>
+<text text-anchor="start" x="4529.5" y="-1506.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
+<text text-anchor="start" x="4612.7244" y="-1506.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="4643.0694" y="-1506.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1465 4522.5,-1495 5021.5,-1495 5021.5,-1465 4522.5,-1465"/>
+<text text-anchor="start" x="4529.5" y="-1476.4" font-family="Arial" font-size="14.00" fill="#000000">genre_id    </text>
+<text text-anchor="start" x="4618.1676" y="-1476.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="4648.5126" y="-1476.4" font-family="Arial" font-size="14.00" fill="#000000"> ジャンルID</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1435 4522.5,-1465 5021.5,-1465 5021.5,-1435 4522.5,-1435"/>
+<text text-anchor="start" x="4529.4703" y="-1446.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
+<text text-anchor="start" x="4604.1295" y="-1446.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
+<text text-anchor="start" x="4661.7129" y="-1446.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1405 4522.5,-1435 5021.5,-1435 5021.5,-1405 4522.5,-1405"/>
+<text text-anchor="start" x="4529.5" y="-1416.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="4629.8422" y="-1416.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="4795.5266" y="-1416.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<polygon fill="none" stroke="#000000" points="4522.5,-1375 4522.5,-1405 5021.5,-1405 5021.5,-1375 4522.5,-1375"/>
+<text text-anchor="start" x="4529.5" y="-1386.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="4633.7468" y="-1386.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="4799.4312" y="-1386.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 </g>
 <!-- public.songs_genres&#45;&gt;public.songs -->
 <g id="edge10" class="edge">
 <title>public.songs_genres:song_id&#45;&gt;public.songs:id</title>
-<path fill="none" stroke="#000000" d="M4512.5186,-1524.3322C4441.9326,-1514.0368 4535.2243,-1387.395 4470.5,-1332 4358.6716,-1236.2905 3300.6934,-1189 3153.5,-1189"/>
-<polygon fill="#000000" stroke="#000000" points="4512.5223,-1524.3323 4522.1995,-1529.49 4517.5112,-1524.6662 4522.5,-1525 4522.5,-1525 4522.5,-1525 4517.5112,-1524.6662 4522.8005,-1520.51 4512.5223,-1524.3323 4512.5223,-1524.3323"/>
-<text text-anchor="start" x="4288.6045" y="-1535" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (song_id) REFERENCES songs(id)</text>
+<path fill="none" stroke="#000000" d="M4512.4283,-1509.2607C4448.1747,-1498.9087 4530.8384,-1382.551 4470.5,-1332 4357.6707,-1237.4725 3300.6934,-1189 3153.5,-1189"/>
+<polygon fill="#000000" stroke="#000000" points="4512.5268,-1509.2678 4522.1705,-1514.4879 4517.5134,-1509.6339 4522.5,-1510 4522.5,-1510 4522.5,-1510 4517.5134,-1509.6339 4522.8295,-1505.5121 4512.5268,-1509.2678 4512.5268,-1509.2678"/>
+<text text-anchor="start" x="4288.6045" y="-1520" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (song_id) REFERENCES songs(id)</text>
 </g>
 <!-- public.songs_tags -->
 <g id="node12" class="node">
 <title>public.songs_tags</title>
-<polygon fill="#efefef" stroke="transparent" points="5125.5,-1540 5125.5,-1586 5624.5,-1586 5624.5,-1540 5125.5,-1540"/>
-<polygon fill="none" stroke="#000000" points="5125.5,-1540 5125.5,-1586 5624.5,-1586 5624.5,-1540 5125.5,-1540"/>
-<text text-anchor="start" x="5239.1917" y="-1563.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.songs_tags</text>
-<text text-anchor="start" x="5383.2403" y="-1563.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
-<text text-anchor="start" x="5417.4451" y="-1563.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
-<text text-anchor="start" x="5339.0907" y="-1549.4" font-family="Arial" font-size="14.00" fill="#333333">楽曲タグ</text>
-<polygon fill="none" stroke="#000000" points="5125.5,-1510 5125.5,-1540 5624.5,-1540 5624.5,-1510 5125.5,-1510"/>
-<text text-anchor="start" x="5132.5" y="-1521.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
-<text text-anchor="start" x="5215.7244" y="-1521.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="5246.0694" y="-1521.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
-<polygon fill="none" stroke="#000000" points="5125.5,-1480 5125.5,-1510 5624.5,-1510 5624.5,-1480 5125.5,-1480"/>
-<text text-anchor="start" x="5132.5" y="-1491.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="5204.8324" y="-1491.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="5235.1774" y="-1491.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
-<polygon fill="none" stroke="#000000" points="5125.5,-1450 5125.5,-1480 5624.5,-1480 5624.5,-1450 5125.5,-1450"/>
-<text text-anchor="start" x="5132.4703" y="-1461.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
-<text text-anchor="start" x="5207.1295" y="-1461.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="5264.7129" y="-1461.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
-<polygon fill="none" stroke="#000000" points="5125.5,-1420 5125.5,-1450 5624.5,-1450 5624.5,-1420 5125.5,-1420"/>
-<text text-anchor="start" x="5132.5" y="-1431.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="5232.8422" y="-1431.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="5398.5266" y="-1431.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
-<polygon fill="none" stroke="#000000" points="5125.5,-1390 5125.5,-1420 5624.5,-1420 5624.5,-1390 5125.5,-1390"/>
-<text text-anchor="start" x="5132.5" y="-1401.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="5236.7468" y="-1401.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="5402.4312" y="-1401.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<polygon fill="#efefef" stroke="transparent" points="5125.5,-1555 5125.5,-1601 5624.5,-1601 5624.5,-1555 5125.5,-1555"/>
+<polygon fill="none" stroke="#000000" points="5125.5,-1555 5125.5,-1601 5624.5,-1601 5624.5,-1555 5125.5,-1555"/>
+<text text-anchor="start" x="5239.1917" y="-1578.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.songs_tags</text>
+<text text-anchor="start" x="5383.2403" y="-1578.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
+<text text-anchor="start" x="5417.4451" y="-1578.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
+<text text-anchor="start" x="5339.0907" y="-1564.4" font-family="Arial" font-size="14.00" fill="#333333">楽曲タグ</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1525 5125.5,-1555 5624.5,-1555 5624.5,-1525 5125.5,-1525"/>
+<text text-anchor="start" x="5132.5" y="-1536.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
+<text text-anchor="start" x="5177.594" y="-1536.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="5207.939" y="-1536.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1495 5125.5,-1525 5624.5,-1525 5624.5,-1495 5125.5,-1495"/>
+<text text-anchor="start" x="5132.5" y="-1506.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
+<text text-anchor="start" x="5215.7244" y="-1506.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="5246.0694" y="-1506.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1465 5125.5,-1495 5624.5,-1495 5624.5,-1465 5125.5,-1465"/>
+<text text-anchor="start" x="5132.5" y="-1476.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
+<text text-anchor="start" x="5204.8324" y="-1476.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="5235.1774" y="-1476.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1435 5125.5,-1465 5624.5,-1465 5624.5,-1435 5125.5,-1435"/>
+<text text-anchor="start" x="5132.4703" y="-1446.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
+<text text-anchor="start" x="5207.1295" y="-1446.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
+<text text-anchor="start" x="5264.7129" y="-1446.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1405 5125.5,-1435 5624.5,-1435 5624.5,-1405 5125.5,-1405"/>
+<text text-anchor="start" x="5132.5" y="-1416.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="5232.8422" y="-1416.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="5398.5266" y="-1416.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<polygon fill="none" stroke="#000000" points="5125.5,-1375 5125.5,-1405 5624.5,-1405 5624.5,-1375 5125.5,-1375"/>
+<text text-anchor="start" x="5132.5" y="-1386.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="5236.7468" y="-1386.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="5402.4312" y="-1386.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 </g>
 <!-- public.songs_tags&#45;&gt;public.songs -->
 <g id="edge11" class="edge">
 <title>public.songs_tags:song_id&#45;&gt;public.songs:id</title>
-<path fill="none" stroke="#000000" d="M5115.0945,-1524.2617C5045.3914,-1513.4267 5139.0179,-1386.1822 5073.5,-1332 4908.6452,-1195.6679 3367.4242,-1189 3153.5,-1189"/>
-<polygon fill="#000000" stroke="#000000" points="5115.5251,-1524.2922 5125.1815,-1529.4887 5120.5125,-1524.6461 5125.5,-1525 5125.5,-1525 5125.5,-1525 5120.5125,-1524.6461 5125.8185,-1520.5113 5115.5251,-1524.2922 5115.5251,-1524.2922"/>
-<text text-anchor="start" x="4891.6045" y="-1535" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (song_id) REFERENCES songs(id)</text>
+<path fill="none" stroke="#000000" d="M5115.4334,-1509.2545C5051.2507,-1498.8164 5134.6844,-1381.5236 5073.5,-1332 4907.2198,-1197.4101 3367.4242,-1189 3153.5,-1189"/>
+<polygon fill="#000000" stroke="#000000" points="5115.5273,-1509.2613 5125.1676,-1514.4877 5120.5137,-1509.6307 5125.5,-1510 5125.5,-1510 5125.5,-1510 5120.5137,-1509.6307 5125.8324,-1505.5123 5115.5273,-1509.2613 5115.5273,-1509.2613"/>
+<text text-anchor="start" x="4891.6045" y="-1520" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (song_id) REFERENCES songs(id)</text>
 </g>
 </g>
 </svg>
