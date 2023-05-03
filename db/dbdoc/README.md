@@ -28,12 +28,14 @@
 | [public.songs_lyricists](public.songs_lyricists.md) | 4 | 楽曲作詞者 | BASE TABLE |
 | [public.songs_vocalists](public.songs_vocalists.md) | 4 | 楽曲ボーカリスト | BASE TABLE |
 | [public.songs_original_songs](public.songs_original_songs.md) | 4 | 楽曲原曲 | BASE TABLE |
+| [public.genres](public.genres.md) | 4 | ジャンル | BASE TABLE |
 | [public.tags](public.tags.md) | 5 | タグ | BASE TABLE |
-| [public.albums_genres](public.albums_genres.md) | 5 | アルバムジャンル | BASE TABLE |
-| [public.albums_tags](public.albums_tags.md) | 5 | アルバムタグ | BASE TABLE |
-| [public.songs_genres](public.songs_genres.md) | 5 | 楽曲ジャンル | BASE TABLE |
-| [public.songs_tags](public.songs_tags.md) | 5 | 楽曲タグ | BASE TABLE |
-| [public.circles_tags](public.circles_tags.md) | 5 | サークルタグ | BASE TABLE |
+| [public.albums_genres](public.albums_genres.md) | 6 | アルバムジャンル | BASE TABLE |
+| [public.albums_tags](public.albums_tags.md) | 6 | アルバムタグ | BASE TABLE |
+| [public.songs_genres](public.songs_genres.md) | 6 | 楽曲ジャンル | BASE TABLE |
+| [public.songs_tags](public.songs_tags.md) | 6 | 楽曲タグ | BASE TABLE |
+| [public.circles_genres](public.circles_genres.md) | 6 | サークルタグ | BASE TABLE |
+| [public.circles_tags](public.circles_tags.md) | 6 | サークルタグ | BASE TABLE |
 
 ## Stored procedures and functions
 

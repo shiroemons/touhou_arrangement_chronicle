@@ -8,8 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
+| id | text | xid() | false |  |  | ID |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
-| tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
+| genre_id | text |  | false |  | [public.genres](public.genres.md) | ジャンルID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック・削除不可、false: アンロック) |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
@@ -19,14 +20,14 @@
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | albums_genres_album_id_fkey | FOREIGN KEY | FOREIGN KEY (album_id) REFERENCES albums(id) |
-| albums_genres_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
-| albums_genres_pkey | PRIMARY KEY | PRIMARY KEY (album_id, tag_id) |
+| albums_genres_genre_id_fkey | FOREIGN KEY | FOREIGN KEY (genre_id) REFERENCES genres(id) |
+| albums_genres_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| albums_genres_pkey | CREATE UNIQUE INDEX albums_genres_pkey ON public.albums_genres USING btree (album_id, tag_id) |
+| albums_genres_pkey | CREATE UNIQUE INDEX albums_genres_pkey ON public.albums_genres USING btree (id) |
 
 ## Relations
 

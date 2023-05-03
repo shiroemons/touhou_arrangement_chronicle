@@ -8,6 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
+| id | text | xid() | false |  |  | ID |
 | song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック・削除不可、false: アンロック) |
@@ -20,13 +21,13 @@
 | ---- | ---- | ---------- |
 | songs_tags_song_id_fkey | FOREIGN KEY | FOREIGN KEY (song_id) REFERENCES songs(id) |
 | songs_tags_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
-| songs_tags_pkey | PRIMARY KEY | PRIMARY KEY (song_id, tag_id) |
+| songs_tags_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| songs_tags_pkey | CREATE UNIQUE INDEX songs_tags_pkey ON public.songs_tags USING btree (song_id, tag_id) |
+| songs_tags_pkey | CREATE UNIQUE INDEX songs_tags_pkey ON public.songs_tags USING btree (id) |
 
 ## Relations
 

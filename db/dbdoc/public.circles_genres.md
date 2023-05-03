@@ -1,16 +1,16 @@
-# public.albums_tags
+# public.circles_genres
 
 ## Description
 
-アルバムタグ
+サークルタグ
 
 ## Columns
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text | xid() | false |  |  | ID |
-| album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
-| tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
+| circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
+| genre_id | text |  | false |  | [public.genres](public.genres.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック、false: アンロック) |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
@@ -19,19 +19,19 @@
 
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
-| albums_tags_album_id_fkey | FOREIGN KEY | FOREIGN KEY (album_id) REFERENCES albums(id) |
-| albums_tags_tag_id_fkey | FOREIGN KEY | FOREIGN KEY (tag_id) REFERENCES tags(id) |
-| albums_tags_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| circles_genres_circle_id_fkey | FOREIGN KEY | FOREIGN KEY (circle_id) REFERENCES circles(id) |
+| circles_genres_genre_id_fkey | FOREIGN KEY | FOREIGN KEY (genre_id) REFERENCES genres(id) |
+| circles_genres_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
-| albums_tags_pkey | CREATE UNIQUE INDEX albums_tags_pkey ON public.albums_tags USING btree (id) |
+| circles_genres_pkey | CREATE UNIQUE INDEX circles_genres_pkey ON public.circles_genres USING btree (id) |
 
 ## Relations
 
-![er](public.albums_tags.svg)
+![er](public.circles_genres.svg)
 
 ---
 

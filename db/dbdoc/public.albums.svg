@@ -330,76 +330,84 @@
 <!-- public.albums_genres -->
 <g id="node7" class="node">
 <title>public.albums_genres</title>
-<polygon fill="#efefef" stroke="transparent" points="2834,-1012 2834,-1058 3333,-1058 3333,-1012 2834,-1012"/>
-<polygon fill="none" stroke="#000000" points="2834,-1012 2834,-1058 3333,-1058 3333,-1012 2834,-1012"/>
-<text text-anchor="start" x="2932.1973" y="-1035.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.albums_genres</text>
-<text text-anchor="start" x="3107.2347" y="-1035.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
-<text text-anchor="start" x="3141.4395" y="-1035.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
-<text text-anchor="start" x="3022.3228" y="-1021.4" font-family="Arial" font-size="14.00" fill="#333333">アルバムジャンル</text>
-<polygon fill="none" stroke="#000000" points="2834,-982 2834,-1012 3333,-1012 3333,-982 2834,-982"/>
-<text text-anchor="start" x="2841" y="-993.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
-<text text-anchor="start" x="2931.9916" y="-993.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="2962.3366" y="-993.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
-<polygon fill="none" stroke="#000000" points="2834,-952 2834,-982 3333,-982 3333,-952 2834,-952"/>
-<text text-anchor="start" x="2841" y="-963.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="2913.3324" y="-963.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="2943.6774" y="-963.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
-<polygon fill="none" stroke="#000000" points="2834,-922 2834,-952 3333,-952 3333,-922 2834,-922"/>
-<text text-anchor="start" x="2840.9703" y="-933.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
-<text text-anchor="start" x="2915.6295" y="-933.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="2973.2129" y="-933.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
-<polygon fill="none" stroke="#000000" points="2834,-892 2834,-922 3333,-922 3333,-892 2834,-892"/>
-<text text-anchor="start" x="2841" y="-903.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="2941.3422" y="-903.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="3107.0266" y="-903.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
-<polygon fill="none" stroke="#000000" points="2834,-862 2834,-892 3333,-892 3333,-862 2834,-862"/>
-<text text-anchor="start" x="2841" y="-873.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="2945.2468" y="-873.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="3110.9312" y="-873.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<polygon fill="#efefef" stroke="transparent" points="2834,-1027 2834,-1073 3333,-1073 3333,-1027 2834,-1027"/>
+<polygon fill="none" stroke="#000000" points="2834,-1027 2834,-1073 3333,-1073 3333,-1027 2834,-1027"/>
+<text text-anchor="start" x="2932.1973" y="-1050.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.albums_genres</text>
+<text text-anchor="start" x="3107.2347" y="-1050.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
+<text text-anchor="start" x="3141.4395" y="-1050.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
+<text text-anchor="start" x="3022.3228" y="-1036.4" font-family="Arial" font-size="14.00" fill="#333333">アルバムジャンル</text>
+<polygon fill="none" stroke="#000000" points="2834,-997 2834,-1027 3333,-1027 3333,-997 2834,-997"/>
+<text text-anchor="start" x="2841" y="-1008.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
+<text text-anchor="start" x="2886.094" y="-1008.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="2916.439" y="-1008.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<polygon fill="none" stroke="#000000" points="2834,-967 2834,-997 3333,-997 3333,-967 2834,-967"/>
+<text text-anchor="start" x="2841" y="-978.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
+<text text-anchor="start" x="2931.9916" y="-978.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="2962.3366" y="-978.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
+<polygon fill="none" stroke="#000000" points="2834,-937 2834,-967 3333,-967 3333,-937 2834,-937"/>
+<text text-anchor="start" x="2841" y="-948.4" font-family="Arial" font-size="14.00" fill="#000000">genre_id    </text>
+<text text-anchor="start" x="2929.6676" y="-948.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="2960.0126" y="-948.4" font-family="Arial" font-size="14.00" fill="#000000"> ジャンルID</text>
+<polygon fill="none" stroke="#000000" points="2834,-907 2834,-937 3333,-937 3333,-907 2834,-907"/>
+<text text-anchor="start" x="2840.9703" y="-918.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
+<text text-anchor="start" x="2915.6295" y="-918.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
+<text text-anchor="start" x="2973.2129" y="-918.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック・削除不可、false: アンロック)</text>
+<polygon fill="none" stroke="#000000" points="2834,-877 2834,-907 3333,-907 3333,-877 2834,-877"/>
+<text text-anchor="start" x="2841" y="-888.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="2941.3422" y="-888.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="3107.0266" y="-888.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<polygon fill="none" stroke="#000000" points="2834,-847 2834,-877 3333,-877 3333,-847 2834,-847"/>
+<text text-anchor="start" x="2841" y="-858.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="2945.2468" y="-858.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="3110.9312" y="-858.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 </g>
 <!-- public.albums_genres&#45;&gt;public.albums -->
 <g id="edge6" class="edge">
 <title>public.albums_genres:album_id&#45;&gt;public.albums:id</title>
-<path fill="none" stroke="#000000" d="M2823.7414,-995.1589C2758.0615,-969.4259 2837.3038,-681.71 2782,-624 2659.9215,-496.6101 2177.4408,-481 2001,-481"/>
-<polygon fill="#000000" stroke="#000000" points="2824.1573,-995.2334 2833.205,-1001.4292 2829.0786,-996.1167 2834,-997 2834,-997 2834,-997 2829.0786,-996.1167 2834.795,-992.5708 2824.1573,-995.2334 2824.1573,-995.2334"/>
-<text text-anchor="start" x="2588.5565" y="-1007" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
+<path fill="none" stroke="#000000" d="M2824.1348,-980.2323C2760.89,-955.5251 2835.2816,-679.2821 2782,-624 2659.5573,-496.9601 2177.4408,-481 2001,-481"/>
+<polygon fill="#000000" stroke="#000000" points="2824.1568,-980.2361 2833.2063,-986.4295 2829.0784,-981.1181 2834,-982 2834,-982 2834,-982 2829.0784,-981.1181 2834.7937,-977.5705 2824.1568,-980.2361 2824.1568,-980.2361"/>
+<text text-anchor="start" x="2588.5565" y="-992" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
 </g>
 <!-- public.albums_tags -->
 <g id="node8" class="node">
 <title>public.albums_tags</title>
-<polygon fill="#efefef" stroke="transparent" points="3437,-1012 3437,-1058 3864,-1058 3864,-1012 3437,-1012"/>
-<polygon fill="none" stroke="#000000" points="3437,-1012 3437,-1058 3864,-1058 3864,-1012 3437,-1012"/>
-<text text-anchor="start" x="3509.6985" y="-1035.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.albums_tags</text>
-<text text-anchor="start" x="3663.7335" y="-1035.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
-<text text-anchor="start" x="3697.9383" y="-1035.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
-<text text-anchor="start" x="3605.3976" y="-1021.4" font-family="Arial" font-size="14.00" fill="#333333">アルバムタグ</text>
-<polygon fill="none" stroke="#000000" points="3437,-982 3437,-1012 3864,-1012 3864,-982 3437,-982"/>
-<text text-anchor="start" x="3444" y="-993.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
-<text text-anchor="start" x="3534.9916" y="-993.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="3565.3366" y="-993.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
-<polygon fill="none" stroke="#000000" points="3437,-952 3437,-982 3864,-982 3864,-952 3437,-952"/>
-<text text-anchor="start" x="3444" y="-963.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="3516.3324" y="-963.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="3546.6774" y="-963.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
-<polygon fill="none" stroke="#000000" points="3437,-922 3437,-952 3864,-952 3864,-922 3437,-922"/>
-<text text-anchor="start" x="3443.6255" y="-933.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
-<text text-anchor="start" x="3518.2847" y="-933.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="3575.8681" y="-933.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック、false: アンロック)</text>
-<polygon fill="none" stroke="#000000" points="3437,-892 3437,-922 3864,-922 3864,-892 3437,-892"/>
-<text text-anchor="start" x="3444" y="-903.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="3544.3422" y="-903.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="3710.0266" y="-903.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
-<polygon fill="none" stroke="#000000" points="3437,-862 3437,-892 3864,-892 3864,-862 3437,-862"/>
-<text text-anchor="start" x="3444" y="-873.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="3548.2468" y="-873.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="3713.9312" y="-873.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<polygon fill="#efefef" stroke="transparent" points="3437,-1027 3437,-1073 3864,-1073 3864,-1027 3437,-1027"/>
+<polygon fill="none" stroke="#000000" points="3437,-1027 3437,-1073 3864,-1073 3864,-1027 3437,-1027"/>
+<text text-anchor="start" x="3509.6985" y="-1050.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.albums_tags</text>
+<text text-anchor="start" x="3663.7335" y="-1050.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
+<text text-anchor="start" x="3697.9383" y="-1050.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
+<text text-anchor="start" x="3605.3976" y="-1036.4" font-family="Arial" font-size="14.00" fill="#333333">アルバムタグ</text>
+<polygon fill="none" stroke="#000000" points="3437,-997 3437,-1027 3864,-1027 3864,-997 3437,-997"/>
+<text text-anchor="start" x="3444" y="-1008.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
+<text text-anchor="start" x="3489.094" y="-1008.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="3519.439" y="-1008.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<polygon fill="none" stroke="#000000" points="3437,-967 3437,-997 3864,-997 3864,-967 3437,-967"/>
+<text text-anchor="start" x="3444" y="-978.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
+<text text-anchor="start" x="3534.9916" y="-978.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="3565.3366" y="-978.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
+<polygon fill="none" stroke="#000000" points="3437,-937 3437,-967 3864,-967 3864,-937 3437,-937"/>
+<text text-anchor="start" x="3444" y="-948.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
+<text text-anchor="start" x="3516.3324" y="-948.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="3546.6774" y="-948.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<polygon fill="none" stroke="#000000" points="3437,-907 3437,-937 3864,-937 3864,-907 3437,-907"/>
+<text text-anchor="start" x="3443.6255" y="-918.4" font-family="Arial" font-size="14.00" fill="#000000">locked    </text>
+<text text-anchor="start" x="3518.2847" y="-918.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
+<text text-anchor="start" x="3575.8681" y="-918.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック、false: アンロック)</text>
+<polygon fill="none" stroke="#000000" points="3437,-877 3437,-907 3864,-907 3864,-877 3437,-877"/>
+<text text-anchor="start" x="3444" y="-888.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="3544.3422" y="-888.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="3710.0266" y="-888.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<polygon fill="none" stroke="#000000" points="3437,-847 3437,-877 3864,-877 3864,-847 3437,-847"/>
+<text text-anchor="start" x="3444" y="-858.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="3548.2468" y="-858.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="3713.9312" y="-858.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 </g>
 <!-- public.albums_tags&#45;&gt;public.albums -->
 <g id="edge7" class="edge">
 <title>public.albums_tags:album_id&#45;&gt;public.albums:id</title>
-<path fill="none" stroke="#000000" d="M3426.7548,-995.1455C3361.2602,-969.2278 3442.5156,-679.5059 3385,-624 3273.7576,-516.6446 2155.5964,-481 2001,-481"/>
-<polygon fill="#000000" stroke="#000000" points="3427.1599,-995.2188 3436.1985,-1001.428 3432.0799,-996.1094 3437,-997 3437,-997 3437,-997 3432.0799,-996.1094 3437.8015,-992.572 3427.1599,-995.2188 3427.1599,-995.2188"/>
-<text text-anchor="start" x="3443.5565" y="-1007" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
+<path fill="none" stroke="#000000" d="M3427.1476,-980.2194C3364.0804,-955.3344 3440.4001,-677.1589 3385,-624 3273.4507,-516.9635 2155.5964,-481 2001,-481"/>
+<polygon fill="#000000" stroke="#000000" points="3427.1594,-980.2215 3436.1997,-986.4283 3432.0797,-981.1107 3437,-982 3437,-982 3437,-982 3432.0797,-981.1107 3437.8003,-977.5717 3427.1594,-980.2215 3427.1594,-980.2215"/>
+<text text-anchor="start" x="3443.5565" y="-992" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
 </g>
 </g>
 </svg>
