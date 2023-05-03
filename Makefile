@@ -59,6 +59,9 @@ bundle: ## Run bundle install
 	docker compose run --rm web bundle config set clean true
 	docker compose run --rm web bundle install --jobs=4
 
+bash: ## Run bash in web container
+	docker compose run --rm web bash
+
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
