@@ -231,24 +231,30 @@ func convertSongServiceUrlsToMaps(serviceUrls []*entity.SongDistributionServiceU
 	return maps
 }
 
-func convertTags(tags []*entity.Tag) []string {
+func convertTags(tags []*entity.Tag) []map[string]interface{} {
 	if len(tags) == 0 {
 		return nil
 	}
-	arr := make([]string, len(tags))
+	maps := make([]map[string]interface{}, len(tags))
 	for i, tag := range tags {
-		arr[i] = tag.Name
+		maps[i] = map[string]interface{}{
+			"id":   tag.ID,
+			"name": tag.Name,
+		}
 	}
-	return arr
+	return maps
 }
 
-func convertGenres(genres []*entity.Genre) []string {
+func convertGenres(genres []*entity.Genre) []map[string]interface{} {
 	if len(genres) == 0 {
 		return nil
 	}
-	arr := make([]string, len(genres))
+	maps := make([]map[string]interface{}, len(genres))
 	for i, genre := range genres {
-		arr[i] = genre.Name
+		maps[i] = map[string]interface{}{
+			"id":   genre.ID,
+			"name": genre.Name,
+		}
 	}
-	return arr
+	return maps
 }
