@@ -40,6 +40,12 @@ func TestInitialLetter(t *testing.T) {
 			want1: "S",
 		},
 		{
+			name:  "英字-Y",
+			args:  args{str: "ｙｔｒ"},
+			want:  InitialLetterTypeAlphabet,
+			want1: "Y",
+		},
+		{
 			name:  "ひらがな-ち",
 			args:  args{str: "ちょこふぁん"},
 			want:  InitialLetterTypeHiragana,
