@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint
+.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -61,6 +61,15 @@ bundle: ## Run bundle install
 
 bash: ## Run bash in web container
 	docker compose run --rm web bash
+
+rubocop: ## Run rubocop
+	docker compose run --rm web bundle exec rubocop
+
+rubocop-a: ## Run rubocop (auto correct)
+	docker compose run --rm web bundle exec rubocop -a
+
+rubocop-all: ## Run rubocop (auto correct all)
+	docker compose run --rm web bundle exec rubocop -A
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \

@@ -1,0 +1,44 @@
+inherit_from:
+  - .rubocop_base.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  Exclude:
+    - db/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - .git/**/*
+
+Metrics:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Rails/Present:
+  Exclude:
+    - bin/bundle
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - test
+
+Rails/EnvironmentVariableAccess:
+  AllowReads: true
+
+Rails/Pluck:
+  Enabled: false
+
+Style/SignalException:
+  Exclude:
+    - app/avo/actions/*
