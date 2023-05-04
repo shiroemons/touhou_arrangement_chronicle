@@ -15,6 +15,7 @@ class SongResource < Avo::BaseResource
   field :search_enabled, as: :boolean, hide_on: [:index]
   field :length, as: :number, hide_on: [:index]
   field :bpm, as: :number, hide_on: [:index]
+  field :description, as: :markdown, hide_on: [:index]
   field :display_composer, as: :text, hide_on: [:index]
   field :display_arranger, as: :text, hide_on: [:index]
   field :display_rearranger, as: :text, hide_on: [:index]
@@ -31,6 +32,8 @@ class SongResource < Avo::BaseResource
     field :composers, as: :has_many, through: :songs_composers, searchable: true, show_on: :edit
   end
   field :song_isrcs, as: :has_many, searchable: true, name: 'ISRCs', show_on: :edit
+
+  field :circles, as: :has_many, searchable: true
 
   tabs do
     field :genres, as: :has_many, searchable: true
