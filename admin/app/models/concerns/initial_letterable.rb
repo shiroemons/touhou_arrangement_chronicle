@@ -11,7 +11,7 @@ module InitialLetterable
       katakana: 'katakana',
       kanji: 'kanji',
       alphabet: 'alphabet',
-      other: 'other',
+      other: 'other'
     }
 
     validates :initial_letter_type, inclusion: { in: InitialLetter::KIND }

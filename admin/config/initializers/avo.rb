@@ -100,10 +100,10 @@ Avo.configure do |config|
   # end
 
   ## == Menus ==
-  config.main_menu = -> {
-  #   section "Dashboards", icon: "dashboards" do
-  #     all_dashboards
-  #   end
+  config.main_menu = lambda {
+    #   section "Dashboards", icon: "dashboards" do
+    #     all_dashboards
+    #   end
 
     section "Resources", icon: "resources" do
       group "Master data" do
@@ -130,9 +130,9 @@ Avo.configure do |config|
       end
     end
 
-  #   section "Tools", icon: "tools" do
-  #     all_tools
-  #   end
+    #   section "Tools", icon: "tools" do
+    #     all_tools
+    #   end
   }
   # config.profile_menu = -> {
   #   link "Profile", path: "/avo/profile", icon: "user-circle"

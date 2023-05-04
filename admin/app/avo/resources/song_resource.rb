@@ -1,9 +1,9 @@
 class SongResource < Avo::BaseResource
   self.title = :name
-  self.includes = [:album, :genres, :tags]
-  self.search_query = -> do
+  self.includes = %i[album genres tags]
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :album, as: :belongs_to, searchable: true

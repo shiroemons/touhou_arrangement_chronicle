@@ -1,9 +1,9 @@
 class EventResource < Avo::BaseResource
   self.title = :name
   self.includes = [:event_series]
-  self.search_query = -> do
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :event_series, as: :belongs_to, searchable: true

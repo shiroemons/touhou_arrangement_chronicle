@@ -1,9 +1,9 @@
 class CircleResource < Avo::BaseResource
   self.title = :name
-  self.includes = [:albums, :genres, :tags]
-  self.search_query = -> do
+  self.includes = %i[albums genres tags]
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :name, as: :text, required: true, sortable: true

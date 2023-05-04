@@ -3,10 +3,10 @@ class InitialLetter
 
   using StringEx
 
-  INITIAL_LETTER_LIST = %w[symbol number hiragana katakana kanji alphabet other]
+  INITIAL_LETTER_LIST = %w[symbol number hiragana katakana kanji alphabet other].freeze
 
-  KIND = %w[symbol number hiragana katakana kanji alphabet]
-  KANA = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん'
+  KIND = %w[symbol number hiragana katakana kanji alphabet].freeze
+  KANA = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん'.freeze
   KANA_LIST = KANA.chars
   ALPHABET_LIST = ('A'..'Z').to_a
   LIST = KANA_LIST + ALPHABET_LIST

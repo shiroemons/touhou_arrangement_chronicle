@@ -1,9 +1,9 @@
 class AlbumResource < Avo::BaseResource
   self.title = :name
-  self.includes = [:event, :sub_event, :circles, :songs, :album_consignment_shops, :album_distribution_service_urls, :album_upcs, :genres, :tags]
-  self.search_query = -> do
+  self.includes = %i[event sub_event circles songs album_consignment_shops album_distribution_service_urls album_upcs genres tags]
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :release_circle_name, as: :text, sortable: true

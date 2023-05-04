@@ -1,10 +1,10 @@
 class OriginalSongResource < Avo::BaseResource
   self.record_selector = false
   self.title = :name
-  self.includes = [:product, :source]
-  self.search_query = -> do
+  self.includes = %i[product source]
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :product, as: :belongs_to

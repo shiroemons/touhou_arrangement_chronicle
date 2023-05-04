@@ -14,7 +14,7 @@ class Artist < ApplicationRecord
   has_many :songs_vocalists, dependent: :destroy
   has_many :vocalist_songs, through: :songs_vocalists, source: :song
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
 end

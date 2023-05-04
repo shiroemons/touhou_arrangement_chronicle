@@ -1,9 +1,9 @@
 class ArtistResource < Avo::BaseResource
   self.title = :name
-  self.includes = [:arranger_songs, :rearranger_songs, :lyricist_songs, :vocalist_songs, :composer_songs]
-  self.search_query = -> do
+  self.includes = %i[arranger_songs rearranger_songs lyricist_songs vocalist_songs composer_songs]
+  self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
-  end
+  }
 
   field :id, as: :id, link_to_resource: true
   field :name, as: :text, required: true, sortable: true

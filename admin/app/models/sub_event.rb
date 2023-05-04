@@ -6,10 +6,10 @@ class SubEvent < ApplicationRecord
     cancelled: 'cancelled', # 中止
     postpone: 'postpone', # 延期(開催日未定)
     rescheduled: 'rescheduled', # 延期(開催日決定)
-    moved_online: 'moved_online', # オンライン開催に変更
+    moved_online: 'moved_online' # オンライン開催に変更
   }
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
 end

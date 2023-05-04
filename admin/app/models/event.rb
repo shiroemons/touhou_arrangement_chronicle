@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :event_series
 
-  has_many :albums
+  has_many :albums, dependent: :destroy
 
   enum mode: {
     offline: 'offline', # オフライン開催
@@ -17,7 +17,7 @@ class Event < ApplicationRecord
     moved_online: 'moved_online' # オンライン開催に変更
   }
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
 end

@@ -10,7 +10,7 @@ class Circle < ApplicationRecord
   has_many :circles_tags, dependent: :destroy
   has_many :tags, through: :circles_tags
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
 end

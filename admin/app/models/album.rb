@@ -6,7 +6,7 @@ class Album < ApplicationRecord
   has_many :albums_tags, dependent: :destroy
   has_many :tags, through: :albums_tags
 
-  has_many :songs, -> { order(Arel.sql('songs.track_number ASC')) }, dependent: :destroy
+  has_many :songs, -> { order(Arel.sql('songs.track_number ASC')) }, inverse_of: :album, dependent: :destroy
   has_many :album_consignment_shops, dependent: :destroy
   has_many :album_distribution_service_urls, dependent: :destroy
   has_many :album_upcs, dependent: :destroy
@@ -14,7 +14,7 @@ class Album < ApplicationRecord
   belongs_to :event
   belongs_to :sub_event
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
 end
