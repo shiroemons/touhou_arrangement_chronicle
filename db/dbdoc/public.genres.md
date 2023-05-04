@@ -18,12 +18,14 @@
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | genres_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| genres_name_key | UNIQUE | UNIQUE (name) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | genres_pkey | CREATE UNIQUE INDEX genres_pkey ON public.genres USING btree (id) |
+| genres_name_key | CREATE UNIQUE INDEX genres_name_key ON public.genres USING btree (name) |
 
 ## Relations
 

@@ -508,7 +508,7 @@ comment on column songs_original_songs.updated_at is '更新日時';
 
 create table genres (
     id         text                     not null primary key default xid(),
-    name       text                     not null,
+    name       text                     not null unique,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -527,7 +527,7 @@ create type tag_type as enum (
 
 create table tags (
     id         text                     not null primary key default xid(),
-    name       text                     not null,
+    name       text                     not null unique,
     tag_type   tag_type                 not null default 'unknown'::tag_type,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
