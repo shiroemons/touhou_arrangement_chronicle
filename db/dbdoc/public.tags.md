@@ -19,12 +19,14 @@
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | tags_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| tags_name_key | UNIQUE | UNIQUE (name) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | tags_pkey | CREATE UNIQUE INDEX tags_pkey ON public.tags USING btree (id) |
+| tags_name_key | CREATE UNIQUE INDEX tags_name_key ON public.tags USING btree (name) |
 
 ## Relations
 
