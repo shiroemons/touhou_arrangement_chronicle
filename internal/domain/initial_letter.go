@@ -85,5 +85,5 @@ func runeCheck(r rune) (InitialLetterType, string) {
 // InitialLetter 文字列の頭文字の文字種別を判定する。
 // ひらがなやカタカナ、アルファベットの場合は、2つ目の戻り値に詳細情報が返されます。
 func InitialLetter(str string) (InitialLetterType, string) {
-	return runeCheck([]rune(str)[0])
+	return runeCheck([]rune(width.Fold.String(str))[0])
 }
