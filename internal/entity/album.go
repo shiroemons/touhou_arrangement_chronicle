@@ -30,7 +30,7 @@ type Album struct {
 	AlbumUPCs                    []*AlbumUPC                    `bun:"rel:has-many,join:id=album_id"`
 	Songs                        []*Song                        `bun:"rel:has-many,join:id=album_id"`
 	Circles                      []*Circle                      `bun:"m2m:albums_circles,join:Album=Circle"`
-	GenreTags                    []*Tag                         `bun:"m2m:albums_genres,join:Album=GenreTag"`
+	Genres                       []*Genre                       `bun:"m2m:albums_genres,join:Album=Genre"`
 	Tags                         []*Tag                         `bun:"m2m:albums_tags,join:Album=Tag"`
 	CreatedAt                    time.Time                      `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                    time.Time                      `bun:"updated_at,notnull,default:current_timestamp"`
