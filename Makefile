@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint
+.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -45,6 +45,31 @@ test: ## Execute tests
 
 lint:
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run -v --timeout 5m
+
+server: ## Run server
+	docker compose run --rm --service-ports web
+
+console: ## Run console
+	docker compose run --rm web bin/rails console
+
+console-sandbox: ## Run console(sandbox)
+	docker compose run --rm web bin/rails console --sandbox
+
+bundle: ## Run bundle install
+	docker compose run --rm web bundle config set clean true
+	docker compose run --rm web bundle install --jobs=4
+
+bash: ## Run bash in web container
+	docker compose run --rm web bash
+
+rubocop: ## Run rubocop
+	docker compose run --rm web bundle exec rubocop
+
+rubocop-a: ## Run rubocop (auto correct)
+	docker compose run --rm web bundle exec rubocop -a
+
+rubocop-all: ## Run rubocop (auto correct all)
+	docker compose run --rm web bundle exec rubocop -A
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \

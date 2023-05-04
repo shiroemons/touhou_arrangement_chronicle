@@ -113,8 +113,39 @@ services:
       - "meilisearch"
       - "--master-key=MASTER_KEY"
 
+  web: &web
+    build:
+      context: .
+      dockerfile: "./docker/admin/Dockerfile"
+    image: web:1.0.0
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./admin/.:/app:cached
+      - bundle:/app/vendor/bundle
+      - rails_cache:/app/tmp/cache
+    tmpfs:
+      - /tmp
+    environment:
+      BUNDLE_PATH: "/app/vendor/bundle"
+      BOOTSNAP_CACHE_DIR: "/app/vendor/bundle"
+      DATABASE_URL: "postgres://postgres:postgres@db:5432"
+      EDITOR: "vim"
+      HISTFILE: "/app/log/.bash_history"
+      RAILS_MASTER_KEY:
+      WD_INSTALL_DIR: "/usr/local/bin"
+    depends_on:
+      - db
+    command: ["bin/rails", "server", "-b", "0.0.0.0"]
+    expose: ["3000"]
+    ports: ["3000:3000"]
+    user: root
+    working_dir: /app
+
 volumes:
   go_pkg:
   postgres:
   meili-data:
     driver: local
+  bundle:
+  rails_cache:
