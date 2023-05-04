@@ -24,11 +24,11 @@ class SongResource < Avo::BaseResource
 
   field :original_songs, as: :has_many, through: :songs_original_songs, searchable: true, show_on: :edit
   tabs do
-    field :composers, as: :has_many, through: :songs_composers, searchable: true, show_on: :edit
     field :arrangers, as: :has_many, through: :songs_arrangers, searchable: true, show_on: :edit
-    field :rearrangers, as: :has_many, through: :songs_rearrangers, searchable: true, show_on: :edit
     field :lyricists, as: :has_many, through: :songs_lyricists, searchable: true, show_on: :edit
     field :vocalists, as: :has_many, through: :songs_vocalists, searchable: true, show_on: :edit
+    field :rearrangers, as: :has_many, through: :songs_rearrangers, searchable: true, show_on: :edit
+    field :composers, as: :has_many, through: :songs_composers, searchable: true, show_on: :edit
   end
   field :song_isrcs, as: :has_many, searchable: true, name: 'ISRCs', show_on: :edit
 

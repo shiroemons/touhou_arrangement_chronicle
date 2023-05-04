@@ -3,13 +3,13 @@ class Event < ApplicationRecord
 
   has_many :albums, dependent: :destroy
 
-  enum mode: {
+  enum format: {
     offline: 'offline', # オフライン開催
     online: 'online', # オンライン開催
     mixed: 'mixed' # オフライン・オンライン両方開催
   }
 
-  enum status: {
+  enum event_status: {
     scheduled: 'scheduled', # 開催済み
     cancelled: 'cancelled', # 中止
     postpone: 'postpone', # 延期(開催日未定)

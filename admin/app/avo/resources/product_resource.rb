@@ -9,7 +9,7 @@ class ProductResource < Avo::BaseResource
   field :id, as: :id, link_to_resource: true
   field :name, as: :text
   field :short_name, as: :text
-  field :product_type, as: :badge
+  field :product_type, as: :badge, options: { info: %w[pc98], success: %w[windows tasofro], warning: %w[zuns_music_collection akyus_untouched_score commercial_books], danger: %w[other] }
   field :series_number, as: :number
 
   field :original_songs, as: :has_many

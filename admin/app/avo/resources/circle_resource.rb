@@ -10,7 +10,7 @@ class CircleResource < Avo::BaseResource
   field :name_reading, as: :text, sortable: true
   field :description, as: :markdown, hide_on: [:index]
 
-  field :initial_letter_type, as: :badge
+  field :initial_letter_type, options: { info: %w[symbol number other], success: %w[hiragana katakana], warning: %w[kanji], danger: %w[alphabet] }, as: :badge
   field :initial_letter_detail, as: :badge
 
   panel name: 'URLs' do

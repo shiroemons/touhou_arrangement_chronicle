@@ -10,7 +10,7 @@ class ArtistResource < Avo::BaseResource
   field :name_reading, as: :text, sortable: true
   field :description, as: :markdown, hide_on: [:index]
 
-  field :initial_letter_type, as: :badge, show_on: [:index]
+  field :initial_letter_type, as: :badge, options: { info: %w[symbol number other], success: %w[hiragana katakana], warning: %w[kanji], danger: %w[alphabet] }, show_on: [:index]
   field :initial_letter_detail, as: :badge, show_on: [:index]
 
   panel name: 'URLs' do
@@ -22,9 +22,9 @@ class ArtistResource < Avo::BaseResource
 
   tabs do
     field :arranger_songs, as: :has_many, through: :songs_arrangers, searchable: true, show_on: :edit
-    field :rearranger_songs, as: :has_many, through: :songs_rearrangers, searchable: true, show_on: :edit
     field :lyricist_songs, as: :has_many, through: :songs_lyricists, searchable: true, show_on: :edit
     field :vocalist_songs, as: :has_many, through: :songs_vocalists, searchable: true, show_on: :edit
+    field :rearranger_songs, as: :has_many, through: :songs_rearrangers, searchable: true, show_on: :edit
     field :composer_songs, as: :has_many, through: :songs_composers, searchable: true, show_on: :edit
   end
 end
