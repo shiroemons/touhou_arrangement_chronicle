@@ -18,8 +18,10 @@ class Song < ApplicationRecord
   has_many :songs_tags, dependent: :destroy
   has_many :tags, through: :songs_tags
   has_many :song_isrcs, dependent: :destroy
+  has_many :songs_circles, dependent: :destroy
+  has_many :circles, through: :songs_circles
 
-  belongs_to :album
+  belongs_to :album, optional: true
 
   def self.ransackable_attributes(_auth_object = nil)
     ["name"]

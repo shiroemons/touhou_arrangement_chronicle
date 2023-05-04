@@ -10,7 +10,7 @@ type Song struct {
 	bun.BaseModel `bun:"table:songs,alias:t"`
 
 	ID                          string                        `bun:",pk,default:xid()"`
-	AlbumID                     string                        `bun:"album_id,nullzero,notnull"`
+	AlbumID                     string                        `bun:"album_id,nullzero,notnull,default:''"`
 	Album                       *Album                        `bun:"rel:belongs-to,join:album_id=id"`
 	Name                        string                        `bun:"name,nullzero,notnull"`
 	DiscNumber                  int                           `bun:"disc_number,nullzero,notnull,default:1"`
@@ -19,6 +19,7 @@ type Song struct {
 	SearchEnabled               bool                          `bun:"search_enabled,nullzero,notnull,default:true"`
 	Length                      int                           `bun:"length,nullzero"`
 	BPM                         int                           `bun:"bpm,nullzero"`
+	Description                 string                        `bun:"description,nullzero,notnull,default:''"`
 	DisplayComposer             string                        `bun:"display_composer,nullzero,notnull,default:''"`
 	DisplayArranger             string                        `bun:"display_arranger,nullzero,notnull,default:''"`
 	DisplayRearranger           string                        `bun:"display_rearranger,nullzero,notnull,default:''"`

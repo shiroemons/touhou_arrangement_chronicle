@@ -18,7 +18,7 @@
 | [public.album_consignment_shops](public.album_consignment_shops.md) | 9 | アルバム委託販売ショップ | BASE TABLE |
 | [public.album_distribution_service_urls](public.album_distribution_service_urls.md) | 6 | アルバム配信サービスURL | BASE TABLE |
 | [public.album_upcs](public.album_upcs.md) | 5 | アルバムUPC | BASE TABLE |
-| [public.songs](public.songs.md) | 18 | 楽曲 | BASE TABLE |
+| [public.songs](public.songs.md) | 19 | 楽曲 | BASE TABLE |
 | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) | 6 | 楽曲配信サービスURL | BASE TABLE |
 | [public.song_isrcs](public.song_isrcs.md) | 5 | 楽曲ISRC | BASE TABLE |
 | [public.songs_arrange_circles](public.songs_arrange_circles.md) | 4 | 楽曲編曲サークル | BASE TABLE |
@@ -28,6 +28,7 @@
 | [public.songs_lyricists](public.songs_lyricists.md) | 4 | 楽曲作詞者 | BASE TABLE |
 | [public.songs_vocalists](public.songs_vocalists.md) | 4 | 楽曲ボーカリスト | BASE TABLE |
 | [public.songs_original_songs](public.songs_original_songs.md) | 4 | 楽曲原曲 | BASE TABLE |
+| [public.songs_circles](public.songs_circles.md) | 4 | 楽曲とサークルの中間テーブル | BASE TABLE |
 | [public.genres](public.genres.md) | 4 | ジャンル | BASE TABLE |
 | [public.tags](public.tags.md) | 5 | タグ | BASE TABLE |
 | [public.albums_genres](public.albums_genres.md) | 6 | アルバムジャンル | BASE TABLE |
