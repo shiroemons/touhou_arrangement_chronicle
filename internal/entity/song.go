@@ -34,7 +34,7 @@ type Song struct {
 	Lyricists                   []*Artist                     `bun:"m2m:songs_lyricists,join:Song=Artist"`
 	ReArrangers                 []*Artist                     `bun:"m2m:songs_rearrangers,join:Song=Artist"`
 	Vocalists                   []*Artist                     `bun:"m2m:songs_vocalists,join:Song=Artist"`
-	GenreTags                   []*Tag                        `bun:"m2m:songs_genres,join:Song=GenreTag"`
+	Genres                      []*Genre                      `bun:"m2m:songs_genres,join:Song=Genre"`
 	Tags                        []*Tag                        `bun:"m2m:songs_tags,join:Song=Tag"`
 	CreatedAt                   time.Time                     `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                   time.Time                     `bun:"updated_at,notnull,default:current_timestamp"`
