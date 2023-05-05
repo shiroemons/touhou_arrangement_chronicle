@@ -15,6 +15,8 @@ import (
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type Product struct {
@@ -76,6 +78,10 @@ type OSDSUcsv struct {
 	LineMusicURL    string `csv:"line_music_url"`
 }
 
+type ArtistTsv struct {
+	Name string `csv:"name"`
+}
+
 func main() {
 	ctx := context.Background()
 	db := initDB()
@@ -92,6 +98,7 @@ func main() {
 	importOriginalSongs(ctx, db)
 	importPDSU(ctx, db)
 	importOSDSU(ctx, db)
+	importArtists(ctx, db)
 }
 
 func initDB() *bun.DB {
@@ -292,4 +299,37 @@ func importOSDSU(ctx context.Context, db *bun.DB) {
 	}
 
 	log.Println("finish original_song_distribution_service_urls import.")
+}
+
+func importArtists(ctx context.Context, db *bun.DB) {
+	log.Println("start artists import.")
+
+	f, err := os.Open("./db/fixtures/artists.tsv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	var lines []ArtistTsv
+	if err = gocsv.UnmarshalFile(f, &lines); err != nil {
+		log.Fatal(err)
+	}
+
+	var artists []entity.Artist
+	for _, line := range lines {
+		artist := entity.Artist{
+			Name: line.Name,
+		}
+		artists = append(artists, artist)
+	}
+
+	_, err = db.NewInsert().Model(&artists).
+		On("CONFLICT (id) DO UPDATE").
+		Set("name = EXCLUDED.name").
+		Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println("finish artists import.")
 }
