@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
+	"golang.org/x/exp/slices"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
@@ -417,6 +418,62 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 			}
 		}
 	}
+
+	if len(song.Composers) == 0 && len(track.OriginalSongs) != 0 {
+		var artists []string
+		for _, originalSong := range track.OriginalSongs {
+			if originalSong.Title != "" {
+				title := originalSong.Title
+				if originalSong.Title == "夜の鳩山を飛ぶ-Power Mix" {
+					title = "夜の鳩山を飛ぶ‐Power Mix"
+				} else if originalSong.Title == "アンノウンX　～ Occultly Madness" {
+					title = "アンノウンＸ　～ Occultly Madness"
+				}
+				oSong, err := FindOriginalSongByName(ctx, db, title, true)
+				if err != nil {
+					return err
+				}
+				if oSong == nil {
+					oSong, err = FindOriginalSongByName(ctx, db, title, false)
+					if err != nil {
+						return err
+					}
+					if oSong == nil {
+						fmt.Println("Not Found Original Song:", originalSong.Title)
+						return nil
+					}
+				}
+				if oSong.ProductID != "0799" {
+					artists = append(artists, oSong.Composer)
+				}
+			}
+		}
+		composers := slices.Compact(artists)
+		for _, composer := range composers {
+			if composer != "" {
+				artist, err := FindArtistByName(ctx, db, composer)
+				if err != nil {
+					return err
+				}
+				if artist == nil {
+					fmt.Println("Not Found composer artist:", composer)
+					return nil
+				}
+				songArtist := &entity.SongComposer{
+					SongID:   song.ID,
+					ArtistID: artist.ID,
+				}
+				_, err = db.NewInsert().
+					Model(songArtist).
+					Ignore().
+					Exec(ctx)
+				if err != nil {
+					return err
+				}
+			}
+		}
+	}
+
 	return nil
 }
 
