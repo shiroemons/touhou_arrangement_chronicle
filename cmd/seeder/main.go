@@ -82,6 +82,10 @@ type ArtistTsv struct {
 	Name string `csv:"name"`
 }
 
+type GenreTsv struct {
+	Name string `csv:"name"`
+}
+
 func main() {
 	ctx := context.Background()
 	db := initDB()
@@ -99,6 +103,7 @@ func main() {
 	importPDSU(ctx, db)
 	importOSDSU(ctx, db)
 	importArtists(ctx, db)
+	importGenres(ctx, db)
 }
 
 func initDB() *bun.DB {
@@ -332,4 +337,37 @@ func importArtists(ctx context.Context, db *bun.DB) {
 	}
 
 	log.Println("finish artists import.")
+}
+
+func importGenres(ctx context.Context, db *bun.DB) {
+	log.Println("start genres import.")
+
+	f, err := os.Open("./db/fixtures/genres.tsv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	var lines []GenreTsv
+	if err = gocsv.UnmarshalFile(f, &lines); err != nil {
+		log.Fatal(err)
+	}
+
+	var genres []entity.Genre
+	for _, line := range lines {
+		genre := entity.Genre{
+			Name: line.Name,
+		}
+		genres = append(genres, genre)
+	}
+
+	_, err = db.NewInsert().Model(&genres).
+		On("CONFLICT (id) DO UPDATE").
+		Set("name = EXCLUDED.name").
+		Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println("finish genres import.")
 }
