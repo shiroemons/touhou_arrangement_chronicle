@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/go-playground/validator/v10 v10.13.0
 	github.com/goark/kkconv v0.3.3
-	github.com/gocarina/gocsv v0.0.0-20230406101422-6445c2b15027
+	github.com/gocarina/gocsv v0.0.0-20230510095315-7f30c79fd20c
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/k0kubun/pp/v3 v3.2.0
