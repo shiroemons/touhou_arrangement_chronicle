@@ -86,6 +86,11 @@ type GenreTsv struct {
 	Name string `csv:"name"`
 }
 
+type TagTsv struct {
+	Name    string `csv:"name"`
+	TagType string `csv:"type"`
+}
+
 func main() {
 	ctx := context.Background()
 	db := initDB()
@@ -104,6 +109,7 @@ func main() {
 	importOSDSU(ctx, db)
 	importArtists(ctx, db)
 	importGenres(ctx, db)
+	importTags(ctx, db)
 }
 
 func initDB() *bun.DB {
@@ -329,8 +335,7 @@ func importArtists(ctx context.Context, db *bun.DB) {
 	}
 
 	_, err = db.NewInsert().Model(&artists).
-		On("CONFLICT (id) DO UPDATE").
-		Set("name = EXCLUDED.name").
+		Ignore().
 		Exec(ctx)
 	if err != nil {
 		panic(err)
@@ -362,12 +367,44 @@ func importGenres(ctx context.Context, db *bun.DB) {
 	}
 
 	_, err = db.NewInsert().Model(&genres).
-		On("CONFLICT (id) DO UPDATE").
-		Set("name = EXCLUDED.name").
+		Ignore().
 		Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 
 	log.Println("finish genres import.")
+}
+
+func importTags(ctx context.Context, db *bun.DB) {
+	log.Println("start tags import.")
+
+	f, err := os.Open("./db/fixtures/tags.tsv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	var lines []TagTsv
+	if err = gocsv.UnmarshalFile(f, &lines); err != nil {
+		log.Fatal(err)
+	}
+
+	var tags []entity.Tag
+	for _, line := range lines {
+		tag := entity.Tag{
+			Name:    line.Name,
+			TagType: line.TagType,
+		}
+		tags = append(tags, tag)
+	}
+
+	_, err = db.NewInsert().Model(&tags).
+		Ignore().
+		Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println("finish tags import.")
 }
