@@ -562,6 +562,7 @@ create table albums_genres (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_albums_genres_album_id_genre_id on albums_genres (album_id, genre_id);
 comment on table  albums_genres is 'アルバムジャンル';
 comment on column albums_genres.id is 'ID';
 comment on column albums_genres.album_id is 'アルバムID';
@@ -578,6 +579,7 @@ create table albums_tags (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_albums_tags_song_id_tag_id on albums_tags (album_id, tag_id);
 comment on table  albums_tags is 'アルバムタグ';
 comment on column albums_tags.id is 'ID';
 comment on column albums_tags.album_id is 'アルバムID';
@@ -594,6 +596,7 @@ create table songs_genres (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_songs_genres_song_id_genre_id on songs_genres (song_id, genre_id);
 comment on table  songs_genres is '楽曲ジャンル';
 comment on column songs_genres.id is '楽曲ID';
 comment on column songs_genres.song_id is '楽曲ID';
@@ -610,6 +613,7 @@ create table songs_tags (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_songs_tags_song_id_tag_id on songs_tags (song_id, tag_id);
 comment on table  songs_tags is '楽曲タグ';
 comment on column songs_tags.id is 'ID';
 comment on column songs_tags.song_id is '楽曲ID';
@@ -626,6 +630,7 @@ create table circles_genres (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_circles_genres_circle_id_genre_id on circles_genres (circle_id, genre_id);
 comment on table  circles_genres is 'サークルタグ';
 comment on column circles_genres.id is 'ID';
 comment on column circles_genres.circle_id is 'サークルID';
@@ -642,6 +647,7 @@ create table circles_tags (
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
+create unique index uk_circles_tags_circle_id_tag_id on circles_tags (circle_id, tag_id);
 comment on table  circles_tags is 'サークルタグ';
 comment on column circles_tags.id is 'サークルID';
 comment on column circles_tags.circle_id is 'サークルID';

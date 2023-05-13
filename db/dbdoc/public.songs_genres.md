@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | songs_genres_pkey | CREATE UNIQUE INDEX songs_genres_pkey ON public.songs_genres USING btree (id) |
+| uk_songs_genres_song_id_genre_id | CREATE UNIQUE INDEX uk_songs_genres_song_id_genre_id ON public.songs_genres USING btree (song_id, genre_id) |
 
 ## Relations
 
