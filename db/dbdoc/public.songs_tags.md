@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | songs_tags_pkey | CREATE UNIQUE INDEX songs_tags_pkey ON public.songs_tags USING btree (id) |
+| uk_songs_tags_song_id_tag_id | CREATE UNIQUE INDEX uk_songs_tags_song_id_tag_id ON public.songs_tags USING btree (song_id, tag_id) |
 
 ## Relations
 

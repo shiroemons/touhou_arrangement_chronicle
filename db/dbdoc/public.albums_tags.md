@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | albums_tags_pkey | CREATE UNIQUE INDEX albums_tags_pkey ON public.albums_tags USING btree (id) |
+| uk_albums_tags_song_id_tag_id | CREATE UNIQUE INDEX uk_albums_tags_song_id_tag_id ON public.albums_tags USING btree (album_id, tag_id) |
 
 ## Relations
 

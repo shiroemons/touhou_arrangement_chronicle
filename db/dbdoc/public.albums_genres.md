@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | albums_genres_pkey | CREATE UNIQUE INDEX albums_genres_pkey ON public.albums_genres USING btree (id) |
+| uk_albums_genres_album_id_genre_id | CREATE UNIQUE INDEX uk_albums_genres_album_id_genre_id ON public.albums_genres USING btree (album_id, genre_id) |
 
 ## Relations
 

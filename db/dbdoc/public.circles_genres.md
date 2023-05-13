@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | circles_genres_pkey | CREATE UNIQUE INDEX circles_genres_pkey ON public.circles_genres USING btree (id) |
+| uk_circles_genres_circle_id_genre_id | CREATE UNIQUE INDEX uk_circles_genres_circle_id_genre_id ON public.circles_genres USING btree (circle_id, genre_id) |
 
 ## Relations
 

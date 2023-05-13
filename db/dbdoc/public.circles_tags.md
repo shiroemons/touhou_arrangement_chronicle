@@ -28,6 +28,7 @@
 | Name | Definition |
 | ---- | ---------- |
 | circles_tags_pkey | CREATE UNIQUE INDEX circles_tags_pkey ON public.circles_tags USING btree (id) |
+| uk_circles_tags_circle_id_tag_id | CREATE UNIQUE INDEX uk_circles_tags_circle_id_tag_id ON public.circles_tags USING btree (circle_id, tag_id) |
 
 ## Relations
 
