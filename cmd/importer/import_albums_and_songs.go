@@ -80,8 +80,17 @@ func (imp *Importer) importAlbums() {
 		log.Fatal("error:", err)
 	}
 
+	vocalTag, err := FindTagByName(imp.ctx, imp.db, "ボーカル有り")
+	if err != nil {
+		log.Fatal("error:", err)
+	}
+	tdmdTag, err := FindTagByName(imp.ctx, imp.db, "ボーカル有り")
+	if err != nil {
+		log.Fatal("error:", err)
+	}
+
 	albums := data["albums"]
-	err = importAlbumsData(imp.ctx, imp.db, albums)
+	err = importAlbumsData(imp.ctx, imp.db, albums, vocalTag, tdmdTag)
 	if err != nil {
 		log.Fatal("error:", err)
 	}
@@ -89,7 +98,7 @@ func (imp *Importer) importAlbums() {
 	log.Println("finish albums import.")
 }
 
-func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album) error {
+func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album, vTag, tTag *entity.Tag) error {
 	if len(albums) == 0 {
 		return nil
 	}
@@ -117,6 +126,10 @@ func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album) error {
 					return err
 				}
 			}
+			err = createAlbumTag(ctx, db, eAlbum, tTag)
+			if err != nil {
+				return err
+			}
 		}
 
 		for _, track := range album.Tracks {
@@ -133,6 +146,18 @@ func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album) error {
 			err = createSongOriginalSongRelations(ctx, db, song, track)
 			if err != nil {
 				return err
+			}
+
+			if len(track.Vocalists) > 0 {
+				err = createAlbumTag(ctx, db, eAlbum, vTag)
+				if err != nil {
+					return err
+				}
+
+				err = createSongTag(ctx, db, song, vTag)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
@@ -541,4 +566,50 @@ func FindOriginalSongByName(ctx context.Context, db *bun.DB, name string, isOrig
 		return nil, err
 	}
 	return originalSong, nil
+}
+
+func FindTagByName(ctx context.Context, db *bun.DB, name string) (*entity.Tag, error) {
+	event := new(entity.Tag)
+	err := db.NewSelect().Model(event).Where("name = ?", name).Limit(1).Scan(ctx)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return event, nil
+}
+
+func createAlbumTag(ctx context.Context, db *bun.DB, album *entity.Album, tag *entity.Tag) error {
+	if album != nil && tag != nil {
+		albumTag := &entity.AlbumTag{
+			AlbumID: album.ID,
+			TagID:   tag.ID,
+		}
+		_, err := db.NewInsert().
+			Model(albumTag).
+			Ignore().
+			Exec(ctx)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func createSongTag(ctx context.Context, db *bun.DB, song *entity.Song, tag *entity.Tag) error {
+	if song != nil && tag != nil {
+		songTag := &entity.SongTag{
+			SongID: song.ID,
+			TagID:  tag.ID,
+		}
+		_, err := db.NewInsert().
+			Model(songTag).
+			Ignore().
+			Exec(ctx)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
