@@ -11,6 +11,7 @@
 | id | text | xid() | false | [public.events](public.events.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |
+| slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
@@ -20,6 +21,7 @@
 | ---- | ---- | ---------- |
 | event_series_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 | event_series_name_key | UNIQUE | UNIQUE (name) |
+| event_series_slug_key | UNIQUE | UNIQUE (slug) |
 
 ## Indexes
 
@@ -27,6 +29,7 @@
 | ---- | ---------- |
 | event_series_pkey | CREATE UNIQUE INDEX event_series_pkey ON public.event_series USING btree (id) |
 | event_series_name_key | CREATE UNIQUE INDEX event_series_name_key ON public.event_series USING btree (name) |
+| event_series_slug_key | CREATE UNIQUE INDEX event_series_slug_key ON public.event_series USING btree (slug) |
 
 ## Relations
 
