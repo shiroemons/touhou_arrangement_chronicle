@@ -42,6 +42,16 @@ func (imp *Importer) importAlbumServiceUrl() {
 		if appleMusic == nil {
 			continue
 		}
+		if album.Jan != "" {
+			upc := entity.AlbumUPC{
+				AlbumID: appleMusic.AlbumID,
+				UPC:     album.Jan,
+			}
+			err = imp.createAlbumUPC(upc)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
 		if album.SpotifyAlbumUrl != "" {
 			spotify := entity.AlbumDistributionServiceURL{
 				AlbumID: appleMusic.AlbumID,
@@ -95,6 +105,16 @@ func (imp *Importer) findByAppleMusicUrl(url string) *entity.AlbumDistributionSe
 
 func (imp *Importer) createAlbumServiceUrl(adsu entity.AlbumDistributionServiceURL) error {
 	_, err := imp.db.NewInsert().Model(&adsu).
+		Ignore().
+		Exec(imp.ctx)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (imp *Importer) createAlbumUPC(aupc entity.AlbumUPC) error {
+	_, err := imp.db.NewInsert().Model(&aupc).
 		Ignore().
 		Exec(imp.ctx)
 	if err != nil {
