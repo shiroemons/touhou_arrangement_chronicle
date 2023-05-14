@@ -15,6 +15,7 @@ type Event struct {
 	EventSeries   *EventSeries     `bun:"rel:belongs-to,join:event_series_id=id"`
 	Name          string           `bun:"name,nullzero,notnull,unique"`
 	DisplayName   string           `bun:"display_name,nullzero,notnull"`
+	Slug          string           `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	EventDates    pgtype.Daterange `bun:"event_dates,type:daterange,nullzero"`
 	EventStatus   string           `bun:"event_status,nullzero,notnull,default:'scheduled'::event_status"`
 	Format        string           `bun:"format,nullzero,notnull,default:'offline'::event_format"`

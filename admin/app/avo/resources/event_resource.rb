@@ -9,6 +9,7 @@ class EventResource < Avo::BaseResource
   field :event_series, as: :belongs_to, searchable: true
   field :name, as: :text, required: true, sortable: true
   field :display_name, as: :text, required: true, sortable: true
+  field :slug, as: :text, required: true
   field :event_dates, as: :text
   field :event_status, as: :select, hide_on: %i[show index], enum: ::Event.event_statuses
   field :event_status, as: :badge, options: { success: %w[scheduled], danger: %w[cancelled], warning: %w[postpone rescheduled moved_online] }

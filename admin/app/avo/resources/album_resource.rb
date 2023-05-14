@@ -8,6 +8,8 @@ class AlbumResource < Avo::BaseResource
   field :id, as: :id, link_to_resource: true
   field :release_circle_name, as: :text, sortable: true
   field :name, as: :text, required: true, sortable: true
+  field :name_reading, as: :text, sortable: true
+  field :slug, as: :text, required: true
   field :release_date, as: :date, sortable: true
   field :event, as: :belongs_to, searchable: true
   field :sub_event, as: :belongs_to, searchable: true, hide_on: [:index]

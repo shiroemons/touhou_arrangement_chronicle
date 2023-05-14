@@ -10,9 +10,12 @@ type Song struct {
 	bun.BaseModel `bun:"table:songs,alias:t"`
 
 	ID                          string                        `bun:",pk,default:xid()"`
+	CircleID                    string                        `bun:"circle_id,nullzero,notnull,default:''"`
+	Circle                      *Circle                       `bun:"rel:belongs-to,join:circle_id=id"`
 	AlbumID                     string                        `bun:"album_id,nullzero,notnull,default:''"`
 	Album                       *Album                        `bun:"rel:belongs-to,join:album_id=id"`
 	Name                        string                        `bun:"name,nullzero,notnull"`
+	Slug                        string                        `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	DiscNumber                  int                           `bun:"disc_number,nullzero,notnull,default:1"`
 	TrackNumber                 int                           `bun:"track_number,nullzero,notnull"`
 	ReleaseDate                 *time.Time                    `bun:"release_date"`

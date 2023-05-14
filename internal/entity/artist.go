@@ -15,6 +15,7 @@ type Artist struct {
 	ID                  string    `bun:",pk,default:xid()"`
 	Name                string    `bun:"name,nullzero,notnull"`
 	NameReading         string    `bun:"name_reading,nullzero,notnull,default:''"`
+	Slug                string    `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	InitialLetterType   string    `bun:"initial_letter_type,type:initial_letter_type,nullzero,notnull"`
 	InitialLetterDetail string    `bun:"initial_letter_detail,notnull"`
 	Description         string    `bun:"description,nullzero,notnull,default:''"`
