@@ -333,7 +333,7 @@ comment on column album_distribution_service_urls.created_at is '作成日時';
 comment on column album_distribution_service_urls.updated_at is '更新日時';
 
 create table album_upcs (
-    id         text                     not null primary key,
+    id         text                     not null primary key default xid(),
     album_id   text                     not null references albums(id),
     upc        text                     not null,
     created_at timestamp with time zone not null default current_timestamp,
