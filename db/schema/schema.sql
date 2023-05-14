@@ -97,12 +97,14 @@ create table event_series (
     id           text                     not null primary key default xid(),
     name         text                     not null unique,
     display_name text                     not null,
+    slug         text                     not null unique default gen_random_uuid(),
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
 comment on table  event_series is 'イベントシリーズ';
 comment on column event_series.name is '名前';
 comment on column event_series.display_name is '表示名';
+comment on column event_series.slug is 'スラッグ';
 comment on column event_series.created_at is '作成日時';
 comment on column event_series.updated_at is '更新日時';
 
@@ -126,6 +128,7 @@ create table events (
     event_series_id text                     not null references event_series(id),
     name            text                     not null unique,
     display_name    text                     not null,
+    slug            text                     not null unique default gen_random_uuid(),
     event_dates     daterange,
     event_status    event_status             not null default 'scheduled'::event_status,
     format          event_format             not null default 'offline'::event_format,
@@ -141,6 +144,7 @@ comment on table  events is 'イベント';
 comment on column events.event_series_id is 'イベントシリーズID';
 comment on column events.name is '名前';
 comment on column events.display_name is '表示名';
+comment on column events.slug is 'スラッグ';
 comment on column events.event_dates is 'イベント開催期間';
 comment on column events.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
 comment on column events.format is '形式/offline: オフライン開催, online: オフライン開催, mixed: 両方開催/default: offline';
@@ -155,8 +159,9 @@ comment on column events.updated_at is '更新日時';
 create table sub_events (
     id           text                     not null primary key default xid(),
     event_id     text                     not null references events(id),
-    name         text                     not null,
+    name         text                     not null unique,
     display_name text                     not null,
+    slug         text                     not null unique default gen_random_uuid(),
     event_date   date,
     event_status event_status             not null default 'scheduled'::event_status,
     description  text                     not null default '',
@@ -167,6 +172,7 @@ comment on table  sub_events is 'サブイベント';
 comment on column sub_events.event_id is 'イベントID';
 comment on column sub_events.name is '名前(例: 〇〇 2日目)';
 comment on column sub_events.display_name is '表示名';
+comment on column sub_events.slug is 'スラッグ';
 comment on column sub_events.event_date is '開催日';
 comment on column sub_events.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
 comment on column sub_events.description is '説明';
@@ -187,6 +193,7 @@ create table artists (
     id                    text                     not null primary key default xid(),
     name                  text                     not null,
     name_reading          text                     not null default '',
+    slug                  text                     not null unique default gen_random_uuid(),
     initial_letter_type   initial_letter_type      not null,
     initial_letter_detail text                     not null default '',
     description           text                     not null default '',
@@ -200,6 +207,7 @@ create table artists (
 comment on table  artists is 'アーティスト';
 comment on column artists.name is '名前';
 comment on column artists.name_reading is '名前読み方';
+comment on column artists.slug is 'スラッグ';
 comment on column artists.initial_letter_type is '頭文字の文字種別(symbol,number,alphabet,kana,kanji,other)';
 comment on column artists.initial_letter_detail is '頭文字の文字種別詳細';
 comment on column artists.description is '説明';
@@ -214,6 +222,7 @@ create table circles (
     id                    text                     not null primary key default xid(),
     name                  text                     not null,
     name_reading          text                     not null default '',
+    slug                  text                     not null unique default gen_random_uuid(),
     initial_letter_type   initial_letter_type      not null,
     initial_letter_detail text                     not null,
     description           text                     not null default '',
@@ -227,6 +236,7 @@ create table circles (
 comment on table  circles is 'サークル';
 comment on column circles.name is '名前';
 comment on column circles.name_reading is '名前読み方';
+comment on column circles.slug is 'スラッグ';
 comment on column circles.initial_letter_type is '頭文字の文字種別(symbol,number,alphabet,kana,kanji,other)';
 comment on column circles.initial_letter_detail is '頭文字の文字種別詳細';
 comment on column circles.description is '説明';
@@ -240,6 +250,8 @@ comment on column circles.updated_at is '更新日時';
 create table albums (
     id                    text                     not null primary key default xid(),
     name                  text                     not null,
+    name_reading          text                     not null default '',
+    slug                  text                     not null unique default gen_random_uuid(),
     release_circle_name   text                     not null default '',
     release_date          date,
     event_id              text                     not null default '',
@@ -256,6 +268,8 @@ create table albums (
 );
 comment on table  albums is 'アルバム';
 comment on column albums.name is '名前';
+comment on column albums.name_reading is '名前読み方';
+comment on column albums.slug is 'スラッグ';
 comment on column albums.release_circle_name is '頒布サークル名';
 comment on column albums.release_date is '頒布日';
 comment on column albums.event_id is 'イベントID';
@@ -348,9 +362,11 @@ comment on column album_upcs.updated_at is '更新日時';
 
 create table songs (
     id                    text                     not null primary key default xid(),
+    circle_id             text                     not null default '',
     album_id              text                     not null default '',
     name                  text                     not null,
     name_reading          text                     not null default '',
+    slug                  text                     not null unique default gen_random_uuid(),
     disc_number           integer                  not null default 1,
     track_number          integer                  not null,
     release_date          date,
@@ -368,9 +384,11 @@ create table songs (
     updated_at     timestamp with time zone not null default current_timestamp
 );
 comment on table  songs is '楽曲';
+comment on column songs.circle_id is 'サークルID';
 comment on column songs.album_id is 'アルバムID';
 comment on column songs.name is '名前';
 comment on column songs.name_reading is '名前読み方';
+comment on column songs.slug is 'スラッグ';
 comment on column songs.disc_number is 'ディスク番号(default: 1)';
 comment on column songs.track_number is 'トラック番号';
 comment on column songs.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';

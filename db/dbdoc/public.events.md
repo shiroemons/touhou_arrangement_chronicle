@@ -12,6 +12,7 @@
 | event_series_id | text |  | false |  | [public.event_series](public.event_series.md) | イベントシリーズID |
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |
+| slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | event_dates | daterange |  | true |  |  | イベント開催期間 |
 | event_status | event_status | 'scheduled'::event_status | false |  |  | ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled |
 | format | event_format | 'offline'::event_format | false |  |  | 形式/offline: オフライン開催, online: オフライン開催, mixed: 両方開催/default: offline |
@@ -30,6 +31,7 @@
 | events_event_series_id_fkey | FOREIGN KEY | FOREIGN KEY (event_series_id) REFERENCES event_series(id) |
 | events_pkey | PRIMARY KEY | PRIMARY KEY (id) |
 | events_name_key | UNIQUE | UNIQUE (name) |
+| events_slug_key | UNIQUE | UNIQUE (slug) |
 
 ## Indexes
 
@@ -37,6 +39,7 @@
 | ---- | ---------- |
 | events_pkey | CREATE UNIQUE INDEX events_pkey ON public.events USING btree (id) |
 | events_name_key | CREATE UNIQUE INDEX events_name_key ON public.events USING btree (name) |
+| events_slug_key | CREATE UNIQUE INDEX events_slug_key ON public.events USING btree (slug) |
 
 ## Relations
 

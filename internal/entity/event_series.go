@@ -12,6 +12,7 @@ type EventSeries struct {
 	ID          string    `bun:",pk,default:xid()"`
 	Name        string    `bun:"name,nullzero,notnull,unique"`
 	DisplayName string    `bun:"display_name,nullzero,notnull"`
+	Slug        string    `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	Events      []*Event  `bun:"rel:has-many,join:id=event_series_id"`
 	CreatedAt   time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt   time.Time `bun:"updated_at,notnull,default:current_timestamp"`

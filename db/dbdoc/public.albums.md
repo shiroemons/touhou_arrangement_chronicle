@@ -10,6 +10,8 @@
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text | xid() | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
+| name_reading | text | ''::text | false |  |  | 名前読み方 |
+| slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | release_circle_name | text | ''::text | false |  |  | 頒布サークル名 |
 | release_date | date |  | true |  |  | 頒布日 |
 | event_id | text | ''::text | false |  |  | イベントID |
@@ -29,12 +31,14 @@
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | albums_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| albums_slug_key | UNIQUE | UNIQUE (slug) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | albums_pkey | CREATE UNIQUE INDEX albums_pkey ON public.albums USING btree (id) |
+| albums_slug_key | CREATE UNIQUE INDEX albums_slug_key ON public.albums USING btree (slug) |
 
 ## Relations
 

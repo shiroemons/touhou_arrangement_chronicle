@@ -9,9 +9,11 @@
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text | xid() | false | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) [public.song_isrcs](public.song_isrcs.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) [public.songs_original_songs](public.songs_original_songs.md) [public.songs_circles](public.songs_circles.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) |  |  |
+| circle_id | text | ''::text | false |  |  | サークルID |
 | album_id | text | ''::text | false |  |  | アルバムID |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text | ''::text | false |  |  | 名前読み方 |
+| slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | disc_number | integer | 1 | false |  |  | ディスク番号(default: 1) |
 | track_number | integer |  | false |  |  | トラック番号 |
 | release_date | date |  | true |  |  | 頒布日(アルバムの頒布日と異なる場合に使用する) |
@@ -33,12 +35,14 @@
 | Name | Type | Definition |
 | ---- | ---- | ---------- |
 | songs_pkey | PRIMARY KEY | PRIMARY KEY (id) |
+| songs_slug_key | UNIQUE | UNIQUE (slug) |
 
 ## Indexes
 
 | Name | Definition |
 | ---- | ---------- |
 | songs_pkey | CREATE UNIQUE INDEX songs_pkey ON public.songs USING btree (id) |
+| songs_slug_key | CREATE UNIQUE INDEX songs_slug_key ON public.songs USING btree (slug) |
 
 ## Relations
 

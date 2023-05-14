@@ -6,9 +6,11 @@ class SongResource < Avo::BaseResource
   }
 
   field :id, as: :id, link_to_resource: true
+  field :circle, as: :belongs_to, searchable: true
   field :album, as: :belongs_to, searchable: true
   field :name, as: :text, required: true
   field :name_reading, as: :text
+  field :slug, as: :text, required: true
   field :disc_number, as: :number, required: true
   field :track_number, as: :number, required: true
   field :release_date, as: :date

@@ -12,6 +12,8 @@ type Album struct {
 
 	ID                           string                         `bun:",pk,default:xid()"`
 	Name                         string                         `bun:"name,nullzero,notnull"`
+	NameReading                  string                         `bun:"name_reading,nullzero,notnull,default:''"`
+	Slug                         string                         `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	ReleaseCircleName            string                         `bun:"release_circle_name,nullzero,notnull,default:''"`
 	ReleaseDate                  *time.Time                     `bun:"release_date"`
 	EventID                      string                         `bun:"event_id,nullzero,notnull,default:''"`

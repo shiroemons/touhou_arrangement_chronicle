@@ -22,6 +22,7 @@ class Song < ApplicationRecord
   has_many :circles, through: :songs_circles
 
   belongs_to :album, optional: true
+  belongs_to :circle, optional: true
 
   def self.ransackable_attributes(_auth_object = nil)
     ["name"]

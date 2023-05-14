@@ -8,6 +8,7 @@ class EventSeriesResource < Avo::BaseResource
   field :id, as: :id, link_to_resource: true
   field :name, as: :text, required: true
   field :display_name, as: :text, required: true
+  field :slug, as: :text, required: true
 
   field :events, as: :has_many
 end
