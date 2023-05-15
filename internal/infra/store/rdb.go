@@ -6,11 +6,11 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func NewDB(connString string) *bun.DB {
@@ -40,6 +40,10 @@ func NewDB(connString string) *bun.DB {
 	log.Println(v)
 
 	return conn
+}
+
+func PostgresProvider(cfg config.Config) *bun.DB {
+	return NewDB(cfg.ConnectURL)
 }
 
 func AddRegisterModels(db *bun.DB) {
