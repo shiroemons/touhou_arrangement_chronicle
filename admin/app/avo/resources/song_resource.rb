@@ -1,18 +1,24 @@
 class SongResource < Avo::BaseResource
   self.title = :name
-  self.includes = %i[album genres tags]
+  self.includes = %i[album genres tags circle composers arrangers rearrangers lyricists vocalists original_songs]
   self.search_query = lambda {
     scope.ransack(name_cont: params[:q], m: "or").result(distinct: false)
   }
 
   field :id, as: :id, link_to_resource: true
+  field :disc_number, as: :number, required: true
+  field :track_number, as: :number, required: true
   field :circle, as: :belongs_to, searchable: true
   field :album, as: :belongs_to, searchable: true
   field :name, as: :text, required: true
-  field :name_reading, as: :text
-  field :slug, as: :text, required: true
-  field :disc_number, as: :number, required: true
-  field :track_number, as: :number, required: true
+  field :name_reading, as: :text, hide_on: [:index]
+  field :slug, as: :text, required: true, hide_on: [:index]
+  field :composers_name, as: :text, show_on: :index
+  field :arrangers_name, as: :text, show_on: :index
+  field :rearrangers_name, as: :text, show_on: :index
+  field :lyricists_name, as: :text, show_on: :index
+  field :vocalists_name, as: :text, show_on: :index
+  field :original_songs_name, as: :text, show_on: :index
   field :release_date, as: :date
   field :search_enabled, as: :boolean, hide_on: [:index]
   field :length, as: :number, hide_on: [:index]

@@ -27,4 +27,28 @@ class Song < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     ["name"]
   end
+
+  def composers_name
+    composers.map{_1.name}.join(' / ')
+  end
+
+  def arrangers_name
+    arrangers.map{_1.name}.join(' / ')
+  end
+
+  def rearrangers_name
+    rearrangers.map{_1.name}.join(' / ')
+  end
+
+  def lyricists_name
+    lyricists.map{_1.name}.join(' / ')
+  end
+
+  def vocalists_name
+    vocalists.map{_1.name}.join(' / ')
+  end
+
+  def original_songs_name
+    original_songs.map{_1.name}.join(' / ')
+  end
 end
