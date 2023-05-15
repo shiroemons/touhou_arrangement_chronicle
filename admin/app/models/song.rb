@@ -29,26 +29,26 @@ class Song < ApplicationRecord
   end
 
   def composers_name
-    composers.map{_1.name}.join(' / ')
+    composers.map(&:name).join(' / ')
   end
 
   def arrangers_name
-    arrangers.map{_1.name}.join(' / ')
+    arrangers.map(&:name).join(' / ')
   end
 
   def rearrangers_name
-    rearrangers.map{_1.name}.join(' / ')
+    rearrangers.map(&:name).join(' / ')
   end
 
   def lyricists_name
-    lyricists.map{_1.name}.join(' / ')
+    lyricists.map(&:name).join(' / ')
   end
 
   def vocalists_name
-    vocalists.map{_1.name}.join(' / ')
+    vocalists.map(&:name).join(' / ')
   end
 
   def original_songs_name
-    original_songs.map{_1.name}.join(' / ')
+    original_songs.map(&:name).join(' / ')
   end
 end
