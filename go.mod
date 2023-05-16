@@ -25,7 +25,7 @@ require (
 	github.com/vektah/gqlparser/v2 v2.5.1
 	go.opentelemetry.io/otel/trace v1.10.0
 	go.uber.org/fx v1.19.3
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.24.0
 	golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
 	golang.org/x/text v0.9.0
 )
