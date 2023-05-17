@@ -20,22 +20,16 @@ import (
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"
 )
 
+// inject 関数は、アプリケーションの依存関係を注入します。
 func inject() fx.Option {
-	ctx := func() context.Context {
-		return context.Background()
-	}
-
 	return fx.Options(
-		fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
-			return &fxevent.ZapLogger{Logger: log}
-		}),
 		fx.Provide(
 			// Context
-			fx.Annotate(ctx, fx.As(new(context.Context))),
+			context.Background,
 			// Config
 			config.Provider,
 			// Logger
-			zap.NewExample,
+			zap.NewProduction,
 		),
 		// Provide
 		store.Module,
@@ -50,25 +44,46 @@ func inject() fx.Option {
 }
 
 func main() {
-	app := fx.New(inject())
+	// ロガーの新しいインスタンスを初期化します。
+	logger, err := zap.NewProduction()
+	if err != nil {
+		log.Fatalf("can't initialize zap logger: %v", err)
+	}
+	// プログラムが終了する前に、すべてのログがフラッシュされることを保証します。
+	defer func() {
+		if err := logger.Sync(); err != nil {
+			log.Printf("Error syncing logger: %v", err)
+		}
+	}()
+
+	// Fxと互換性を持つように、ロガーをfxevent.ZapLoggerでラップします。
+	fxLogger := fxevent.ZapLogger{Logger: logger}
+
+	app := fx.New(
+		fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
+			return &fxLogger
+		}),
+		inject(), // アプリケーションの依存関係を注入します。
+	)
 
 	startCtx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	if err := app.Start(startCtx); err != nil {
-		log.Fatal(err)
+		// アプリケーションの起動に失敗した場合、エラーをログに記録します。
+		fxLogger.Logger.Fatal("Failed to start the application", zap.Error(err))
 	}
 
 	quit := make(chan os.Signal, 1)
-	// kill (no param) default send syscall.SIGTERM
-	// kill -2 is syscall.SIGINT
-	// kill -9 is syscall.SIGKILL but can't be caught, so don't need to add it
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	// SIGINT、SIGTERM、Interruptシグナルを受け取るためのチャネルを作成します。
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-quit
-	log.Println("Shutting down server...")
+	// サーバーのシャットダウンをログに記録します。
+	fxLogger.Logger.Info("Shutting down server...")
 
 	stopCtx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	if err := app.Stop(stopCtx); err != nil {
-		log.Fatal(err)
+		// アプリケーションの停止に失敗した場合、エラーをログに記録します。
+		fxLogger.Logger.Fatal("Failed to stop the application", zap.Error(err))
 	}
 }
