@@ -1,9 +1,8 @@
 package server
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
 )
@@ -27,7 +26,10 @@ func TestArrowOrigins(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			assert.Equal(t, tt.want, allowOrigins(tt.args.cnf), "they should be equal")
+			got := allowOrigins(tt.args.cnf)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("allowOrigins() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
