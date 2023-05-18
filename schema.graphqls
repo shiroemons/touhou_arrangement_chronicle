@@ -21,6 +21,7 @@ type Product {
   productType: ProductType!
   seriesNumber: Float!
   originalSongs: [OriginalSong!]!
+  distributionServiceURLs: [ProductDistributionServiceURL!]!
 }
 
 # original_songs tableの定義
@@ -33,6 +34,35 @@ type OriginalSong {
   trackNumber: Int!
   isOriginal: Boolean!
   sourceId: String!
+  distributionServiceURLs: [OriginalSongDistributionServiceURL!]!
+}
+
+# distribution_service enum定義
+enum DistributionService {
+  SPOTIFY
+  APPLE_MUSIC
+  YOUTUBE_MUSIC
+  LINE_MUSIC
+  ITUNES
+  YOUTUBE
+  NICOVIDEO
+  SOUND_CLOUD
+}
+
+# product_distribution_service_urls tableの定義
+type ProductDistributionServiceURL {
+  id: ID!
+  product: Product!
+  service: DistributionService!
+  url: String!
+}
+
+# original_song_distribution_service_urls tableの定義
+type OriginalSongDistributionServiceURL {
+  id: ID!
+  originalSong: OriginalSong!
+  service: DistributionService!
+  url: String!
 }
 
 # 各種クエリの定義

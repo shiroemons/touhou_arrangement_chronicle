@@ -9,23 +9,92 @@ import (
 )
 
 type OriginalSong struct {
-	ID          string   `json:"id"`
-	Product     *Product `json:"product"`
-	Name        string   `json:"name"`
-	Composer    string   `json:"composer"`
-	Arranger    string   `json:"arranger"`
-	TrackNumber int      `json:"trackNumber"`
-	IsOriginal  bool     `json:"isOriginal"`
-	SourceID    string   `json:"sourceId"`
+	ID                      string                                `json:"id"`
+	Product                 *Product                              `json:"product"`
+	Name                    string                                `json:"name"`
+	Composer                string                                `json:"composer"`
+	Arranger                string                                `json:"arranger"`
+	TrackNumber             int                                   `json:"trackNumber"`
+	IsOriginal              bool                                  `json:"isOriginal"`
+	SourceID                string                                `json:"sourceId"`
+	DistributionServiceURLs []*OriginalSongDistributionServiceURL `json:"distributionServiceURLs"`
+}
+
+type OriginalSongDistributionServiceURL struct {
+	ID           string              `json:"id"`
+	OriginalSong *OriginalSong       `json:"originalSong"`
+	Service      DistributionService `json:"service"`
+	URL          string              `json:"url"`
 }
 
 type Product struct {
-	ID            string          `json:"id"`
-	Name          string          `json:"name"`
-	ShortName     string          `json:"shortName"`
-	ProductType   ProductType     `json:"productType"`
-	SeriesNumber  float64         `json:"seriesNumber"`
-	OriginalSongs []*OriginalSong `json:"originalSongs"`
+	ID                      string                           `json:"id"`
+	Name                    string                           `json:"name"`
+	ShortName               string                           `json:"shortName"`
+	ProductType             ProductType                      `json:"productType"`
+	SeriesNumber            float64                          `json:"seriesNumber"`
+	OriginalSongs           []*OriginalSong                  `json:"originalSongs"`
+	DistributionServiceURLs []*ProductDistributionServiceURL `json:"distributionServiceURLs"`
+}
+
+type ProductDistributionServiceURL struct {
+	ID      string              `json:"id"`
+	Product *Product            `json:"product"`
+	Service DistributionService `json:"service"`
+	URL     string              `json:"url"`
+}
+
+type DistributionService string
+
+const (
+	DistributionServiceSpotify      DistributionService = "SPOTIFY"
+	DistributionServiceAppleMusic   DistributionService = "APPLE_MUSIC"
+	DistributionServiceYoutubeMusic DistributionService = "YOUTUBE_MUSIC"
+	DistributionServiceLineMusic    DistributionService = "LINE_MUSIC"
+	DistributionServiceItunes       DistributionService = "ITUNES"
+	DistributionServiceYoutube      DistributionService = "YOUTUBE"
+	DistributionServiceNicovideo    DistributionService = "NICOVIDEO"
+	DistributionServiceSoundCloud   DistributionService = "SOUND_CLOUD"
+)
+
+var AllDistributionService = []DistributionService{
+	DistributionServiceSpotify,
+	DistributionServiceAppleMusic,
+	DistributionServiceYoutubeMusic,
+	DistributionServiceLineMusic,
+	DistributionServiceItunes,
+	DistributionServiceYoutube,
+	DistributionServiceNicovideo,
+	DistributionServiceSoundCloud,
+}
+
+func (e DistributionService) IsValid() bool {
+	switch e {
+	case DistributionServiceSpotify, DistributionServiceAppleMusic, DistributionServiceYoutubeMusic, DistributionServiceLineMusic, DistributionServiceItunes, DistributionServiceYoutube, DistributionServiceNicovideo, DistributionServiceSoundCloud:
+		return true
+	}
+	return false
+}
+
+func (e DistributionService) String() string {
+	return string(e)
+}
+
+func (e *DistributionService) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = DistributionService(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid DistributionService", str)
+	}
+	return nil
+}
+
+func (e DistributionService) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
 }
 
 type ProductType string

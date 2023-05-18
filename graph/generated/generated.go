@@ -44,23 +44,39 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	OriginalSong struct {
-		Arranger    func(childComplexity int) int
-		Composer    func(childComplexity int) int
-		ID          func(childComplexity int) int
-		IsOriginal  func(childComplexity int) int
-		Name        func(childComplexity int) int
-		Product     func(childComplexity int) int
-		SourceID    func(childComplexity int) int
-		TrackNumber func(childComplexity int) int
+		Arranger                func(childComplexity int) int
+		Composer                func(childComplexity int) int
+		DistributionServiceURLs func(childComplexity int) int
+		ID                      func(childComplexity int) int
+		IsOriginal              func(childComplexity int) int
+		Name                    func(childComplexity int) int
+		Product                 func(childComplexity int) int
+		SourceID                func(childComplexity int) int
+		TrackNumber             func(childComplexity int) int
+	}
+
+	OriginalSongDistributionServiceURL struct {
+		ID           func(childComplexity int) int
+		OriginalSong func(childComplexity int) int
+		Service      func(childComplexity int) int
+		URL          func(childComplexity int) int
 	}
 
 	Product struct {
-		ID            func(childComplexity int) int
-		Name          func(childComplexity int) int
-		OriginalSongs func(childComplexity int) int
-		ProductType   func(childComplexity int) int
-		SeriesNumber  func(childComplexity int) int
-		ShortName     func(childComplexity int) int
+		DistributionServiceURLs func(childComplexity int) int
+		ID                      func(childComplexity int) int
+		Name                    func(childComplexity int) int
+		OriginalSongs           func(childComplexity int) int
+		ProductType             func(childComplexity int) int
+		SeriesNumber            func(childComplexity int) int
+		ShortName               func(childComplexity int) int
+	}
+
+	ProductDistributionServiceURL struct {
+		ID      func(childComplexity int) int
+		Product func(childComplexity int) int
+		Service func(childComplexity int) int
+		URL     func(childComplexity int) int
 	}
 
 	Query struct {
@@ -107,6 +123,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.OriginalSong.Composer(childComplexity), true
 
+	case "OriginalSong.distributionServiceURLs":
+		if e.complexity.OriginalSong.DistributionServiceURLs == nil {
+			break
+		}
+
+		return e.complexity.OriginalSong.DistributionServiceURLs(childComplexity), true
+
 	case "OriginalSong.id":
 		if e.complexity.OriginalSong.ID == nil {
 			break
@@ -149,6 +172,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.OriginalSong.TrackNumber(childComplexity), true
 
+	case "OriginalSongDistributionServiceURL.id":
+		if e.complexity.OriginalSongDistributionServiceURL.ID == nil {
+			break
+		}
+
+		return e.complexity.OriginalSongDistributionServiceURL.ID(childComplexity), true
+
+	case "OriginalSongDistributionServiceURL.originalSong":
+		if e.complexity.OriginalSongDistributionServiceURL.OriginalSong == nil {
+			break
+		}
+
+		return e.complexity.OriginalSongDistributionServiceURL.OriginalSong(childComplexity), true
+
+	case "OriginalSongDistributionServiceURL.service":
+		if e.complexity.OriginalSongDistributionServiceURL.Service == nil {
+			break
+		}
+
+		return e.complexity.OriginalSongDistributionServiceURL.Service(childComplexity), true
+
+	case "OriginalSongDistributionServiceURL.url":
+		if e.complexity.OriginalSongDistributionServiceURL.URL == nil {
+			break
+		}
+
+		return e.complexity.OriginalSongDistributionServiceURL.URL(childComplexity), true
+
+	case "Product.distributionServiceURLs":
+		if e.complexity.Product.DistributionServiceURLs == nil {
+			break
+		}
+
+		return e.complexity.Product.DistributionServiceURLs(childComplexity), true
+
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
 			break
@@ -190,6 +248,34 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.ShortName(childComplexity), true
+
+	case "ProductDistributionServiceURL.id":
+		if e.complexity.ProductDistributionServiceURL.ID == nil {
+			break
+		}
+
+		return e.complexity.ProductDistributionServiceURL.ID(childComplexity), true
+
+	case "ProductDistributionServiceURL.product":
+		if e.complexity.ProductDistributionServiceURL.Product == nil {
+			break
+		}
+
+		return e.complexity.ProductDistributionServiceURL.Product(childComplexity), true
+
+	case "ProductDistributionServiceURL.service":
+		if e.complexity.ProductDistributionServiceURL.Service == nil {
+			break
+		}
+
+		return e.complexity.ProductDistributionServiceURL.Service(childComplexity), true
+
+	case "ProductDistributionServiceURL.url":
+		if e.complexity.ProductDistributionServiceURL.URL == nil {
+			break
+		}
+
+		return e.complexity.ProductDistributionServiceURL.URL(childComplexity), true
 
 	case "Query.getOriginalSongById":
 		if e.complexity.Query.GetOriginalSongByID == nil {
@@ -304,6 +390,7 @@ type Product {
   productType: ProductType!
   seriesNumber: Float!
   originalSongs: [OriginalSong!]!
+  distributionServiceURLs: [ProductDistributionServiceURL!]!
 }
 
 # original_songs tableの定義
@@ -316,6 +403,35 @@ type OriginalSong {
   trackNumber: Int!
   isOriginal: Boolean!
   sourceId: String!
+  distributionServiceURLs: [OriginalSongDistributionServiceURL!]!
+}
+
+# distribution_service enum定義
+enum DistributionService {
+  SPOTIFY
+  APPLE_MUSIC
+  YOUTUBE_MUSIC
+  LINE_MUSIC
+  ITUNES
+  YOUTUBE
+  NICOVIDEO
+  SOUND_CLOUD
+}
+
+# product_distribution_service_urls tableの定義
+type ProductDistributionServiceURL {
+  id: ID!
+  product: Product!
+  service: DistributionService!
+  url: String!
+}
+
+# original_song_distribution_service_urls tableの定義
+type OriginalSongDistributionServiceURL {
+  id: ID!
+  originalSong: OriginalSong!
+  service: DistributionService!
+  url: String!
 }
 
 # 各種クエリの定義
@@ -511,6 +627,8 @@ func (ec *executionContext) fieldContext_OriginalSong_product(ctx context.Contex
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -772,6 +890,256 @@ func (ec *executionContext) _OriginalSong_sourceId(ctx context.Context, field gr
 func (ec *executionContext) fieldContext_OriginalSong_sourceId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "OriginalSong",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OriginalSong_distributionServiceURLs(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSong) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DistributionServiceURLs, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.OriginalSongDistributionServiceURL)
+	fc.Result = res
+	return ec.marshalNOriginalSongDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSongDistributionServiceURLᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OriginalSong_distributionServiceURLs(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OriginalSong",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_OriginalSongDistributionServiceURL_id(ctx, field)
+			case "originalSong":
+				return ec.fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx, field)
+			case "service":
+				return ec.fieldContext_OriginalSongDistributionServiceURL_service(ctx, field)
+			case "url":
+				return ec.fieldContext_OriginalSongDistributionServiceURL_url(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type OriginalSongDistributionServiceURL", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OriginalSongDistributionServiceURL_id(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSongDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSongDistributionServiceURL_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OriginalSongDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OriginalSongDistributionServiceURL_originalSong(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSongDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.OriginalSong, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.OriginalSong)
+	fc.Result = res
+	return ec.marshalNOriginalSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSong(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OriginalSongDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_OriginalSong_id(ctx, field)
+			case "product":
+				return ec.fieldContext_OriginalSong_product(ctx, field)
+			case "name":
+				return ec.fieldContext_OriginalSong_name(ctx, field)
+			case "composer":
+				return ec.fieldContext_OriginalSong_composer(ctx, field)
+			case "arranger":
+				return ec.fieldContext_OriginalSong_arranger(ctx, field)
+			case "trackNumber":
+				return ec.fieldContext_OriginalSong_trackNumber(ctx, field)
+			case "isOriginal":
+				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
+			case "sourceId":
+				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OriginalSongDistributionServiceURL_service(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSongDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSongDistributionServiceURL_service(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Service, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DistributionService)
+	fc.Result = res
+	return ec.marshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_service(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OriginalSongDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DistributionService does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OriginalSongDistributionServiceURL_url(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSongDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSongDistributionServiceURL_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OriginalSongDistributionServiceURL",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -1057,8 +1425,256 @@ func (ec *executionContext) fieldContext_Product_originalSongs(ctx context.Conte
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Product_distributionServiceURLs(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DistributionServiceURLs, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ProductDistributionServiceURL)
+	fc.Result = res
+	return ec.marshalNProductDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductDistributionServiceURLᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Product_distributionServiceURLs(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Product",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_ProductDistributionServiceURL_id(ctx, field)
+			case "product":
+				return ec.fieldContext_ProductDistributionServiceURL_product(ctx, field)
+			case "service":
+				return ec.fieldContext_ProductDistributionServiceURL_service(ctx, field)
+			case "url":
+				return ec.fieldContext_ProductDistributionServiceURL_url(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ProductDistributionServiceURL", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ProductDistributionServiceURL_id(ctx context.Context, field graphql.CollectedField, obj *model.ProductDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ProductDistributionServiceURL_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ProductDistributionServiceURL_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ProductDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ProductDistributionServiceURL_product(ctx context.Context, field graphql.CollectedField, obj *model.ProductDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ProductDistributionServiceURL_product(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Product, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.Product)
+	fc.Result = res
+	return ec.marshalNProduct2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ProductDistributionServiceURL_product(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ProductDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Product_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Product_name(ctx, field)
+			case "shortName":
+				return ec.fieldContext_Product_shortName(ctx, field)
+			case "productType":
+				return ec.fieldContext_Product_productType(ctx, field)
+			case "seriesNumber":
+				return ec.fieldContext_Product_seriesNumber(ctx, field)
+			case "originalSongs":
+				return ec.fieldContext_Product_originalSongs(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ProductDistributionServiceURL_service(ctx context.Context, field graphql.CollectedField, obj *model.ProductDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ProductDistributionServiceURL_service(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Service, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DistributionService)
+	fc.Result = res
+	return ec.marshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ProductDistributionServiceURL_service(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ProductDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DistributionService does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ProductDistributionServiceURL_url(ctx context.Context, field graphql.CollectedField, obj *model.ProductDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ProductDistributionServiceURL_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ProductDistributionServiceURL_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ProductDistributionServiceURL",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -1112,6 +1728,8 @@ func (ec *executionContext) fieldContext_Query_getProductById(ctx context.Contex
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -1182,6 +1800,8 @@ func (ec *executionContext) fieldContext_Query_getOriginalSongById(ctx context.C
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -1251,6 +1871,8 @@ func (ec *executionContext) fieldContext_Query_getProducts(ctx context.Context, 
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -1313,6 +1935,8 @@ func (ec *executionContext) fieldContext_Query_getOriginalSongs(ctx context.Cont
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
+			case "distributionServiceURLs":
+				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -3296,6 +3920,62 @@ func (ec *executionContext) _OriginalSong(ctx context.Context, sel ast.Selection
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
+		case "distributionServiceURLs":
+
+			out.Values[i] = ec._OriginalSong_distributionServiceURLs(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var originalSongDistributionServiceURLImplementors = []string{"OriginalSongDistributionServiceURL"}
+
+func (ec *executionContext) _OriginalSongDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, obj *model.OriginalSongDistributionServiceURL) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, originalSongDistributionServiceURLImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("OriginalSongDistributionServiceURL")
+		case "id":
+
+			out.Values[i] = ec._OriginalSongDistributionServiceURL_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "originalSong":
+
+			out.Values[i] = ec._OriginalSongDistributionServiceURL_originalSong(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "service":
+
+			out.Values[i] = ec._OriginalSongDistributionServiceURL_service(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._OriginalSongDistributionServiceURL_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -3355,6 +4035,62 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 		case "originalSongs":
 
 			out.Values[i] = ec._Product_originalSongs(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "distributionServiceURLs":
+
+			out.Values[i] = ec._Product_distributionServiceURLs(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var productDistributionServiceURLImplementors = []string{"ProductDistributionServiceURL"}
+
+func (ec *executionContext) _ProductDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, obj *model.ProductDistributionServiceURL) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, productDistributionServiceURLImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("ProductDistributionServiceURL")
+		case "id":
+
+			out.Values[i] = ec._ProductDistributionServiceURL_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "product":
+
+			out.Values[i] = ec._ProductDistributionServiceURL_product(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "service":
+
+			out.Values[i] = ec._ProductDistributionServiceURL_service(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._ProductDistributionServiceURL_url(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -3831,6 +4567,16 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
+func (ec *executionContext) unmarshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx context.Context, v interface{}) (model.DistributionService, error) {
+	var res model.DistributionService
+	err := res.UnmarshalGQL(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx context.Context, sel ast.SelectionSet, v model.DistributionService) graphql.Marshaler {
+	return v
+}
+
 func (ec *executionContext) unmarshalNFloat2float64(ctx context.Context, v interface{}) (float64, error) {
 	res, err := graphql.UnmarshalFloatContext(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -3930,6 +4676,60 @@ func (ec *executionContext) marshalNOriginalSong2ᚖgithubᚗcomᚋshiroemonsᚋ
 	return ec._OriginalSong(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNOriginalSongDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSongDistributionServiceURLᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.OriginalSongDistributionServiceURL) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNOriginalSongDistributionServiceURL2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSongDistributionServiceURL(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNOriginalSongDistributionServiceURL2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSongDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, v *model.OriginalSongDistributionServiceURL) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._OriginalSongDistributionServiceURL(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNProduct2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Product) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -3982,6 +4782,60 @@ func (ec *executionContext) marshalNProduct2ᚖgithubᚗcomᚋshiroemonsᚋtouho
 		return graphql.Null
 	}
 	return ec._Product(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNProductDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductDistributionServiceURLᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.ProductDistributionServiceURL) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNProductDistributionServiceURL2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductDistributionServiceURL(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNProductDistributionServiceURL2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, v *model.ProductDistributionServiceURL) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._ProductDistributionServiceURL(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNProductType2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductType(ctx context.Context, v interface{}) (model.ProductType, error) {
