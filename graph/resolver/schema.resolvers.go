@@ -32,6 +32,26 @@ func (r *queryResolver) GetOriginalSongs(ctx context.Context) ([]*model.Original
 	panic(fmt.Errorf("not implemented: GetOriginalSongs - getOriginalSongs"))
 }
 
+// GetEventSeriesByID is the resolver for the getEventSeriesById field.
+func (r *queryResolver) GetEventSeriesByID(ctx context.Context, id string) (*model.EventSeries, error) {
+	panic(fmt.Errorf("not implemented: GetEventSeriesByID - getEventSeriesById"))
+}
+
+// GetEventByID is the resolver for the getEventById field.
+func (r *queryResolver) GetEventByID(ctx context.Context, id string) (*model.Event, error) {
+	panic(fmt.Errorf("not implemented: GetEventByID - getEventById"))
+}
+
+// GetSubEventByID is the resolver for the getSubEventById field.
+func (r *queryResolver) GetSubEventByID(ctx context.Context, id string) (*model.SubEvent, error) {
+	panic(fmt.Errorf("not implemented: GetSubEventByID - getSubEventById"))
+}
+
+// GetEventSeries is the resolver for the getEventSeries field.
+func (r *queryResolver) GetEventSeries(ctx context.Context) ([]*model.EventSeries, error) {
+	panic(fmt.Errorf("not implemented: GetEventSeries - getEventSeries"))
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 

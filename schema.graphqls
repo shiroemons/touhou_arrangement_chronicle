@@ -2,6 +2,8 @@
 #
 # https://gqlgen.com/getting-started/
 
+scalar Date
+
 # product_type enum定義
 enum ProductType {
   PC98
@@ -65,10 +67,71 @@ type OriginalSongDistributionServiceURL {
   url: String!
 }
 
+# event_status enum定義
+enum EventStatus {
+  SCHEDULED
+  CANCELLED
+  POSTPONE
+  RESCHEDULED
+  MOVED_ONLINE
+  OTHER
+}
+
+# event_format enum定義
+enum EventFormat {
+  OFFLINE
+  ONLINE
+  MIXED
+}
+
+# event_series tableの定義
+type EventSeries {
+  id: ID!
+  name: String!
+  displayName: String!
+  slug: String!
+  events: [Event!]!
+}
+
+# events tableの定義
+type Event {
+  id: ID!
+  eventSeries: EventSeries!
+  name: String!
+  displayName: String!
+  slug: String!
+  startDate: Date
+  endDate: Date
+  eventStatus: EventStatus!
+  format: EventFormat!
+  regionCode: String!
+  address: String!
+  description: String!
+  url: String!
+  twitterUrl: String!
+  subEvents: [SubEvent!]!
+}
+
+# sub_events tableの定義
+type SubEvent {
+  id: ID!
+  event: Event!
+  name: String!
+  displayName: String!
+  slug: String!
+  date: Date
+  eventStatus: EventStatus!
+  description: String!
+}
+
 # 各種クエリの定義
 type Query {
   getProductById(id: ID!): Product
   getOriginalSongById(id: ID!): OriginalSong
   getProducts: [Product!]!
   getOriginalSongs: [OriginalSong!]!
+  getEventSeriesById(id: ID!): EventSeries
+  getEventById(id: ID!): Event
+  getSubEventById(id: ID!): SubEvent
+  getEventSeries: [EventSeries!]!
 }

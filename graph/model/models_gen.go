@@ -8,6 +8,32 @@ import (
 	"strconv"
 )
 
+type Event struct {
+	ID          string       `json:"id"`
+	EventSeries *EventSeries `json:"eventSeries"`
+	Name        string       `json:"name"`
+	DisplayName string       `json:"displayName"`
+	Slug        string       `json:"slug"`
+	StartDate   *string      `json:"startDate,omitempty"`
+	EndDate     *string      `json:"endDate,omitempty"`
+	EventStatus EventStatus  `json:"eventStatus"`
+	Format      EventFormat  `json:"format"`
+	RegionCode  string       `json:"regionCode"`
+	Address     string       `json:"address"`
+	Description string       `json:"description"`
+	URL         string       `json:"url"`
+	TwitterURL  string       `json:"twitterUrl"`
+	SubEvents   []*SubEvent  `json:"subEvents"`
+}
+
+type EventSeries struct {
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	DisplayName string   `json:"displayName"`
+	Slug        string   `json:"slug"`
+	Events      []*Event `json:"events"`
+}
+
 type OriginalSong struct {
 	ID                      string                                `json:"id"`
 	Product                 *Product                              `json:"product"`
@@ -42,6 +68,17 @@ type ProductDistributionServiceURL struct {
 	Product *Product            `json:"product"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
+}
+
+type SubEvent struct {
+	ID          string      `json:"id"`
+	Event       *Event      `json:"event"`
+	Name        string      `json:"name"`
+	DisplayName string      `json:"displayName"`
+	Slug        string      `json:"slug"`
+	Date        *string     `json:"date,omitempty"`
+	EventStatus EventStatus `json:"eventStatus"`
+	Description string      `json:"description"`
 }
 
 type DistributionService string
@@ -94,6 +131,98 @@ func (e *DistributionService) UnmarshalGQL(v interface{}) error {
 }
 
 func (e DistributionService) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type EventFormat string
+
+const (
+	EventFormatOffline EventFormat = "OFFLINE"
+	EventFormatOnline  EventFormat = "ONLINE"
+	EventFormatMixed   EventFormat = "MIXED"
+)
+
+var AllEventFormat = []EventFormat{
+	EventFormatOffline,
+	EventFormatOnline,
+	EventFormatMixed,
+}
+
+func (e EventFormat) IsValid() bool {
+	switch e {
+	case EventFormatOffline, EventFormatOnline, EventFormatMixed:
+		return true
+	}
+	return false
+}
+
+func (e EventFormat) String() string {
+	return string(e)
+}
+
+func (e *EventFormat) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = EventFormat(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid EventFormat", str)
+	}
+	return nil
+}
+
+func (e EventFormat) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type EventStatus string
+
+const (
+	EventStatusScheduled   EventStatus = "SCHEDULED"
+	EventStatusCancelled   EventStatus = "CANCELLED"
+	EventStatusPostpone    EventStatus = "POSTPONE"
+	EventStatusRescheduled EventStatus = "RESCHEDULED"
+	EventStatusMovedOnline EventStatus = "MOVED_ONLINE"
+	EventStatusOther       EventStatus = "OTHER"
+)
+
+var AllEventStatus = []EventStatus{
+	EventStatusScheduled,
+	EventStatusCancelled,
+	EventStatusPostpone,
+	EventStatusRescheduled,
+	EventStatusMovedOnline,
+	EventStatusOther,
+}
+
+func (e EventStatus) IsValid() bool {
+	switch e {
+	case EventStatusScheduled, EventStatusCancelled, EventStatusPostpone, EventStatusRescheduled, EventStatusMovedOnline, EventStatusOther:
+		return true
+	}
+	return false
+}
+
+func (e EventStatus) String() string {
+	return string(e)
+}
+
+func (e *EventStatus) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = EventStatus(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid EventStatus", str)
+	}
+	return nil
+}
+
+func (e EventStatus) MarshalGQL(w io.Writer) {
 	fmt.Fprint(w, strconv.Quote(e.String()))
 }
 
