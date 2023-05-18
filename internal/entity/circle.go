@@ -35,13 +35,19 @@ func (e *Circle) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	switch query.(type) {
 	case *bun.InsertQuery:
 		if e.Name != "" {
-			ilType, ilDetail := domain.InitialLetter(e.Name)
+			ilType, ilDetail, err := domain.InitialLetter(e.Name)
+			if err != nil {
+				return err
+			}
 			e.InitialLetterType = string(ilType)
 			e.InitialLetterDetail = ilDetail
 		}
 	case *bun.UpdateQuery:
 		if e.Name != "" {
-			ilType, ilDetail := domain.InitialLetter(e.Name)
+			ilType, ilDetail, err := domain.InitialLetter(e.Name)
+			if err != nil {
+				return err
+			}
 			e.InitialLetterType = string(ilType)
 			e.InitialLetterDetail = ilDetail
 		}

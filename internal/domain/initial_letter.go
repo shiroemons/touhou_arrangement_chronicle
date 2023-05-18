@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"errors"
 	"unicode"
 
 	"github.com/goark/kkconv"
@@ -56,22 +57,25 @@ var (
 	}
 )
 
+// runeCheck は文字種別と詳細を判定します。
 func runeCheck(r rune) (InitialLetterType, string) {
 	if unicode.IsPunct(r) || unicode.IsSymbol(r) {
 		return InitialLetterTypeSymbol, ""
 	}
-	if unicode.IsDigit(r) && unicode.IsNumber(r) {
+	if unicode.IsDigit(r) {
 		return InitialLetterTypeNumber, ""
 	}
-	if unicode.Is(Hiragana, r) {
+	if unicode.Is(Hiragana, r) || unicode.Is(Katakana, r) || unicode.Is(HalfWidthKatakana, r) {
 		d := kkconv.Chokuon(string(r), true)
+		if unicode.Is(Katakana, r) || unicode.Is(HalfWidthKatakana, r) {
+			d = kkconv.Hiragana(d, true)
+		}
 		detail := []rune(width.Widen.String(width.Narrow.String(norm.NFD.String(d))))[0]
-		return InitialLetterTypeHiragana, string(detail)
-	}
-	if unicode.Is(Katakana, r) || unicode.Is(HalfWidthKatakana, r) {
-		d := kkconv.Hiragana(kkconv.Chokuon(string(r), true), true)
-		detail := []rune(width.Widen.String(width.Narrow.String(norm.NFD.String(d))))[0]
-		return InitialLetterTypeKatakana, string(detail)
+		letterType := InitialLetterTypeHiragana
+		if unicode.Is(Katakana, r) || unicode.Is(HalfWidthKatakana, r) {
+			letterType = InitialLetterTypeKatakana
+		}
+		return letterType, string(detail)
 	}
 	if unicode.Is(Kanji, r) {
 		return InitialLetterTypeKanji, ""
@@ -84,6 +88,15 @@ func runeCheck(r rune) (InitialLetterType, string) {
 
 // InitialLetter 文字列の頭文字の文字種別を判定する。
 // ひらがなやカタカナ、アルファベットの場合は、2つ目の戻り値に詳細情報が返されます。
-func InitialLetter(str string) (InitialLetterType, string) {
-	return runeCheck([]rune(width.Fold.String(str))[0])
+func InitialLetter(str string) (InitialLetterType, string, error) {
+	if str == "" {
+		return "", "", errors.New("入力文字列は空ではいけません")
+	}
+	foldedStr := width.Fold.String(str)
+	runes := []rune(foldedStr)
+	if len(runes) == 0 {
+		return "", "", errors.New("変換後の文字列が空です")
+	}
+	typeInfo, detail := runeCheck(runes[0])
+	return typeInfo, detail, nil
 }
