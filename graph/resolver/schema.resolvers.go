@@ -52,6 +52,26 @@ func (r *queryResolver) GetEventSeries(ctx context.Context) ([]*model.EventSerie
 	panic(fmt.Errorf("not implemented: GetEventSeries - getEventSeries"))
 }
 
+// GetArtistByID is the resolver for the getArtistById field.
+func (r *queryResolver) GetArtistByID(ctx context.Context, id string) (*model.Artist, error) {
+	panic(fmt.Errorf("not implemented: GetArtistByID - getArtistById"))
+}
+
+// GetCircleByID is the resolver for the getCircleById field.
+func (r *queryResolver) GetCircleByID(ctx context.Context, id string) (*model.Circle, error) {
+	panic(fmt.Errorf("not implemented: GetCircleByID - getCircleById"))
+}
+
+// GetArtists is the resolver for the getArtists field.
+func (r *queryResolver) GetArtists(ctx context.Context) ([]*model.Artist, error) {
+	panic(fmt.Errorf("not implemented: GetArtists - getArtists"))
+}
+
+// GetCircles is the resolver for the getCircles field.
+func (r *queryResolver) GetCircles(ctx context.Context) ([]*model.Circle, error) {
+	panic(fmt.Errorf("not implemented: GetCircles - getCircles"))
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 

@@ -124,6 +124,47 @@ type SubEvent {
   description: String!
 }
 
+# initial_letter_type enum定義
+enum InitialLetterType {
+  SYMBOL
+  NUMBER
+  ALPHABET
+  HIRAGANA
+  KATAKANA
+  KANJI
+  OTHER
+}
+
+# artists tableの定義
+type Artist {
+  id: ID!
+  name: String!
+  nameReading: String!
+  slug: String!
+  initialLetterType: InitialLetterType!
+  initialLetterDetail: String!
+  description: String!
+  url: String!
+  blogUrl: String!
+  twitterUrl: String!
+  youtubeChannelUrl: String!
+}
+
+# circles tableの定義
+type Circle {
+  id: ID!
+  name: String!
+  nameReading: String!
+  slug: String!
+  initialLetterType: InitialLetterType!
+  initialLetterDetail: String!
+  description: String!
+  url: String!
+  blogUrl: String!
+  twitterUrl: String!
+  youtubeChannelUrl: String!
+}
+
 # 各種クエリの定義
 type Query {
   getProductById(id: ID!): Product
@@ -134,4 +175,8 @@ type Query {
   getEventById(id: ID!): Event
   getSubEventById(id: ID!): SubEvent
   getEventSeries: [EventSeries!]!
+  getArtistById(id: ID!): Artist
+  getCircleById(id: ID!): Circle
+  getArtists: [Artist!]!
+  getCircles: [Circle!]!
 }

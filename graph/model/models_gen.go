@@ -8,6 +8,34 @@ import (
 	"strconv"
 )
 
+type Artist struct {
+	ID                  string            `json:"id"`
+	Name                string            `json:"name"`
+	NameReading         string            `json:"nameReading"`
+	Slug                string            `json:"slug"`
+	InitialLetterType   InitialLetterType `json:"initialLetterType"`
+	InitialLetterDetail string            `json:"initialLetterDetail"`
+	Description         string            `json:"description"`
+	URL                 string            `json:"url"`
+	BlogURL             string            `json:"blogUrl"`
+	TwitterURL          string            `json:"twitterUrl"`
+	YoutubeChannelURL   string            `json:"youtubeChannelUrl"`
+}
+
+type Circle struct {
+	ID                  string            `json:"id"`
+	Name                string            `json:"name"`
+	NameReading         string            `json:"nameReading"`
+	Slug                string            `json:"slug"`
+	InitialLetterType   InitialLetterType `json:"initialLetterType"`
+	InitialLetterDetail string            `json:"initialLetterDetail"`
+	Description         string            `json:"description"`
+	URL                 string            `json:"url"`
+	BlogURL             string            `json:"blogUrl"`
+	TwitterURL          string            `json:"twitterUrl"`
+	YoutubeChannelURL   string            `json:"youtubeChannelUrl"`
+}
+
 type Event struct {
 	ID          string       `json:"id"`
 	EventSeries *EventSeries `json:"eventSeries"`
@@ -223,6 +251,57 @@ func (e *EventStatus) UnmarshalGQL(v interface{}) error {
 }
 
 func (e EventStatus) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type InitialLetterType string
+
+const (
+	InitialLetterTypeSymbol   InitialLetterType = "SYMBOL"
+	InitialLetterTypeNumber   InitialLetterType = "NUMBER"
+	InitialLetterTypeAlphabet InitialLetterType = "ALPHABET"
+	InitialLetterTypeHiragana InitialLetterType = "HIRAGANA"
+	InitialLetterTypeKatakana InitialLetterType = "KATAKANA"
+	InitialLetterTypeKanji    InitialLetterType = "KANJI"
+	InitialLetterTypeOther    InitialLetterType = "OTHER"
+)
+
+var AllInitialLetterType = []InitialLetterType{
+	InitialLetterTypeSymbol,
+	InitialLetterTypeNumber,
+	InitialLetterTypeAlphabet,
+	InitialLetterTypeHiragana,
+	InitialLetterTypeKatakana,
+	InitialLetterTypeKanji,
+	InitialLetterTypeOther,
+}
+
+func (e InitialLetterType) IsValid() bool {
+	switch e {
+	case InitialLetterTypeSymbol, InitialLetterTypeNumber, InitialLetterTypeAlphabet, InitialLetterTypeHiragana, InitialLetterTypeKatakana, InitialLetterTypeKanji, InitialLetterTypeOther:
+		return true
+	}
+	return false
+}
+
+func (e InitialLetterType) String() string {
+	return string(e)
+}
+
+func (e *InitialLetterType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = InitialLetterType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid InitialLetterType", str)
+	}
+	return nil
+}
+
+func (e InitialLetterType) MarshalGQL(w io.Writer) {
 	fmt.Fprint(w, strconv.Quote(e.String()))
 }
 
