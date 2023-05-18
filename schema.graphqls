@@ -2,27 +2,43 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+# product_type enum定義
+enum ProductType {
+  PC98
+  WINDOWS
+  ZUNS_MUSIC_COLLECTION
+  AKYUS_UNTOUCHED_SCORE
+  COMMERCIAL_BOOKS
+  TASOFRO
+  OTHER
 }
 
-type User {
+# products tableの定義
+type Product {
   id: ID!
   name: String!
+  shortName: String!
+  productType: ProductType!
+  seriesNumber: Float!
+  originalSongs: [OriginalSong!]!
 }
 
+# original_songs tableの定義
+type OriginalSong {
+  id: ID!
+  product: Product!
+  name: String!
+  composer: String!
+  arranger: String!
+  trackNumber: Int!
+  isOriginal: Boolean!
+  sourceId: String!
+}
+
+# 各種クエリの定義
 type Query {
-  todos: [Todo!]!
-}
-
-input NewTodo {
-  text: String!
-  userId: String!
-}
-
-type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  getProductById(id: ID!): Product
+  getOriginalSongById(id: ID!): OriginalSong
+  getProducts: [Product!]!
+  getOriginalSongs: [OriginalSong!]!
 }
