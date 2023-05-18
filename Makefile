@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
+.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test generate lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -42,6 +42,9 @@ all-clean:
 
 test: ## Execute tests
 	go test -race -shuffle=on ./...
+
+generate: ## Run go generate ./...
+	go generate ./...
 
 lint:
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run -v --timeout 5m
