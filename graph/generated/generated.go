@@ -44,27 +44,27 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Album struct {
-		AlbumNumber             func(childComplexity int) int
-		Circles                 func(childComplexity int) int
-		ConsignmentShops        func(childComplexity int) int
-		Credit                  func(childComplexity int) int
-		Currency                func(childComplexity int) int
-		DistributionServiceUrls func(childComplexity int) int
-		Event                   func(childComplexity int) int
-		EventPrice              func(childComplexity int) int
-		Genres                  func(childComplexity int) int
-		ID                      func(childComplexity int) int
-		Introduction            func(childComplexity int) int
-		Name                    func(childComplexity int) int
-		NameReading             func(childComplexity int) int
-		ReleaseCircleName       func(childComplexity int) int
-		ReleaseDate             func(childComplexity int) int
-		SearchEnabled           func(childComplexity int) int
-		Slug                    func(childComplexity int) int
-		SubEvent                func(childComplexity int) int
-		Tags                    func(childComplexity int) int
-		URL                     func(childComplexity int) int
-		Upcs                    func(childComplexity int) int
+		AlbumNumber       func(childComplexity int) int
+		Circles           func(childComplexity int) int
+		ConsignmentShops  func(childComplexity int) int
+		Credit            func(childComplexity int) int
+		Currency          func(childComplexity int) int
+		DistributionUrls  func(childComplexity int) int
+		Event             func(childComplexity int) int
+		EventPrice        func(childComplexity int) int
+		Genres            func(childComplexity int) int
+		ID                func(childComplexity int) int
+		Introduction      func(childComplexity int) int
+		Name              func(childComplexity int) int
+		NameReading       func(childComplexity int) int
+		ReleaseCircleName func(childComplexity int) int
+		ReleaseDate       func(childComplexity int) int
+		SearchEnabled     func(childComplexity int) int
+		Slug              func(childComplexity int) int
+		SubEvent          func(childComplexity int) int
+		Tags              func(childComplexity int) int
+		URL               func(childComplexity int) int
+		Upcs              func(childComplexity int) int
 	}
 
 	AlbumDistributionServiceUrl struct {
@@ -147,14 +147,14 @@ type ComplexityRoot struct {
 		Description func(childComplexity int) int
 		DisplayName func(childComplexity int) int
 		EndDate     func(childComplexity int) int
-		EventSeries func(childComplexity int) int
-		EventStatus func(childComplexity int) int
 		Format      func(childComplexity int) int
 		ID          func(childComplexity int) int
 		Name        func(childComplexity int) int
 		RegionCode  func(childComplexity int) int
+		Series      func(childComplexity int) int
 		Slug        func(childComplexity int) int
 		StartDate   func(childComplexity int) int
+		Status      func(childComplexity int) int
 		SubEvents   func(childComplexity int) int
 		TwitterURL  func(childComplexity int) int
 		URL         func(childComplexity int) int
@@ -180,15 +180,15 @@ type ComplexityRoot struct {
 	}
 
 	OriginalSong struct {
-		Arranger                func(childComplexity int) int
-		Composer                func(childComplexity int) int
-		DistributionServiceURLs func(childComplexity int) int
-		ID                      func(childComplexity int) int
-		IsOriginal              func(childComplexity int) int
-		Name                    func(childComplexity int) int
-		Product                 func(childComplexity int) int
-		SourceID                func(childComplexity int) int
-		TrackNumber             func(childComplexity int) int
+		Arranger         func(childComplexity int) int
+		Composer         func(childComplexity int) int
+		DistributionUrls func(childComplexity int) int
+		ID               func(childComplexity int) int
+		IsOriginal       func(childComplexity int) int
+		Name             func(childComplexity int) int
+		Product          func(childComplexity int) int
+		SourceID         func(childComplexity int) int
+		TrackNumber      func(childComplexity int) int
 	}
 
 	OriginalSongDistributionServiceURL struct {
@@ -199,13 +199,13 @@ type ComplexityRoot struct {
 	}
 
 	Product struct {
-		DistributionServiceURLs func(childComplexity int) int
-		ID                      func(childComplexity int) int
-		Name                    func(childComplexity int) int
-		OriginalSongs           func(childComplexity int) int
-		ProductType             func(childComplexity int) int
-		SeriesNumber            func(childComplexity int) int
-		ShortName               func(childComplexity int) int
+		DistributionUrls func(childComplexity int) int
+		ID               func(childComplexity int) int
+		Name             func(childComplexity int) int
+		OriginalSongs    func(childComplexity int) int
+		ProductType      func(childComplexity int) int
+		SeriesNumber     func(childComplexity int) int
+		ShortName        func(childComplexity int) int
 	}
 
 	ProductDistributionServiceURL struct {
@@ -235,37 +235,37 @@ type ComplexityRoot struct {
 	}
 
 	Song struct {
-		Album                   func(childComplexity int) int
-		ArrangeCircles          func(childComplexity int) int
-		Arrangers               func(childComplexity int) int
-		Bpm                     func(childComplexity int) int
-		Circle                  func(childComplexity int) int
-		Circles                 func(childComplexity int) int
-		Composers               func(childComplexity int) int
-		Description             func(childComplexity int) int
-		DiscNumber              func(childComplexity int) int
-		DisplayArranger         func(childComplexity int) int
-		DisplayComposer         func(childComplexity int) int
-		DisplayLyricist         func(childComplexity int) int
-		DisplayOriginalSong     func(childComplexity int) int
-		DisplayRearranger       func(childComplexity int) int
-		DisplayVocalist         func(childComplexity int) int
-		DistributionServiceUrls func(childComplexity int) int
-		Genres                  func(childComplexity int) int
-		ID                      func(childComplexity int) int
-		Isrcs                   func(childComplexity int) int
-		Length                  func(childComplexity int) int
-		Lyricists               func(childComplexity int) int
-		Name                    func(childComplexity int) int
-		NameReading             func(childComplexity int) int
-		OriginalSongs           func(childComplexity int) int
-		Rearrangers             func(childComplexity int) int
-		ReleaseDate             func(childComplexity int) int
-		SearchEnabled           func(childComplexity int) int
-		Slug                    func(childComplexity int) int
-		Tags                    func(childComplexity int) int
-		TrackNumber             func(childComplexity int) int
-		Vocalists               func(childComplexity int) int
+		Album               func(childComplexity int) int
+		ArrangeCircles      func(childComplexity int) int
+		Arrangers           func(childComplexity int) int
+		Bpm                 func(childComplexity int) int
+		Circle              func(childComplexity int) int
+		Circles             func(childComplexity int) int
+		Composers           func(childComplexity int) int
+		Description         func(childComplexity int) int
+		DiscNumber          func(childComplexity int) int
+		DisplayArranger     func(childComplexity int) int
+		DisplayComposer     func(childComplexity int) int
+		DisplayLyricist     func(childComplexity int) int
+		DisplayOriginalSong func(childComplexity int) int
+		DisplayRearranger   func(childComplexity int) int
+		DisplayVocalist     func(childComplexity int) int
+		DistributionUrls    func(childComplexity int) int
+		Genres              func(childComplexity int) int
+		ID                  func(childComplexity int) int
+		Isrcs               func(childComplexity int) int
+		Length              func(childComplexity int) int
+		Lyricists           func(childComplexity int) int
+		Name                func(childComplexity int) int
+		NameReading         func(childComplexity int) int
+		OriginalSongs       func(childComplexity int) int
+		Rearrangers         func(childComplexity int) int
+		ReleaseDate         func(childComplexity int) int
+		SearchEnabled       func(childComplexity int) int
+		Slug                func(childComplexity int) int
+		Tags                func(childComplexity int) int
+		TrackNumber         func(childComplexity int) int
+		Vocalists           func(childComplexity int) int
 	}
 
 	SongDistributionServiceUrl struct {
@@ -294,10 +294,10 @@ type ComplexityRoot struct {
 		Description func(childComplexity int) int
 		DisplayName func(childComplexity int) int
 		Event       func(childComplexity int) int
-		EventStatus func(childComplexity int) int
 		ID          func(childComplexity int) int
 		Name        func(childComplexity int) int
 		Slug        func(childComplexity int) int
+		Status      func(childComplexity int) int
 	}
 
 	Tag struct {
@@ -382,12 +382,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Album.Currency(childComplexity), true
 
-	case "Album.distributionServiceUrls":
-		if e.complexity.Album.DistributionServiceUrls == nil {
+	case "Album.distributionUrls":
+		if e.complexity.Album.DistributionUrls == nil {
 			break
 		}
 
-		return e.complexity.Album.DistributionServiceUrls(childComplexity), true
+		return e.complexity.Album.DistributionUrls(childComplexity), true
 
 	case "Album.event":
 		if e.complexity.Album.Event == nil {
@@ -879,20 +879,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Event.EndDate(childComplexity), true
 
-	case "Event.eventSeries":
-		if e.complexity.Event.EventSeries == nil {
-			break
-		}
-
-		return e.complexity.Event.EventSeries(childComplexity), true
-
-	case "Event.eventStatus":
-		if e.complexity.Event.EventStatus == nil {
-			break
-		}
-
-		return e.complexity.Event.EventStatus(childComplexity), true
-
 	case "Event.format":
 		if e.complexity.Event.Format == nil {
 			break
@@ -921,6 +907,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Event.RegionCode(childComplexity), true
 
+	case "Event.series":
+		if e.complexity.Event.Series == nil {
+			break
+		}
+
+		return e.complexity.Event.Series(childComplexity), true
+
 	case "Event.slug":
 		if e.complexity.Event.Slug == nil {
 			break
@@ -934,6 +927,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Event.StartDate(childComplexity), true
+
+	case "Event.status":
+		if e.complexity.Event.Status == nil {
+			break
+		}
+
+		return e.complexity.Event.Status(childComplexity), true
 
 	case "Event.subEvents":
 		if e.complexity.Event.SubEvents == nil {
@@ -1040,12 +1040,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.OriginalSong.Composer(childComplexity), true
 
-	case "OriginalSong.distributionServiceURLs":
-		if e.complexity.OriginalSong.DistributionServiceURLs == nil {
+	case "OriginalSong.distributionUrls":
+		if e.complexity.OriginalSong.DistributionUrls == nil {
 			break
 		}
 
-		return e.complexity.OriginalSong.DistributionServiceURLs(childComplexity), true
+		return e.complexity.OriginalSong.DistributionUrls(childComplexity), true
 
 	case "OriginalSong.id":
 		if e.complexity.OriginalSong.ID == nil {
@@ -1117,12 +1117,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.OriginalSongDistributionServiceURL.URL(childComplexity), true
 
-	case "Product.distributionServiceURLs":
-		if e.complexity.Product.DistributionServiceURLs == nil {
+	case "Product.distributionUrls":
+		if e.complexity.Product.DistributionUrls == nil {
 			break
 		}
 
-		return e.complexity.Product.DistributionServiceURLs(childComplexity), true
+		return e.complexity.Product.DistributionUrls(childComplexity), true
 
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
@@ -1456,12 +1456,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Song.DisplayVocalist(childComplexity), true
 
-	case "Song.distributionServiceUrls":
-		if e.complexity.Song.DistributionServiceUrls == nil {
+	case "Song.distributionUrls":
+		if e.complexity.Song.DistributionUrls == nil {
 			break
 		}
 
-		return e.complexity.Song.DistributionServiceUrls(childComplexity), true
+		return e.complexity.Song.DistributionUrls(childComplexity), true
 
 	case "Song.genres":
 		if e.complexity.Song.Genres == nil {
@@ -1680,13 +1680,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SubEvent.Event(childComplexity), true
 
-	case "SubEvent.eventStatus":
-		if e.complexity.SubEvent.EventStatus == nil {
-			break
-		}
-
-		return e.complexity.SubEvent.EventStatus(childComplexity), true
-
 	case "SubEvent.id":
 		if e.complexity.SubEvent.ID == nil {
 			break
@@ -1707,6 +1700,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.SubEvent.Slug(childComplexity), true
+
+	case "SubEvent.status":
+		if e.complexity.SubEvent.Status == nil {
+			break
+		}
+
+		return e.complexity.SubEvent.Status(childComplexity), true
 
 	case "Tag.id":
 		if e.complexity.Tag.ID == nil {
@@ -1827,7 +1827,7 @@ type Product {
   productType: ProductType!
   seriesNumber: Float!
   originalSongs: [OriginalSong!]!
-  distributionServiceURLs: [ProductDistributionServiceURL!]!
+  distributionUrls: [ProductDistributionServiceURL!]!
 }
 
 # original_songs tableの定義
@@ -1840,7 +1840,7 @@ type OriginalSong {
   trackNumber: Int!
   isOriginal: Boolean!
   sourceId: String!
-  distributionServiceURLs: [OriginalSongDistributionServiceURL!]!
+  distributionUrls: [OriginalSongDistributionServiceURL!]!
 }
 
 # distribution_service enum定義
@@ -1900,13 +1900,13 @@ type EventSeries {
 # events tableの定義
 type Event {
   id: ID!
-  eventSeries: EventSeries!
+  series: EventSeries!
   name: String!
   displayName: String!
   slug: String!
   startDate: Date
   endDate: Date
-  eventStatus: EventStatus!
+  status: EventStatus!
   format: EventFormat!
   regionCode: String!
   address: String!
@@ -1924,7 +1924,7 @@ type SubEvent {
   displayName: String!
   slug: String!
   date: Date
-  eventStatus: EventStatus!
+  status: EventStatus!
   description: String!
 }
 
@@ -1989,7 +1989,7 @@ type Album {
   url: String!
   circles: [Circle!]!
   consignmentShops: [ConsignmentShop!]!
-  distributionServiceUrls: [AlbumDistributionServiceUrl!]!
+  distributionUrls: [AlbumDistributionServiceUrl!]!
   upcs: [Upc!]!
   genres: [AlbumGenre!]!
   tags: [AlbumTag!]!
@@ -2051,7 +2051,7 @@ type Song {
   displayLyricist: String!
   displayVocalist: String!
   displayOriginalSong: String!
-  distributionServiceUrls: [SongDistributionServiceUrl!]!
+  distributionUrls: [SongDistributionServiceUrl!]!
   isrcs: [Isrc!]!
   arrangeCircles: [Circle!]!
   composers: [Artist!]!
@@ -2652,8 +2652,8 @@ func (ec *executionContext) fieldContext_Album_event(ctx context.Context, field 
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Event_id(ctx, field)
-			case "eventSeries":
-				return ec.fieldContext_Event_eventSeries(ctx, field)
+			case "series":
+				return ec.fieldContext_Event_series(ctx, field)
 			case "name":
 				return ec.fieldContext_Event_name(ctx, field)
 			case "displayName":
@@ -2664,8 +2664,8 @@ func (ec *executionContext) fieldContext_Album_event(ctx context.Context, field 
 				return ec.fieldContext_Event_startDate(ctx, field)
 			case "endDate":
 				return ec.fieldContext_Event_endDate(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_Event_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_Event_status(ctx, field)
 			case "format":
 				return ec.fieldContext_Event_format(ctx, field)
 			case "regionCode":
@@ -2735,8 +2735,8 @@ func (ec *executionContext) fieldContext_Album_subEvent(ctx context.Context, fie
 				return ec.fieldContext_SubEvent_slug(ctx, field)
 			case "date":
 				return ec.fieldContext_SubEvent_date(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_SubEvent_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_SubEvent_status(ctx, field)
 			case "description":
 				return ec.fieldContext_SubEvent_description(ctx, field)
 			}
@@ -3183,8 +3183,8 @@ func (ec *executionContext) fieldContext_Album_consignmentShops(ctx context.Cont
 	return fc, nil
 }
 
-func (ec *executionContext) _Album_distributionServiceUrls(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+func (ec *executionContext) _Album_distributionUrls(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_distributionUrls(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3197,7 +3197,7 @@ func (ec *executionContext) _Album_distributionServiceUrls(ctx context.Context, 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.DistributionServiceUrls, nil
+		return obj.DistributionUrls, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -3214,7 +3214,7 @@ func (ec *executionContext) _Album_distributionServiceUrls(ctx context.Context, 
 	return ec.marshalNAlbumDistributionServiceUrl2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbumDistributionServiceURLᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Album_distributionServiceUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Album_distributionUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Album",
 		Field:      field,
@@ -3514,8 +3514,8 @@ func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_album(ctx c
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -3734,8 +3734,8 @@ func (ec *executionContext) fieldContext_AlbumGenre_album(ctx context.Context, f
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -3960,8 +3960,8 @@ func (ec *executionContext) fieldContext_AlbumTag_album(ctx context.Context, fie
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -5686,8 +5686,8 @@ func (ec *executionContext) fieldContext_ConsignmentShop_album(ctx context.Conte
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -5965,8 +5965,8 @@ func (ec *executionContext) fieldContext_Event_id(ctx context.Context, field gra
 	return fc, nil
 }
 
-func (ec *executionContext) _Event_eventSeries(ctx context.Context, field graphql.CollectedField, obj *model.Event) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Event_eventSeries(ctx, field)
+func (ec *executionContext) _Event_series(ctx context.Context, field graphql.CollectedField, obj *model.Event) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Event_series(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -5979,7 +5979,7 @@ func (ec *executionContext) _Event_eventSeries(ctx context.Context, field graphq
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.EventSeries, nil
+		return obj.Series, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -5996,7 +5996,7 @@ func (ec *executionContext) _Event_eventSeries(ctx context.Context, field graphq
 	return ec.marshalNEventSeries2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventSeries(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Event_eventSeries(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Event_series(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Event",
 		Field:      field,
@@ -6235,8 +6235,8 @@ func (ec *executionContext) fieldContext_Event_endDate(ctx context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _Event_eventStatus(ctx context.Context, field graphql.CollectedField, obj *model.Event) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Event_eventStatus(ctx, field)
+func (ec *executionContext) _Event_status(ctx context.Context, field graphql.CollectedField, obj *model.Event) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Event_status(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -6249,7 +6249,7 @@ func (ec *executionContext) _Event_eventStatus(ctx context.Context, field graphq
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.EventStatus, nil
+		return obj.Status, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -6266,7 +6266,7 @@ func (ec *executionContext) _Event_eventStatus(ctx context.Context, field graphq
 	return ec.marshalNEventStatus2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventStatus(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Event_eventStatus(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Event_status(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Event",
 		Field:      field,
@@ -6594,8 +6594,8 @@ func (ec *executionContext) fieldContext_Event_subEvents(ctx context.Context, fi
 				return ec.fieldContext_SubEvent_slug(ctx, field)
 			case "date":
 				return ec.fieldContext_SubEvent_date(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_SubEvent_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_SubEvent_status(ctx, field)
 			case "description":
 				return ec.fieldContext_SubEvent_description(ctx, field)
 			}
@@ -6822,8 +6822,8 @@ func (ec *executionContext) fieldContext_EventSeries_events(ctx context.Context,
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Event_id(ctx, field)
-			case "eventSeries":
-				return ec.fieldContext_Event_eventSeries(ctx, field)
+			case "series":
+				return ec.fieldContext_Event_series(ctx, field)
 			case "name":
 				return ec.fieldContext_Event_name(ctx, field)
 			case "displayName":
@@ -6834,8 +6834,8 @@ func (ec *executionContext) fieldContext_EventSeries_events(ctx context.Context,
 				return ec.fieldContext_Event_startDate(ctx, field)
 			case "endDate":
 				return ec.fieldContext_Event_endDate(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_Event_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_Event_status(ctx, field)
 			case "format":
 				return ec.fieldContext_Event_format(ctx, field)
 			case "regionCode":
@@ -7066,8 +7066,8 @@ func (ec *executionContext) fieldContext_Isrc_song(ctx context.Context, field gr
 				return ec.fieldContext_Song_displayVocalist(ctx, field)
 			case "displayOriginalSong":
 				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Song_distributionUrls(ctx, field)
 			case "isrcs":
 				return ec.fieldContext_Song_isrcs(ctx, field)
 			case "arrangeCircles":
@@ -7236,8 +7236,8 @@ func (ec *executionContext) fieldContext_OriginalSong_product(ctx context.Contex
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Product_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -7509,8 +7509,8 @@ func (ec *executionContext) fieldContext_OriginalSong_sourceId(ctx context.Conte
 	return fc, nil
 }
 
-func (ec *executionContext) _OriginalSong_distributionServiceURLs(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSong) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+func (ec *executionContext) _OriginalSong_distributionUrls(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSong) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -7523,7 +7523,7 @@ func (ec *executionContext) _OriginalSong_distributionServiceURLs(ctx context.Co
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.DistributionServiceURLs, nil
+		return obj.DistributionUrls, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -7540,7 +7540,7 @@ func (ec *executionContext) _OriginalSong_distributionServiceURLs(ctx context.Co
 	return ec.marshalNOriginalSongDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSongDistributionServiceURLᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_OriginalSong_distributionServiceURLs(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_OriginalSong_distributionUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "OriginalSong",
 		Field:      field,
@@ -7662,8 +7662,8 @@ func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_orig
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -8034,8 +8034,8 @@ func (ec *executionContext) fieldContext_Product_originalSongs(ctx context.Conte
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -8043,8 +8043,8 @@ func (ec *executionContext) fieldContext_Product_originalSongs(ctx context.Conte
 	return fc, nil
 }
 
-func (ec *executionContext) _Product_distributionServiceURLs(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+func (ec *executionContext) _Product_distributionUrls(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_distributionUrls(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -8057,7 +8057,7 @@ func (ec *executionContext) _Product_distributionServiceURLs(ctx context.Context
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.DistributionServiceURLs, nil
+		return obj.DistributionUrls, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -8074,7 +8074,7 @@ func (ec *executionContext) _Product_distributionServiceURLs(ctx context.Context
 	return ec.marshalNProductDistributionServiceURL2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductDistributionServiceURLᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Product_distributionServiceURLs(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Product_distributionUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Product",
 		Field:      field,
@@ -8192,8 +8192,8 @@ func (ec *executionContext) fieldContext_ProductDistributionServiceURL_product(c
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Product_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -8337,8 +8337,8 @@ func (ec *executionContext) fieldContext_Query_getProductById(ctx context.Contex
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Product_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -8409,8 +8409,8 @@ func (ec *executionContext) fieldContext_Query_getOriginalSongById(ctx context.C
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -8480,8 +8480,8 @@ func (ec *executionContext) fieldContext_Query_getProducts(ctx context.Context, 
 				return ec.fieldContext_Product_seriesNumber(ctx, field)
 			case "originalSongs":
 				return ec.fieldContext_Product_originalSongs(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_Product_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Product_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -8544,8 +8544,8 @@ func (ec *executionContext) fieldContext_Query_getOriginalSongs(ctx context.Cont
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -8655,8 +8655,8 @@ func (ec *executionContext) fieldContext_Query_getEventById(ctx context.Context,
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Event_id(ctx, field)
-			case "eventSeries":
-				return ec.fieldContext_Event_eventSeries(ctx, field)
+			case "series":
+				return ec.fieldContext_Event_series(ctx, field)
 			case "name":
 				return ec.fieldContext_Event_name(ctx, field)
 			case "displayName":
@@ -8667,8 +8667,8 @@ func (ec *executionContext) fieldContext_Query_getEventById(ctx context.Context,
 				return ec.fieldContext_Event_startDate(ctx, field)
 			case "endDate":
 				return ec.fieldContext_Event_endDate(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_Event_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_Event_status(ctx, field)
 			case "format":
 				return ec.fieldContext_Event_format(ctx, field)
 			case "regionCode":
@@ -8749,8 +8749,8 @@ func (ec *executionContext) fieldContext_Query_getSubEventById(ctx context.Conte
 				return ec.fieldContext_SubEvent_slug(ctx, field)
 			case "date":
 				return ec.fieldContext_SubEvent_date(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_SubEvent_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_SubEvent_status(ctx, field)
 			case "description":
 				return ec.fieldContext_SubEvent_description(ctx, field)
 			}
@@ -9193,8 +9193,8 @@ func (ec *executionContext) fieldContext_Query_getAlbumById(ctx context.Context,
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -9293,8 +9293,8 @@ func (ec *executionContext) fieldContext_Query_getSongById(ctx context.Context, 
 				return ec.fieldContext_Song_displayVocalist(ctx, field)
 			case "displayOriginalSong":
 				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Song_distributionUrls(ctx, field)
 			case "isrcs":
 				return ec.fieldContext_Song_isrcs(ctx, field)
 			case "arrangeCircles":
@@ -9752,8 +9752,8 @@ func (ec *executionContext) fieldContext_Song_album(ctx context.Context, field g
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -10462,8 +10462,8 @@ func (ec *executionContext) fieldContext_Song_displayOriginalSong(ctx context.Co
 	return fc, nil
 }
 
-func (ec *executionContext) _Song_distributionServiceUrls(ctx context.Context, field graphql.CollectedField, obj *model.Song) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+func (ec *executionContext) _Song_distributionUrls(ctx context.Context, field graphql.CollectedField, obj *model.Song) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Song_distributionUrls(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -10476,7 +10476,7 @@ func (ec *executionContext) _Song_distributionServiceUrls(ctx context.Context, f
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.DistributionServiceUrls, nil
+		return obj.DistributionUrls, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10493,7 +10493,7 @@ func (ec *executionContext) _Song_distributionServiceUrls(ctx context.Context, f
 	return ec.marshalNSongDistributionServiceUrl2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSongDistributionServiceURLᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Song_distributionServiceUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Song_distributionUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Song",
 		Field:      field,
@@ -11035,8 +11035,8 @@ func (ec *executionContext) fieldContext_Song_originalSongs(ctx context.Context,
 				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
 			case "sourceId":
 				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionServiceURLs":
-				return ec.fieldContext_OriginalSong_distributionServiceURLs(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
@@ -11345,8 +11345,8 @@ func (ec *executionContext) fieldContext_SongDistributionServiceUrl_song(ctx con
 				return ec.fieldContext_Song_displayVocalist(ctx, field)
 			case "displayOriginalSong":
 				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Song_distributionUrls(ctx, field)
 			case "isrcs":
 				return ec.fieldContext_Song_isrcs(ctx, field)
 			case "arrangeCircles":
@@ -11585,8 +11585,8 @@ func (ec *executionContext) fieldContext_SongGenre_song(ctx context.Context, fie
 				return ec.fieldContext_Song_displayVocalist(ctx, field)
 			case "displayOriginalSong":
 				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Song_distributionUrls(ctx, field)
 			case "isrcs":
 				return ec.fieldContext_Song_isrcs(ctx, field)
 			case "arrangeCircles":
@@ -11831,8 +11831,8 @@ func (ec *executionContext) fieldContext_SongTag_song(ctx context.Context, field
 				return ec.fieldContext_Song_displayVocalist(ctx, field)
 			case "displayOriginalSong":
 				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Song_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Song_distributionUrls(ctx, field)
 			case "isrcs":
 				return ec.fieldContext_Song_isrcs(ctx, field)
 			case "arrangeCircles":
@@ -12043,8 +12043,8 @@ func (ec *executionContext) fieldContext_SubEvent_event(ctx context.Context, fie
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Event_id(ctx, field)
-			case "eventSeries":
-				return ec.fieldContext_Event_eventSeries(ctx, field)
+			case "series":
+				return ec.fieldContext_Event_series(ctx, field)
 			case "name":
 				return ec.fieldContext_Event_name(ctx, field)
 			case "displayName":
@@ -12055,8 +12055,8 @@ func (ec *executionContext) fieldContext_SubEvent_event(ctx context.Context, fie
 				return ec.fieldContext_Event_startDate(ctx, field)
 			case "endDate":
 				return ec.fieldContext_Event_endDate(ctx, field)
-			case "eventStatus":
-				return ec.fieldContext_Event_eventStatus(ctx, field)
+			case "status":
+				return ec.fieldContext_Event_status(ctx, field)
 			case "format":
 				return ec.fieldContext_Event_format(ctx, field)
 			case "regionCode":
@@ -12251,8 +12251,8 @@ func (ec *executionContext) fieldContext_SubEvent_date(ctx context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _SubEvent_eventStatus(ctx context.Context, field graphql.CollectedField, obj *model.SubEvent) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SubEvent_eventStatus(ctx, field)
+func (ec *executionContext) _SubEvent_status(ctx context.Context, field graphql.CollectedField, obj *model.SubEvent) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_SubEvent_status(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -12265,7 +12265,7 @@ func (ec *executionContext) _SubEvent_eventStatus(ctx context.Context, field gra
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.EventStatus, nil
+		return obj.Status, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12282,7 +12282,7 @@ func (ec *executionContext) _SubEvent_eventStatus(ctx context.Context, field gra
 	return ec.marshalNEventStatus2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventStatus(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_SubEvent_eventStatus(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_SubEvent_status(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "SubEvent",
 		Field:      field,
@@ -12588,8 +12588,8 @@ func (ec *executionContext) fieldContext_Upc_album(ctx context.Context, field gr
 				return ec.fieldContext_Album_circles(ctx, field)
 			case "consignmentShops":
 				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionServiceUrls":
-				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "distributionUrls":
+				return ec.fieldContext_Album_distributionUrls(ctx, field)
 			case "upcs":
 				return ec.fieldContext_Album_upcs(ctx, field)
 			case "genres":
@@ -14545,9 +14545,9 @@ func (ec *executionContext) _Album(ctx context.Context, sel ast.SelectionSet, ob
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "distributionServiceUrls":
+		case "distributionUrls":
 
-			out.Values[i] = ec._Album_distributionServiceUrls(ctx, field, obj)
+			out.Values[i] = ec._Album_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -15126,9 +15126,9 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "eventSeries":
+		case "series":
 
-			out.Values[i] = ec._Event_eventSeries(ctx, field, obj)
+			out.Values[i] = ec._Event_series(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -15162,9 +15162,9 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 
 			out.Values[i] = ec._Event_endDate(ctx, field, obj)
 
-		case "eventStatus":
+		case "status":
 
-			out.Values[i] = ec._Event_eventStatus(ctx, field, obj)
+			out.Values[i] = ec._Event_status(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -15428,9 +15428,9 @@ func (ec *executionContext) _OriginalSong(ctx context.Context, sel ast.Selection
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "distributionServiceURLs":
+		case "distributionUrls":
 
-			out.Values[i] = ec._OriginalSong_distributionServiceURLs(ctx, field, obj)
+			out.Values[i] = ec._OriginalSong_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -15547,9 +15547,9 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "distributionServiceURLs":
+		case "distributionUrls":
 
-			out.Values[i] = ec._Product_distributionServiceURLs(ctx, field, obj)
+			out.Values[i] = ec._Product_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -16128,9 +16128,9 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "distributionServiceUrls":
+		case "distributionUrls":
 
-			out.Values[i] = ec._Song_distributionServiceUrls(ctx, field, obj)
+			out.Values[i] = ec._Song_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -16419,9 +16419,9 @@ func (ec *executionContext) _SubEvent(ctx context.Context, sel ast.SelectionSet,
 
 			out.Values[i] = ec._SubEvent_date(ctx, field, obj)
 
-		case "eventStatus":
+		case "status":
 
-			out.Values[i] = ec._SubEvent_eventStatus(ctx, field, obj)
+			out.Values[i] = ec._SubEvent_status(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++

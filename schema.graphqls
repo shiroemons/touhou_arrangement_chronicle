@@ -23,7 +23,7 @@ type Product {
   productType: ProductType!
   seriesNumber: Float!
   originalSongs: [OriginalSong!]!
-  distributionServiceURLs: [ProductDistributionServiceURL!]!
+  distributionUrls: [ProductDistributionServiceURL!]!
 }
 
 # original_songs tableの定義
@@ -36,7 +36,7 @@ type OriginalSong {
   trackNumber: Int!
   isOriginal: Boolean!
   sourceId: String!
-  distributionServiceURLs: [OriginalSongDistributionServiceURL!]!
+  distributionUrls: [OriginalSongDistributionServiceURL!]!
 }
 
 # distribution_service enum定義
@@ -96,13 +96,13 @@ type EventSeries {
 # events tableの定義
 type Event {
   id: ID!
-  eventSeries: EventSeries!
+  series: EventSeries!
   name: String!
   displayName: String!
   slug: String!
   startDate: Date
   endDate: Date
-  eventStatus: EventStatus!
+  status: EventStatus!
   format: EventFormat!
   regionCode: String!
   address: String!
@@ -120,7 +120,7 @@ type SubEvent {
   displayName: String!
   slug: String!
   date: Date
-  eventStatus: EventStatus!
+  status: EventStatus!
   description: String!
 }
 
@@ -185,7 +185,7 @@ type Album {
   url: String!
   circles: [Circle!]!
   consignmentShops: [ConsignmentShop!]!
-  distributionServiceUrls: [AlbumDistributionServiceUrl!]!
+  distributionUrls: [AlbumDistributionServiceUrl!]!
   upcs: [Upc!]!
   genres: [AlbumGenre!]!
   tags: [AlbumTag!]!
@@ -247,7 +247,7 @@ type Song {
   displayLyricist: String!
   displayVocalist: String!
   displayOriginalSong: String!
-  distributionServiceUrls: [SongDistributionServiceUrl!]!
+  distributionUrls: [SongDistributionServiceUrl!]!
   isrcs: [Isrc!]!
   arrangeCircles: [Circle!]!
   composers: [Artist!]!
