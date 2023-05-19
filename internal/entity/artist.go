@@ -5,8 +5,6 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 )
 
 type Artist struct {
@@ -33,7 +31,7 @@ func (e *Artist) BeforeAppendModel(_ context.Context, query bun.Query) error {
 	switch query.(type) {
 	case *bun.InsertQuery:
 		if e.Name != "" {
-			ilType, ilDetail, err := domain.InitialLetter(e.Name)
+			ilType, ilDetail, err := InitialLetter(e.Name)
 			if err != nil {
 				return err
 			}
@@ -42,7 +40,7 @@ func (e *Artist) BeforeAppendModel(_ context.Context, query bun.Query) error {
 		}
 	case *bun.UpdateQuery:
 		if e.Name != "" {
-			ilType, ilDetail, err := domain.InitialLetter(e.Name)
+			ilType, ilDetail, err := InitialLetter(e.Name)
 			if err != nil {
 				return err
 			}
