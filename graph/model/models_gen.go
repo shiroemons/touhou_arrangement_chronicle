@@ -8,6 +8,35 @@ import (
 	"strconv"
 )
 
+type Album struct {
+	ID                      string                         `json:"id"`
+	Name                    string                         `json:"name"`
+	NameReading             string                         `json:"nameReading"`
+	Slug                    string                         `json:"slug"`
+	ReleaseCircleName       string                         `json:"releaseCircleName"`
+	ReleaseDate             *string                        `json:"releaseDate,omitempty"`
+	Event                   *Event                         `json:"event,omitempty"`
+	SubEvent                *SubEvent                      `json:"subEvent,omitempty"`
+	SearchEnabled           bool                           `json:"searchEnabled"`
+	AlbumNumber             string                         `json:"albumNumber"`
+	EventPrice              *float64                       `json:"eventPrice,omitempty"`
+	Currency                string                         `json:"currency"`
+	Credit                  string                         `json:"credit"`
+	Introduction            string                         `json:"introduction"`
+	URL                     string                         `json:"url"`
+	Circles                 []*Circle                      `json:"circles"`
+	ConsignmentShops        []*ConsignmentShop             `json:"consignmentShops"`
+	DistributionServiceUrls []*AlbumDistributionServiceURL `json:"distributionServiceUrls"`
+	Upcs                    []*Upc                         `json:"upcs"`
+}
+
+type AlbumDistributionServiceURL struct {
+	ID      string              `json:"id"`
+	Album   *Album              `json:"album"`
+	Service DistributionService `json:"service"`
+	URL     string              `json:"url"`
+}
+
 type Artist struct {
 	ID                  string            `json:"id"`
 	Name                string            `json:"name"`
@@ -34,6 +63,16 @@ type Circle struct {
 	BlogURL             string            `json:"blogUrl"`
 	TwitterURL          string            `json:"twitterUrl"`
 	YoutubeChannelURL   string            `json:"youtubeChannelUrl"`
+}
+
+type ConsignmentShop struct {
+	ID          string  `json:"id"`
+	Album       *Album  `json:"album"`
+	Shop        Shop    `json:"shop"`
+	URL         string  `json:"url"`
+	TaxIncluded bool    `json:"taxIncluded"`
+	ShopPrice   float64 `json:"shopPrice"`
+	Currency    string  `json:"currency"`
 }
 
 type Event struct {
@@ -107,6 +146,12 @@ type SubEvent struct {
 	Date        *string     `json:"date,omitempty"`
 	EventStatus EventStatus `json:"eventStatus"`
 	Description string      `json:"description"`
+}
+
+type Upc struct {
+	ID    string `json:"id"`
+	Album *Album `json:"album"`
+	Upc   string `json:"upc"`
 }
 
 type DistributionService string
@@ -353,5 +398,62 @@ func (e *ProductType) UnmarshalGQL(v interface{}) error {
 }
 
 func (e ProductType) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type Shop string
+
+const (
+	ShopAkibaHobby    Shop = "AKIBA_HOBBY"
+	ShopAkibaoo       Shop = "AKIBAOO"
+	ShopAnimate       Shop = "ANIMATE"
+	ShopBookmate      Shop = "BOOKMATE"
+	ShopBooth         Shop = "BOOTH"
+	ShopDiverseDirect Shop = "DIVERSE_DIRECT"
+	ShopGrep          Shop = "GREP"
+	ShopMelonbooks    Shop = "MELONBOOKS"
+	ShopTanocstore    Shop = "TANOCSTORE"
+	ShopToranoana     Shop = "TORANOANA"
+)
+
+var AllShop = []Shop{
+	ShopAkibaHobby,
+	ShopAkibaoo,
+	ShopAnimate,
+	ShopBookmate,
+	ShopBooth,
+	ShopDiverseDirect,
+	ShopGrep,
+	ShopMelonbooks,
+	ShopTanocstore,
+	ShopToranoana,
+}
+
+func (e Shop) IsValid() bool {
+	switch e {
+	case ShopAkibaHobby, ShopAkibaoo, ShopAnimate, ShopBookmate, ShopBooth, ShopDiverseDirect, ShopGrep, ShopMelonbooks, ShopTanocstore, ShopToranoana:
+		return true
+	}
+	return false
+}
+
+func (e Shop) String() string {
+	return string(e)
+}
+
+func (e *Shop) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = Shop(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid Shop", str)
+	}
+	return nil
+}
+
+func (e Shop) MarshalGQL(w io.Writer) {
 	fmt.Fprint(w, strconv.Quote(e.String()))
 }

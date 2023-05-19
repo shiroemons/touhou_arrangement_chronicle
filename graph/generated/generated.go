@@ -43,6 +43,35 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
+	Album struct {
+		AlbumNumber             func(childComplexity int) int
+		Circles                 func(childComplexity int) int
+		ConsignmentShops        func(childComplexity int) int
+		Credit                  func(childComplexity int) int
+		Currency                func(childComplexity int) int
+		DistributionServiceUrls func(childComplexity int) int
+		Event                   func(childComplexity int) int
+		EventPrice              func(childComplexity int) int
+		ID                      func(childComplexity int) int
+		Introduction            func(childComplexity int) int
+		Name                    func(childComplexity int) int
+		NameReading             func(childComplexity int) int
+		ReleaseCircleName       func(childComplexity int) int
+		ReleaseDate             func(childComplexity int) int
+		SearchEnabled           func(childComplexity int) int
+		Slug                    func(childComplexity int) int
+		SubEvent                func(childComplexity int) int
+		URL                     func(childComplexity int) int
+		Upcs                    func(childComplexity int) int
+	}
+
+	AlbumDistributionServiceUrl struct {
+		Album   func(childComplexity int) int
+		ID      func(childComplexity int) int
+		Service func(childComplexity int) int
+		URL     func(childComplexity int) int
+	}
+
 	Artist struct {
 		BlogURL             func(childComplexity int) int
 		Description         func(childComplexity int) int
@@ -69,6 +98,16 @@ type ComplexityRoot struct {
 		TwitterURL          func(childComplexity int) int
 		URL                 func(childComplexity int) int
 		YoutubeChannelURL   func(childComplexity int) int
+	}
+
+	ConsignmentShop struct {
+		Album       func(childComplexity int) int
+		Currency    func(childComplexity int) int
+		ID          func(childComplexity int) int
+		Shop        func(childComplexity int) int
+		ShopPrice   func(childComplexity int) int
+		TaxIncluded func(childComplexity int) int
+		URL         func(childComplexity int) int
 	}
 
 	Event struct {
@@ -134,6 +173,7 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
+		GetAlbumByID        func(childComplexity int, id string) int
 		GetArtistByID       func(childComplexity int, id string) int
 		GetArtists          func(childComplexity int) int
 		GetCircleByID       func(childComplexity int, id string) int
@@ -158,6 +198,12 @@ type ComplexityRoot struct {
 		Name        func(childComplexity int) int
 		Slug        func(childComplexity int) int
 	}
+
+	Upc struct {
+		Album func(childComplexity int) int
+		ID    func(childComplexity int) int
+		Upc   func(childComplexity int) int
+	}
 }
 
 type QueryResolver interface {
@@ -173,6 +219,7 @@ type QueryResolver interface {
 	GetCircleByID(ctx context.Context, id string) (*model.Circle, error)
 	GetArtists(ctx context.Context) ([]*model.Artist, error)
 	GetCircles(ctx context.Context) ([]*model.Circle, error)
+	GetAlbumByID(ctx context.Context, id string) (*model.Album, error)
 }
 
 type executableSchema struct {
@@ -189,6 +236,167 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	ec := executionContext{nil, e}
 	_ = ec
 	switch typeName + "." + field {
+
+	case "Album.albumNumber":
+		if e.complexity.Album.AlbumNumber == nil {
+			break
+		}
+
+		return e.complexity.Album.AlbumNumber(childComplexity), true
+
+	case "Album.circles":
+		if e.complexity.Album.Circles == nil {
+			break
+		}
+
+		return e.complexity.Album.Circles(childComplexity), true
+
+	case "Album.consignmentShops":
+		if e.complexity.Album.ConsignmentShops == nil {
+			break
+		}
+
+		return e.complexity.Album.ConsignmentShops(childComplexity), true
+
+	case "Album.credit":
+		if e.complexity.Album.Credit == nil {
+			break
+		}
+
+		return e.complexity.Album.Credit(childComplexity), true
+
+	case "Album.currency":
+		if e.complexity.Album.Currency == nil {
+			break
+		}
+
+		return e.complexity.Album.Currency(childComplexity), true
+
+	case "Album.distributionServiceUrls":
+		if e.complexity.Album.DistributionServiceUrls == nil {
+			break
+		}
+
+		return e.complexity.Album.DistributionServiceUrls(childComplexity), true
+
+	case "Album.event":
+		if e.complexity.Album.Event == nil {
+			break
+		}
+
+		return e.complexity.Album.Event(childComplexity), true
+
+	case "Album.eventPrice":
+		if e.complexity.Album.EventPrice == nil {
+			break
+		}
+
+		return e.complexity.Album.EventPrice(childComplexity), true
+
+	case "Album.id":
+		if e.complexity.Album.ID == nil {
+			break
+		}
+
+		return e.complexity.Album.ID(childComplexity), true
+
+	case "Album.introduction":
+		if e.complexity.Album.Introduction == nil {
+			break
+		}
+
+		return e.complexity.Album.Introduction(childComplexity), true
+
+	case "Album.name":
+		if e.complexity.Album.Name == nil {
+			break
+		}
+
+		return e.complexity.Album.Name(childComplexity), true
+
+	case "Album.nameReading":
+		if e.complexity.Album.NameReading == nil {
+			break
+		}
+
+		return e.complexity.Album.NameReading(childComplexity), true
+
+	case "Album.releaseCircleName":
+		if e.complexity.Album.ReleaseCircleName == nil {
+			break
+		}
+
+		return e.complexity.Album.ReleaseCircleName(childComplexity), true
+
+	case "Album.releaseDate":
+		if e.complexity.Album.ReleaseDate == nil {
+			break
+		}
+
+		return e.complexity.Album.ReleaseDate(childComplexity), true
+
+	case "Album.searchEnabled":
+		if e.complexity.Album.SearchEnabled == nil {
+			break
+		}
+
+		return e.complexity.Album.SearchEnabled(childComplexity), true
+
+	case "Album.slug":
+		if e.complexity.Album.Slug == nil {
+			break
+		}
+
+		return e.complexity.Album.Slug(childComplexity), true
+
+	case "Album.subEvent":
+		if e.complexity.Album.SubEvent == nil {
+			break
+		}
+
+		return e.complexity.Album.SubEvent(childComplexity), true
+
+	case "Album.url":
+		if e.complexity.Album.URL == nil {
+			break
+		}
+
+		return e.complexity.Album.URL(childComplexity), true
+
+	case "Album.upcs":
+		if e.complexity.Album.Upcs == nil {
+			break
+		}
+
+		return e.complexity.Album.Upcs(childComplexity), true
+
+	case "AlbumDistributionServiceUrl.album":
+		if e.complexity.AlbumDistributionServiceUrl.Album == nil {
+			break
+		}
+
+		return e.complexity.AlbumDistributionServiceUrl.Album(childComplexity), true
+
+	case "AlbumDistributionServiceUrl.id":
+		if e.complexity.AlbumDistributionServiceUrl.ID == nil {
+			break
+		}
+
+		return e.complexity.AlbumDistributionServiceUrl.ID(childComplexity), true
+
+	case "AlbumDistributionServiceUrl.service":
+		if e.complexity.AlbumDistributionServiceUrl.Service == nil {
+			break
+		}
+
+		return e.complexity.AlbumDistributionServiceUrl.Service(childComplexity), true
+
+	case "AlbumDistributionServiceUrl.url":
+		if e.complexity.AlbumDistributionServiceUrl.URL == nil {
+			break
+		}
+
+		return e.complexity.AlbumDistributionServiceUrl.URL(childComplexity), true
 
 	case "Artist.blogUrl":
 		if e.complexity.Artist.BlogURL == nil {
@@ -343,6 +551,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Circle.YoutubeChannelURL(childComplexity), true
+
+	case "ConsignmentShop.album":
+		if e.complexity.ConsignmentShop.Album == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.Album(childComplexity), true
+
+	case "ConsignmentShop.currency":
+		if e.complexity.ConsignmentShop.Currency == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.Currency(childComplexity), true
+
+	case "ConsignmentShop.id":
+		if e.complexity.ConsignmentShop.ID == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.ID(childComplexity), true
+
+	case "ConsignmentShop.shop":
+		if e.complexity.ConsignmentShop.Shop == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.Shop(childComplexity), true
+
+	case "ConsignmentShop.shopPrice":
+		if e.complexity.ConsignmentShop.ShopPrice == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.ShopPrice(childComplexity), true
+
+	case "ConsignmentShop.taxIncluded":
+		if e.complexity.ConsignmentShop.TaxIncluded == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.TaxIncluded(childComplexity), true
+
+	case "ConsignmentShop.url":
+		if e.complexity.ConsignmentShop.URL == nil {
+			break
+		}
+
+		return e.complexity.ConsignmentShop.URL(childComplexity), true
 
 	case "Event.address":
 		if e.complexity.Event.Address == nil {
@@ -652,6 +909,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.ProductDistributionServiceURL.URL(childComplexity), true
 
+	case "Query.getAlbumById":
+		if e.complexity.Query.GetAlbumByID == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getAlbumById_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetAlbumByID(childComplexity, args["id"].(string)), true
+
 	case "Query.getArtistById":
 		if e.complexity.Query.GetArtistByID == nil {
 			break
@@ -826,6 +1095,27 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.SubEvent.Slug(childComplexity), true
+
+	case "Upc.album":
+		if e.complexity.Upc.Album == nil {
+			break
+		}
+
+		return e.complexity.Upc.Album(childComplexity), true
+
+	case "Upc.id":
+		if e.complexity.Upc.ID == nil {
+			break
+		}
+
+		return e.complexity.Upc.ID(childComplexity), true
+
+	case "Upc.upc":
+		if e.complexity.Upc.Upc == nil {
+			break
+		}
+
+		return e.complexity.Upc.Upc(childComplexity), true
 
 	}
 	return 0, false
@@ -1046,6 +1336,64 @@ type Circle {
   youtubeChannelUrl: String!
 }
 
+type Album {
+  id: ID!
+  name: String!
+  nameReading: String!
+  slug: String!
+  releaseCircleName: String!
+  releaseDate: Date
+  event: Event
+  subEvent: SubEvent
+  searchEnabled: Boolean!
+  albumNumber: String!
+  eventPrice: Float
+  currency: String!
+  credit: String!
+  introduction: String!
+  url: String!
+  circles: [Circle!]!
+  consignmentShops: [ConsignmentShop!]!
+  distributionServiceUrls: [AlbumDistributionServiceUrl!]!
+  upcs: [Upc!]!
+}
+
+enum Shop {
+  AKIBA_HOBBY
+  AKIBAOO
+  ANIMATE
+  BOOKMATE
+  BOOTH
+  DIVERSE_DIRECT
+  GREP
+  MELONBOOKS
+  TANOCSTORE
+  TORANOANA
+}
+
+type ConsignmentShop {
+  id: ID!
+  album: Album!
+  shop: Shop!
+  url: String!
+  taxIncluded: Boolean!
+  shopPrice: Float!
+  currency: String!
+}
+
+type AlbumDistributionServiceUrl {
+  id: ID!
+  album: Album!
+  service: DistributionService!
+  url: String!
+}
+
+type Upc {
+  id: ID!
+  album: Album!
+  upc: String!
+}
+
 # 各種クエリの定義
 type Query {
   getProductById(id: ID!): Product
@@ -1060,6 +1408,7 @@ type Query {
   getCircleById(id: ID!): Circle
   getArtists: [Artist!]!
   getCircles: [Circle!]!
+  getAlbumById(id: ID!): Album
 }
 `, BuiltIn: false},
 }
@@ -1081,6 +1430,21 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 		}
 	}
 	args["name"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getAlbumById_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
 	return args, nil
 }
 
@@ -1226,6 +1590,1154 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 // endregion ************************** directives.gotpl **************************
 
 // region    **************************** field.gotpl *****************************
+
+func (ec *executionContext) _Album_id(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_name(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_name(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_nameReading(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_nameReading(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.NameReading, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_nameReading(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_slug(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_slug(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Slug, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_slug(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_releaseCircleName(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_releaseCircleName(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ReleaseCircleName, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_releaseCircleName(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_releaseDate(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_releaseDate(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ReleaseDate, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalODate2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_releaseDate(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Date does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_event(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_event(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Event, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*model.Event)
+	fc.Result = res
+	return ec.marshalOEvent2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEvent(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_event(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Event_id(ctx, field)
+			case "eventSeries":
+				return ec.fieldContext_Event_eventSeries(ctx, field)
+			case "name":
+				return ec.fieldContext_Event_name(ctx, field)
+			case "displayName":
+				return ec.fieldContext_Event_displayName(ctx, field)
+			case "slug":
+				return ec.fieldContext_Event_slug(ctx, field)
+			case "startDate":
+				return ec.fieldContext_Event_startDate(ctx, field)
+			case "endDate":
+				return ec.fieldContext_Event_endDate(ctx, field)
+			case "eventStatus":
+				return ec.fieldContext_Event_eventStatus(ctx, field)
+			case "format":
+				return ec.fieldContext_Event_format(ctx, field)
+			case "regionCode":
+				return ec.fieldContext_Event_regionCode(ctx, field)
+			case "address":
+				return ec.fieldContext_Event_address(ctx, field)
+			case "description":
+				return ec.fieldContext_Event_description(ctx, field)
+			case "url":
+				return ec.fieldContext_Event_url(ctx, field)
+			case "twitterUrl":
+				return ec.fieldContext_Event_twitterUrl(ctx, field)
+			case "subEvents":
+				return ec.fieldContext_Event_subEvents(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Event", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_subEvent(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_subEvent(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.SubEvent, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*model.SubEvent)
+	fc.Result = res
+	return ec.marshalOSubEvent2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSubEvent(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_subEvent(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_SubEvent_id(ctx, field)
+			case "event":
+				return ec.fieldContext_SubEvent_event(ctx, field)
+			case "name":
+				return ec.fieldContext_SubEvent_name(ctx, field)
+			case "displayName":
+				return ec.fieldContext_SubEvent_displayName(ctx, field)
+			case "slug":
+				return ec.fieldContext_SubEvent_slug(ctx, field)
+			case "date":
+				return ec.fieldContext_SubEvent_date(ctx, field)
+			case "eventStatus":
+				return ec.fieldContext_SubEvent_eventStatus(ctx, field)
+			case "description":
+				return ec.fieldContext_SubEvent_description(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type SubEvent", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_searchEnabled(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_searchEnabled(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.SearchEnabled, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_searchEnabled(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_albumNumber(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_albumNumber(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.AlbumNumber, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_albumNumber(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_eventPrice(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_eventPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.EventPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*float64)
+	fc.Result = res
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_eventPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Float does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_currency(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_currency(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Currency, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_currency(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_credit(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_credit(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Credit, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_credit(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_introduction(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_introduction(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Introduction, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_introduction(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_url(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_circles(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_circles(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Circles, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Circle)
+	fc.Result = res
+	return ec.marshalNCircle2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐCircleᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_circles(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Circle_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Circle_name(ctx, field)
+			case "nameReading":
+				return ec.fieldContext_Circle_nameReading(ctx, field)
+			case "slug":
+				return ec.fieldContext_Circle_slug(ctx, field)
+			case "initialLetterType":
+				return ec.fieldContext_Circle_initialLetterType(ctx, field)
+			case "initialLetterDetail":
+				return ec.fieldContext_Circle_initialLetterDetail(ctx, field)
+			case "description":
+				return ec.fieldContext_Circle_description(ctx, field)
+			case "url":
+				return ec.fieldContext_Circle_url(ctx, field)
+			case "blogUrl":
+				return ec.fieldContext_Circle_blogUrl(ctx, field)
+			case "twitterUrl":
+				return ec.fieldContext_Circle_twitterUrl(ctx, field)
+			case "youtubeChannelUrl":
+				return ec.fieldContext_Circle_youtubeChannelUrl(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Circle", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_consignmentShops(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_consignmentShops(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ConsignmentShops, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ConsignmentShop)
+	fc.Result = res
+	return ec.marshalNConsignmentShop2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐConsignmentShopᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_consignmentShops(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_ConsignmentShop_id(ctx, field)
+			case "album":
+				return ec.fieldContext_ConsignmentShop_album(ctx, field)
+			case "shop":
+				return ec.fieldContext_ConsignmentShop_shop(ctx, field)
+			case "url":
+				return ec.fieldContext_ConsignmentShop_url(ctx, field)
+			case "taxIncluded":
+				return ec.fieldContext_ConsignmentShop_taxIncluded(ctx, field)
+			case "shopPrice":
+				return ec.fieldContext_ConsignmentShop_shopPrice(ctx, field)
+			case "currency":
+				return ec.fieldContext_ConsignmentShop_currency(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ConsignmentShop", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_distributionServiceUrls(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DistributionServiceUrls, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.AlbumDistributionServiceURL)
+	fc.Result = res
+	return ec.marshalNAlbumDistributionServiceUrl2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbumDistributionServiceURLᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_distributionServiceUrls(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_AlbumDistributionServiceUrl_id(ctx, field)
+			case "album":
+				return ec.fieldContext_AlbumDistributionServiceUrl_album(ctx, field)
+			case "service":
+				return ec.fieldContext_AlbumDistributionServiceUrl_service(ctx, field)
+			case "url":
+				return ec.fieldContext_AlbumDistributionServiceUrl_url(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type AlbumDistributionServiceUrl", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Album_upcs(ctx context.Context, field graphql.CollectedField, obj *model.Album) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Album_upcs(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Upcs, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Upc)
+	fc.Result = res
+	return ec.marshalNUpc2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐUpcᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Album_upcs(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Album",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Upc_id(ctx, field)
+			case "album":
+				return ec.fieldContext_Upc_album(ctx, field)
+			case "upc":
+				return ec.fieldContext_Upc_upc(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Upc", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _AlbumDistributionServiceUrl_id(ctx context.Context, field graphql.CollectedField, obj *model.AlbumDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumDistributionServiceUrl_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "AlbumDistributionServiceUrl",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _AlbumDistributionServiceUrl_album(ctx context.Context, field graphql.CollectedField, obj *model.AlbumDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumDistributionServiceUrl_album(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Album, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.Album)
+	fc.Result = res
+	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "AlbumDistributionServiceUrl",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Album_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Album_name(ctx, field)
+			case "nameReading":
+				return ec.fieldContext_Album_nameReading(ctx, field)
+			case "slug":
+				return ec.fieldContext_Album_slug(ctx, field)
+			case "releaseCircleName":
+				return ec.fieldContext_Album_releaseCircleName(ctx, field)
+			case "releaseDate":
+				return ec.fieldContext_Album_releaseDate(ctx, field)
+			case "event":
+				return ec.fieldContext_Album_event(ctx, field)
+			case "subEvent":
+				return ec.fieldContext_Album_subEvent(ctx, field)
+			case "searchEnabled":
+				return ec.fieldContext_Album_searchEnabled(ctx, field)
+			case "albumNumber":
+				return ec.fieldContext_Album_albumNumber(ctx, field)
+			case "eventPrice":
+				return ec.fieldContext_Album_eventPrice(ctx, field)
+			case "currency":
+				return ec.fieldContext_Album_currency(ctx, field)
+			case "credit":
+				return ec.fieldContext_Album_credit(ctx, field)
+			case "introduction":
+				return ec.fieldContext_Album_introduction(ctx, field)
+			case "url":
+				return ec.fieldContext_Album_url(ctx, field)
+			case "circles":
+				return ec.fieldContext_Album_circles(ctx, field)
+			case "consignmentShops":
+				return ec.fieldContext_Album_consignmentShops(ctx, field)
+			case "distributionServiceUrls":
+				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "upcs":
+				return ec.fieldContext_Album_upcs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _AlbumDistributionServiceUrl_service(ctx context.Context, field graphql.CollectedField, obj *model.AlbumDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumDistributionServiceUrl_service(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Service, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DistributionService)
+	fc.Result = res
+	return ec.marshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_service(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "AlbumDistributionServiceUrl",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DistributionService does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _AlbumDistributionServiceUrl_url(ctx context.Context, field graphql.CollectedField, obj *model.AlbumDistributionServiceURL) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumDistributionServiceUrl_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "AlbumDistributionServiceUrl",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
 
 func (ec *executionContext) _Artist_id(ctx context.Context, field graphql.CollectedField, obj *model.Artist) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Artist_id(ctx, field)
@@ -2185,6 +3697,354 @@ func (ec *executionContext) _Circle_youtubeChannelUrl(ctx context.Context, field
 func (ec *executionContext) fieldContext_Circle_youtubeChannelUrl(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Circle",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_id(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_album(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_album(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Album, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.Album)
+	fc.Result = res
+	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Album_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Album_name(ctx, field)
+			case "nameReading":
+				return ec.fieldContext_Album_nameReading(ctx, field)
+			case "slug":
+				return ec.fieldContext_Album_slug(ctx, field)
+			case "releaseCircleName":
+				return ec.fieldContext_Album_releaseCircleName(ctx, field)
+			case "releaseDate":
+				return ec.fieldContext_Album_releaseDate(ctx, field)
+			case "event":
+				return ec.fieldContext_Album_event(ctx, field)
+			case "subEvent":
+				return ec.fieldContext_Album_subEvent(ctx, field)
+			case "searchEnabled":
+				return ec.fieldContext_Album_searchEnabled(ctx, field)
+			case "albumNumber":
+				return ec.fieldContext_Album_albumNumber(ctx, field)
+			case "eventPrice":
+				return ec.fieldContext_Album_eventPrice(ctx, field)
+			case "currency":
+				return ec.fieldContext_Album_currency(ctx, field)
+			case "credit":
+				return ec.fieldContext_Album_credit(ctx, field)
+			case "introduction":
+				return ec.fieldContext_Album_introduction(ctx, field)
+			case "url":
+				return ec.fieldContext_Album_url(ctx, field)
+			case "circles":
+				return ec.fieldContext_Album_circles(ctx, field)
+			case "consignmentShops":
+				return ec.fieldContext_Album_consignmentShops(ctx, field)
+			case "distributionServiceUrls":
+				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "upcs":
+				return ec.fieldContext_Album_upcs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_shop(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_shop(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Shop, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.Shop)
+	fc.Result = res
+	return ec.marshalNShop2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐShop(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_shop(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Shop does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_url(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_taxIncluded(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_taxIncluded(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TaxIncluded, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_taxIncluded(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_shopPrice(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_shopPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ShopPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(float64)
+	fc.Result = res
+	return ec.marshalNFloat2float64(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_shopPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Float does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ConsignmentShop_currency(ctx context.Context, field graphql.CollectedField, obj *model.ConsignmentShop) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ConsignmentShop_currency(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Currency, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ConsignmentShop_currency(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ConsignmentShop",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -5105,6 +6965,98 @@ func (ec *executionContext) fieldContext_Query_getCircles(ctx context.Context, f
 	return fc, nil
 }
 
+func (ec *executionContext) _Query_getAlbumById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_getAlbumById(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetAlbumByID(rctx, fc.Args["id"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*model.Album)
+	fc.Result = res
+	return ec.marshalOAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_getAlbumById(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Album_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Album_name(ctx, field)
+			case "nameReading":
+				return ec.fieldContext_Album_nameReading(ctx, field)
+			case "slug":
+				return ec.fieldContext_Album_slug(ctx, field)
+			case "releaseCircleName":
+				return ec.fieldContext_Album_releaseCircleName(ctx, field)
+			case "releaseDate":
+				return ec.fieldContext_Album_releaseDate(ctx, field)
+			case "event":
+				return ec.fieldContext_Album_event(ctx, field)
+			case "subEvent":
+				return ec.fieldContext_Album_subEvent(ctx, field)
+			case "searchEnabled":
+				return ec.fieldContext_Album_searchEnabled(ctx, field)
+			case "albumNumber":
+				return ec.fieldContext_Album_albumNumber(ctx, field)
+			case "eventPrice":
+				return ec.fieldContext_Album_eventPrice(ctx, field)
+			case "currency":
+				return ec.fieldContext_Album_currency(ctx, field)
+			case "credit":
+				return ec.fieldContext_Album_credit(ctx, field)
+			case "introduction":
+				return ec.fieldContext_Album_introduction(ctx, field)
+			case "url":
+				return ec.fieldContext_Album_url(ctx, field)
+			case "circles":
+				return ec.fieldContext_Album_circles(ctx, field)
+			case "consignmentShops":
+				return ec.fieldContext_Album_consignmentShops(ctx, field)
+			case "distributionServiceUrls":
+				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "upcs":
+				return ec.fieldContext_Album_upcs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_getAlbumById_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Query___type(ctx, field)
 	if err != nil {
@@ -5605,6 +7557,178 @@ func (ec *executionContext) _SubEvent_description(ctx context.Context, field gra
 func (ec *executionContext) fieldContext_SubEvent_description(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "SubEvent",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Upc_id(ctx context.Context, field graphql.CollectedField, obj *model.Upc) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Upc_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Upc_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Upc",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Upc_album(ctx context.Context, field graphql.CollectedField, obj *model.Upc) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Upc_album(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Album, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.Album)
+	fc.Result = res
+	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Upc_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Upc",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_Album_id(ctx, field)
+			case "name":
+				return ec.fieldContext_Album_name(ctx, field)
+			case "nameReading":
+				return ec.fieldContext_Album_nameReading(ctx, field)
+			case "slug":
+				return ec.fieldContext_Album_slug(ctx, field)
+			case "releaseCircleName":
+				return ec.fieldContext_Album_releaseCircleName(ctx, field)
+			case "releaseDate":
+				return ec.fieldContext_Album_releaseDate(ctx, field)
+			case "event":
+				return ec.fieldContext_Album_event(ctx, field)
+			case "subEvent":
+				return ec.fieldContext_Album_subEvent(ctx, field)
+			case "searchEnabled":
+				return ec.fieldContext_Album_searchEnabled(ctx, field)
+			case "albumNumber":
+				return ec.fieldContext_Album_albumNumber(ctx, field)
+			case "eventPrice":
+				return ec.fieldContext_Album_eventPrice(ctx, field)
+			case "currency":
+				return ec.fieldContext_Album_currency(ctx, field)
+			case "credit":
+				return ec.fieldContext_Album_credit(ctx, field)
+			case "introduction":
+				return ec.fieldContext_Album_introduction(ctx, field)
+			case "url":
+				return ec.fieldContext_Album_url(ctx, field)
+			case "circles":
+				return ec.fieldContext_Album_circles(ctx, field)
+			case "consignmentShops":
+				return ec.fieldContext_Album_consignmentShops(ctx, field)
+			case "distributionServiceUrls":
+				return ec.fieldContext_Album_distributionServiceUrls(ctx, field)
+			case "upcs":
+				return ec.fieldContext_Album_upcs(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Upc_upc(ctx context.Context, field graphql.CollectedField, obj *model.Upc) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Upc_upc(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Upc, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Upc_upc(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Upc",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -7396,6 +9520,197 @@ func (ec *executionContext) fieldContext___Type_specifiedByURL(ctx context.Conte
 
 // region    **************************** object.gotpl ****************************
 
+var albumImplementors = []string{"Album"}
+
+func (ec *executionContext) _Album(ctx context.Context, sel ast.SelectionSet, obj *model.Album) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, albumImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("Album")
+		case "id":
+
+			out.Values[i] = ec._Album_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "name":
+
+			out.Values[i] = ec._Album_name(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "nameReading":
+
+			out.Values[i] = ec._Album_nameReading(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "slug":
+
+			out.Values[i] = ec._Album_slug(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "releaseCircleName":
+
+			out.Values[i] = ec._Album_releaseCircleName(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "releaseDate":
+
+			out.Values[i] = ec._Album_releaseDate(ctx, field, obj)
+
+		case "event":
+
+			out.Values[i] = ec._Album_event(ctx, field, obj)
+
+		case "subEvent":
+
+			out.Values[i] = ec._Album_subEvent(ctx, field, obj)
+
+		case "searchEnabled":
+
+			out.Values[i] = ec._Album_searchEnabled(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "albumNumber":
+
+			out.Values[i] = ec._Album_albumNumber(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "eventPrice":
+
+			out.Values[i] = ec._Album_eventPrice(ctx, field, obj)
+
+		case "currency":
+
+			out.Values[i] = ec._Album_currency(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "credit":
+
+			out.Values[i] = ec._Album_credit(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "introduction":
+
+			out.Values[i] = ec._Album_introduction(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._Album_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "circles":
+
+			out.Values[i] = ec._Album_circles(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "consignmentShops":
+
+			out.Values[i] = ec._Album_consignmentShops(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "distributionServiceUrls":
+
+			out.Values[i] = ec._Album_distributionServiceUrls(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "upcs":
+
+			out.Values[i] = ec._Album_upcs(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var albumDistributionServiceUrlImplementors = []string{"AlbumDistributionServiceUrl"}
+
+func (ec *executionContext) _AlbumDistributionServiceUrl(ctx context.Context, sel ast.SelectionSet, obj *model.AlbumDistributionServiceURL) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, albumDistributionServiceUrlImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("AlbumDistributionServiceUrl")
+		case "id":
+
+			out.Values[i] = ec._AlbumDistributionServiceUrl_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "album":
+
+			out.Values[i] = ec._AlbumDistributionServiceUrl_album(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "service":
+
+			out.Values[i] = ec._AlbumDistributionServiceUrl_service(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._AlbumDistributionServiceUrl_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var artistImplementors = []string{"Artist"}
 
 func (ec *executionContext) _Artist(ctx context.Context, sel ast.SelectionSet, obj *model.Artist) graphql.Marshaler {
@@ -7577,6 +9892,76 @@ func (ec *executionContext) _Circle(ctx context.Context, sel ast.SelectionSet, o
 		case "youtubeChannelUrl":
 
 			out.Values[i] = ec._Circle_youtubeChannelUrl(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var consignmentShopImplementors = []string{"ConsignmentShop"}
+
+func (ec *executionContext) _ConsignmentShop(ctx context.Context, sel ast.SelectionSet, obj *model.ConsignmentShop) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, consignmentShopImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("ConsignmentShop")
+		case "id":
+
+			out.Values[i] = ec._ConsignmentShop_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "album":
+
+			out.Values[i] = ec._ConsignmentShop_album(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "shop":
+
+			out.Values[i] = ec._ConsignmentShop_shop(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._ConsignmentShop_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "taxIncluded":
+
+			out.Values[i] = ec._ConsignmentShop_taxIncluded(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "shopPrice":
+
+			out.Values[i] = ec._ConsignmentShop_shopPrice(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "currency":
+
+			out.Values[i] = ec._ConsignmentShop_currency(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -8294,6 +10679,26 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 			out.Concurrently(i, func() graphql.Marshaler {
 				return rrm(innerCtx)
 			})
+		case "getAlbumById":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getAlbumById(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
 		case "__type":
 
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
@@ -8376,6 +10781,48 @@ func (ec *executionContext) _SubEvent(ctx context.Context, sel ast.SelectionSet,
 		case "description":
 
 			out.Values[i] = ec._SubEvent_description(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var upcImplementors = []string{"Upc"}
+
+func (ec *executionContext) _Upc(ctx context.Context, sel ast.SelectionSet, obj *model.Upc) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, upcImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("Upc")
+		case "id":
+
+			out.Values[i] = ec._Upc_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "album":
+
+			out.Values[i] = ec._Upc_album(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "upc":
+
+			out.Values[i] = ec._Upc_upc(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -8709,6 +11156,70 @@ func (ec *executionContext) ___Type(ctx context.Context, sel ast.SelectionSet, o
 
 // region    ***************************** type.gotpl *****************************
 
+func (ec *executionContext) marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx context.Context, sel ast.SelectionSet, v *model.Album) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._Album(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNAlbumDistributionServiceUrl2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbumDistributionServiceURLᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.AlbumDistributionServiceURL) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNAlbumDistributionServiceUrl2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbumDistributionServiceURL(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNAlbumDistributionServiceUrl2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbumDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, v *model.AlbumDistributionServiceURL) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._AlbumDistributionServiceUrl(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNArtist2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐArtistᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Artist) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -8830,6 +11341,60 @@ func (ec *executionContext) marshalNCircle2ᚖgithubᚗcomᚋshiroemonsᚋtouhou
 		return graphql.Null
 	}
 	return ec._Circle(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNConsignmentShop2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐConsignmentShopᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.ConsignmentShop) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNConsignmentShop2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐConsignmentShop(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNConsignmentShop2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐConsignmentShop(ctx context.Context, sel ast.SelectionSet, v *model.ConsignmentShop) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._ConsignmentShop(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNDistributionService2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐDistributionService(ctx context.Context, v interface{}) (model.DistributionService, error) {
@@ -9251,6 +11816,16 @@ func (ec *executionContext) marshalNProductType2githubᚗcomᚋshiroemonsᚋtouh
 	return v
 }
 
+func (ec *executionContext) unmarshalNShop2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐShop(ctx context.Context, v interface{}) (model.Shop, error) {
+	var res model.Shop
+	err := res.UnmarshalGQL(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNShop2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐShop(ctx context.Context, sel ast.SelectionSet, v model.Shop) graphql.Marshaler {
+	return v
+}
+
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v interface{}) (string, error) {
 	res, err := graphql.UnmarshalString(v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -9318,6 +11893,60 @@ func (ec *executionContext) marshalNSubEvent2ᚖgithubᚗcomᚋshiroemonsᚋtouh
 		return graphql.Null
 	}
 	return ec._SubEvent(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpc2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐUpcᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Upc) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNUpc2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐUpc(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNUpc2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐUpc(ctx context.Context, sel ast.SelectionSet, v *model.Upc) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._Upc(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalN__Directive2githubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx context.Context, sel ast.SelectionSet, v introspection.Directive) graphql.Marshaler {
@@ -9573,6 +12202,13 @@ func (ec *executionContext) marshalN__TypeKind2string(ctx context.Context, sel a
 	return res
 }
 
+func (ec *executionContext) marshalOAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx context.Context, sel ast.SelectionSet, v *model.Album) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._Album(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalOArtist2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐArtist(ctx context.Context, sel ast.SelectionSet, v *model.Artist) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
@@ -9641,6 +12277,22 @@ func (ec *executionContext) marshalOEventSeries2ᚖgithubᚗcomᚋshiroemonsᚋt
 		return graphql.Null
 	}
 	return ec._EventSeries(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalOFloat2ᚖfloat64(ctx context.Context, v interface{}) (*float64, error) {
+	if v == nil {
+		return nil, nil
+	}
+	res, err := graphql.UnmarshalFloatContext(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalOFloat2ᚖfloat64(ctx context.Context, sel ast.SelectionSet, v *float64) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	res := graphql.MarshalFloatContext(*v)
+	return graphql.WrapContextMarshaler(ctx, res)
 }
 
 func (ec *executionContext) marshalOOriginalSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSong(ctx context.Context, sel ast.SelectionSet, v *model.OriginalSong) graphql.Marshaler {

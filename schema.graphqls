@@ -165,6 +165,64 @@ type Circle {
   youtubeChannelUrl: String!
 }
 
+type Album {
+  id: ID!
+  name: String!
+  nameReading: String!
+  slug: String!
+  releaseCircleName: String!
+  releaseDate: Date
+  event: Event
+  subEvent: SubEvent
+  searchEnabled: Boolean!
+  albumNumber: String!
+  eventPrice: Float
+  currency: String!
+  credit: String!
+  introduction: String!
+  url: String!
+  circles: [Circle!]!
+  consignmentShops: [ConsignmentShop!]!
+  distributionServiceUrls: [AlbumDistributionServiceUrl!]!
+  upcs: [Upc!]!
+}
+
+enum Shop {
+  AKIBA_HOBBY
+  AKIBAOO
+  ANIMATE
+  BOOKMATE
+  BOOTH
+  DIVERSE_DIRECT
+  GREP
+  MELONBOOKS
+  TANOCSTORE
+  TORANOANA
+}
+
+type ConsignmentShop {
+  id: ID!
+  album: Album!
+  shop: Shop!
+  url: String!
+  taxIncluded: Boolean!
+  shopPrice: Float!
+  currency: String!
+}
+
+type AlbumDistributionServiceUrl {
+  id: ID!
+  album: Album!
+  service: DistributionService!
+  url: String!
+}
+
+type Upc {
+  id: ID!
+  album: Album!
+  upc: String!
+}
+
 # 各種クエリの定義
 type Query {
   getProductById(id: ID!): Product
@@ -179,4 +237,5 @@ type Query {
   getCircleById(id: ID!): Circle
   getArtists: [Artist!]!
   getCircles: [Circle!]!
+  getAlbumById(id: ID!): Album
 }

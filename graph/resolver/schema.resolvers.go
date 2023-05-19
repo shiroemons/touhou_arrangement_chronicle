@@ -72,6 +72,11 @@ func (r *queryResolver) GetCircles(ctx context.Context) ([]*model.Circle, error)
 	panic(fmt.Errorf("not implemented: GetCircles - getCircles"))
 }
 
+// GetAlbumByID is the resolver for the getAlbumById field.
+func (r *queryResolver) GetAlbumByID(ctx context.Context, id string) (*model.Album, error) {
+	panic(fmt.Errorf("not implemented: GetAlbumByID - getAlbumById"))
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
