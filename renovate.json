@@ -13,5 +13,6 @@
         "github.com/uptrace/bun"
       ]
     }
-  ]
+  ],
+  "postUpdateOptions": ["gomodTidy"]
 }
