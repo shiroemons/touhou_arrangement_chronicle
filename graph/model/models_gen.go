@@ -101,6 +101,12 @@ type EventSeries struct {
 	Events      []*Event `json:"events"`
 }
 
+type Isrc struct {
+	ID   string `json:"id"`
+	Song *Song  `json:"song"`
+	Isrc string `json:"isrc"`
+}
+
 type OriginalSong struct {
 	ID                      string                                `json:"id"`
 	Product                 *Product                              `json:"product"`
@@ -133,6 +139,45 @@ type Product struct {
 type ProductDistributionServiceURL struct {
 	ID      string              `json:"id"`
 	Product *Product            `json:"product"`
+	Service DistributionService `json:"service"`
+	URL     string              `json:"url"`
+}
+
+type Song struct {
+	ID                      string                        `json:"id"`
+	Circle                  *Circle                       `json:"circle,omitempty"`
+	Album                   *Album                        `json:"album"`
+	Name                    string                        `json:"name"`
+	NameReading             string                        `json:"nameReading"`
+	Slug                    string                        `json:"slug"`
+	DiscNumber              int                           `json:"discNumber"`
+	TrackNumber             int                           `json:"trackNumber"`
+	ReleaseDate             *string                       `json:"releaseDate,omitempty"`
+	SearchEnabled           bool                          `json:"searchEnabled"`
+	Length                  *int                          `json:"length,omitempty"`
+	Bpm                     *int                          `json:"bpm,omitempty"`
+	Description             string                        `json:"description"`
+	DisplayComposer         string                        `json:"displayComposer"`
+	DisplayArranger         string                        `json:"displayArranger"`
+	DisplayRearranger       string                        `json:"displayRearranger"`
+	DisplayLyricist         string                        `json:"displayLyricist"`
+	DisplayVocalist         string                        `json:"displayVocalist"`
+	DisplayOriginalSong     string                        `json:"displayOriginalSong"`
+	DistributionServiceUrls []*SongDistributionServiceURL `json:"distributionServiceUrls"`
+	Isrcs                   []*Isrc                       `json:"isrcs"`
+	ArrangeCircles          []*Circle                     `json:"arrangeCircles"`
+	Composers               []*Artist                     `json:"composers"`
+	Arrangers               []*Artist                     `json:"arrangers"`
+	Rearrangers             []*Artist                     `json:"rearrangers"`
+	Lyricists               []*Artist                     `json:"lyricists"`
+	Vocalists               []*Artist                     `json:"vocalists"`
+	OriginalSongs           []*OriginalSong               `json:"originalSongs"`
+	Circles                 []*Circle                     `json:"circles"`
+}
+
+type SongDistributionServiceURL struct {
+	ID      string              `json:"id"`
+	Song    *Song               `json:"song"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }

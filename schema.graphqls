@@ -223,6 +223,51 @@ type Upc {
   upc: String!
 }
 
+type Song {
+  id: ID!
+  circle: Circle
+  album: Album!
+  name: String!
+  nameReading: String!
+  slug: String!
+  discNumber: Int!
+  trackNumber: Int!
+  releaseDate: Date
+  searchEnabled: Boolean!
+  length: Int
+  bpm: Int
+  description: String!
+  displayComposer: String!
+  displayArranger: String!
+  displayRearranger: String!
+  displayLyricist: String!
+  displayVocalist: String!
+  displayOriginalSong: String!
+  distributionServiceUrls: [SongDistributionServiceUrl!]!
+  isrcs: [Isrc!]!
+  arrangeCircles: [Circle!]!
+  composers: [Artist!]!
+  arrangers: [Artist!]!
+  rearrangers: [Artist!]!
+  lyricists: [Artist!]!
+  vocalists: [Artist!]!
+  originalSongs: [OriginalSong!]!
+  circles: [Circle!]!
+}
+
+type SongDistributionServiceUrl {
+  id: ID!
+  song: Song!
+  service: DistributionService!
+  url: String!
+}
+
+type Isrc {
+  id: ID!
+  song: Song!
+  isrc: String!
+}
+
 # 各種クエリの定義
 type Query {
   getProductById(id: ID!): Product
@@ -238,4 +283,5 @@ type Query {
   getArtists: [Artist!]!
   getCircles: [Circle!]!
   getAlbumById(id: ID!): Album
+  getSongById(id: ID!): Song
 }

@@ -77,6 +77,11 @@ func (r *queryResolver) GetAlbumByID(ctx context.Context, id string) (*model.Alb
 	panic(fmt.Errorf("not implemented: GetAlbumByID - getAlbumById"))
 }
 
+// GetSongByID is the resolver for the getSongById field.
+func (r *queryResolver) GetSongByID(ctx context.Context, id string) (*model.Song, error) {
+	panic(fmt.Errorf("not implemented: GetSongByID - getSongById"))
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
