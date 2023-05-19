@@ -18,7 +18,7 @@ type TxRepository struct {
 	db *bun.DB
 }
 
-func TxRepositoryProvider(db *bun.DB) *TxRepository {
+func NewTxRepository(db *bun.DB) *TxRepository {
 	return &TxRepository{db: db}
 }
 

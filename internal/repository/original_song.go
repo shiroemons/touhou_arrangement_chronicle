@@ -12,7 +12,7 @@ type OriginalSongRepository struct {
 	db *bun.DB
 }
 
-func NewOriginalSong(db *bun.DB) *OriginalSongRepository {
+func NewOriginalSongRepository(db *bun.DB) *OriginalSongRepository {
 	return &OriginalSongRepository{db: db}
 }
 
