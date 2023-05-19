@@ -346,8 +346,8 @@ type Query {
   getEventSeries: [EventSeries!]!
   getArtistById(id: ID!): Artist
   getCircleById(id: ID!): Circle
-  getArtists: [Artist!]!
-  getCircles: [Circle!]!
+  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
+  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
   getAlbumById(id: ID!): Album
   getSongById(id: ID!): Song
   getGenres: [Genre!]!

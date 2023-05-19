@@ -62,14 +62,14 @@ func (r *queryResolver) GetCircleByID(ctx context.Context, id string) (*model.Ci
 	panic(fmt.Errorf("not implemented: GetCircleByID - getCircleById"))
 }
 
-// GetArtists is the resolver for the getArtists field.
-func (r *queryResolver) GetArtists(ctx context.Context) ([]*model.Artist, error) {
-	panic(fmt.Errorf("not implemented: GetArtists - getArtists"))
+// ArtistsByInitialLetterType is the resolver for the artistsByInitialLetterType field.
+func (r *queryResolver) ArtistsByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) ([]*model.Artist, error) {
+	panic(fmt.Errorf("not implemented: ArtistsByInitialLetterType - artistsByInitialLetterType"))
 }
 
-// GetCircles is the resolver for the getCircles field.
-func (r *queryResolver) GetCircles(ctx context.Context) ([]*model.Circle, error) {
-	panic(fmt.Errorf("not implemented: GetCircles - getCircles"))
+// CirclesByInitialLetterType is the resolver for the circlesByInitialLetterType field.
+func (r *queryResolver) CirclesByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) ([]*model.Circle, error) {
+	panic(fmt.Errorf("not implemented: CirclesByInitialLetterType - circlesByInitialLetterType"))
 }
 
 // GetAlbumByID is the resolver for the getAlbumById field.
@@ -96,3 +96,16 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//     it when you're done.
+//   - You have helper methods in this file. Move them out to keep these resolver files clean.
+func (r *queryResolver) GetArtists(ctx context.Context) ([]*model.Artist, error) {
+	panic(fmt.Errorf("not implemented: GetArtists - getArtists"))
+}
+func (r *queryResolver) GetCircles(ctx context.Context) ([]*model.Circle, error) {
+	panic(fmt.Errorf("not implemented: GetCircles - getCircles"))
+}
