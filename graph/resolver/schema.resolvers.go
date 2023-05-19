@@ -82,6 +82,16 @@ func (r *queryResolver) GetSongByID(ctx context.Context, id string) (*model.Song
 	panic(fmt.Errorf("not implemented: GetSongByID - getSongById"))
 }
 
+// GetGenres is the resolver for the getGenres field.
+func (r *queryResolver) GetGenres(ctx context.Context) ([]*model.Genre, error) {
+	panic(fmt.Errorf("not implemented: GetGenres - getGenres"))
+}
+
+// GetTags is the resolver for the getTags field.
+func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
+	panic(fmt.Errorf("not implemented: GetTags - getTags"))
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 

@@ -28,6 +28,8 @@ type Album struct {
 	ConsignmentShops        []*ConsignmentShop             `json:"consignmentShops"`
 	DistributionServiceUrls []*AlbumDistributionServiceURL `json:"distributionServiceUrls"`
 	Upcs                    []*Upc                         `json:"upcs"`
+	Genres                  []*AlbumGenre                  `json:"genres"`
+	Tags                    []*AlbumTag                    `json:"tags"`
 }
 
 type AlbumDistributionServiceURL struct {
@@ -35,6 +37,20 @@ type AlbumDistributionServiceURL struct {
 	Album   *Album              `json:"album"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
+}
+
+type AlbumGenre struct {
+	ID     string `json:"id"`
+	Album  *Album `json:"album"`
+	Genre  *Genre `json:"genre"`
+	Locked bool   `json:"locked"`
+}
+
+type AlbumTag struct {
+	ID     string `json:"id"`
+	Album  *Album `json:"album"`
+	Tag    *Tag   `json:"tag"`
+	Locked bool   `json:"locked"`
 }
 
 type Artist struct {
@@ -63,6 +79,22 @@ type Circle struct {
 	BlogURL             string            `json:"blogUrl"`
 	TwitterURL          string            `json:"twitterUrl"`
 	YoutubeChannelURL   string            `json:"youtubeChannelUrl"`
+	Genres              []*CircleGenre    `json:"genres"`
+	Tags                []*CircleTag      `json:"tags"`
+}
+
+type CircleGenre struct {
+	ID     string  `json:"id"`
+	Circle *Circle `json:"circle"`
+	Genre  *Genre  `json:"genre"`
+	Locked bool    `json:"locked"`
+}
+
+type CircleTag struct {
+	ID     string  `json:"id"`
+	Circle *Circle `json:"circle"`
+	Tag    *Tag    `json:"tag"`
+	Locked bool    `json:"locked"`
 }
 
 type ConsignmentShop struct {
@@ -99,6 +131,11 @@ type EventSeries struct {
 	DisplayName string   `json:"displayName"`
 	Slug        string   `json:"slug"`
 	Events      []*Event `json:"events"`
+}
+
+type Genre struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type Isrc struct {
@@ -173,6 +210,8 @@ type Song struct {
 	Vocalists               []*Artist                     `json:"vocalists"`
 	OriginalSongs           []*OriginalSong               `json:"originalSongs"`
 	Circles                 []*Circle                     `json:"circles"`
+	Genres                  []*SongGenre                  `json:"genres"`
+	Tags                    []*SongTag                    `json:"tags"`
 }
 
 type SongDistributionServiceURL struct {
@@ -180,6 +219,20 @@ type SongDistributionServiceURL struct {
 	Song    *Song               `json:"song"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
+}
+
+type SongGenre struct {
+	ID     string `json:"id"`
+	Song   *Song  `json:"song"`
+	Genre  *Genre `json:"genre"`
+	Locked bool   `json:"locked"`
+}
+
+type SongTag struct {
+	ID     string `json:"id"`
+	Song   *Song  `json:"song"`
+	Tag    *Tag   `json:"tag"`
+	Locked bool   `json:"locked"`
 }
 
 type SubEvent struct {
@@ -191,6 +244,12 @@ type SubEvent struct {
 	Date        *string     `json:"date,omitempty"`
 	EventStatus EventStatus `json:"eventStatus"`
 	Description string      `json:"description"`
+}
+
+type Tag struct {
+	ID      string  `json:"id"`
+	Name    string  `json:"name"`
+	TagType TagType `json:"tagType"`
 }
 
 type Upc struct {
@@ -500,5 +559,50 @@ func (e *Shop) UnmarshalGQL(v interface{}) error {
 }
 
 func (e Shop) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type TagType string
+
+const (
+	TagTypeUnknown    TagType = "UNKNOWN"
+	TagTypeGenre      TagType = "GENRE"
+	TagTypeAmbience   TagType = "AMBIENCE"
+	TagTypeInstrument TagType = "INSTRUMENT"
+)
+
+var AllTagType = []TagType{
+	TagTypeUnknown,
+	TagTypeGenre,
+	TagTypeAmbience,
+	TagTypeInstrument,
+}
+
+func (e TagType) IsValid() bool {
+	switch e {
+	case TagTypeUnknown, TagTypeGenre, TagTypeAmbience, TagTypeInstrument:
+		return true
+	}
+	return false
+}
+
+func (e TagType) String() string {
+	return string(e)
+}
+
+func (e *TagType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = TagType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid TagType", str)
+	}
+	return nil
+}
+
+func (e TagType) MarshalGQL(w io.Writer) {
 	fmt.Fprint(w, strconv.Quote(e.String()))
 }

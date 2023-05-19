@@ -163,6 +163,8 @@ type Circle {
   blogUrl: String!
   twitterUrl: String!
   youtubeChannelUrl: String!
+  genres: [CircleGenre!]!
+  tags: [CircleTag!]!
 }
 
 type Album {
@@ -185,6 +187,8 @@ type Album {
   consignmentShops: [ConsignmentShop!]!
   distributionServiceUrls: [AlbumDistributionServiceUrl!]!
   upcs: [Upc!]!
+  genres: [AlbumGenre!]!
+  tags: [AlbumTag!]!
 }
 
 enum Shop {
@@ -253,6 +257,8 @@ type Song {
   vocalists: [Artist!]!
   originalSongs: [OriginalSong!]!
   circles: [Circle!]!
+  genres: [SongGenre!]!
+  tags: [SongTag!]!
 }
 
 type SongDistributionServiceUrl {
@@ -266,6 +272,66 @@ type Isrc {
   id: ID!
   song: Song!
   isrc: String!
+}
+
+type Genre {
+  id: ID!
+  name: String!
+}
+
+enum TagType {
+  UNKNOWN
+  GENRE
+  AMBIENCE
+  INSTRUMENT
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  tagType: TagType!
+}
+
+type AlbumGenre {
+  id: ID!
+  album: Album!
+  genre: Genre!
+  locked: Boolean!
+}
+
+type AlbumTag {
+  id: ID!
+  album: Album!
+  tag: Tag!
+  locked: Boolean!
+}
+
+type SongGenre {
+  id: ID!
+  song: Song!
+  genre: Genre!
+  locked: Boolean!
+}
+
+type SongTag {
+  id: ID!
+  song: Song!
+  tag: Tag!
+  locked: Boolean!
+}
+
+type CircleGenre {
+  id: ID!
+  circle: Circle!
+  genre: Genre!
+  locked: Boolean!
+}
+
+type CircleTag {
+  id: ID!
+  circle: Circle!
+  tag: Tag!
+  locked: Boolean!
 }
 
 # 各種クエリの定義
@@ -284,4 +350,6 @@ type Query {
   getCircles: [Circle!]!
   getAlbumById(id: ID!): Album
   getSongById(id: ID!): Song
+  getGenres: [Genre!]!
+  getTags: [Tag!]!
 }
