@@ -1,7 +1,11 @@
 package repository
 
 import (
+	"context"
+
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type AlbumRepository struct {
@@ -10,4 +14,66 @@ type AlbumRepository struct {
 
 func NewAlbumRepository(db *bun.DB) *AlbumRepository {
 	return &AlbumRepository{db: db}
+}
+
+func (r *AlbumRepository) Create(ctx context.Context, album *entity.Album) (*entity.Album, error) {
+	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
+	if ok {
+		if _, err := tx.NewInsert().Model(album).Exec(ctx); err != nil {
+			return nil, err
+		}
+		return album, nil
+	}
+	if _, err := r.db.NewInsert().Model(album).Exec(ctx); err != nil {
+		return nil, err
+	}
+	return album, nil
+}
+
+func (r *AlbumRepository) Update(ctx context.Context, album *entity.Album) (*entity.Album, error) {
+	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
+	if ok {
+		if _, err := tx.NewUpdate().Model(album).WherePK().Exec(ctx); err != nil {
+			return nil, err
+		}
+		return album, nil
+	}
+	if _, err := r.db.NewUpdate().Model(album).WherePK().Exec(ctx); err != nil {
+		return nil, err
+	}
+	return album, nil
+}
+
+func (r *AlbumRepository) Delete(ctx context.Context, album *entity.Album) error {
+	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
+	if ok {
+		if _, err := tx.NewDelete().Model(album).WherePK().Exec(ctx); err != nil {
+			return err
+		}
+		return nil
+	}
+	if _, err := r.db.NewDelete().Model(album).WherePK().Exec(ctx); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *AlbumRepository) FindByID(ctx context.Context, id string) (*entity.Album, error) {
+	album := new(entity.Album)
+	err := r.db.NewSelect().Model(album).
+		Relation("Event").
+		Relation("SubEvent").
+		Relation("AlbumConsignmentShops").
+		Relation("AlbumDistributionServiceURLs").
+		Relation("AlbumUPCs").
+		Relation("Songs").
+		Relation("Circles").
+		Relation("Genres").
+		Relation("Tags").
+		Where("id = ?", id).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return album, nil
 }

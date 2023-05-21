@@ -1,3 +1,14 @@
 package domain
 
-type SongRepository interface{}
+import (
+	"context"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+)
+
+type SongRepository interface {
+	Create(ctx context.Context, song *entity.Song) (*entity.Song, error)
+	Update(ctx context.Context, song *entity.Song) (*entity.Song, error)
+	Delete(ctx context.Context, song *entity.Song) error
+	FindByID(ctx context.Context, id string) (*entity.Song, error)
+}

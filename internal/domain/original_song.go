@@ -8,4 +8,5 @@ import (
 
 type OriginalSongRepository interface {
 	All(ctx context.Context) ([]*entity.OriginalSong, error)
+	FindByID(ctx context.Context, id string) (*entity.OriginalSong, error)
 }
