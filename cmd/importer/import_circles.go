@@ -13,6 +13,8 @@ import (
 
 type CircleCSV struct {
 	CircleName string `csv:"circle_name"`
+	URL        string `csv:"url"`
+	BlogURL    string `csv:"blog_url"`
 }
 
 func (imp *Importer) importCircles() {
@@ -36,6 +38,12 @@ func (imp *Importer) importCircles() {
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
 			c := entity.Circle{
 				Name: line.CircleName,
+			}
+			if line.URL != "" {
+				c.URL = line.URL
+			}
+			if line.BlogURL != "" {
+				c.BlogURL = line.BlogURL
 			}
 			circles = append(circles, c)
 		}
