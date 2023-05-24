@@ -18,9 +18,9 @@ require (
 	github.com/rs/xid v1.4.0
 	github.com/shopspring/decimal v1.3.1
 	github.com/spkg/bom v1.0.0
-	github.com/uptrace/bun v1.1.13
-	github.com/uptrace/bun/dialect/pgdialect v1.1.13
-	github.com/uptrace/bun/extra/bundebug v1.1.13
+	github.com/uptrace/bun v1.1.14
+	github.com/uptrace/bun/dialect/pgdialect v1.1.14
+	github.com/uptrace/bun/extra/bundebug v1.1.14
 	github.com/vektah/gqlparser/v2 v2.5.1
 	go.opentelemetry.io/otel/trace v1.16.0
 	go.uber.org/fx v1.19.3
@@ -55,7 +55,7 @@ require (
 	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.18 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
