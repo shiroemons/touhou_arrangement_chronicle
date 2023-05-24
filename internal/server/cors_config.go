@@ -14,6 +14,19 @@ func customCorsConfig(cfg config.Config) cors.Config {
 	return cors.Config{
 		AllowOrigins:     allowOrigins(cfg),
 		AllowCredentials: true,
+		AllowMethods: []string{
+			"GET",
+			"POST",
+			"OPTIONS",
+		},
+		AllowHeaders: []string{
+			"Access-Control-Allow-Credentials",
+			"Access-Control-Allow-Headers",
+			"Content-Type",
+			"Content-Length",
+			"Accept-Encoding",
+			"Authorization",
+		},
 	}
 }
 
