@@ -16,6 +16,15 @@ func NewProductRepository(db *bun.DB) *ProductRepository {
 	return &ProductRepository{db: db}
 }
 
+func (r *ProductRepository) All(ctx context.Context) ([]*entity.Product, error) {
+	products := make([]*entity.Product, 0)
+	err := r.db.NewSelect().Model(&products).Order("id ASC").Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return products, nil
+}
+
 func (r *ProductRepository) FindByID(ctx context.Context, id string) (*entity.Product, error) {
 	product := new(entity.Product)
 	err := r.db.NewSelect().Model(product).
@@ -25,4 +34,19 @@ func (r *ProductRepository) FindByID(ctx context.Context, id string) (*entity.Pr
 		return nil, err
 	}
 	return product, nil
+}
+
+func (r *ProductRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Product, error) {
+	products := make([]*entity.Product, 0)
+	err := r.db.NewSelect().Model(&products).Where("id IN (?)", bun.In(ids)).Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	productById := map[string]*entity.Product{}
+	for _, product := range products {
+		p := product
+		productById[p.ID] = p
+	}
+	return productById, nil
 }

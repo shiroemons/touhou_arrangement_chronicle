@@ -6,6 +6,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"
 )
 
 // This file will not be regenerated automatically.
@@ -15,17 +16,20 @@ import (
 type Params struct {
 	fx.In
 
-	Logger *zap.Logger
+	Logger     *zap.Logger
+	ProductSrv *service.ProductService
 }
 
 type Resolver struct {
-	logger *zap.Logger
+	logger     *zap.Logger
+	productSrv *service.ProductService
 }
 
 // NewResolver Resolver Constructor
 func NewResolver(p Params) *Resolver {
 	return &Resolver{
-		logger: p.Logger,
+		logger:     p.Logger,
+		productSrv: p.ProductSrv,
 	}
 }
 
