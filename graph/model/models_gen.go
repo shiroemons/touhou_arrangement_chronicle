@@ -34,7 +34,6 @@ type Album struct {
 
 type AlbumDistributionServiceURL struct {
 	ID      string              `json:"id"`
-	Album   *Album              `json:"album"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
@@ -157,10 +156,9 @@ type OriginalSong struct {
 }
 
 type OriginalSongDistributionServiceURL struct {
-	ID           string              `json:"id"`
-	OriginalSong *OriginalSong       `json:"originalSong"`
-	Service      DistributionService `json:"service"`
-	URL          string              `json:"url"`
+	ID      string              `json:"id"`
+	Service DistributionService `json:"service"`
+	URL     string              `json:"url"`
 }
 
 type Product struct {
@@ -175,7 +173,6 @@ type Product struct {
 
 type ProductDistributionServiceURL struct {
 	ID      string              `json:"id"`
-	Product *Product            `json:"product"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
@@ -216,7 +213,6 @@ type Song struct {
 
 type SongDistributionServiceURL struct {
 	ID      string              `json:"id"`
-	Song    *Song               `json:"song"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }

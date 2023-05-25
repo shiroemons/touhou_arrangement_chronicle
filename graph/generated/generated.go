@@ -69,7 +69,6 @@ type ComplexityRoot struct {
 	}
 
 	AlbumDistributionServiceUrl struct {
-		Album   func(childComplexity int) int
 		ID      func(childComplexity int) int
 		Service func(childComplexity int) int
 		URL     func(childComplexity int) int
@@ -193,10 +192,9 @@ type ComplexityRoot struct {
 	}
 
 	OriginalSongDistributionServiceURL struct {
-		ID           func(childComplexity int) int
-		OriginalSong func(childComplexity int) int
-		Service      func(childComplexity int) int
-		URL          func(childComplexity int) int
+		ID      func(childComplexity int) int
+		Service func(childComplexity int) int
+		URL     func(childComplexity int) int
 	}
 
 	Product struct {
@@ -211,7 +209,6 @@ type ComplexityRoot struct {
 
 	ProductDistributionServiceURL struct {
 		ID      func(childComplexity int) int
-		Product func(childComplexity int) int
 		Service func(childComplexity int) int
 		URL     func(childComplexity int) int
 	}
@@ -272,7 +269,6 @@ type ComplexityRoot struct {
 	SongDistributionServiceUrl struct {
 		ID      func(childComplexity int) int
 		Service func(childComplexity int) int
-		Song    func(childComplexity int) int
 		URL     func(childComplexity int) int
 	}
 
@@ -497,13 +493,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Album.Upcs(childComplexity), true
-
-	case "AlbumDistributionServiceUrl.album":
-		if e.complexity.AlbumDistributionServiceUrl.Album == nil {
-			break
-		}
-
-		return e.complexity.AlbumDistributionServiceUrl.Album(childComplexity), true
 
 	case "AlbumDistributionServiceUrl.id":
 		if e.complexity.AlbumDistributionServiceUrl.ID == nil {
@@ -1100,13 +1089,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.OriginalSongDistributionServiceURL.ID(childComplexity), true
 
-	case "OriginalSongDistributionServiceURL.originalSong":
-		if e.complexity.OriginalSongDistributionServiceURL.OriginalSong == nil {
-			break
-		}
-
-		return e.complexity.OriginalSongDistributionServiceURL.OriginalSong(childComplexity), true
-
 	case "OriginalSongDistributionServiceURL.service":
 		if e.complexity.OriginalSongDistributionServiceURL.Service == nil {
 			break
@@ -1176,13 +1158,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.ProductDistributionServiceURL.ID(childComplexity), true
-
-	case "ProductDistributionServiceURL.product":
-		if e.complexity.ProductDistributionServiceURL.Product == nil {
-			break
-		}
-
-		return e.complexity.ProductDistributionServiceURL.Product(childComplexity), true
 
 	case "ProductDistributionServiceURL.service":
 		if e.complexity.ProductDistributionServiceURL.Service == nil {
@@ -1596,13 +1571,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SongDistributionServiceUrl.Service(childComplexity), true
 
-	case "SongDistributionServiceUrl.song":
-		if e.complexity.SongDistributionServiceUrl.Song == nil {
-			break
-		}
-
-		return e.complexity.SongDistributionServiceUrl.Song(childComplexity), true
-
 	case "SongDistributionServiceUrl.url":
 		if e.complexity.SongDistributionServiceUrl.URL == nil {
 			break
@@ -1872,7 +1840,6 @@ enum DistributionService {
 # product_distribution_service_urls tableの定義
 type ProductDistributionServiceURL {
   id: ID!
-  product: Product!
   service: DistributionService!
   url: String!
 }
@@ -1880,7 +1847,6 @@ type ProductDistributionServiceURL {
 # original_song_distribution_service_urls tableの定義
 type OriginalSongDistributionServiceURL {
   id: ID!
-  originalSong: OriginalSong!
   service: DistributionService!
   url: String!
 }
@@ -2034,7 +2000,6 @@ type ConsignmentShop {
 
 type AlbumDistributionServiceUrl {
   id: ID!
-  album: Album!
   service: DistributionService!
   url: String!
 }
@@ -2081,7 +2046,6 @@ type Song {
 
 type SongDistributionServiceUrl {
   id: ID!
-  song: Song!
   service: DistributionService!
   url: String!
 }
@@ -3268,8 +3232,6 @@ func (ec *executionContext) fieldContext_Album_distributionUrls(ctx context.Cont
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_AlbumDistributionServiceUrl_id(ctx, field)
-			case "album":
-				return ec.fieldContext_AlbumDistributionServiceUrl_album(ctx, field)
 			case "service":
 				return ec.fieldContext_AlbumDistributionServiceUrl_service(ctx, field)
 			case "url":
@@ -3480,94 +3442,6 @@ func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_id(ctx cont
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _AlbumDistributionServiceUrl_album(ctx context.Context, field graphql.CollectedField, obj *model.AlbumDistributionServiceURL) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_AlbumDistributionServiceUrl_album(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Album, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Album)
-	fc.Result = res
-	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_AlbumDistributionServiceUrl_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "AlbumDistributionServiceUrl",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Album_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Album_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Album_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Album_slug(ctx, field)
-			case "releaseCircleName":
-				return ec.fieldContext_Album_releaseCircleName(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Album_releaseDate(ctx, field)
-			case "event":
-				return ec.fieldContext_Album_event(ctx, field)
-			case "subEvent":
-				return ec.fieldContext_Album_subEvent(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Album_searchEnabled(ctx, field)
-			case "albumNumber":
-				return ec.fieldContext_Album_albumNumber(ctx, field)
-			case "eventPrice":
-				return ec.fieldContext_Album_eventPrice(ctx, field)
-			case "currency":
-				return ec.fieldContext_Album_currency(ctx, field)
-			case "credit":
-				return ec.fieldContext_Album_credit(ctx, field)
-			case "introduction":
-				return ec.fieldContext_Album_introduction(ctx, field)
-			case "url":
-				return ec.fieldContext_Album_url(ctx, field)
-			case "circles":
-				return ec.fieldContext_Album_circles(ctx, field)
-			case "consignmentShops":
-				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Album_distributionUrls(ctx, field)
-			case "upcs":
-				return ec.fieldContext_Album_upcs(ctx, field)
-			case "genres":
-				return ec.fieldContext_Album_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Album_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
 		},
 	}
 	return fc, nil
@@ -7594,8 +7468,6 @@ func (ec *executionContext) fieldContext_OriginalSong_distributionUrls(ctx conte
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_OriginalSongDistributionServiceURL_id(ctx, field)
-			case "originalSong":
-				return ec.fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx, field)
 			case "service":
 				return ec.fieldContext_OriginalSongDistributionServiceURL_service(ctx, field)
 			case "url":
@@ -7646,70 +7518,6 @@ func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_id(c
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _OriginalSongDistributionServiceURL_originalSong(ctx context.Context, field graphql.CollectedField, obj *model.OriginalSongDistributionServiceURL) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.OriginalSong, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.OriginalSong)
-	fc.Result = res
-	return ec.marshalNOriginalSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐOriginalSong(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_OriginalSongDistributionServiceURL_originalSong(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "OriginalSongDistributionServiceURL",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_OriginalSong_id(ctx, field)
-			case "product":
-				return ec.fieldContext_OriginalSong_product(ctx, field)
-			case "name":
-				return ec.fieldContext_OriginalSong_name(ctx, field)
-			case "composer":
-				return ec.fieldContext_OriginalSong_composer(ctx, field)
-			case "arranger":
-				return ec.fieldContext_OriginalSong_arranger(ctx, field)
-			case "trackNumber":
-				return ec.fieldContext_OriginalSong_trackNumber(ctx, field)
-			case "isOriginal":
-				return ec.fieldContext_OriginalSong_isOriginal(ctx, field)
-			case "sourceId":
-				return ec.fieldContext_OriginalSong_sourceId(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_OriginalSong_distributionUrls(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type OriginalSong", field.Name)
 		},
 	}
 	return fc, nil
@@ -8128,8 +7936,6 @@ func (ec *executionContext) fieldContext_Product_distributionUrls(ctx context.Co
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_ProductDistributionServiceURL_id(ctx, field)
-			case "product":
-				return ec.fieldContext_ProductDistributionServiceURL_product(ctx, field)
 			case "service":
 				return ec.fieldContext_ProductDistributionServiceURL_service(ctx, field)
 			case "url":
@@ -8180,66 +7986,6 @@ func (ec *executionContext) fieldContext_ProductDistributionServiceURL_id(ctx co
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _ProductDistributionServiceURL_product(ctx context.Context, field graphql.CollectedField, obj *model.ProductDistributionServiceURL) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_ProductDistributionServiceURL_product(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Product, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Product)
-	fc.Result = res
-	return ec.marshalNProduct2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProduct(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_ProductDistributionServiceURL_product(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "ProductDistributionServiceURL",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Product_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Product_name(ctx, field)
-			case "shortName":
-				return ec.fieldContext_Product_shortName(ctx, field)
-			case "productType":
-				return ec.fieldContext_Product_productType(ctx, field)
-			case "seriesNumber":
-				return ec.fieldContext_Product_seriesNumber(ctx, field)
-			case "originalSongs":
-				return ec.fieldContext_Product_originalSongs(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Product_distributionUrls(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
 	}
 	return fc, nil
@@ -10563,8 +10309,6 @@ func (ec *executionContext) fieldContext_Song_distributionUrls(ctx context.Conte
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SongDistributionServiceUrl_id(ctx, field)
-			case "song":
-				return ec.fieldContext_SongDistributionServiceUrl_song(ctx, field)
 			case "service":
 				return ec.fieldContext_SongDistributionServiceUrl_service(ctx, field)
 			case "url":
@@ -11323,114 +11067,6 @@ func (ec *executionContext) fieldContext_SongDistributionServiceUrl_id(ctx conte
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _SongDistributionServiceUrl_song(ctx context.Context, field graphql.CollectedField, obj *model.SongDistributionServiceURL) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SongDistributionServiceUrl_song(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Song, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Song)
-	fc.Result = res
-	return ec.marshalNSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSong(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_SongDistributionServiceUrl_song(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "SongDistributionServiceUrl",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Song_id(ctx, field)
-			case "circle":
-				return ec.fieldContext_Song_circle(ctx, field)
-			case "album":
-				return ec.fieldContext_Song_album(ctx, field)
-			case "name":
-				return ec.fieldContext_Song_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Song_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Song_slug(ctx, field)
-			case "discNumber":
-				return ec.fieldContext_Song_discNumber(ctx, field)
-			case "trackNumber":
-				return ec.fieldContext_Song_trackNumber(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Song_releaseDate(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Song_searchEnabled(ctx, field)
-			case "length":
-				return ec.fieldContext_Song_length(ctx, field)
-			case "bpm":
-				return ec.fieldContext_Song_bpm(ctx, field)
-			case "description":
-				return ec.fieldContext_Song_description(ctx, field)
-			case "displayComposer":
-				return ec.fieldContext_Song_displayComposer(ctx, field)
-			case "displayArranger":
-				return ec.fieldContext_Song_displayArranger(ctx, field)
-			case "displayRearranger":
-				return ec.fieldContext_Song_displayRearranger(ctx, field)
-			case "displayLyricist":
-				return ec.fieldContext_Song_displayLyricist(ctx, field)
-			case "displayVocalist":
-				return ec.fieldContext_Song_displayVocalist(ctx, field)
-			case "displayOriginalSong":
-				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Song_distributionUrls(ctx, field)
-			case "isrcs":
-				return ec.fieldContext_Song_isrcs(ctx, field)
-			case "arrangeCircles":
-				return ec.fieldContext_Song_arrangeCircles(ctx, field)
-			case "composers":
-				return ec.fieldContext_Song_composers(ctx, field)
-			case "arrangers":
-				return ec.fieldContext_Song_arrangers(ctx, field)
-			case "rearrangers":
-				return ec.fieldContext_Song_rearrangers(ctx, field)
-			case "lyricists":
-				return ec.fieldContext_Song_lyricists(ctx, field)
-			case "vocalists":
-				return ec.fieldContext_Song_vocalists(ctx, field)
-			case "originalSongs":
-				return ec.fieldContext_Song_originalSongs(ctx, field)
-			case "circles":
-				return ec.fieldContext_Song_circles(ctx, field)
-			case "genres":
-				return ec.fieldContext_Song_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Song_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Song", field.Name)
 		},
 	}
 	return fc, nil
@@ -14661,13 +14297,6 @@ func (ec *executionContext) _AlbumDistributionServiceUrl(ctx context.Context, se
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "album":
-
-			out.Values[i] = ec._AlbumDistributionServiceUrl_album(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "service":
 
 			out.Values[i] = ec._AlbumDistributionServiceUrl_service(ctx, field, obj)
@@ -15536,13 +15165,6 @@ func (ec *executionContext) _OriginalSongDistributionServiceURL(ctx context.Cont
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "originalSong":
-
-			out.Values[i] = ec._OriginalSongDistributionServiceURL_originalSong(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "service":
 
 			out.Values[i] = ec._OriginalSongDistributionServiceURL_service(ctx, field, obj)
@@ -15651,13 +15273,6 @@ func (ec *executionContext) _ProductDistributionServiceURL(ctx context.Context, 
 		case "id":
 
 			out.Values[i] = ec._ProductDistributionServiceURL_id(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "product":
-
-			out.Values[i] = ec._ProductDistributionServiceURL_product(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -16303,13 +15918,6 @@ func (ec *executionContext) _SongDistributionServiceUrl(ctx context.Context, sel
 		case "id":
 
 			out.Values[i] = ec._SongDistributionServiceUrl_id(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "song":
-
-			out.Values[i] = ec._SongDistributionServiceUrl_song(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++

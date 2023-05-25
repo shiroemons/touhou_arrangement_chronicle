@@ -54,7 +54,6 @@ enum DistributionService {
 # product_distribution_service_urls tableの定義
 type ProductDistributionServiceURL {
   id: ID!
-  product: Product!
   service: DistributionService!
   url: String!
 }
@@ -62,7 +61,6 @@ type ProductDistributionServiceURL {
 # original_song_distribution_service_urls tableの定義
 type OriginalSongDistributionServiceURL {
   id: ID!
-  originalSong: OriginalSong!
   service: DistributionService!
   url: String!
 }
@@ -216,7 +214,6 @@ type ConsignmentShop {
 
 type AlbumDistributionServiceUrl {
   id: ID!
-  album: Album!
   service: DistributionService!
   url: String!
 }
@@ -263,7 +260,6 @@ type Song {
 
 type SongDistributionServiceUrl {
   id: ID!
-  song: Song!
   service: DistributionService!
   url: String!
 }
