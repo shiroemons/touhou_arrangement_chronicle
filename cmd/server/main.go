@@ -15,6 +15,7 @@ import (
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/resolver"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infra/store"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/server"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"
@@ -35,6 +36,8 @@ func inject() fx.Option {
 		store.Module,
 		repository.Module,
 		server.Module,
+		loader.InitModule,
+		loader.Module,
 		resolver.Module,
 		service.Module,
 

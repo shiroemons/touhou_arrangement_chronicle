@@ -36,6 +36,7 @@ type Config struct {
 }
 
 type ResolverRoot interface {
+	OriginalSong() OriginalSongResolver
 	Query() QueryResolver
 }
 
@@ -313,6 +314,9 @@ type ComplexityRoot struct {
 	}
 }
 
+type OriginalSongResolver interface {
+	Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error)
+}
 type QueryResolver interface {
 	GetProductByID(ctx context.Context, id string) (*model.Product, error)
 	GetOriginalSongByID(ctx context.Context, id string) (*model.OriginalSong, error)
@@ -7239,7 +7243,7 @@ func (ec *executionContext) _OriginalSong_product(ctx context.Context, field gra
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Product, nil
+		return ec.resolvers.OriginalSong().Product(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -7260,8 +7264,8 @@ func (ec *executionContext) fieldContext_OriginalSong_product(ctx context.Contex
 	fc = &graphql.FieldContext{
 		Object:     "OriginalSong",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
@@ -15433,63 +15437,76 @@ func (ec *executionContext) _OriginalSong(ctx context.Context, sel ast.Selection
 			out.Values[i] = ec._OriginalSong_id(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "product":
+			field := field
 
-			out.Values[i] = ec._OriginalSong_product(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._OriginalSong_product(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "name":
 
 			out.Values[i] = ec._OriginalSong_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "composer":
 
 			out.Values[i] = ec._OriginalSong_composer(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "arranger":
 
 			out.Values[i] = ec._OriginalSong_arranger(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "trackNumber":
 
 			out.Values[i] = ec._OriginalSong_trackNumber(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "isOriginal":
 
 			out.Values[i] = ec._OriginalSong_isOriginal(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "sourceId":
 
 			out.Values[i] = ec._OriginalSong_sourceId(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "distributionUrls":
 
 			out.Values[i] = ec._OriginalSong_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
@@ -17760,6 +17777,10 @@ func (ec *executionContext) marshalNOriginalSongDistributionServiceURL2ᚖgithub
 		return graphql.Null
 	}
 	return ec._OriginalSongDistributionServiceURL(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNProduct2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProduct(ctx context.Context, sel ast.SelectionSet, v model.Product) graphql.Marshaler {
+	return ec._Product(ctx, sel, &v)
 }
 
 func (ec *executionContext) marshalNProduct2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Product) graphql.Marshaler {

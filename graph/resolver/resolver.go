@@ -16,20 +16,23 @@ import (
 type Params struct {
 	fx.In
 
-	Logger     *zap.Logger
-	ProductSrv *service.ProductService
+	Logger          *zap.Logger
+	ProductSrv      *service.ProductService
+	OriginalSongSrv *service.OriginalSongService
 }
 
 type Resolver struct {
-	logger     *zap.Logger
-	productSrv *service.ProductService
+	logger          *zap.Logger
+	productSrv      *service.ProductService
+	originalSongSrv *service.OriginalSongService
 }
 
 // NewResolver Resolver Constructor
 func NewResolver(p Params) *Resolver {
 	return &Resolver{
-		logger:     p.Logger,
-		productSrv: p.ProductSrv,
+		logger:          p.Logger,
+		productSrv:      p.ProductSrv,
+		originalSongSrv: p.OriginalSongSrv,
 	}
 }
 

@@ -10,7 +10,17 @@ import (
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
 )
+
+// Product is the resolver for the product field.
+func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error) {
+	product, err := loader.LoadProduct(ctx, obj.Product.ID)
+	if err != nil {
+		return nil, err
+	}
+	return product, nil
+}
 
 // GetProductByID is the resolver for the getProductById field.
 func (r *queryResolver) GetProductByID(ctx context.Context, id string) (*model.Product, error) {
@@ -33,7 +43,11 @@ func (r *queryResolver) GetProducts(ctx context.Context) ([]*model.Product, erro
 
 // GetOriginalSongs is the resolver for the getOriginalSongs field.
 func (r *queryResolver) GetOriginalSongs(ctx context.Context) ([]*model.OriginalSong, error) {
-	panic(fmt.Errorf("not implemented: GetOriginalSongs - getOriginalSongs"))
+	os, err := r.originalSongSrv.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return os.ToGraphQLs(), nil
 }
 
 // GetEventSeriesByID is the resolver for the getEventSeriesById field.
@@ -96,20 +110,11 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 	panic(fmt.Errorf("not implemented: GetTags - getTags"))
 }
 
+// OriginalSong returns generated.OriginalSongResolver implementation.
+func (r *Resolver) OriginalSong() generated.OriginalSongResolver { return &originalSongResolver{r} }
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
+type originalSongResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//     it when you're done.
-//   - You have helper methods in this file. Move them out to keep these resolver files clean.
-func (r *queryResolver) GetArtists(ctx context.Context) ([]*model.Artist, error) {
-	panic(fmt.Errorf("not implemented: GetArtists - getArtists"))
-}
-func (r *queryResolver) GetCircles(ctx context.Context) ([]*model.Circle, error) {
-	panic(fmt.Errorf("not implemented: GetCircles - getCircles"))
-}
