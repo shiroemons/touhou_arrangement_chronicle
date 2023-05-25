@@ -18,7 +18,10 @@ func NewProductRepository(db *bun.DB) *ProductRepository {
 
 func (r *ProductRepository) All(ctx context.Context) ([]*entity.Product, error) {
 	products := make([]*entity.Product, 0)
-	err := r.db.NewSelect().Model(&products).Order("id ASC").Scan(ctx)
+	err := r.db.NewSelect().Model(&products).
+		Relation("OriginalSongs").
+		Relation("ProductDistributionServiceURLs").
+		Order("id ASC").Scan(ctx)
 	if err != nil {
 		return nil, err
 	}

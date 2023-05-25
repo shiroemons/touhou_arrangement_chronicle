@@ -17,6 +17,7 @@ type Product struct {
 	ShortName                      string                           `bun:"short_name,nullzero,notnull"`
 	ProductType                    string                           `bun:"product_type,nullzero,notnull"`
 	SeriesNumber                   float64                          `bun:"series_number,nullzero,notnull"`
+	OriginalSongs                  []*OriginalSong                  `bun:"rel:has-many,join:id=product_id"`
 	ProductDistributionServiceURLs []*ProductDistributionServiceURL `bun:"rel:has-many,join:id=product_id"`
 	CreatedAt                      time.Time                        `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                      time.Time                        `bun:"updated_at,notnull,default:current_timestamp"`
@@ -32,12 +33,26 @@ func (e *Product) ToGraphQL() *model.Product {
 		zap.S().Warnf("ToProductType error: %s", err)
 	}
 
+	// OriginalSongsをmodel.OriginalSongに変換
+	var originalSongs []*model.OriginalSong
+	for _, originalSong := range e.OriginalSongs {
+		originalSongs = append(originalSongs, originalSong.ToGraphQL())
+	}
+
+	// ProductDistributionServiceURLsをmodel.ProductDistributionServiceURLに変換
+	var distributionServiceURLs []*model.ProductDistributionServiceURL
+	for _, distributionServiceURL := range e.ProductDistributionServiceURLs {
+		distributionServiceURLs = append(distributionServiceURLs, distributionServiceURL.ToGraphQL())
+	}
+
 	return &model.Product{
-		ID:           e.ID,
-		Name:         e.Name,
-		ShortName:    e.ShortName,
-		ProductType:  productType,
-		SeriesNumber: e.SeriesNumber,
+		ID:               e.ID,
+		Name:             e.Name,
+		ShortName:        e.ShortName,
+		ProductType:      productType,
+		SeriesNumber:     e.SeriesNumber,
+		OriginalSongs:    originalSongs,
+		DistributionUrls: distributionServiceURLs,
 	}
 }
 

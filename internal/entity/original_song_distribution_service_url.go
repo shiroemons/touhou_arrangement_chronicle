@@ -4,6 +4,9 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
+	"go.uber.org/zap"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type OriginalSongDistributionServiceURL struct {
@@ -15,4 +18,17 @@ type OriginalSongDistributionServiceURL struct {
 	URL            string    `bun:"url,nullzero,notnull"`
 	CreatedAt      time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt      time.Time `bun:"updated_at,notnull,default:current_timestamp"`
+}
+
+func (e *OriginalSongDistributionServiceURL) ToGraphQL() *model.OriginalSongDistributionServiceURL {
+	service, err := model.ToDistributionService(e.Service)
+	if err != nil {
+		zap.S().Warnf("ToDistributionService error: %s", err)
+	}
+
+	return &model.OriginalSongDistributionServiceURL{
+		ID:      e.ID,
+		Service: service,
+		URL:     e.URL,
+	}
 }
