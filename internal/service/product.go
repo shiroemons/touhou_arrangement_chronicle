@@ -22,3 +22,11 @@ func (s *ProductService) GetAll(ctx context.Context) (entity.Products, error) {
 	}
 	return products, nil
 }
+
+func (s *ProductService) Get(ctx context.Context, id string) (*entity.Product, error) {
+	product, err := s.pRepo.FindByID(ctx, id)
+	if err != nil {
+		return &entity.Product{}, SrvErr(ctx, err.Error())
+	}
+	return product, nil
+}

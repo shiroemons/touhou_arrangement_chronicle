@@ -31,6 +31,8 @@ func (r *ProductRepository) All(ctx context.Context) ([]*entity.Product, error) 
 func (r *ProductRepository) FindByID(ctx context.Context, id string) (*entity.Product, error) {
 	product := new(entity.Product)
 	err := r.db.NewSelect().Model(product).
+		Relation("OriginalSongs").
+		Relation("ProductDistributionServiceURLs").
 		Where("id = ?", id).
 		Scan(ctx)
 	if err != nil {
@@ -41,7 +43,11 @@ func (r *ProductRepository) FindByID(ctx context.Context, id string) (*entity.Pr
 
 func (r *ProductRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Product, error) {
 	products := make([]*entity.Product, 0)
-	err := r.db.NewSelect().Model(&products).Where("id IN (?)", bun.In(ids)).Scan(ctx)
+	err := r.db.NewSelect().Model(&products).
+		Relation("OriginalSongs").
+		Relation("ProductDistributionServiceURLs").
+		Where("id IN (?)", bun.In(ids)).
+		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
