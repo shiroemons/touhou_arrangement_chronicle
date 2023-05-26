@@ -33,7 +33,10 @@ func (r *OriginalSongRepository) All(ctx context.Context) ([]*entity.OriginalSon
 func (r *OriginalSongRepository) FindByID(ctx context.Context, id string) (*entity.OriginalSong, error) {
 	originalSong := new(entity.OriginalSong)
 	err := r.db.NewSelect().Model(originalSong).
-		Where("id = ?", id).
+		Relation("Product").
+		Relation("Product.ProductDistributionServiceURLs").
+		Relation("OriginalSongDistributionServiceURLs").
+		Where("os.id = ?", id).
 		Scan(ctx)
 	if err != nil {
 		return nil, err

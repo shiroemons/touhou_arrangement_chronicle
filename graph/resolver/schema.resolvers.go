@@ -29,7 +29,11 @@ func (r *queryResolver) GetProductByID(ctx context.Context, id string) (*model.P
 
 // GetOriginalSongByID is the resolver for the getOriginalSongById field.
 func (r *queryResolver) GetOriginalSongByID(ctx context.Context, id string) (*model.OriginalSong, error) {
-	panic(fmt.Errorf("not implemented: GetOriginalSongByID - getOriginalSongById"))
+	os, err := r.originalSongSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return os.ToGraphQL(), nil
 }
 
 // GetProducts is the resolver for the getProducts field.

@@ -22,3 +22,11 @@ func (s *OriginalSongService) GetAll(ctx context.Context) (entity.OriginalSongs,
 	}
 	return originalSongs, nil
 }
+
+func (s *OriginalSongService) Get(ctx context.Context, id string) (*entity.OriginalSong, error) {
+	originalSong, err := s.osRepo.FindByID(ctx, id)
+	if err != nil {
+		return &entity.OriginalSong{}, SrvErr(ctx, err.Error())
+	}
+	return originalSong, nil
+}

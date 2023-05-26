@@ -10,3 +10,8 @@ type OriginalSongRepository interface {
 	All(ctx context.Context) ([]*entity.OriginalSong, error)
 	FindByID(ctx context.Context, id string) (*entity.OriginalSong, error)
 }
+
+type OriginalSongService interface {
+	GetAll(ctx context.Context) (entity.OriginalSongs, error)
+	Get(ctx context.Context, id string) (*entity.OriginalSong, error)
+}
