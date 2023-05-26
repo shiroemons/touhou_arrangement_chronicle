@@ -113,7 +113,6 @@ type Event {
 # sub_events tableの定義
 type SubEvent {
   id: ID!
-  event: Event!
   name: String!
   displayName: String!
   slug: String!

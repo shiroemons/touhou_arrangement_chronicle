@@ -12,3 +12,7 @@ type SubEventRepository interface {
 	Delete(ctx context.Context, subEvent *entity.SubEvent) error
 	FindByID(ctx context.Context, id string) (*entity.SubEvent, error)
 }
+
+type SubEventService interface {
+	Get(ctx context.Context, id string) (*entity.SubEvent, error)
+}

@@ -68,3 +68,15 @@ func (r *EventSeriesRepository) FindByID(ctx context.Context, id string) (*entit
 	}
 	return eventSeries, nil
 }
+
+func (r *EventSeriesRepository) All(ctx context.Context) ([]*entity.EventSeries, error) {
+	eventSeries := make([]*entity.EventSeries, 0)
+	err := r.db.NewSelect().Model(&eventSeries).
+		Relation("Events").
+		Relation("Events.SubEvents").
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return eventSeries, nil
+}

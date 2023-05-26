@@ -233,7 +233,6 @@ type SongTag struct {
 
 type SubEvent struct {
 	ID          string      `json:"id"`
-	Event       *Event      `json:"event"`
 	Name        string      `json:"name"`
 	DisplayName string      `json:"displayName"`
 	Slug        string      `json:"slug"`

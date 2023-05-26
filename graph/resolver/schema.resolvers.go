@@ -60,22 +60,38 @@ func (r *queryResolver) GetOriginalSongs(ctx context.Context) ([]*model.Original
 
 // GetEventSeriesByID is the resolver for the getEventSeriesById field.
 func (r *queryResolver) GetEventSeriesByID(ctx context.Context, id string) (*model.EventSeries, error) {
-	panic(fmt.Errorf("not implemented: GetEventSeriesByID - getEventSeriesById"))
+	es, err := r.eventSeriesSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return es.ToGraphQL(), nil
 }
 
 // GetEventByID is the resolver for the getEventById field.
 func (r *queryResolver) GetEventByID(ctx context.Context, id string) (*model.Event, error) {
-	panic(fmt.Errorf("not implemented: GetEventByID - getEventById"))
+	e, err := r.eventSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return e.ToGraphQL(), nil
 }
 
 // GetSubEventByID is the resolver for the getSubEventById field.
 func (r *queryResolver) GetSubEventByID(ctx context.Context, id string) (*model.SubEvent, error) {
-	panic(fmt.Errorf("not implemented: GetSubEventByID - getSubEventById"))
+	se, err := r.subEventSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return se.ToGraphQL(), nil
 }
 
 // GetEventSeries is the resolver for the getEventSeries field.
 func (r *queryResolver) GetEventSeries(ctx context.Context) ([]*model.EventSeries, error) {
-	panic(fmt.Errorf("not implemented: GetEventSeries - getEventSeries"))
+	es, err := r.eventSeriesSrv.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return es.ToGraphQLs(), nil
 }
 
 // GetArtistByID is the resolver for the getArtistById field.

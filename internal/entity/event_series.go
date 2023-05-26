@@ -4,6 +4,8 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type EventSeries struct {
@@ -16,4 +18,31 @@ type EventSeries struct {
 	Events      []*Event  `bun:"rel:has-many,join:id=event_series_id"`
 	CreatedAt   time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt   time.Time `bun:"updated_at,notnull,default:current_timestamp"`
+}
+
+func (e *EventSeries) ToGraphQL() *model.EventSeries {
+	var events []*model.Event
+	for _, event := range e.Events {
+		events = append(events, event.ToGraphQL())
+	}
+
+	return &model.EventSeries{
+		ID:          e.ID,
+		Name:        e.Name,
+		DisplayName: e.DisplayName,
+		Slug:        e.Slug,
+		Events:      events,
+	}
+}
+
+// EventSeriesArr Method Injection
+type EventSeriesArr []*EventSeries
+
+// ToGraphQLs Convert all to GraphQL Schema
+func (arr EventSeriesArr) ToGraphQLs() []*model.EventSeries {
+	res := make([]*model.EventSeries, len(arr))
+	for i, es := range arr {
+		res[i] = es.ToGraphQL()
+	}
+	return res
 }

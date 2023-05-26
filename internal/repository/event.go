@@ -61,10 +61,24 @@ func (r *EventRepository) Delete(ctx context.Context, event *entity.Event) error
 func (r *EventRepository) FindByID(ctx context.Context, id string) (*entity.Event, error) {
 	event := new(entity.Event)
 	err := r.db.NewSelect().Model(event).
-		Where("id = ?", id).
+		Relation("EventSeries").
+		Where("e.id = ?", id).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
 	return event, nil
+}
+
+func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {
+	events := make([]*entity.Event, 0)
+	err := r.db.NewSelect().Model(&events).
+		Relation("EventSeries").
+		Relation("SubEvents").
+		Order("event_dates DESC").
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return events, nil
 }

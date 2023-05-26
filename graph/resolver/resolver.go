@@ -19,12 +19,18 @@ type Params struct {
 	Logger          *zap.Logger
 	ProductSrv      *service.ProductService
 	OriginalSongSrv *service.OriginalSongService
+	EventSeriesSrv  *service.EventSeriesService
+	EventSrv        *service.EventService
+	SubEventSrv     *service.SubEventService
 }
 
 type Resolver struct {
 	logger          *zap.Logger
 	productSrv      *service.ProductService
 	originalSongSrv *service.OriginalSongService
+	eventSeriesSrv  *service.EventSeriesService
+	eventSrv        *service.EventService
+	subEventSrv     *service.SubEventService
 }
 
 // NewResolver Resolver Constructor
@@ -33,6 +39,9 @@ func NewResolver(p Params) *Resolver {
 		logger:          p.Logger,
 		productSrv:      p.ProductSrv,
 		originalSongSrv: p.OriginalSongSrv,
+		eventSeriesSrv:  p.EventSeriesSrv,
+		eventSrv:        p.EventSrv,
+		subEventSrv:     p.SubEventSrv,
 	}
 }
 

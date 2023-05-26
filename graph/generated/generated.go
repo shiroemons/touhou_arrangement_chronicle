@@ -290,7 +290,6 @@ type ComplexityRoot struct {
 		Date        func(childComplexity int) int
 		Description func(childComplexity int) int
 		DisplayName func(childComplexity int) int
-		Event       func(childComplexity int) int
 		ID          func(childComplexity int) int
 		Name        func(childComplexity int) int
 		Slug        func(childComplexity int) int
@@ -1655,13 +1654,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SubEvent.DisplayName(childComplexity), true
 
-	case "SubEvent.event":
-		if e.complexity.SubEvent.Event == nil {
-			break
-		}
-
-		return e.complexity.SubEvent.Event(childComplexity), true
-
 	case "SubEvent.id":
 		if e.complexity.SubEvent.ID == nil {
 			break
@@ -1899,7 +1891,6 @@ type Event {
 # sub_events tableの定義
 type SubEvent {
   id: ID!
-  event: Event!
   name: String!
   displayName: String!
   slug: String!
@@ -2733,8 +2724,6 @@ func (ec *executionContext) fieldContext_Album_subEvent(ctx context.Context, fie
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SubEvent_id(ctx, field)
-			case "event":
-				return ec.fieldContext_SubEvent_event(ctx, field)
 			case "name":
 				return ec.fieldContext_SubEvent_name(ctx, field)
 			case "displayName":
@@ -6502,8 +6491,6 @@ func (ec *executionContext) fieldContext_Event_subEvents(ctx context.Context, fi
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SubEvent_id(ctx, field)
-			case "event":
-				return ec.fieldContext_SubEvent_event(ctx, field)
 			case "name":
 				return ec.fieldContext_SubEvent_name(ctx, field)
 			case "displayName":
@@ -8529,8 +8516,6 @@ func (ec *executionContext) fieldContext_Query_getSubEventById(ctx context.Conte
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SubEvent_id(ctx, field)
-			case "event":
-				return ec.fieldContext_SubEvent_event(ctx, field)
 			case "name":
 				return ec.fieldContext_SubEvent_name(ctx, field)
 			case "displayName":
@@ -11693,82 +11678,6 @@ func (ec *executionContext) fieldContext_SubEvent_id(ctx context.Context, field 
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _SubEvent_event(ctx context.Context, field graphql.CollectedField, obj *model.SubEvent) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SubEvent_event(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Event, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Event)
-	fc.Result = res
-	return ec.marshalNEvent2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEvent(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_SubEvent_event(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "SubEvent",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Event_id(ctx, field)
-			case "series":
-				return ec.fieldContext_Event_series(ctx, field)
-			case "name":
-				return ec.fieldContext_Event_name(ctx, field)
-			case "displayName":
-				return ec.fieldContext_Event_displayName(ctx, field)
-			case "slug":
-				return ec.fieldContext_Event_slug(ctx, field)
-			case "startDate":
-				return ec.fieldContext_Event_startDate(ctx, field)
-			case "endDate":
-				return ec.fieldContext_Event_endDate(ctx, field)
-			case "status":
-				return ec.fieldContext_Event_status(ctx, field)
-			case "format":
-				return ec.fieldContext_Event_format(ctx, field)
-			case "regionCode":
-				return ec.fieldContext_Event_regionCode(ctx, field)
-			case "address":
-				return ec.fieldContext_Event_address(ctx, field)
-			case "description":
-				return ec.fieldContext_Event_description(ctx, field)
-			case "url":
-				return ec.fieldContext_Event_url(ctx, field)
-			case "twitterUrl":
-				return ec.fieldContext_Event_twitterUrl(ctx, field)
-			case "subEvents":
-				return ec.fieldContext_Event_subEvents(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Event", field.Name)
 		},
 	}
 	return fc, nil
@@ -16058,13 +15967,6 @@ func (ec *executionContext) _SubEvent(ctx context.Context, sel ast.SelectionSet,
 		case "id":
 
 			out.Values[i] = ec._SubEvent_id(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "event":
-
-			out.Values[i] = ec._SubEvent_event(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++

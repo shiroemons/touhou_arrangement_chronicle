@@ -12,3 +12,7 @@ type EventRepository interface {
 	Delete(ctx context.Context, event *entity.Event) error
 	FindByID(ctx context.Context, id string) (*entity.Event, error)
 }
+
+type EventService interface {
+	Get(ctx context.Context, id string) (*entity.Event, error)
+}
