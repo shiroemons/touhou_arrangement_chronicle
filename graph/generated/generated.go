@@ -1962,7 +1962,7 @@ type Album {
   subEvent: SubEvent
   searchEnabled: Boolean!
   albumNumber: String!
-  eventPrice: Float
+  eventPrice: String
   currency: String!
   credit: String!
   introduction: String!
@@ -1994,7 +1994,7 @@ type ConsignmentShop {
   shop: Shop!
   url: String!
   taxIncluded: Boolean!
-  shopPrice: Float!
+  shopPrice: String!
   currency: String!
 }
 
@@ -2865,9 +2865,9 @@ func (ec *executionContext) _Album_eventPrice(ctx context.Context, field graphql
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*float64)
+	res := resTmp.(*string)
 	fc.Result = res
-	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Album_eventPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -2877,7 +2877,7 @@ func (ec *executionContext) fieldContext_Album_eventPrice(ctx context.Context, f
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Float does not have child fields")
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -5777,9 +5777,9 @@ func (ec *executionContext) _ConsignmentShop_shopPrice(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.(float64)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNFloat2float64(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_ConsignmentShop_shopPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -5789,7 +5789,7 @@ func (ec *executionContext) fieldContext_ConsignmentShop_shopPrice(ctx context.C
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Float does not have child fields")
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -18288,22 +18288,6 @@ func (ec *executionContext) marshalOEventSeries2ᚖgithubᚗcomᚋshiroemonsᚋt
 		return graphql.Null
 	}
 	return ec._EventSeries(ctx, sel, v)
-}
-
-func (ec *executionContext) unmarshalOFloat2ᚖfloat64(ctx context.Context, v interface{}) (*float64, error) {
-	if v == nil {
-		return nil, nil
-	}
-	res, err := graphql.UnmarshalFloatContext(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
-}
-
-func (ec *executionContext) marshalOFloat2ᚖfloat64(ctx context.Context, sel ast.SelectionSet, v *float64) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	res := graphql.MarshalFloatContext(*v)
-	return graphql.WrapContextMarshaler(ctx, res)
 }
 
 func (ec *executionContext) unmarshalOInt2ᚖint(ctx context.Context, v interface{}) (*int, error) {

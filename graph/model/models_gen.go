@@ -19,7 +19,7 @@ type Album struct {
 	SubEvent          *SubEvent                      `json:"subEvent,omitempty"`
 	SearchEnabled     bool                           `json:"searchEnabled"`
 	AlbumNumber       string                         `json:"albumNumber"`
-	EventPrice        *float64                       `json:"eventPrice,omitempty"`
+	EventPrice        *string                        `json:"eventPrice,omitempty"`
 	Currency          string                         `json:"currency"`
 	Credit            string                         `json:"credit"`
 	Introduction      string                         `json:"introduction"`
@@ -97,13 +97,13 @@ type CircleTag struct {
 }
 
 type ConsignmentShop struct {
-	ID          string  `json:"id"`
-	Album       *Album  `json:"album"`
-	Shop        Shop    `json:"shop"`
-	URL         string  `json:"url"`
-	TaxIncluded bool    `json:"taxIncluded"`
-	ShopPrice   float64 `json:"shopPrice"`
-	Currency    string  `json:"currency"`
+	ID          string `json:"id"`
+	Album       *Album `json:"album"`
+	Shop        Shop   `json:"shop"`
+	URL         string `json:"url"`
+	TaxIncluded bool   `json:"taxIncluded"`
+	ShopPrice   string `json:"shopPrice"`
+	Currency    string `json:"currency"`
 }
 
 type Event struct {

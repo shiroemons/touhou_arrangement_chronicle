@@ -176,7 +176,7 @@ type Album {
   subEvent: SubEvent
   searchEnabled: Boolean!
   albumNumber: String!
-  eventPrice: Float
+  eventPrice: String
   currency: String!
   credit: String!
   introduction: String!
@@ -208,7 +208,7 @@ type ConsignmentShop {
   shop: Shop!
   url: String!
   taxIncluded: Boolean!
-  shopPrice: Float!
+  shopPrice: String!
   currency: String!
 }
 
