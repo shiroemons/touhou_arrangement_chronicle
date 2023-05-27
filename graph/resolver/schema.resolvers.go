@@ -132,7 +132,11 @@ func (r *queryResolver) CirclesByInitialLetterType(ctx context.Context, typeArg 
 
 // GetAlbumByID is the resolver for the getAlbumById field.
 func (r *queryResolver) GetAlbumByID(ctx context.Context, id string) (*model.Album, error) {
-	panic(fmt.Errorf("not implemented: GetAlbumByID - getAlbumById"))
+	album, err := r.albumSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return album.ToGraphQL(), nil
 }
 
 // GetSongByID is the resolver for the getSongById field.

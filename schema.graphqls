@@ -289,15 +289,14 @@ type Tag {
 
 type AlbumGenre {
   id: ID!
-  album: Album!
-  genre: Genre!
+  name: String!
   locked: Boolean!
 }
 
 type AlbumTag {
   id: ID!
-  album: Album!
-  tag: Tag!
+  name: String!
+  tagType: TagType!
   locked: Boolean!
 }
 

@@ -14,4 +14,5 @@ var Module = fx.Provide(
 	ArtistServiceProvider,
 	TagServiceProvider,
 	GenreServiceProvider,
+	AlbumServiceProvider,
 )

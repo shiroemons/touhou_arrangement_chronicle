@@ -5,6 +5,8 @@ import (
 
 	"github.com/shopspring/decimal"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type Album struct {
@@ -31,9 +33,64 @@ type Album struct {
 	AlbumDistributionServiceURLs []*AlbumDistributionServiceURL `bun:"rel:has-many,join:id=album_id"`
 	AlbumUPCs                    []*AlbumUPC                    `bun:"rel:has-many,join:id=album_id"`
 	Songs                        []*Song                        `bun:"rel:has-many,join:id=album_id"`
+	Genres                       []*AlbumGenre                  `bun:"rel:has-many,join:id=album_id"`
+	Tags                         []*AlbumTag                    `bun:"rel:has-many,join:id=album_id"`
 	Circles                      []*Circle                      `bun:"m2m:albums_circles,join:Album=Circle"`
-	Genres                       []*Genre                       `bun:"m2m:albums_genres,join:Album=Genre"`
-	Tags                         []*Tag                         `bun:"m2m:albums_tags,join:Album=Tag"`
 	CreatedAt                    time.Time                      `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                    time.Time                      `bun:"updated_at,notnull,default:current_timestamp"`
+}
+
+// ToGraphQL Convert to GraphQL Schema
+func (e *Album) ToGraphQL() *model.Album {
+	var circles []*model.Circle
+	for _, circle := range e.Circles {
+		circles = append(circles, circle.ToGraphQL())
+	}
+	var genres []*model.AlbumGenre
+	for _, genre := range e.Genres {
+		genres = append(genres, genre.ToGraphQL())
+	}
+	var tags []*model.AlbumTag
+	for _, tag := range e.Tags {
+		tags = append(tags, tag.ToGraphQL())
+	}
+
+	album := &model.Album{
+		ID:                e.ID,
+		Name:              e.Name,
+		NameReading:       e.NameReading,
+		Slug:              e.Slug,
+		ReleaseCircleName: e.ReleaseCircleName,
+		SearchEnabled:     e.SearchEnabled,
+		AlbumNumber:       e.AlbumNumber,
+		Currency:          e.Currency,
+		Credit:            e.Credit,
+		Introduction:      e.Introduction,
+		URL:               e.URL,
+		Circles:           circles,
+		Genres:            genres,
+		Tags:              tags,
+	}
+	if e.ReleaseDate != nil {
+		releaseDate := e.ReleaseDate.Format("2006-01-02")
+		album.ReleaseDate = &releaseDate
+	}
+	if e.EventID != "" {
+		album.Event = &model.Event{ID: e.EventID}
+	}
+	if e.SubEventID != "" {
+		album.SubEvent = &model.SubEvent{ID: e.SubEventID}
+	}
+
+	return album
+}
+
+type Albums []*Album
+
+func (arr Albums) ToGraphQLs() []*model.Album {
+	res := make([]*model.Album, len(arr))
+	for i, v := range arr {
+		res[i] = v.ToGraphQL()
+	}
+	return res
 }

@@ -69,8 +69,10 @@ func (r *AlbumRepository) FindByID(ctx context.Context, id string) (*entity.Albu
 		Relation("Songs").
 		Relation("Circles").
 		Relation("Genres").
+		Relation("Genres.Genre").
 		Relation("Tags").
-		Where("id = ?", id).
+		Relation("Tags.Tag").
+		Where("al.id = ?", id).
 		Scan(ctx)
 	if err != nil {
 		return nil, err

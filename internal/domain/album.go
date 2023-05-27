@@ -12,3 +12,7 @@ type AlbumRepository interface {
 	Delete(ctx context.Context, album *entity.Album) error
 	FindByID(ctx context.Context, id string) (*entity.Album, error)
 }
+
+type AlbumService interface {
+	Get(ctx context.Context, id string) (*entity.Album, error)
+}

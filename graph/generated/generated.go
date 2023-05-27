@@ -75,17 +75,16 @@ type ComplexityRoot struct {
 	}
 
 	AlbumGenre struct {
-		Album  func(childComplexity int) int
-		Genre  func(childComplexity int) int
 		ID     func(childComplexity int) int
 		Locked func(childComplexity int) int
+		Name   func(childComplexity int) int
 	}
 
 	AlbumTag struct {
-		Album  func(childComplexity int) int
-		ID     func(childComplexity int) int
-		Locked func(childComplexity int) int
-		Tag    func(childComplexity int) int
+		ID      func(childComplexity int) int
+		Locked  func(childComplexity int) int
+		Name    func(childComplexity int) int
+		TagType func(childComplexity int) int
 	}
 
 	Artist struct {
@@ -514,20 +513,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.AlbumDistributionServiceUrl.URL(childComplexity), true
 
-	case "AlbumGenre.album":
-		if e.complexity.AlbumGenre.Album == nil {
-			break
-		}
-
-		return e.complexity.AlbumGenre.Album(childComplexity), true
-
-	case "AlbumGenre.genre":
-		if e.complexity.AlbumGenre.Genre == nil {
-			break
-		}
-
-		return e.complexity.AlbumGenre.Genre(childComplexity), true
-
 	case "AlbumGenre.id":
 		if e.complexity.AlbumGenre.ID == nil {
 			break
@@ -542,12 +527,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.AlbumGenre.Locked(childComplexity), true
 
-	case "AlbumTag.album":
-		if e.complexity.AlbumTag.Album == nil {
+	case "AlbumGenre.name":
+		if e.complexity.AlbumGenre.Name == nil {
 			break
 		}
 
-		return e.complexity.AlbumTag.Album(childComplexity), true
+		return e.complexity.AlbumGenre.Name(childComplexity), true
 
 	case "AlbumTag.id":
 		if e.complexity.AlbumTag.ID == nil {
@@ -563,12 +548,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.AlbumTag.Locked(childComplexity), true
 
-	case "AlbumTag.tag":
-		if e.complexity.AlbumTag.Tag == nil {
+	case "AlbumTag.name":
+		if e.complexity.AlbumTag.Name == nil {
 			break
 		}
 
-		return e.complexity.AlbumTag.Tag(childComplexity), true
+		return e.complexity.AlbumTag.Name(childComplexity), true
+
+	case "AlbumTag.tagType":
+		if e.complexity.AlbumTag.TagType == nil {
+			break
+		}
+
+		return e.complexity.AlbumTag.TagType(childComplexity), true
 
 	case "Artist.blogUrl":
 		if e.complexity.Artist.BlogURL == nil {
@@ -2067,15 +2059,14 @@ type Tag {
 
 type AlbumGenre {
   id: ID!
-  album: Album!
-  genre: Genre!
+  name: String!
   locked: Boolean!
 }
 
 type AlbumTag {
   id: ID!
-  album: Album!
-  tag: Tag!
+  name: String!
+  tagType: TagType!
   locked: Boolean!
 }
 
@@ -3325,10 +3316,8 @@ func (ec *executionContext) fieldContext_Album_genres(ctx context.Context, field
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_AlbumGenre_id(ctx, field)
-			case "album":
-				return ec.fieldContext_AlbumGenre_album(ctx, field)
-			case "genre":
-				return ec.fieldContext_AlbumGenre_genre(ctx, field)
+			case "name":
+				return ec.fieldContext_AlbumGenre_name(ctx, field)
 			case "locked":
 				return ec.fieldContext_AlbumGenre_locked(ctx, field)
 			}
@@ -3379,10 +3368,10 @@ func (ec *executionContext) fieldContext_Album_tags(ctx context.Context, field g
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_AlbumTag_id(ctx, field)
-			case "album":
-				return ec.fieldContext_AlbumTag_album(ctx, field)
-			case "tag":
-				return ec.fieldContext_AlbumTag_tag(ctx, field)
+			case "name":
+				return ec.fieldContext_AlbumTag_name(ctx, field)
+			case "tagType":
+				return ec.fieldContext_AlbumTag_tagType(ctx, field)
 			case "locked":
 				return ec.fieldContext_AlbumTag_locked(ctx, field)
 			}
@@ -3568,8 +3557,8 @@ func (ec *executionContext) fieldContext_AlbumGenre_id(ctx context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _AlbumGenre_album(ctx context.Context, field graphql.CollectedField, obj *model.AlbumGenre) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_AlbumGenre_album(ctx, field)
+func (ec *executionContext) _AlbumGenre_name(ctx context.Context, field graphql.CollectedField, obj *model.AlbumGenre) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumGenre_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3582,7 +3571,7 @@ func (ec *executionContext) _AlbumGenre_album(ctx context.Context, field graphql
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Album, nil
+		return obj.Name, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -3594,113 +3583,19 @@ func (ec *executionContext) _AlbumGenre_album(ctx context.Context, field graphql
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Album)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_AlbumGenre_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_AlbumGenre_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "AlbumGenre",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Album_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Album_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Album_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Album_slug(ctx, field)
-			case "releaseCircleName":
-				return ec.fieldContext_Album_releaseCircleName(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Album_releaseDate(ctx, field)
-			case "event":
-				return ec.fieldContext_Album_event(ctx, field)
-			case "subEvent":
-				return ec.fieldContext_Album_subEvent(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Album_searchEnabled(ctx, field)
-			case "albumNumber":
-				return ec.fieldContext_Album_albumNumber(ctx, field)
-			case "eventPrice":
-				return ec.fieldContext_Album_eventPrice(ctx, field)
-			case "currency":
-				return ec.fieldContext_Album_currency(ctx, field)
-			case "credit":
-				return ec.fieldContext_Album_credit(ctx, field)
-			case "introduction":
-				return ec.fieldContext_Album_introduction(ctx, field)
-			case "url":
-				return ec.fieldContext_Album_url(ctx, field)
-			case "circles":
-				return ec.fieldContext_Album_circles(ctx, field)
-			case "consignmentShops":
-				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Album_distributionUrls(ctx, field)
-			case "upcs":
-				return ec.fieldContext_Album_upcs(ctx, field)
-			case "genres":
-				return ec.fieldContext_Album_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Album_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _AlbumGenre_genre(ctx context.Context, field graphql.CollectedField, obj *model.AlbumGenre) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_AlbumGenre_genre(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Genre, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Genre)
-	fc.Result = res
-	return ec.marshalNGenre2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐGenre(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_AlbumGenre_genre(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "AlbumGenre",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Genre_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Genre_name(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Genre", field.Name)
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3794,8 +3689,8 @@ func (ec *executionContext) fieldContext_AlbumTag_id(ctx context.Context, field 
 	return fc, nil
 }
 
-func (ec *executionContext) _AlbumTag_album(ctx context.Context, field graphql.CollectedField, obj *model.AlbumTag) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_AlbumTag_album(ctx, field)
+func (ec *executionContext) _AlbumTag_name(ctx context.Context, field graphql.CollectedField, obj *model.AlbumTag) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumTag_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3808,7 +3703,7 @@ func (ec *executionContext) _AlbumTag_album(ctx context.Context, field graphql.C
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Album, nil
+		return obj.Name, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -3820,70 +3715,26 @@ func (ec *executionContext) _AlbumTag_album(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Album)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_AlbumTag_album(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_AlbumTag_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "AlbumTag",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Album_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Album_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Album_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Album_slug(ctx, field)
-			case "releaseCircleName":
-				return ec.fieldContext_Album_releaseCircleName(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Album_releaseDate(ctx, field)
-			case "event":
-				return ec.fieldContext_Album_event(ctx, field)
-			case "subEvent":
-				return ec.fieldContext_Album_subEvent(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Album_searchEnabled(ctx, field)
-			case "albumNumber":
-				return ec.fieldContext_Album_albumNumber(ctx, field)
-			case "eventPrice":
-				return ec.fieldContext_Album_eventPrice(ctx, field)
-			case "currency":
-				return ec.fieldContext_Album_currency(ctx, field)
-			case "credit":
-				return ec.fieldContext_Album_credit(ctx, field)
-			case "introduction":
-				return ec.fieldContext_Album_introduction(ctx, field)
-			case "url":
-				return ec.fieldContext_Album_url(ctx, field)
-			case "circles":
-				return ec.fieldContext_Album_circles(ctx, field)
-			case "consignmentShops":
-				return ec.fieldContext_Album_consignmentShops(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Album_distributionUrls(ctx, field)
-			case "upcs":
-				return ec.fieldContext_Album_upcs(ctx, field)
-			case "genres":
-				return ec.fieldContext_Album_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Album_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Album", field.Name)
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
 }
 
-func (ec *executionContext) _AlbumTag_tag(ctx context.Context, field graphql.CollectedField, obj *model.AlbumTag) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_AlbumTag_tag(ctx, field)
+func (ec *executionContext) _AlbumTag_tagType(ctx context.Context, field graphql.CollectedField, obj *model.AlbumTag) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_AlbumTag_tagType(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3896,7 +3747,7 @@ func (ec *executionContext) _AlbumTag_tag(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Tag, nil
+		return obj.TagType, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -3908,27 +3759,19 @@ func (ec *executionContext) _AlbumTag_tag(ctx context.Context, field graphql.Col
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Tag)
+	res := resTmp.(model.TagType)
 	fc.Result = res
-	return ec.marshalNTag2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐTag(ctx, field.Selections, res)
+	return ec.marshalNTagType2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐTagType(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_AlbumTag_tag(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_AlbumTag_tagType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "AlbumTag",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Tag_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Tag_name(ctx, field)
-			case "tagType":
-				return ec.fieldContext_Tag_tagType(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Tag", field.Name)
+			return nil, errors.New("field of type TagType does not have child fields")
 		},
 	}
 	return fc, nil
@@ -14248,16 +14091,9 @@ func (ec *executionContext) _AlbumGenre(ctx context.Context, sel ast.SelectionSe
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "album":
+		case "name":
 
-			out.Values[i] = ec._AlbumGenre_album(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "genre":
-
-			out.Values[i] = ec._AlbumGenre_genre(ctx, field, obj)
+			out.Values[i] = ec._AlbumGenre_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -14297,16 +14133,16 @@ func (ec *executionContext) _AlbumTag(ctx context.Context, sel ast.SelectionSet,
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "album":
+		case "name":
 
-			out.Values[i] = ec._AlbumTag_album(ctx, field, obj)
+			out.Values[i] = ec._AlbumTag_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "tag":
+		case "tagType":
 
-			out.Values[i] = ec._AlbumTag_tag(ctx, field, obj)
+			out.Values[i] = ec._AlbumTag_tagType(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++

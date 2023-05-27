@@ -40,16 +40,15 @@ type AlbumDistributionServiceURL struct {
 
 type AlbumGenre struct {
 	ID     string `json:"id"`
-	Album  *Album `json:"album"`
-	Genre  *Genre `json:"genre"`
+	Name   string `json:"name"`
 	Locked bool   `json:"locked"`
 }
 
 type AlbumTag struct {
-	ID     string `json:"id"`
-	Album  *Album `json:"album"`
-	Tag    *Tag   `json:"tag"`
-	Locked bool   `json:"locked"`
+	ID      string  `json:"id"`
+	Name    string  `json:"name"`
+	TagType TagType `json:"tagType"`
+	Locked  bool    `json:"locked"`
 }
 
 type Artist struct {
