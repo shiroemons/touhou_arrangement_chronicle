@@ -142,7 +142,11 @@ func (r *queryResolver) GetSongByID(ctx context.Context, id string) (*model.Song
 
 // GetGenres is the resolver for the getGenres field.
 func (r *queryResolver) GetGenres(ctx context.Context) ([]*model.Genre, error) {
-	panic(fmt.Errorf("not implemented: GetGenres - getGenres"))
+	genres, err := r.genreSrv.All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return genres.ToGraphQLs(), nil
 }
 
 // GetTags is the resolver for the getTags field.

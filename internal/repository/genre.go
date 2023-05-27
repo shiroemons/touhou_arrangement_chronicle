@@ -57,3 +57,11 @@ func (r *GenreRepository) Delete(ctx context.Context, genre *entity.Genre) error
 	}
 	return nil
 }
+
+func (r *GenreRepository) FindAll(ctx context.Context) ([]*entity.Genre, error) {
+	genres := make([]*entity.Genre, 0)
+	if err := r.db.NewSelect().Model(&genres).Scan(ctx); err != nil {
+		return nil, err
+	}
+	return genres, nil
+}

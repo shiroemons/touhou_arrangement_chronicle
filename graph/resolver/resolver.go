@@ -25,6 +25,7 @@ type Params struct {
 	CircleSrv       *service.CircleService
 	ArtistSrv       *service.ArtistService
 	TagSrv          *service.TagService
+	GenreSrv        *service.GenreService
 }
 
 type Resolver struct {
@@ -37,6 +38,7 @@ type Resolver struct {
 	circleSrv       *service.CircleService
 	artistSrv       *service.ArtistService
 	tagSrv          *service.TagService
+	genreSrv        *service.GenreService
 }
 
 // NewResolver Resolver Constructor
@@ -51,6 +53,7 @@ func NewResolver(p Params) *Resolver {
 		circleSrv:       p.CircleSrv,
 		artistSrv:       p.ArtistSrv,
 		tagSrv:          p.TagSrv,
+		genreSrv:        p.GenreSrv,
 	}
 }
 
