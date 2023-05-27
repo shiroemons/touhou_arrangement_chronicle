@@ -68,3 +68,16 @@ func (r *ArtistRepository) FindByID(ctx context.Context, id string) (*entity.Art
 	}
 	return artist, nil
 }
+
+func (r *ArtistRepository) FindByInitialType(ctx context.Context, initialType string) ([]*entity.Artist, error) {
+	artists := make(entity.Artists, 0)
+
+	err := r.db.NewSelect().Model(&artists).
+		Where("initial_letter_type = ?", initialType).
+		Order("name").
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return artists, nil
+}

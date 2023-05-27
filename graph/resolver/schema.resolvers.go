@@ -96,7 +96,11 @@ func (r *queryResolver) GetEventSeries(ctx context.Context) ([]*model.EventSerie
 
 // GetArtistByID is the resolver for the getArtistById field.
 func (r *queryResolver) GetArtistByID(ctx context.Context, id string) (*model.Artist, error) {
-	panic(fmt.Errorf("not implemented: GetArtistByID - getArtistById"))
+	artist, err := r.artistSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return artist.ToGraphQL(), nil
 }
 
 // GetCircleByID is the resolver for the getCircleById field.
@@ -110,7 +114,11 @@ func (r *queryResolver) GetCircleByID(ctx context.Context, id string) (*model.Ci
 
 // ArtistsByInitialLetterType is the resolver for the artistsByInitialLetterType field.
 func (r *queryResolver) ArtistsByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) ([]*model.Artist, error) {
-	panic(fmt.Errorf("not implemented: ArtistsByInitialLetterType - artistsByInitialLetterType"))
+	artists, err := r.artistSrv.GetAllByInitialLetterType(ctx, typeArg)
+	if err != nil {
+		return nil, err
+	}
+	return artists.ToGraphQLs(), nil
 }
 
 // CirclesByInitialLetterType is the resolver for the circlesByInitialLetterType field.
