@@ -147,7 +147,11 @@ func (r *queryResolver) GetGenres(ctx context.Context) ([]*model.Genre, error) {
 
 // GetTags is the resolver for the getTags field.
 func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
-	panic(fmt.Errorf("not implemented: GetTags - getTags"))
+	tags, err := r.tagSrv.All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return tags.ToGraphQLs(), nil
 }
 
 // OriginalSong returns generated.OriginalSongResolver implementation.

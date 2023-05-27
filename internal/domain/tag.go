@@ -10,4 +10,9 @@ type TagRepository interface {
 	Create(ctx context.Context, tag *entity.Tag) (*entity.Tag, error)
 	Update(ctx context.Context, tag *entity.Tag) (*entity.Tag, error)
 	Delete(ctx context.Context, tag *entity.Tag) error
+	FindAll(ctx context.Context) ([]*entity.Tag, error)
+}
+
+type TagService interface {
+	All(ctx context.Context) (entity.Tags, error)
 }

@@ -57,3 +57,11 @@ func (r *TagRepository) Delete(ctx context.Context, tag *entity.Tag) error {
 	}
 	return nil
 }
+
+func (r *TagRepository) FindAll(ctx context.Context) ([]*entity.Tag, error) {
+	tags := make(entity.Tags, 0)
+	if err := r.db.NewSelect().Model(&tags).Scan(ctx); err != nil {
+		return nil, err
+	}
+	return tags, nil
+}
