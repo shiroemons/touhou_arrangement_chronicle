@@ -175,7 +175,6 @@ type ComplexityRoot struct {
 	Isrc struct {
 		ID   func(childComplexity int) int
 		Isrc func(childComplexity int) int
-		Song func(childComplexity int) int
 	}
 
 	OriginalSong struct {
@@ -272,17 +271,16 @@ type ComplexityRoot struct {
 	}
 
 	SongGenre struct {
-		Genre  func(childComplexity int) int
 		ID     func(childComplexity int) int
 		Locked func(childComplexity int) int
-		Song   func(childComplexity int) int
+		Name   func(childComplexity int) int
 	}
 
 	SongTag struct {
-		ID     func(childComplexity int) int
-		Locked func(childComplexity int) int
-		Song   func(childComplexity int) int
-		Tag    func(childComplexity int) int
+		ID      func(childComplexity int) int
+		Locked  func(childComplexity int) int
+		Name    func(childComplexity int) int
+		TagType func(childComplexity int) int
 	}
 
 	SubEvent struct {
@@ -1003,13 +1001,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Isrc.Isrc(childComplexity), true
 
-	case "Isrc.song":
-		if e.complexity.Isrc.Song == nil {
-			break
-		}
-
-		return e.complexity.Isrc.Song(childComplexity), true
-
 	case "OriginalSong.arranger":
 		if e.complexity.OriginalSong.Arranger == nil {
 			break
@@ -1569,13 +1560,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SongDistributionServiceUrl.URL(childComplexity), true
 
-	case "SongGenre.genre":
-		if e.complexity.SongGenre.Genre == nil {
-			break
-		}
-
-		return e.complexity.SongGenre.Genre(childComplexity), true
-
 	case "SongGenre.id":
 		if e.complexity.SongGenre.ID == nil {
 			break
@@ -1590,12 +1574,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SongGenre.Locked(childComplexity), true
 
-	case "SongGenre.song":
-		if e.complexity.SongGenre.Song == nil {
+	case "SongGenre.name":
+		if e.complexity.SongGenre.Name == nil {
 			break
 		}
 
-		return e.complexity.SongGenre.Song(childComplexity), true
+		return e.complexity.SongGenre.Name(childComplexity), true
 
 	case "SongTag.id":
 		if e.complexity.SongTag.ID == nil {
@@ -1611,19 +1595,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SongTag.Locked(childComplexity), true
 
-	case "SongTag.song":
-		if e.complexity.SongTag.Song == nil {
+	case "SongTag.name":
+		if e.complexity.SongTag.Name == nil {
 			break
 		}
 
-		return e.complexity.SongTag.Song(childComplexity), true
+		return e.complexity.SongTag.Name(childComplexity), true
 
-	case "SongTag.tag":
-		if e.complexity.SongTag.Tag == nil {
+	case "SongTag.tagType":
+		if e.complexity.SongTag.TagType == nil {
 			break
 		}
 
-		return e.complexity.SongTag.Tag(childComplexity), true
+		return e.complexity.SongTag.TagType(childComplexity), true
 
 	case "SubEvent.date":
 		if e.complexity.SubEvent.Date == nil {
@@ -2035,7 +2019,6 @@ type SongDistributionServiceUrl {
 
 type Isrc {
   id: ID!
-  song: Song!
   isrc: String!
 }
 
@@ -2072,15 +2055,14 @@ type AlbumTag {
 
 type SongGenre {
   id: ID!
-  song: Song!
-  genre: Genre!
+  name: String!
   locked: Boolean!
 }
 
 type SongTag {
   id: ID!
-  song: Song!
-  tag: Tag!
+  name: String!
+  tagType: TagType!
   locked: Boolean!
 }
 
@@ -6737,114 +6719,6 @@ func (ec *executionContext) fieldContext_Isrc_id(ctx context.Context, field grap
 	return fc, nil
 }
 
-func (ec *executionContext) _Isrc_song(ctx context.Context, field graphql.CollectedField, obj *model.Isrc) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Isrc_song(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Song, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Song)
-	fc.Result = res
-	return ec.marshalNSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSong(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Isrc_song(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Isrc",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Song_id(ctx, field)
-			case "circle":
-				return ec.fieldContext_Song_circle(ctx, field)
-			case "album":
-				return ec.fieldContext_Song_album(ctx, field)
-			case "name":
-				return ec.fieldContext_Song_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Song_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Song_slug(ctx, field)
-			case "discNumber":
-				return ec.fieldContext_Song_discNumber(ctx, field)
-			case "trackNumber":
-				return ec.fieldContext_Song_trackNumber(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Song_releaseDate(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Song_searchEnabled(ctx, field)
-			case "length":
-				return ec.fieldContext_Song_length(ctx, field)
-			case "bpm":
-				return ec.fieldContext_Song_bpm(ctx, field)
-			case "description":
-				return ec.fieldContext_Song_description(ctx, field)
-			case "displayComposer":
-				return ec.fieldContext_Song_displayComposer(ctx, field)
-			case "displayArranger":
-				return ec.fieldContext_Song_displayArranger(ctx, field)
-			case "displayRearranger":
-				return ec.fieldContext_Song_displayRearranger(ctx, field)
-			case "displayLyricist":
-				return ec.fieldContext_Song_displayLyricist(ctx, field)
-			case "displayVocalist":
-				return ec.fieldContext_Song_displayVocalist(ctx, field)
-			case "displayOriginalSong":
-				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Song_distributionUrls(ctx, field)
-			case "isrcs":
-				return ec.fieldContext_Song_isrcs(ctx, field)
-			case "arrangeCircles":
-				return ec.fieldContext_Song_arrangeCircles(ctx, field)
-			case "composers":
-				return ec.fieldContext_Song_composers(ctx, field)
-			case "arrangers":
-				return ec.fieldContext_Song_arrangers(ctx, field)
-			case "rearrangers":
-				return ec.fieldContext_Song_rearrangers(ctx, field)
-			case "lyricists":
-				return ec.fieldContext_Song_lyricists(ctx, field)
-			case "vocalists":
-				return ec.fieldContext_Song_vocalists(ctx, field)
-			case "originalSongs":
-				return ec.fieldContext_Song_originalSongs(ctx, field)
-			case "circles":
-				return ec.fieldContext_Song_circles(ctx, field)
-			case "genres":
-				return ec.fieldContext_Song_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Song_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Song", field.Name)
-		},
-	}
-	return fc, nil
-}
-
 func (ec *executionContext) _Isrc_isrc(ctx context.Context, field graphql.CollectedField, obj *model.Isrc) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Isrc_isrc(ctx, field)
 	if err != nil {
@@ -10189,8 +10063,6 @@ func (ec *executionContext) fieldContext_Song_isrcs(ctx context.Context, field g
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Isrc_id(ctx, field)
-			case "song":
-				return ec.fieldContext_Isrc_song(ctx, field)
 			case "isrc":
 				return ec.fieldContext_Isrc_isrc(ctx, field)
 			}
@@ -10789,10 +10661,8 @@ func (ec *executionContext) fieldContext_Song_genres(ctx context.Context, field 
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SongGenre_id(ctx, field)
-			case "song":
-				return ec.fieldContext_SongGenre_song(ctx, field)
-			case "genre":
-				return ec.fieldContext_SongGenre_genre(ctx, field)
+			case "name":
+				return ec.fieldContext_SongGenre_name(ctx, field)
 			case "locked":
 				return ec.fieldContext_SongGenre_locked(ctx, field)
 			}
@@ -10843,10 +10713,10 @@ func (ec *executionContext) fieldContext_Song_tags(ctx context.Context, field gr
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_SongTag_id(ctx, field)
-			case "song":
-				return ec.fieldContext_SongTag_song(ctx, field)
-			case "tag":
-				return ec.fieldContext_SongTag_tag(ctx, field)
+			case "name":
+				return ec.fieldContext_SongTag_name(ctx, field)
+			case "tagType":
+				return ec.fieldContext_SongTag_tagType(ctx, field)
 			case "locked":
 				return ec.fieldContext_SongTag_locked(ctx, field)
 			}
@@ -11032,8 +10902,8 @@ func (ec *executionContext) fieldContext_SongGenre_id(ctx context.Context, field
 	return fc, nil
 }
 
-func (ec *executionContext) _SongGenre_song(ctx context.Context, field graphql.CollectedField, obj *model.SongGenre) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SongGenre_song(ctx, field)
+func (ec *executionContext) _SongGenre_name(ctx context.Context, field graphql.CollectedField, obj *model.SongGenre) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_SongGenre_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -11046,7 +10916,7 @@ func (ec *executionContext) _SongGenre_song(ctx context.Context, field graphql.C
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Song, nil
+		return obj.Name, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11058,133 +10928,19 @@ func (ec *executionContext) _SongGenre_song(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Song)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSong(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_SongGenre_song(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_SongGenre_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "SongGenre",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Song_id(ctx, field)
-			case "circle":
-				return ec.fieldContext_Song_circle(ctx, field)
-			case "album":
-				return ec.fieldContext_Song_album(ctx, field)
-			case "name":
-				return ec.fieldContext_Song_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Song_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Song_slug(ctx, field)
-			case "discNumber":
-				return ec.fieldContext_Song_discNumber(ctx, field)
-			case "trackNumber":
-				return ec.fieldContext_Song_trackNumber(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Song_releaseDate(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Song_searchEnabled(ctx, field)
-			case "length":
-				return ec.fieldContext_Song_length(ctx, field)
-			case "bpm":
-				return ec.fieldContext_Song_bpm(ctx, field)
-			case "description":
-				return ec.fieldContext_Song_description(ctx, field)
-			case "displayComposer":
-				return ec.fieldContext_Song_displayComposer(ctx, field)
-			case "displayArranger":
-				return ec.fieldContext_Song_displayArranger(ctx, field)
-			case "displayRearranger":
-				return ec.fieldContext_Song_displayRearranger(ctx, field)
-			case "displayLyricist":
-				return ec.fieldContext_Song_displayLyricist(ctx, field)
-			case "displayVocalist":
-				return ec.fieldContext_Song_displayVocalist(ctx, field)
-			case "displayOriginalSong":
-				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Song_distributionUrls(ctx, field)
-			case "isrcs":
-				return ec.fieldContext_Song_isrcs(ctx, field)
-			case "arrangeCircles":
-				return ec.fieldContext_Song_arrangeCircles(ctx, field)
-			case "composers":
-				return ec.fieldContext_Song_composers(ctx, field)
-			case "arrangers":
-				return ec.fieldContext_Song_arrangers(ctx, field)
-			case "rearrangers":
-				return ec.fieldContext_Song_rearrangers(ctx, field)
-			case "lyricists":
-				return ec.fieldContext_Song_lyricists(ctx, field)
-			case "vocalists":
-				return ec.fieldContext_Song_vocalists(ctx, field)
-			case "originalSongs":
-				return ec.fieldContext_Song_originalSongs(ctx, field)
-			case "circles":
-				return ec.fieldContext_Song_circles(ctx, field)
-			case "genres":
-				return ec.fieldContext_Song_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Song_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Song", field.Name)
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _SongGenre_genre(ctx context.Context, field graphql.CollectedField, obj *model.SongGenre) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SongGenre_genre(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Genre, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(*model.Genre)
-	fc.Result = res
-	return ec.marshalNGenre2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐGenre(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_SongGenre_genre(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "SongGenre",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Genre_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Genre_name(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Genre", field.Name)
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -11278,8 +11034,8 @@ func (ec *executionContext) fieldContext_SongTag_id(ctx context.Context, field g
 	return fc, nil
 }
 
-func (ec *executionContext) _SongTag_song(ctx context.Context, field graphql.CollectedField, obj *model.SongTag) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SongTag_song(ctx, field)
+func (ec *executionContext) _SongTag_name(ctx context.Context, field graphql.CollectedField, obj *model.SongTag) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_SongTag_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -11292,7 +11048,7 @@ func (ec *executionContext) _SongTag_song(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Song, nil
+		return obj.Name, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11304,90 +11060,26 @@ func (ec *executionContext) _SongTag_song(ctx context.Context, field graphql.Col
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Song)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSong(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_SongTag_song(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_SongTag_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "SongTag",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Song_id(ctx, field)
-			case "circle":
-				return ec.fieldContext_Song_circle(ctx, field)
-			case "album":
-				return ec.fieldContext_Song_album(ctx, field)
-			case "name":
-				return ec.fieldContext_Song_name(ctx, field)
-			case "nameReading":
-				return ec.fieldContext_Song_nameReading(ctx, field)
-			case "slug":
-				return ec.fieldContext_Song_slug(ctx, field)
-			case "discNumber":
-				return ec.fieldContext_Song_discNumber(ctx, field)
-			case "trackNumber":
-				return ec.fieldContext_Song_trackNumber(ctx, field)
-			case "releaseDate":
-				return ec.fieldContext_Song_releaseDate(ctx, field)
-			case "searchEnabled":
-				return ec.fieldContext_Song_searchEnabled(ctx, field)
-			case "length":
-				return ec.fieldContext_Song_length(ctx, field)
-			case "bpm":
-				return ec.fieldContext_Song_bpm(ctx, field)
-			case "description":
-				return ec.fieldContext_Song_description(ctx, field)
-			case "displayComposer":
-				return ec.fieldContext_Song_displayComposer(ctx, field)
-			case "displayArranger":
-				return ec.fieldContext_Song_displayArranger(ctx, field)
-			case "displayRearranger":
-				return ec.fieldContext_Song_displayRearranger(ctx, field)
-			case "displayLyricist":
-				return ec.fieldContext_Song_displayLyricist(ctx, field)
-			case "displayVocalist":
-				return ec.fieldContext_Song_displayVocalist(ctx, field)
-			case "displayOriginalSong":
-				return ec.fieldContext_Song_displayOriginalSong(ctx, field)
-			case "distributionUrls":
-				return ec.fieldContext_Song_distributionUrls(ctx, field)
-			case "isrcs":
-				return ec.fieldContext_Song_isrcs(ctx, field)
-			case "arrangeCircles":
-				return ec.fieldContext_Song_arrangeCircles(ctx, field)
-			case "composers":
-				return ec.fieldContext_Song_composers(ctx, field)
-			case "arrangers":
-				return ec.fieldContext_Song_arrangers(ctx, field)
-			case "rearrangers":
-				return ec.fieldContext_Song_rearrangers(ctx, field)
-			case "lyricists":
-				return ec.fieldContext_Song_lyricists(ctx, field)
-			case "vocalists":
-				return ec.fieldContext_Song_vocalists(ctx, field)
-			case "originalSongs":
-				return ec.fieldContext_Song_originalSongs(ctx, field)
-			case "circles":
-				return ec.fieldContext_Song_circles(ctx, field)
-			case "genres":
-				return ec.fieldContext_Song_genres(ctx, field)
-			case "tags":
-				return ec.fieldContext_Song_tags(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Song", field.Name)
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
 }
 
-func (ec *executionContext) _SongTag_tag(ctx context.Context, field graphql.CollectedField, obj *model.SongTag) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_SongTag_tag(ctx, field)
+func (ec *executionContext) _SongTag_tagType(ctx context.Context, field graphql.CollectedField, obj *model.SongTag) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_SongTag_tagType(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -11400,7 +11092,7 @@ func (ec *executionContext) _SongTag_tag(ctx context.Context, field graphql.Coll
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Tag, nil
+		return obj.TagType, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11412,27 +11104,19 @@ func (ec *executionContext) _SongTag_tag(ctx context.Context, field graphql.Coll
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Tag)
+	res := resTmp.(model.TagType)
 	fc.Result = res
-	return ec.marshalNTag2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐTag(ctx, field.Selections, res)
+	return ec.marshalNTagType2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐTagType(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_SongTag_tag(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_SongTag_tagType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "SongTag",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_Tag_id(ctx, field)
-			case "name":
-				return ec.fieldContext_Tag_name(ctx, field)
-			case "tagType":
-				return ec.fieldContext_Tag_tagType(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type Tag", field.Name)
+			return nil, errors.New("field of type TagType does not have child fields")
 		},
 	}
 	return fc, nil
@@ -14771,13 +14455,6 @@ func (ec *executionContext) _Isrc(ctx context.Context, sel ast.SelectionSet, obj
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "song":
-
-			out.Values[i] = ec._Isrc_song(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "isrc":
 
 			out.Values[i] = ec._Isrc_isrc(ctx, field, obj)
@@ -15709,16 +15386,9 @@ func (ec *executionContext) _SongGenre(ctx context.Context, sel ast.SelectionSet
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "song":
+		case "name":
 
-			out.Values[i] = ec._SongGenre_song(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "genre":
-
-			out.Values[i] = ec._SongGenre_genre(ctx, field, obj)
+			out.Values[i] = ec._SongGenre_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -15758,16 +15428,16 @@ func (ec *executionContext) _SongTag(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "song":
+		case "name":
 
-			out.Values[i] = ec._SongTag_song(ctx, field, obj)
+			out.Values[i] = ec._SongTag_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "tag":
+		case "tagType":
 
-			out.Values[i] = ec._SongTag_tag(ctx, field, obj)
+			out.Values[i] = ec._SongTag_tagType(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -17255,16 +16925,6 @@ func (ec *executionContext) unmarshalNShop2githubᚗcomᚋshiroemonsᚋtouhou_ar
 
 func (ec *executionContext) marshalNShop2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐShop(ctx context.Context, sel ast.SelectionSet, v model.Shop) graphql.Marshaler {
 	return v
-}
-
-func (ec *executionContext) marshalNSong2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSong(ctx context.Context, sel ast.SelectionSet, v *model.Song) graphql.Marshaler {
-	if v == nil {
-		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
-			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
-		}
-		return graphql.Null
-	}
-	return ec._Song(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNSongDistributionServiceUrl2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐSongDistributionServiceURLᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.SongDistributionServiceURL) graphql.Marshaler {

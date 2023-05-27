@@ -12,3 +12,7 @@ type SongRepository interface {
 	Delete(ctx context.Context, song *entity.Song) error
 	FindByID(ctx context.Context, id string) (*entity.Song, error)
 }
+
+type SongService interface {
+	Get(ctx context.Context, id string) (*entity.Song, error)
+}

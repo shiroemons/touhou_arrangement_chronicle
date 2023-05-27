@@ -265,7 +265,6 @@ type SongDistributionServiceUrl {
 
 type Isrc {
   id: ID!
-  song: Song!
   isrc: String!
 }
 
@@ -302,15 +301,14 @@ type AlbumTag {
 
 type SongGenre {
   id: ID!
-  song: Song!
-  genre: Genre!
+  name: String!
   locked: Boolean!
 }
 
 type SongTag {
   id: ID!
-  song: Song!
-  tag: Tag!
+  name: String!
+  tagType: TagType!
   locked: Boolean!
 }
 

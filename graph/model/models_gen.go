@@ -138,7 +138,6 @@ type Genre struct {
 
 type Isrc struct {
 	ID   string `json:"id"`
-	Song *Song  `json:"song"`
 	Isrc string `json:"isrc"`
 }
 
@@ -218,16 +217,15 @@ type SongDistributionServiceURL struct {
 
 type SongGenre struct {
 	ID     string `json:"id"`
-	Song   *Song  `json:"song"`
-	Genre  *Genre `json:"genre"`
+	Name   string `json:"name"`
 	Locked bool   `json:"locked"`
 }
 
 type SongTag struct {
-	ID     string `json:"id"`
-	Song   *Song  `json:"song"`
-	Tag    *Tag   `json:"tag"`
-	Locked bool   `json:"locked"`
+	ID      string  `json:"id"`
+	Name    string  `json:"name"`
+	TagType TagType `json:"tagType"`
+	Locked  bool    `json:"locked"`
 }
 
 type SubEvent struct {

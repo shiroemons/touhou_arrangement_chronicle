@@ -6,7 +6,6 @@ package resolver
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
@@ -141,7 +140,11 @@ func (r *queryResolver) GetAlbumByID(ctx context.Context, id string) (*model.Alb
 
 // GetSongByID is the resolver for the getSongById field.
 func (r *queryResolver) GetSongByID(ctx context.Context, id string) (*model.Song, error) {
-	panic(fmt.Errorf("not implemented: GetSongByID - getSongById"))
+	song, err := r.songSrv.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return song.ToGraphQL(), nil
 }
 
 // GetGenres is the resolver for the getGenres field.

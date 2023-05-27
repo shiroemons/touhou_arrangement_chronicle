@@ -61,7 +61,20 @@ func (r *SongRepository) Delete(ctx context.Context, song *entity.Song) error {
 func (r *SongRepository) FindByID(ctx context.Context, id string) (*entity.Song, error) {
 	song := new(entity.Song)
 	err := r.db.NewSelect().Model(song).
-		Where("id = ?", id).
+		Relation("Circle").
+		Relation("Album").
+		Relation("SongDistributionServiceURLs").
+		Relation("SongISRCs").
+		Relation("Genres.Genre").
+		Relation("Tags.Tag").
+		Relation("OriginalSongs").
+		Relation("ArrangeCircles").
+		Relation("Arrangers").
+		Relation("Composers").
+		Relation("Lyricists").
+		Relation("ReArrangers").
+		Relation("Vocalists").
+		Where("s.id = ?", id).
 		Scan(ctx)
 	if err != nil {
 		return nil, err

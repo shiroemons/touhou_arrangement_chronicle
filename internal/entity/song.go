@@ -3,11 +3,14 @@ package entity
 import (
 	"time"
 
+	"github.com/samber/lo"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type Song struct {
-	bun.BaseModel `bun:"table:songs,alias:t"`
+	bun.BaseModel `bun:"table:songs,alias:s"`
 
 	ID                          string                        `bun:",pk,default:xid()"`
 	CircleID                    string                        `bun:"circle_id,nullzero,notnull,default:''"`
@@ -31,6 +34,8 @@ type Song struct {
 	DisplayOriginalSong         string                        `bun:"display_original_song,nullzero,notnull,default:''"`
 	SongDistributionServiceURLs []*SongDistributionServiceURL `bun:"rel:has-many,join:id=song_id"`
 	SongISRCs                   []*SongISRC                   `bun:"rel:has-many,join:id=song_id"`
+	Genres                      []*SongGenre                  `bun:"rel:has-many,join:id=song_id"`
+	Tags                        []*SongTag                    `bun:"rel:has-many,join:id=song_id"`
 	OriginalSongs               []*OriginalSong               `bun:"m2m:songs_original_songs,join:Song=OriginalSong"`
 	ArrangeCircles              []*Circle                     `bun:"m2m:songs_arrange_circles,join:Song=Circle"`
 	Arrangers                   []*Artist                     `bun:"m2m:songs_arrangers,join:Song=Artist"`
@@ -38,8 +43,102 @@ type Song struct {
 	Lyricists                   []*Artist                     `bun:"m2m:songs_lyricists,join:Song=Artist"`
 	ReArrangers                 []*Artist                     `bun:"m2m:songs_rearrangers,join:Song=Artist"`
 	Vocalists                   []*Artist                     `bun:"m2m:songs_vocalists,join:Song=Artist"`
-	Genres                      []*Genre                      `bun:"m2m:songs_genres,join:Song=Genre"`
-	Tags                        []*Tag                        `bun:"m2m:songs_tags,join:Song=Tag"`
 	CreatedAt                   time.Time                     `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                   time.Time                     `bun:"updated_at,notnull,default:current_timestamp"`
+}
+
+// ToGraphQL Convert to GraphQL Schema
+func (e *Song) ToGraphQL() *model.Song {
+	var releaseDate *string
+	if e.ReleaseDate != nil {
+		releaseDate = lo.ToPtr(e.ReleaseDate.Format("2006-01-02"))
+	}
+	var originalSongs []*model.OriginalSong
+	for _, v := range e.OriginalSongs {
+		originalSongs = append(originalSongs, v.ToGraphQL())
+	}
+	var arrangeCircles []*model.Circle
+	for _, v := range e.ArrangeCircles {
+		arrangeCircles = append(arrangeCircles, v.ToGraphQL())
+	}
+	var arrangers []*model.Artist
+	for _, v := range e.Arrangers {
+		arrangers = append(arrangers, v.ToGraphQL())
+	}
+	var composers []*model.Artist
+	for _, v := range e.Composers {
+		composers = append(composers, v.ToGraphQL())
+	}
+	var lyricists []*model.Artist
+	for _, v := range e.Lyricists {
+		lyricists = append(lyricists, v.ToGraphQL())
+	}
+	var reArrangers []*model.Artist
+	for _, v := range e.ReArrangers {
+		reArrangers = append(reArrangers, v.ToGraphQL())
+	}
+	var vocalists []*model.Artist
+	for _, v := range e.Vocalists {
+		vocalists = append(vocalists, v.ToGraphQL())
+	}
+	var distributionServiceURLs []*model.SongDistributionServiceURL
+	for _, v := range e.SongDistributionServiceURLs {
+		distributionServiceURLs = append(distributionServiceURLs, v.ToGraphQL())
+	}
+	var isrcs []*model.Isrc
+	for _, v := range e.SongISRCs {
+		isrcs = append(isrcs, v.ToGraphQL())
+	}
+
+	song := &model.Song{
+		ID:                  e.ID,
+		Name:                e.Name,
+		Slug:                e.Slug,
+		DiscNumber:          e.DiscNumber,
+		TrackNumber:         e.TrackNumber,
+		ReleaseDate:         releaseDate,
+		SearchEnabled:       e.SearchEnabled,
+		Description:         e.Description,
+		DisplayComposer:     e.DisplayComposer,
+		DisplayArranger:     e.DisplayArranger,
+		DisplayRearranger:   e.DisplayRearranger,
+		DisplayLyricist:     e.DisplayLyricist,
+		DisplayVocalist:     e.DisplayVocalist,
+		DisplayOriginalSong: e.DisplayOriginalSong,
+		OriginalSongs:       originalSongs,
+		ArrangeCircles:      arrangeCircles,
+		Arrangers:           arrangers,
+		Composers:           composers,
+		Lyricists:           lyricists,
+		Rearrangers:         reArrangers,
+		Vocalists:           vocalists,
+		DistributionUrls:    distributionServiceURLs,
+		Isrcs:               isrcs,
+	}
+	if e.Length != 0 {
+		song.Length = lo.ToPtr(e.Length)
+	}
+	if e.BPM != 0 {
+		song.Bpm = lo.ToPtr(e.BPM)
+	}
+	if e.Circle != nil {
+		song.Circle = e.Circle.ToGraphQL()
+	}
+	if e.Album != nil {
+		song.Album = e.Album.ToGraphQL()
+	}
+
+	return song
+}
+
+// Songs is a slice of Song
+type Songs []*Song
+
+// ToGraphQLs Convert to GraphQL Schema
+func (arr Songs) ToGraphQLs() []*model.Song {
+	res := make([]*model.Song, len(arr))
+	for i, v := range arr {
+		res[i] = v.ToGraphQL()
+	}
+	return res
 }
