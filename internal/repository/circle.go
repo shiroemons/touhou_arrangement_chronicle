@@ -68,3 +68,16 @@ func (r *CircleRepository) FindByID(ctx context.Context, id string) (*entity.Cir
 	}
 	return circle, nil
 }
+
+func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType string) ([]*entity.Circle, error) {
+	var circles []*entity.Circle
+
+	err := r.db.NewSelect().Model(&circles).
+		Where("initial_letter_type = ?", initialType).
+		Order("name").
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return circles, nil
+}

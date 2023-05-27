@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/uptrace/bun"
 )
 
@@ -51,4 +52,35 @@ func (e *Circle) BeforeAppendModel(_ context.Context, query bun.Query) error {
 		}
 	}
 	return nil
+}
+
+func (e *Circle) ToGraphQL() *model.Circle {
+	var initialLetterType model.InitialLetterType
+	if e.InitialLetterType != "" {
+		initialLetterType = model.InitialLetterType(e.InitialLetterType)
+	}
+
+	return &model.Circle{
+		ID:                  e.ID,
+		Name:                e.Name,
+		NameReading:         e.NameReading,
+		Slug:                e.Slug,
+		InitialLetterType:   initialLetterType,
+		InitialLetterDetail: e.InitialLetterDetail,
+		Description:         e.Description,
+		URL:                 e.URL,
+		BlogURL:             e.BlogURL,
+		TwitterURL:          e.TwitterURL,
+		YoutubeChannelURL:   e.YoutubeChannelURL,
+	}
+}
+
+type Circles []*Circle
+
+func (arr Circles) ToGraphQLs() []*model.Circle {
+	res := make([]*model.Circle, len(arr))
+	for i, circle := range arr {
+		res[i] = circle.ToGraphQL()
+	}
+	return res
 }
