@@ -8,15 +8,17 @@ import (
 type Params struct {
 	fx.In
 
-	ProductLoader  *ProductLoader
-	EventLoader    *EventLoader
-	SubEventLoader *SubEventLoader
-	AlbumLoader    *AlbumLoader
-	SongLoader     *SongLoader
+	ProductLoader     *ProductLoader
+	EventSeriesLoader *EventSeriesLoader
+	EventLoader       *EventLoader
+	SubEventLoader    *SubEventLoader
+	AlbumLoader       *AlbumLoader
+	SongLoader        *SongLoader
 }
 
 type Loaders struct {
 	pLoader  *dataloader.Loader
+	esLoader *dataloader.Loader
 	eLoader  *dataloader.Loader
 	seLoader *dataloader.Loader
 	aLoader  *dataloader.Loader
@@ -26,6 +28,7 @@ type Loaders struct {
 func LoadersProvider(p Params) *Loaders {
 	return &Loaders{
 		pLoader:  dataloader.NewBatchedLoader(p.ProductLoader.BatchGetProducts),
+		esLoader: dataloader.NewBatchedLoader(p.EventSeriesLoader.BatchGetEventSeries),
 		eLoader:  dataloader.NewBatchedLoader(p.EventLoader.BatchGetEvents),
 		seLoader: dataloader.NewBatchedLoader(p.SubEventLoader.BatchGetSubEvents),
 		aLoader:  dataloader.NewBatchedLoader(p.AlbumLoader.BatchGetAlbums),

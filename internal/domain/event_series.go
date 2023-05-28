@@ -12,6 +12,7 @@ type EventSeriesRepository interface {
 	Delete(ctx context.Context, eventSeries *entity.EventSeries) error
 	FindByID(ctx context.Context, id string) (*entity.EventSeries, error)
 	All(ctx context.Context) ([]*entity.EventSeries, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.EventSeries, error)
 }
 
 type EventSeriesService interface {
