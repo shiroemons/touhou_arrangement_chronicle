@@ -33,10 +33,7 @@ type Event struct {
 }
 
 func (e *Event) ToGraphQL() *model.Event {
-	var subEvents []*model.SubEvent
-	for _, subEvent := range e.SubEvents {
-		subEvents = append(subEvents, subEvent.ToGraphQL())
-	}
+	subEvents := ConvertSlice(e.SubEvents, func(v *SubEvent) *model.SubEvent { return v.ToGraphQL() })
 
 	event := &model.Event{
 		ID:          e.ID,

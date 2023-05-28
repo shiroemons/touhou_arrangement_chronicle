@@ -28,11 +28,9 @@ type OriginalSong struct {
 
 // ToGraphQL Convert to GraphQL Schema
 func (e *OriginalSong) ToGraphQL() *model.OriginalSong {
-	// OriginalSongDistributionServiceURLsをmodel.OriginalSongDistributionServiceURLに変換
-	var distributionServiceURLs []*model.OriginalSongDistributionServiceURL
-	for _, distributionServiceURL := range e.OriginalSongDistributionServiceURLs {
-		distributionServiceURLs = append(distributionServiceURLs, distributionServiceURL.ToGraphQL())
-	}
+	distributionServiceURLs := ConvertSlice(e.OriginalSongDistributionServiceURLs, func(v *OriginalSongDistributionServiceURL) *model.OriginalSongDistributionServiceURL {
+		return v.ToGraphQL()
+	})
 
 	return &model.OriginalSong{
 		ID:               e.ID,

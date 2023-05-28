@@ -33,17 +33,8 @@ func (e *Product) ToGraphQL() *model.Product {
 		zap.S().Warnf("ToProductType error: %s", err)
 	}
 
-	// OriginalSongsをmodel.OriginalSongに変換
-	var originalSongs []*model.OriginalSong
-	for _, originalSong := range e.OriginalSongs {
-		originalSongs = append(originalSongs, originalSong.ToGraphQL())
-	}
-
-	// ProductDistributionServiceURLsをmodel.ProductDistributionServiceURLに変換
-	var distributionServiceURLs []*model.ProductDistributionServiceURL
-	for _, distributionServiceURL := range e.ProductDistributionServiceURLs {
-		distributionServiceURLs = append(distributionServiceURLs, distributionServiceURL.ToGraphQL())
-	}
+	originalSongs := ConvertSlice(e.OriginalSongs, func(v *OriginalSong) *model.OriginalSong { return v.ToGraphQL() })
+	distributionServiceURLs := ConvertSlice(e.ProductDistributionServiceURLs, func(v *ProductDistributionServiceURL) *model.ProductDistributionServiceURL { return v.ToGraphQL() })
 
 	return &model.Product{
 		ID:               e.ID,

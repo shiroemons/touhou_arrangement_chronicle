@@ -53,42 +53,18 @@ func (e *Song) ToGraphQL() *model.Song {
 	if e.ReleaseDate != nil {
 		releaseDate = lo.ToPtr(e.ReleaseDate.Format("2006-01-02"))
 	}
-	var originalSongs []*model.OriginalSong
-	for _, v := range e.OriginalSongs {
-		originalSongs = append(originalSongs, v.ToGraphQL())
-	}
-	var arrangeCircles []*model.Circle
-	for _, v := range e.ArrangeCircles {
-		arrangeCircles = append(arrangeCircles, v.ToGraphQL())
-	}
-	var arrangers []*model.Artist
-	for _, v := range e.Arrangers {
-		arrangers = append(arrangers, v.ToGraphQL())
-	}
-	var composers []*model.Artist
-	for _, v := range e.Composers {
-		composers = append(composers, v.ToGraphQL())
-	}
-	var lyricists []*model.Artist
-	for _, v := range e.Lyricists {
-		lyricists = append(lyricists, v.ToGraphQL())
-	}
-	var reArrangers []*model.Artist
-	for _, v := range e.ReArrangers {
-		reArrangers = append(reArrangers, v.ToGraphQL())
-	}
-	var vocalists []*model.Artist
-	for _, v := range e.Vocalists {
-		vocalists = append(vocalists, v.ToGraphQL())
-	}
-	var distributionServiceURLs []*model.SongDistributionServiceURL
-	for _, v := range e.SongDistributionServiceURLs {
-		distributionServiceURLs = append(distributionServiceURLs, v.ToGraphQL())
-	}
-	var isrcs []*model.Isrc
-	for _, v := range e.SongISRCs {
-		isrcs = append(isrcs, v.ToGraphQL())
-	}
+
+	originalSongs := ConvertSlice(e.OriginalSongs, func(v *OriginalSong) *model.OriginalSong { return v.ToGraphQL() })
+	arrangeCircles := ConvertSlice(e.ArrangeCircles, func(v *Circle) *model.Circle { return v.ToGraphQL() })
+	arrangers := ConvertSlice(e.Arrangers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
+	composers := ConvertSlice(e.Composers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
+	lyricists := ConvertSlice(e.Lyricists, func(v *Artist) *model.Artist { return v.ToGraphQL() })
+	reArrangers := ConvertSlice(e.ReArrangers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
+	vocalists := ConvertSlice(e.Vocalists, func(v *Artist) *model.Artist { return v.ToGraphQL() })
+	distributionServiceURLs := ConvertSlice(e.SongDistributionServiceURLs, func(v *SongDistributionServiceURL) *model.SongDistributionServiceURL { return v.ToGraphQL() })
+	isrcs := ConvertSlice(e.SongISRCs, func(v *SongISRC) *model.Isrc { return v.ToGraphQL() })
+	genres := ConvertSlice(e.Genres, func(v *SongGenre) *model.SongGenre { return v.ToGraphQL() })
+	tags := ConvertSlice(e.Tags, func(v *SongTag) *model.SongTag { return v.ToGraphQL() })
 
 	song := &model.Song{
 		ID:                  e.ID,
@@ -114,6 +90,8 @@ func (e *Song) ToGraphQL() *model.Song {
 		Vocalists:           vocalists,
 		DistributionUrls:    distributionServiceURLs,
 		Isrcs:               isrcs,
+		Genres:              genres,
+		Tags:                tags,
 	}
 	if e.Length != 0 {
 		song.Length = lo.ToPtr(e.Length)

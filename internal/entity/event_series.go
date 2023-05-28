@@ -21,10 +21,7 @@ type EventSeries struct {
 }
 
 func (e *EventSeries) ToGraphQL() *model.EventSeries {
-	var events []*model.Event
-	for _, event := range e.Events {
-		events = append(events, event.ToGraphQL())
-	}
+	events := ConvertSlice(e.Events, func(v *Event) *model.Event { return v.ToGraphQL() })
 
 	return &model.EventSeries{
 		ID:          e.ID,
