@@ -12,6 +12,15 @@ import (
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
 )
 
+// Event is the resolver for the event field.
+func (r *albumResolver) Event(ctx context.Context, obj *model.Album) (*model.Event, error) {
+	event, err := loader.LoadEvent(ctx, obj.Event.ID)
+	if err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
 // Product is the resolver for the product field.
 func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error) {
 	product, err := loader.LoadProduct(ctx, obj.Product.ID)
@@ -165,11 +174,15 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 	return tags.ToGraphQLs(), nil
 }
 
+// Album returns generated.AlbumResolver implementation.
+func (r *Resolver) Album() generated.AlbumResolver { return &albumResolver{r} }
+
 // OriginalSong returns generated.OriginalSongResolver implementation.
 func (r *Resolver) OriginalSong() generated.OriginalSongResolver { return &originalSongResolver{r} }
 
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
+type albumResolver struct{ *Resolver }
 type originalSongResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }

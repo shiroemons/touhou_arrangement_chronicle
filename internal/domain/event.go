@@ -11,6 +11,7 @@ type EventRepository interface {
 	Update(ctx context.Context, event *entity.Event) (*entity.Event, error)
 	Delete(ctx context.Context, event *entity.Event) error
 	FindByID(ctx context.Context, id string) (*entity.Event, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Event, error)
 }
 
 type EventService interface {

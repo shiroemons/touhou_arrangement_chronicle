@@ -84,3 +84,7 @@ models:
     fields:
       product:
         resolver: true
+  Album:
+    fields:
+      event:
+        resolver: true

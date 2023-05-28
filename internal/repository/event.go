@@ -82,3 +82,21 @@ func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {
 	}
 	return events, nil
 }
+
+// GetMapInIDs returns a map of events that match the specified IDs.
+func (r *EventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Event, error) {
+	events := make([]*entity.Event, 0)
+	err := r.db.NewSelect().Model(&events).
+		Relation("EventSeries").
+		Where("e.id IN (?)", bun.In(ids)).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	eventByID := make(map[string]*entity.Event, len(events))
+	for _, event := range events {
+		eventByID[event.ID] = event
+	}
+	return eventByID, nil
+}
