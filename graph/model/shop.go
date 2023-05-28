@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-func (e Shop) ToString() string {
-	return string(e)
-}
-
 func ToShop(s string) (Shop, error) {
 	var e Shop = Shop(strings.ToUpper(s))
 	if !e.IsValid() {

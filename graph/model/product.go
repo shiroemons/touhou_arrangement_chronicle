@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-func (e ProductType) ToString() string {
-	return string(e)
-}
-
 func ToProductType(s string) (ProductType, error) {
 	var e ProductType = ProductType(strings.ToUpper(s))
 	if !e.IsValid() {

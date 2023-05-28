@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-func (e TagType) ToString() string {
-	return string(e)
-}
-
 func ToTagType(s string) (TagType, error) {
 	var e TagType = TagType(strings.ToUpper(s))
 	if !e.IsValid() {

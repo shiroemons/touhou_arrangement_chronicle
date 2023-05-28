@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-func (e InitialLetterType) ToString() string {
-	return string(e)
-}
-
 func ToInitialLetterType(s string) (InitialLetterType, error) {
 	var e InitialLetterType = InitialLetterType(strings.ToUpper(s))
 	if !e.IsValid() {
