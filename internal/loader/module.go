@@ -8,6 +8,7 @@ var InitModule = fx.Provide(
 	ProductLoaderProvider,
 	EventLoaderProvider,
 	SubEventLoaderProvider,
+	AlbumLoaderProvider,
 )
 
 var Module = fx.Provide(

@@ -79,3 +79,32 @@ func (r *AlbumRepository) FindByID(ctx context.Context, id string) (*entity.Albu
 	}
 	return album, nil
 }
+
+// GetMapInIDs is get map in ids
+func (r *AlbumRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Album, error) {
+	albums := make([]*entity.Album, 0)
+	err := r.db.NewSelect().Model(&albums).
+		Relation("Event").
+		Relation("SubEvent").
+		Relation("AlbumConsignmentShops").
+		Relation("AlbumDistributionServiceURLs").
+		Relation("AlbumUPCs").
+		Relation("Songs").
+		Relation("Circles").
+		Relation("Genres").
+		Relation("Genres.Genre").
+		Relation("Tags").
+		Relation("Tags.Tag").
+		Where("al.id IN (?)", ids).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	albumMap := make(map[string]*entity.Album)
+	for _, album := range albums {
+		albumMap[album.ID] = album
+	}
+
+	return albumMap, nil
+}

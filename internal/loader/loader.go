@@ -11,12 +11,14 @@ type Params struct {
 	ProductLoader  *ProductLoader
 	EventLoader    *EventLoader
 	SubEventLoader *SubEventLoader
+	AlbumLoader    *AlbumLoader
 }
 
 type Loaders struct {
 	pLoader  *dataloader.Loader
 	eLoader  *dataloader.Loader
 	seLoader *dataloader.Loader
+	aLoader  *dataloader.Loader
 }
 
 func LoadersProvider(p Params) *Loaders {
@@ -24,5 +26,6 @@ func LoadersProvider(p Params) *Loaders {
 		pLoader:  dataloader.NewBatchedLoader(p.ProductLoader.BatchGetProducts),
 		eLoader:  dataloader.NewBatchedLoader(p.EventLoader.BatchGetEvents),
 		seLoader: dataloader.NewBatchedLoader(p.SubEventLoader.BatchGetSubEvents),
+		aLoader:  dataloader.NewBatchedLoader(p.AlbumLoader.BatchGetAlbums),
 	}
 }

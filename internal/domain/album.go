@@ -11,6 +11,7 @@ type AlbumRepository interface {
 	Update(ctx context.Context, album *entity.Album) (*entity.Album, error)
 	Delete(ctx context.Context, album *entity.Album) error
 	FindByID(ctx context.Context, id string) (*entity.Album, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Album, error)
 }
 
 type AlbumService interface {
