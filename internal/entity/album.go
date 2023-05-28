@@ -3,6 +3,7 @@ package entity
 import (
 	"time"
 
+	"github.com/samber/lo"
 	"github.com/shopspring/decimal"
 	"github.com/uptrace/bun"
 
@@ -42,18 +43,11 @@ type Album struct {
 
 // ToGraphQL Convert to GraphQL Schema
 func (e *Album) ToGraphQL() *model.Album {
-	var circles []*model.Circle
-	for _, circle := range e.Circles {
-		circles = append(circles, circle.ToGraphQL())
-	}
-	var genres []*model.AlbumGenre
-	for _, genre := range e.Genres {
-		genres = append(genres, genre.ToGraphQL())
-	}
-	var tags []*model.AlbumTag
-	for _, tag := range e.Tags {
-		tags = append(tags, tag.ToGraphQL())
-	}
+	circles := ConvertSlice(e.Circles, func(c *Circle) *model.Circle { return c.ToGraphQL() })
+	genres := ConvertSlice(e.Genres, func(g *AlbumGenre) *model.AlbumGenre { return g.ToGraphQL() })
+	tags := ConvertSlice(e.Tags, func(t *AlbumTag) *model.AlbumTag { return t.ToGraphQL() })
+	consignmentShops := ConvertSlice(e.AlbumConsignmentShops, func(a *AlbumConsignmentShop) *model.ConsignmentShop { return a.ToGraphQL() })
+	distributionUrls := ConvertSlice(e.AlbumDistributionServiceURLs, func(u *AlbumDistributionServiceURL) *model.AlbumDistributionServiceURL { return u.ToGraphQL() })
 
 	album := &model.Album{
 		ID:                e.ID,
@@ -70,10 +64,11 @@ func (e *Album) ToGraphQL() *model.Album {
 		Circles:           circles,
 		Genres:            genres,
 		Tags:              tags,
+		ConsignmentShops:  consignmentShops,
+		DistributionUrls:  distributionUrls,
 	}
 	if e.ReleaseDate != nil {
-		releaseDate := e.ReleaseDate.Format("2006-01-02")
-		album.ReleaseDate = &releaseDate
+		album.ReleaseDate = lo.ToPtr(e.ReleaseDate.Format("2006-01-02"))
 	}
 	if e.EventID != "" {
 		album.Event = &model.Event{ID: e.EventID}
