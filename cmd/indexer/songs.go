@@ -64,7 +64,9 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 		Relation("ReArrangers").
 		Relation("Vocalists").
 		Relation("Genres").
+		Relation("Genres.Genre").
 		Relation("Tags").
+		Relation("Tags.Tag").
 		Offset(offset).
 		Limit(limit).
 		Scan(ctx)
@@ -231,7 +233,7 @@ func convertSongServiceUrlsToMaps(serviceUrls []*entity.SongDistributionServiceU
 	return maps
 }
 
-func convertTags(tags []*entity.Tag) []map[string]interface{} {
+func convertTags(tags []*entity.SongTag) []map[string]interface{} {
 	if len(tags) == 0 {
 		return nil
 	}
@@ -239,13 +241,13 @@ func convertTags(tags []*entity.Tag) []map[string]interface{} {
 	for i, tag := range tags {
 		maps[i] = map[string]interface{}{
 			"id":   tag.ID,
-			"name": tag.Name,
+			"name": tag.Tag.Name,
 		}
 	}
 	return maps
 }
 
-func convertGenres(genres []*entity.Genre) []map[string]interface{} {
+func convertGenres(genres []*entity.SongGenre) []map[string]interface{} {
 	if len(genres) == 0 {
 		return nil
 	}
@@ -253,7 +255,7 @@ func convertGenres(genres []*entity.Genre) []map[string]interface{} {
 	for i, genre := range genres {
 		maps[i] = map[string]interface{}{
 			"id":   genre.ID,
-			"name": genre.Name,
+			"name": genre.Genre.Name,
 		}
 	}
 	return maps
