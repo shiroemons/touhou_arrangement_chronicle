@@ -124,8 +124,8 @@ func (e *Song) ToGraphQL() *model.Song {
 	if e.Circle != nil {
 		song.Circle = e.Circle.ToGraphQL()
 	}
-	if e.Album != nil {
-		song.Album = e.Album.ToGraphQL()
+	if e.AlbumID != "" {
+		song.Album = &model.Album{ID: e.AlbumID}
 	}
 
 	return song

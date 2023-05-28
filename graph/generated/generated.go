@@ -40,6 +40,7 @@ type ResolverRoot interface {
 	Event() EventResolver
 	OriginalSong() OriginalSongResolver
 	Query() QueryResolver
+	Song() SongResolver
 }
 
 type DirectiveRoot struct {
@@ -335,6 +336,9 @@ type QueryResolver interface {
 	GetSongByID(ctx context.Context, id string) (*model.Song, error)
 	GetGenres(ctx context.Context) ([]*model.Genre, error)
 	GetTags(ctx context.Context) ([]*model.Tag, error)
+}
+type SongResolver interface {
+	Album(ctx context.Context, obj *model.Song) (*model.Album, error)
 }
 
 type executableSchema struct {
@@ -9210,7 +9214,7 @@ func (ec *executionContext) _Song_album(ctx context.Context, field graphql.Colle
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Album, nil
+		return ec.resolvers.Song().Album(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -9231,8 +9235,8 @@ func (ec *executionContext) fieldContext_Song_album(ctx context.Context, field g
 	fc = &graphql.FieldContext{
 		Object:     "Song",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
@@ -15164,53 +15168,66 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = ec._Song_id(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "circle":
 
 			out.Values[i] = ec._Song_circle(ctx, field, obj)
 
 		case "album":
+			field := field
 
-			out.Values[i] = ec._Song_album(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Song_album(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "name":
 
 			out.Values[i] = ec._Song_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "nameReading":
 
 			out.Values[i] = ec._Song_nameReading(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "slug":
 
 			out.Values[i] = ec._Song_slug(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "discNumber":
 
 			out.Values[i] = ec._Song_discNumber(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "trackNumber":
 
 			out.Values[i] = ec._Song_trackNumber(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "releaseDate":
 
@@ -15221,7 +15238,7 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = ec._Song_searchEnabled(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "length":
 
@@ -15236,133 +15253,133 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = ec._Song_description(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayComposer":
 
 			out.Values[i] = ec._Song_displayComposer(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayArranger":
 
 			out.Values[i] = ec._Song_displayArranger(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayRearranger":
 
 			out.Values[i] = ec._Song_displayRearranger(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayLyricist":
 
 			out.Values[i] = ec._Song_displayLyricist(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayVocalist":
 
 			out.Values[i] = ec._Song_displayVocalist(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayOriginalSong":
 
 			out.Values[i] = ec._Song_displayOriginalSong(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "distributionUrls":
 
 			out.Values[i] = ec._Song_distributionUrls(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "isrcs":
 
 			out.Values[i] = ec._Song_isrcs(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "arrangeCircles":
 
 			out.Values[i] = ec._Song_arrangeCircles(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "composers":
 
 			out.Values[i] = ec._Song_composers(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "arrangers":
 
 			out.Values[i] = ec._Song_arrangers(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "rearrangers":
 
 			out.Values[i] = ec._Song_rearrangers(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "lyricists":
 
 			out.Values[i] = ec._Song_lyricists(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "vocalists":
 
 			out.Values[i] = ec._Song_vocalists(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "originalSongs":
 
 			out.Values[i] = ec._Song_originalSongs(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "circles":
 
 			out.Values[i] = ec._Song_circles(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "genres":
 
 			out.Values[i] = ec._Song_genres(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "tags":
 
 			out.Values[i] = ec._Song_tags(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
@@ -15976,6 +15993,10 @@ func (ec *executionContext) ___Type(ctx context.Context, sel ast.SelectionSet, o
 // endregion **************************** object.gotpl ****************************
 
 // region    ***************************** type.gotpl *****************************
+
+func (ec *executionContext) marshalNAlbum2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx context.Context, sel ast.SelectionSet, v model.Album) graphql.Marshaler {
+	return ec._Album(ctx, sel, &v)
+}
 
 func (ec *executionContext) marshalNAlbum2ᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐAlbum(ctx context.Context, sel ast.SelectionSet, v *model.Album) graphql.Marshaler {
 	if v == nil {

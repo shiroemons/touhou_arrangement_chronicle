@@ -192,6 +192,15 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 	return tags.ToGraphQLs(), nil
 }
 
+// Album is the resolver for the album field.
+func (r *songResolver) Album(ctx context.Context, obj *model.Song) (*model.Album, error) {
+	album, err := loader.LoadAlbum(ctx, obj.Album.ID)
+	if err != nil {
+		return nil, err
+	}
+	return album, nil
+}
+
 // Album returns generated.AlbumResolver implementation.
 func (r *Resolver) Album() generated.AlbumResolver { return &albumResolver{r} }
 
@@ -204,7 +213,11 @@ func (r *Resolver) OriginalSong() generated.OriginalSongResolver { return &origi
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
+// Song returns generated.SongResolver implementation.
+func (r *Resolver) Song() generated.SongResolver { return &songResolver{r} }
+
 type albumResolver struct{ *Resolver }
 type eventResolver struct{ *Resolver }
 type originalSongResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+type songResolver struct{ *Resolver }
