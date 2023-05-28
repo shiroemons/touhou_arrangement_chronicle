@@ -11,6 +11,7 @@ type SongRepository interface {
 	Update(ctx context.Context, song *entity.Song) (*entity.Song, error)
 	Delete(ctx context.Context, song *entity.Song) error
 	FindByID(ctx context.Context, id string) (*entity.Song, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Song, error)
 }
 
 type SongService interface {
