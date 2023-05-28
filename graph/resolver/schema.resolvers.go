@@ -21,6 +21,15 @@ func (r *albumResolver) Event(ctx context.Context, obj *model.Album) (*model.Eve
 	return event, nil
 }
 
+// SubEvent is the resolver for the subEvent field.
+func (r *albumResolver) SubEvent(ctx context.Context, obj *model.Album) (*model.SubEvent, error) {
+	subEvent, err := loader.LoadSubEvent(ctx, obj.SubEvent.ID)
+	if err != nil {
+		return nil, err
+	}
+	return subEvent, nil
+}
+
 // Product is the resolver for the product field.
 func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error) {
 	product, err := loader.LoadProduct(ctx, obj.Product.ID)

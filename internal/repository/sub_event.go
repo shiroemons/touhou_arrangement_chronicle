@@ -68,3 +68,20 @@ func (r *SubEventRepository) FindByID(ctx context.Context, id string) (*entity.S
 	}
 	return subEvent, nil
 }
+
+// GetMapInIDs は、指定したIDのSubEventを取得します。
+func (r *SubEventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.SubEvent, error) {
+	subEvents := make([]*entity.SubEvent, 0)
+	err := r.db.NewSelect().Model(&subEvents).
+		Where("id IN (?)", bun.In(ids)).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	subEventMap := make(map[string]*entity.SubEvent)
+	for _, subEvent := range subEvents {
+		subEventMap[subEvent.ID] = subEvent
+	}
+	return subEventMap, nil
+}

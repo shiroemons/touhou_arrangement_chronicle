@@ -88,3 +88,5 @@ models:
     fields:
       event:
         resolver: true
+      subEvent:
+        resolver: true

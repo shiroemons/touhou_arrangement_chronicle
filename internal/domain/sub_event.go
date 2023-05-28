@@ -11,6 +11,7 @@ type SubEventRepository interface {
 	Update(ctx context.Context, subEvent *entity.SubEvent) (*entity.SubEvent, error)
 	Delete(ctx context.Context, subEvent *entity.SubEvent) error
 	FindByID(ctx context.Context, id string) (*entity.SubEvent, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.SubEvent, error)
 }
 
 type SubEventService interface {
