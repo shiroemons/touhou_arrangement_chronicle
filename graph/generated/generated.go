@@ -37,6 +37,7 @@ type Config struct {
 
 type ResolverRoot interface {
 	Album() AlbumResolver
+	Event() EventResolver
 	OriginalSong() OriginalSongResolver
 	Query() QueryResolver
 }
@@ -310,6 +311,9 @@ type ComplexityRoot struct {
 type AlbumResolver interface {
 	Event(ctx context.Context, obj *model.Album) (*model.Event, error)
 	SubEvent(ctx context.Context, obj *model.Album) (*model.SubEvent, error)
+}
+type EventResolver interface {
+	Series(ctx context.Context, obj *model.Event) (*model.EventSeries, error)
 }
 type OriginalSongResolver interface {
 	Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error)
@@ -5716,7 +5720,7 @@ func (ec *executionContext) _Event_series(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Series, nil
+		return ec.resolvers.Event().Series(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -5737,8 +5741,8 @@ func (ec *executionContext) fieldContext_Event_series(ctx context.Context, field
 	fc = &graphql.FieldContext{
 		Object:     "Event",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
@@ -14273,35 +14277,48 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 			out.Values[i] = ec._Event_id(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "series":
+			field := field
 
-			out.Values[i] = ec._Event_series(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Event_series(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "name":
 
 			out.Values[i] = ec._Event_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "displayName":
 
 			out.Values[i] = ec._Event_displayName(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "slug":
 
 			out.Values[i] = ec._Event_slug(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "startDate":
 
@@ -14316,56 +14333,56 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 			out.Values[i] = ec._Event_status(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "format":
 
 			out.Values[i] = ec._Event_format(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "regionCode":
 
 			out.Values[i] = ec._Event_regionCode(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "address":
 
 			out.Values[i] = ec._Event_address(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "description":
 
 			out.Values[i] = ec._Event_description(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "url":
 
 			out.Values[i] = ec._Event_url(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "twitterUrl":
 
 			out.Values[i] = ec._Event_twitterUrl(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "subEvents":
 
 			out.Values[i] = ec._Event_subEvents(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
@@ -16489,6 +16506,10 @@ func (ec *executionContext) unmarshalNEventFormat2githubᚗcomᚋshiroemonsᚋto
 
 func (ec *executionContext) marshalNEventFormat2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventFormat(ctx context.Context, sel ast.SelectionSet, v model.EventFormat) graphql.Marshaler {
 	return v
+}
+
+func (ec *executionContext) marshalNEventSeries2githubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventSeries(ctx context.Context, sel ast.SelectionSet, v model.EventSeries) graphql.Marshaler {
+	return ec._EventSeries(ctx, sel, &v)
 }
 
 func (ec *executionContext) marshalNEventSeries2ᚕᚖgithubᚗcomᚋshiroemonsᚋtouhou_arrangement_chronicleᚋgraphᚋmodelᚐEventSeriesᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.EventSeries) graphql.Marshaler {

@@ -50,6 +50,9 @@ func (e *Event) ToGraphQL() *model.Event {
 		TwitterURL:  e.TwitterURL,
 		SubEvents:   subEvents,
 	}
+	if e.EventSeriesID != "" {
+		event.Series = &model.EventSeries{ID: e.EventSeriesID}
+	}
 	if e.EventDates.Status == pgtype.Present {
 		event.StartDate = lo.ToPtr(e.EventDates.Lower.Time.Format("2006-01-02"))
 		// event.EndDate は、e.EventDates.Upper.Timeを1日前の情報を格納する

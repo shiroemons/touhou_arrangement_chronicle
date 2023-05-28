@@ -79,9 +79,9 @@ func (r *SubEventRepository) GetMapInIDs(ctx context.Context, ids []string) (map
 		return nil, err
 	}
 
-	subEventMap := make(map[string]*entity.SubEvent)
-	for _, subEvent := range subEvents {
-		subEventMap[subEvent.ID] = subEvent
+	subEventMap := make(map[string]*entity.SubEvent, len(subEvents))
+	for _, v := range subEvents {
+		subEventMap[v.ID] = v
 	}
 	return subEventMap, nil
 }

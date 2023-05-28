@@ -73,7 +73,6 @@ func (r *EventRepository) FindByID(ctx context.Context, id string) (*entity.Even
 func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {
 	events := make([]*entity.Event, 0)
 	err := r.db.NewSelect().Model(&events).
-		Relation("EventSeries").
 		Relation("SubEvents").
 		Order("event_dates DESC").
 		Scan(ctx)
@@ -94,9 +93,9 @@ func (r *EventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[st
 		return nil, err
 	}
 
-	eventByID := make(map[string]*entity.Event, len(events))
-	for _, event := range events {
-		eventByID[event.ID] = event
+	eventMap := make(map[string]*entity.Event, len(events))
+	for _, v := range events {
+		eventMap[v.ID] = v
 	}
-	return eventByID, nil
+	return eventMap, nil
 }

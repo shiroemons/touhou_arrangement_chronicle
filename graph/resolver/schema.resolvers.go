@@ -30,6 +30,15 @@ func (r *albumResolver) SubEvent(ctx context.Context, obj *model.Album) (*model.
 	return subEvent, nil
 }
 
+// Series is the resolver for the series field.
+func (r *eventResolver) Series(ctx context.Context, obj *model.Event) (*model.EventSeries, error) {
+	series, err := loader.LoadEventSeries(ctx, obj.Series.ID)
+	if err != nil {
+		return nil, err
+	}
+	return series, nil
+}
+
 // Product is the resolver for the product field.
 func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error) {
 	product, err := loader.LoadProduct(ctx, obj.Product.ID)
@@ -186,6 +195,9 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 // Album returns generated.AlbumResolver implementation.
 func (r *Resolver) Album() generated.AlbumResolver { return &albumResolver{r} }
 
+// Event returns generated.EventResolver implementation.
+func (r *Resolver) Event() generated.EventResolver { return &eventResolver{r} }
+
 // OriginalSong returns generated.OriginalSongResolver implementation.
 func (r *Resolver) OriginalSong() generated.OriginalSongResolver { return &originalSongResolver{r} }
 
@@ -193,5 +205,6 @@ func (r *Resolver) OriginalSong() generated.OriginalSongResolver { return &origi
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type albumResolver struct{ *Resolver }
+type eventResolver struct{ *Resolver }
 type originalSongResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }

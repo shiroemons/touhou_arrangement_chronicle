@@ -99,15 +99,15 @@ func (r *SongRepository) GetMapInIDs(ctx context.Context, ids []string) (map[str
 		Relation("Lyricists").
 		Relation("ReArrangers").
 		Relation("Vocalists").
-		Where("s.id IN (?)", ids).
+		Where("s.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	songMap := make(map[string]*entity.Song)
-	for _, song := range songs {
-		songMap[song.ID] = song
+	songMap := make(map[string]*entity.Song, len(songs))
+	for _, v := range songs {
+		songMap[v.ID] = v
 	}
 	return songMap, nil
 }

@@ -95,13 +95,13 @@ func (r *AlbumRepository) GetMapInIDs(ctx context.Context, ids []string) (map[st
 		Relation("Genres.Genre").
 		Relation("Tags").
 		Relation("Tags.Tag").
-		Where("al.id IN (?)", ids).
+		Where("al.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	albumMap := make(map[string]*entity.Album)
+	albumMap := make(map[string]*entity.Album, len(albums))
 	for _, album := range albums {
 		albumMap[album.ID] = album
 	}

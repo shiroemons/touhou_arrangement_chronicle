@@ -14,9 +14,7 @@ type EventSeriesLoader struct {
 }
 
 func EventSeriesLoaderProvider(esRepo domain.EventSeriesRepository) *EventSeriesLoader {
-	return &EventSeriesLoader{
-		esRepo: esRepo,
-	}
+	return &EventSeriesLoader{esRepo: esRepo}
 }
 
 func (l *EventSeriesLoader) BatchGetEventSeries(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {

@@ -90,3 +90,7 @@ models:
         resolver: true
       subEvent:
         resolver: true
+  Event:
+    fields:
+      series:
+        resolver: true

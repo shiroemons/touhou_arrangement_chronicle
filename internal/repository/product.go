@@ -52,10 +52,9 @@ func (r *ProductRepository) GetMapInIDs(ctx context.Context, ids []string) (map[
 		return nil, err
 	}
 
-	productById := map[string]*entity.Product{}
-	for _, product := range products {
-		p := product
-		productById[p.ID] = p
+	productMap := make(map[string]*entity.Product, len(products))
+	for _, v := range products {
+		productMap[v.ID] = v
 	}
-	return productById, nil
+	return productMap, nil
 }

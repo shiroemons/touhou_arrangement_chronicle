@@ -86,13 +86,13 @@ func (r *EventSeriesRepository) GetMapInIDs(ctx context.Context, ids []string) (
 	err := r.db.NewSelect().Model(&eventSeries).
 		Relation("Events").
 		Relation("Events.SubEvents").
-		Where("es.id IN (?)", ids).
+		Where("es.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	eventSeriesMap := make(map[string]*entity.EventSeries)
+	eventSeriesMap := make(map[string]*entity.EventSeries, len(eventSeries))
 	for _, v := range eventSeries {
 		eventSeriesMap[v.ID] = v
 	}
