@@ -98,3 +98,5 @@ models:
     fields:
       album:
         resolver: true
+      circle:
+        resolver: true

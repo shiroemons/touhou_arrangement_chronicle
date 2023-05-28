@@ -121,8 +121,8 @@ func (e *Song) ToGraphQL() *model.Song {
 	if e.BPM != 0 {
 		song.Bpm = lo.ToPtr(e.BPM)
 	}
-	if e.Circle != nil {
-		song.Circle = e.Circle.ToGraphQL()
+	if e.CircleID != "" {
+		song.Circle = &model.Circle{ID: e.CircleID}
 	}
 	if e.AlbumID != "" {
 		song.Album = &model.Album{ID: e.AlbumID}

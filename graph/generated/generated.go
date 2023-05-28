@@ -338,6 +338,7 @@ type QueryResolver interface {
 	GetTags(ctx context.Context) ([]*model.Tag, error)
 }
 type SongResolver interface {
+	Circle(ctx context.Context, obj *model.Song) (*model.Circle, error)
 	Album(ctx context.Context, obj *model.Song) (*model.Album, error)
 }
 
@@ -9145,7 +9146,7 @@ func (ec *executionContext) _Song_circle(ctx context.Context, field graphql.Coll
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Circle, nil
+		return ec.resolvers.Song().Circle(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -9163,8 +9164,8 @@ func (ec *executionContext) fieldContext_Song_circle(ctx context.Context, field 
 	fc = &graphql.FieldContext{
 		Object:     "Song",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
@@ -15171,9 +15172,22 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 				atomic.AddUint32(&invalids, 1)
 			}
 		case "circle":
+			field := field
 
-			out.Values[i] = ec._Song_circle(ctx, field, obj)
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Song_circle(ctx, field, obj)
+				return res
+			}
 
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "album":
 			field := field
 

@@ -14,6 +14,9 @@ import (
 
 // Event is the resolver for the event field.
 func (r *albumResolver) Event(ctx context.Context, obj *model.Album) (*model.Event, error) {
+	if obj.Event == nil {
+		return nil, nil
+	}
 	event, err := loader.LoadEvent(ctx, obj.Event.ID)
 	if err != nil {
 		return nil, err
@@ -23,6 +26,9 @@ func (r *albumResolver) Event(ctx context.Context, obj *model.Album) (*model.Eve
 
 // SubEvent is the resolver for the subEvent field.
 func (r *albumResolver) SubEvent(ctx context.Context, obj *model.Album) (*model.SubEvent, error) {
+	if obj.SubEvent == nil {
+		return nil, nil
+	}
 	subEvent, err := loader.LoadSubEvent(ctx, obj.SubEvent.ID)
 	if err != nil {
 		return nil, err
@@ -32,6 +38,9 @@ func (r *albumResolver) SubEvent(ctx context.Context, obj *model.Album) (*model.
 
 // Series is the resolver for the series field.
 func (r *eventResolver) Series(ctx context.Context, obj *model.Event) (*model.EventSeries, error) {
+	if obj.Series == nil {
+		return nil, nil
+	}
 	series, err := loader.LoadEventSeries(ctx, obj.Series.ID)
 	if err != nil {
 		return nil, err
@@ -41,6 +50,9 @@ func (r *eventResolver) Series(ctx context.Context, obj *model.Event) (*model.Ev
 
 // Product is the resolver for the product field.
 func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalSong) (*model.Product, error) {
+	if obj.Product == nil {
+		return nil, nil
+	}
 	product, err := loader.LoadProduct(ctx, obj.Product.ID)
 	if err != nil {
 		return nil, err
@@ -192,8 +204,23 @@ func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
 	return tags.ToGraphQLs(), nil
 }
 
+// Circle is the resolver for the circle field.
+func (r *songResolver) Circle(ctx context.Context, obj *model.Song) (*model.Circle, error) {
+	if obj.Circle == nil {
+		return nil, nil
+	}
+	circle, err := loader.LoadCircle(ctx, obj.Circle.ID)
+	if err != nil {
+		return nil, err
+	}
+	return circle, nil
+}
+
 // Album is the resolver for the album field.
 func (r *songResolver) Album(ctx context.Context, obj *model.Song) (*model.Album, error) {
+	if obj.Album == nil {
+		return nil, nil
+	}
 	album, err := loader.LoadAlbum(ctx, obj.Album.ID)
 	if err != nil {
 		return nil, err

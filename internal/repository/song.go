@@ -61,8 +61,6 @@ func (r *SongRepository) Delete(ctx context.Context, song *entity.Song) error {
 func (r *SongRepository) FindByID(ctx context.Context, id string) (*entity.Song, error) {
 	song := new(entity.Song)
 	err := r.db.NewSelect().Model(song).
-		Relation("Circle").
-		Relation("Album").
 		Relation("SongDistributionServiceURLs").
 		Relation("SongISRCs").
 		Relation("Genres.Genre").
@@ -86,8 +84,6 @@ func (r *SongRepository) FindByID(ctx context.Context, id string) (*entity.Song,
 func (r *SongRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Song, error) {
 	songs := make([]*entity.Song, 0)
 	err := r.db.NewSelect().Model(&songs).
-		Relation("Circle").
-		Relation("Album").
 		Relation("SongDistributionServiceURLs").
 		Relation("SongISRCs").
 		Relation("Genres.Genre").

@@ -13,6 +13,7 @@ type CircleRepository interface {
 	Delete(ctx context.Context, circle *entity.Circle) error
 	FindByID(ctx context.Context, id string) (*entity.Circle, error)
 	FindByInitialType(ctx context.Context, initialType string) ([]*entity.Circle, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Circle, error)
 }
 
 type CircleService interface {

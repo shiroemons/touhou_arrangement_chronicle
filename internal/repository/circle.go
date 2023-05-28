@@ -81,3 +81,19 @@ func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType st
 	}
 	return circles, nil
 }
+
+// GetMapInIDs は、指定したIDのCircleを取得します。
+func (r *CircleRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Circle, error) {
+	circles := make([]*entity.Circle, 0)
+	err := r.db.NewSelect().Model(&circles).
+		Where("c.id IN (?)", bun.In(ids)).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	circleMap := make(map[string]*entity.Circle, len(circles))
+	for _, v := range circles {
+		circleMap[v.ID] = v
+	}
+	return circleMap, nil
+}
