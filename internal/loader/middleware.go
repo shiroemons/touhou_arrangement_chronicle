@@ -13,7 +13,13 @@ const (
 )
 
 func Middleware(loaders *Loaders) gin.HandlerFunc {
+	loaders.aLoader.ClearAll()
+	loaders.cLoader.ClearAll()
+	loaders.eLoader.ClearAll()
+	loaders.esLoader.ClearAll()
 	loaders.pLoader.ClearAll()
+	loaders.sLoader.ClearAll()
+	loaders.seLoader.ClearAll()
 	// return a middleware that injects the loader to the request context
 	return func(c *gin.Context) {
 		ctx := context.WithValue(c.Request.Context(), loadersKey, loaders)
