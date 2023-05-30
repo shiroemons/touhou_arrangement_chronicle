@@ -2,8 +2,9 @@ package loader
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
@@ -18,24 +19,20 @@ func SubEventLoaderProvider(seRepo domain.SubEventRepository) *SubEventLoader {
 	return &SubEventLoader{seRepo: seRepo}
 }
 
-func (l *SubEventLoader) BatchGetSubEvents(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	subEventIDs := make([]string, len(keys))
-	for ix, key := range keys {
-		subEventIDs[ix] = key.String()
-	}
-
-	subEventByID, err := l.seRepo.GetMapInIDs(ctx, subEventIDs)
+func (l *SubEventLoader) BatchGetSubEvents(ctx context.Context, keys []string) []*dataloader.Result[*entity.SubEvent] {
+	subEventByID, err := l.seRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, subEventKey := range keys {
-		subEvent, ok := subEventByID[subEventKey.String()]
+	output := make([]*dataloader.Result[*entity.SubEvent], len(keys))
+	for index, key := range keys {
+		subEvent, ok := subEventByID[key]
 		if ok {
-			output[index] = &dataloader.Result{Data: subEvent, Error: nil}
+			output[index] = &dataloader.Result[*entity.SubEvent]{Data: subEvent, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("subEvent not found %s", key)
+			output[index] = &dataloader.Result[*entity.SubEvent]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -43,11 +40,10 @@ func (l *SubEventLoader) BatchGetSubEvents(ctx context.Context, keys dataloader.
 
 func LoadSubEvent(ctx context.Context, subEventID string) (*model.SubEvent, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.seLoader.Load(ctx, dataloader.StringKey(subEventID))
+	thunk := loaders.seLoader.Load(ctx, subEventID)
 	result, err := thunk()
 	if err != nil {
 		return nil, err
 	}
-	subEvent := result.(*entity.SubEvent)
-	return subEvent.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }

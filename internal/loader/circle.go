@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/graph-gophers/dataloader"
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/graph-gophers/dataloader/v7"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleLoader struct {
@@ -19,24 +19,20 @@ func CircleLoaderProvider(cRepo domain.CircleRepository) *CircleLoader {
 	return &CircleLoader{cRepo: cRepo}
 }
 
-func (l *CircleLoader) BatchGetCircles(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	circleIds := make([]string, len(keys))
-	for ix, key := range keys {
-		circleIds[ix] = key.String()
-	}
-
-	circleByID, err := l.cRepo.GetMapInIDs(ctx, circleIds)
+func (l *CircleLoader) BatchGetCircles(ctx context.Context, keys []string) []*dataloader.Result[*entity.Circle] {
+	circleByID, err := l.cRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, circleKey := range keys {
-		circle, ok := circleByID[circleKey.String()]
+	output := make([]*dataloader.Result[*entity.Circle], len(keys))
+	for index, key := range keys {
+		circle, ok := circleByID[key]
 		if ok {
-			output[index] = &dataloader.Result{Data: circle, Error: nil}
+			output[index] = &dataloader.Result[*entity.Circle]{Data: circle, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("circle not found %s", key)
+			output[index] = &dataloader.Result[*entity.Circle]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -44,20 +40,10 @@ func (l *CircleLoader) BatchGetCircles(ctx context.Context, keys dataloader.Keys
 
 func LoadCircle(ctx context.Context, circleID string) (*model.Circle, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.cLoader.Load(ctx, dataloader.StringKey(circleID))
+	thunk := loaders.cLoader.Load(ctx, circleID)
 	result, err := thunk()
 	if err != nil {
 		return nil, fmt.Errorf("error executing thunk: %w", err)
 	}
-
-	circle, ok := result.(*entity.Circle)
-	if !ok {
-		return nil, fmt.Errorf("unable to cast result to *entity.Circle")
-	}
-
-	if circle == nil {
-		return &model.Circle{}, nil
-	}
-
-	return circle.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }

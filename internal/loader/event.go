@@ -2,8 +2,9 @@ package loader
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
@@ -18,24 +19,20 @@ func EventLoaderProvider(eRepo domain.EventRepository) *EventLoader {
 	return &EventLoader{eRepo: eRepo}
 }
 
-func (l *EventLoader) BatchGetEvents(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	eventIDs := make([]string, len(keys))
-	for ix, key := range keys {
-		eventIDs[ix] = key.String()
-	}
-
-	eventByID, err := l.eRepo.GetMapInIDs(ctx, eventIDs)
+func (l *EventLoader) BatchGetEvents(ctx context.Context, keys []string) []*dataloader.Result[*entity.Event] {
+	eventByID, err := l.eRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, eventKey := range keys {
-		event, ok := eventByID[eventKey.String()]
+	output := make([]*dataloader.Result[*entity.Event], len(keys))
+	for index, key := range keys {
+		event, ok := eventByID[key]
 		if ok {
-			output[index] = &dataloader.Result{Data: event, Error: nil}
+			output[index] = &dataloader.Result[*entity.Event]{Data: event, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("event not found %s", key)
+			output[index] = &dataloader.Result[*entity.Event]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -43,11 +40,10 @@ func (l *EventLoader) BatchGetEvents(ctx context.Context, keys dataloader.Keys) 
 
 func LoadEvent(ctx context.Context, eventID string) (*model.Event, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.eLoader.Load(ctx, dataloader.StringKey(eventID))
+	thunk := loaders.eLoader.Load(ctx, eventID)
 	result, err := thunk()
 	if err != nil {
 		return nil, err
 	}
-	event := result.(*entity.Event)
-	return event.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }

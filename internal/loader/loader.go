@@ -1,8 +1,10 @@
 package loader
 
 import (
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
 	"go.uber.org/fx"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type Params struct {
@@ -18,13 +20,13 @@ type Params struct {
 }
 
 type Loaders struct {
-	pLoader  *dataloader.Loader
-	esLoader *dataloader.Loader
-	eLoader  *dataloader.Loader
-	seLoader *dataloader.Loader
-	aLoader  *dataloader.Loader
-	sLoader  *dataloader.Loader
-	cLoader  *dataloader.Loader
+	pLoader  *dataloader.Loader[string, *entity.Product]
+	esLoader *dataloader.Loader[string, *entity.EventSeries]
+	eLoader  *dataloader.Loader[string, *entity.Event]
+	seLoader *dataloader.Loader[string, *entity.SubEvent]
+	aLoader  *dataloader.Loader[string, *entity.Album]
+	sLoader  *dataloader.Loader[string, *entity.Song]
+	cLoader  *dataloader.Loader[string, *entity.Circle]
 }
 
 func LoadersProvider(p Params) *Loaders {

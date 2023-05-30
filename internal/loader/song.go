@@ -2,8 +2,9 @@ package loader
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
@@ -18,24 +19,20 @@ func SongLoaderProvider(sRepo domain.SongRepository) *SongLoader {
 	return &SongLoader{sRepo: sRepo}
 }
 
-func (l *SongLoader) BatchGetSongs(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	songIDs := make([]string, len(keys))
-	for ix, key := range keys {
-		songIDs[ix] = key.String()
-	}
-
-	songByID, err := l.sRepo.GetMapInIDs(ctx, songIDs)
+func (l *SongLoader) BatchGetSongs(ctx context.Context, keys []string) []*dataloader.Result[*entity.Song] {
+	songByID, err := l.sRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, songKey := range keys {
-		song, ok := songByID[songKey.String()]
+	output := make([]*dataloader.Result[*entity.Song], len(keys))
+	for index, key := range keys {
+		song, ok := songByID[key]
 		if ok {
-			output[index] = &dataloader.Result{Data: song, Error: nil}
+			output[index] = &dataloader.Result[*entity.Song]{Data: song, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("song not found %s", key)
+			output[index] = &dataloader.Result[*entity.Song]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -43,11 +40,10 @@ func (l *SongLoader) BatchGetSongs(ctx context.Context, keys dataloader.Keys) []
 
 func LoadSong(ctx context.Context, songID string) (*model.Song, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.sLoader.Load(ctx, dataloader.StringKey(songID))
+	thunk := loaders.sLoader.Load(ctx, songID)
 	result, err := thunk()
 	if err != nil {
 		return nil, err
 	}
-	song := result.(*entity.Song)
-	return song.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }

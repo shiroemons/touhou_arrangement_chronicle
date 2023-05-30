@@ -2,8 +2,10 @@ package loader
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
@@ -17,24 +19,20 @@ func EventSeriesLoaderProvider(esRepo domain.EventSeriesRepository) *EventSeries
 	return &EventSeriesLoader{esRepo: esRepo}
 }
 
-func (l *EventSeriesLoader) BatchGetEventSeries(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	eventSeriesIDs := make([]string, len(keys))
-	for ix, key := range keys {
-		eventSeriesIDs[ix] = key.String()
-	}
-
-	eventSeriesByID, err := l.esRepo.GetMapInIDs(ctx, eventSeriesIDs)
+func (l *EventSeriesLoader) BatchGetEventSeries(ctx context.Context, keys []string) []*dataloader.Result[*entity.EventSeries] {
+	eventSeriesByID, err := l.esRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, eventSeriesKey := range keys {
-		eventSeries, ok := eventSeriesByID[eventSeriesKey.String()]
+	output := make([]*dataloader.Result[*entity.EventSeries], len(keys))
+	for index, key := range keys {
+		eventSeries, ok := eventSeriesByID[key]
 		if ok {
-			output[index] = &dataloader.Result{Data: eventSeries, Error: nil}
+			output[index] = &dataloader.Result[*entity.EventSeries]{Data: eventSeries, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("eventSeries not found %s", key)
+			output[index] = &dataloader.Result[*entity.EventSeries]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -42,11 +40,10 @@ func (l *EventSeriesLoader) BatchGetEventSeries(ctx context.Context, keys datalo
 
 func LoadEventSeries(ctx context.Context, eventSeriesID string) (*model.EventSeries, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.esLoader.Load(ctx, dataloader.StringKey(eventSeriesID))
+	thunk := loaders.esLoader.Load(ctx, eventSeriesID)
 	result, err := thunk()
 	if err != nil {
 		return nil, err
 	}
-	eventSeries := result.(*entity.EventSeries)
-	return eventSeries.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }
