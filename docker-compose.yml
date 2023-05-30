@@ -75,6 +75,7 @@ services:
       - "run"
       - "cmd/indexer/main.go"
       - "cmd/indexer/original_songs.go"
+      - "cmd/indexer/albums.go"
       - "cmd/indexer/songs.go"
       - "cmd/indexer/setup.go"
 

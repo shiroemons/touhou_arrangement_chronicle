@@ -4,64 +4,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
-
-type OriginalSong struct {
-	bun.BaseModel `bun:"table:original_songs,alias:os"`
-
-	ID                                  string                                `bun:",pk"`
-	ProductID                           string                                `bun:"product_id,nullzero,notnull"`
-	Product                             Product                               `bun:"rel:belongs-to,join:product_id=id"`
-	Name                                string                                `bun:"name,nullzero,notnull"`
-	Composer                            string                                `bun:"composer,nullzero,notnull,default:''"`
-	Arranger                            string                                `bun:"arranger,nullzero,notnull,default:''"`
-	TrackNumber                         int                                   `bun:"track_number,nullzero,notnull"`
-	Original                            bool                                  `bun:"is_original,notnull"`
-	SourceID                            string                                `bun:"source_id,nullzero,notnull,default:''"`
-	OriginalSongDistributionServiceURLs []*OriginalSongDistributionServiceURL `bun:"rel:has-many,join:id=original_song_id"`
-	CreatedAt                           time.Time                             `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt                           time.Time                             `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-type Product struct {
-	bun.BaseModel `bun:"table:products,alias:p"`
-
-	ID                             string                           `bun:",pk"`
-	Name                           string                           `bun:"name,nullzero,notnull"`
-	ShortName                      string                           `bun:"short_name,nullzero,notnull"`
-	ProductType                    string                           `bun:"product_type,nullzero,notnull"`
-	SeriesNumber                   float64                          `bun:"series_number,nullzero,notnull"`
-	ProductDistributionServiceURLs []*ProductDistributionServiceURL `bun:"rel:has-many,join:id=product_id"`
-	CreatedAt                      time.Time                        `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt                      time.Time                        `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-type ProductDistributionServiceURL struct {
-	bun.BaseModel `bun:"table:product_distribution_service_urls,alias:pdsu"`
-
-	ID        string    `bun:",pk"`
-	ProductID string    `bun:"product_id,nullzero,notnull"`
-	Service   string    `bun:"service,nullzero,notnull"`
-	URL       string    `bun:"url,nullzero,notnull"`
-	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-type OriginalSongDistributionServiceURL struct {
-	bun.BaseModel `bun:"table:original_song_distribution_service_urls,alias:osdsu"`
-
-	ID             string    `bun:",pk"`
-	OriginalSongID string    `bun:"original_song_id,nullzero,notnull"`
-	Service        string    `bun:"service,nullzero,notnull"`
-	URL            string    `bun:"url,nullzero,notnull"`
-	CreatedAt      time.Time `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt      time.Time `bun:"updated_at,notnull,default:current_timestamp"`
-}
 
 func setupOriginalSongs(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {
 	// An index is where the documents are stored.
@@ -88,8 +37,8 @@ func getOriginalSongDocs(ctx context.Context, db *bun.DB) []map[string]interface
 	return documents
 }
 
-func getOriginalSongs(ctx context.Context, db *bun.DB) []*OriginalSong {
-	originalSongs := make([]*OriginalSong, 0)
+func getOriginalSongs(ctx context.Context, db *bun.DB) []*entity.OriginalSong {
+	originalSongs := make([]*entity.OriginalSong, 0)
 	err := db.NewSelect().Model(&originalSongs).
 		Relation("Product").
 		Relation("Product.ProductDistributionServiceURLs").
@@ -103,7 +52,7 @@ func getOriginalSongs(ctx context.Context, db *bun.DB) []*OriginalSong {
 	return originalSongs
 }
 
-func osDocConverter(song *OriginalSong) map[string]interface{} {
+func osDocConverter(song *entity.OriginalSong) map[string]interface{} {
 	var pServiceURLs []map[string]interface{}
 	if song.Product.ProductDistributionServiceURLs != nil {
 		for _, pdsu := range song.Product.ProductDistributionServiceURLs {

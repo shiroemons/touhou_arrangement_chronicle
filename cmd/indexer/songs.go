@@ -8,6 +8,7 @@ import (
 
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
+	"github.com/samber/lo"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
@@ -67,6 +68,7 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 		Relation("Genres.Genre").
 		Relation("Tags").
 		Relation("Tags.Tag").
+		Where("s.search_enabled = ?", true).
 		Offset(offset).
 		Limit(limit).
 		Scan(ctx)
@@ -84,10 +86,8 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 		var releaseYear *int
 		var releaseDate *string
 		if s.ReleaseDate != nil {
-			year := s.ReleaseDate.Year()
-			releaseYear = &year
-			date := s.ReleaseDate.Format("2006-01-02")
-			releaseDate = &date
+			releaseYear = lo.ToPtr(s.ReleaseDate.Year())
+			releaseDate = lo.ToPtr(s.ReleaseDate.Format("2006-01-02"))
 		}
 		var isTouhouArrange bool
 		if s.OriginalSongs != nil {
@@ -101,6 +101,7 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 
 		song := map[string]interface{}{
 			"id":                  s.ID,
+			"slug":                s.Slug,
 			"name":                s.Name,
 			"disc_number":         s.DiscNumber,
 			"track_number":        s.TrackNumber,
@@ -109,7 +110,7 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 			"circle_name":         s.Album.ReleaseCircleName,
 			"circles":             convertCirclesToMaps(s.Album.Circles),
 			"release_event_name":  eventName,
-			"release_year":        releaseYear,
+			"year":                releaseYear,
 			"release_date":        releaseDate,
 			"composers":           convertArtistsToMaps(s.Composers),
 			"composer_count":      len(s.Composers),
@@ -125,8 +126,8 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 			"original_song_count": len(s.OriginalSongs),
 			"is_touhou_arrange":   isTouhouArrange,
 			"service_urls":        convertSongServiceUrlsToMaps(s.SongDistributionServiceURLs),
-			"tags":                convertTags(s.Tags),
-			"genres":              convertGenres(s.Genres),
+			"tags":                convertSongTags(s.Tags),
+			"genres":              convertSongGenres(s.Genres),
 		}
 		songDocs = append(songDocs, song)
 	}
@@ -233,7 +234,7 @@ func convertSongServiceUrlsToMaps(serviceUrls []*entity.SongDistributionServiceU
 	return maps
 }
 
-func convertTags(tags []*entity.SongTag) []map[string]interface{} {
+func convertSongTags(tags []*entity.SongTag) []map[string]interface{} {
 	if len(tags) == 0 {
 		return nil
 	}
@@ -247,7 +248,7 @@ func convertTags(tags []*entity.SongTag) []map[string]interface{} {
 	return maps
 }
 
-func convertGenres(genres []*entity.SongGenre) []map[string]interface{} {
+func convertSongGenres(genres []*entity.SongGenre) []map[string]interface{} {
 	if len(genres) == 0 {
 		return nil
 	}

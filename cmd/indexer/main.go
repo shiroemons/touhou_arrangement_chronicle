@@ -30,6 +30,7 @@ func run() {
 	db := initDB()
 	cli := initMeilisearch()
 	setupOriginalSongs(ctx, db, cli)
+	setupAlbums(ctx, db, cli)
 	setupSongs(ctx, db, cli)
 	setup(cli)
 }
