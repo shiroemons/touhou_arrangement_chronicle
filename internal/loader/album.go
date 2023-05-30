@@ -2,8 +2,9 @@ package loader
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/graph-gophers/dataloader"
+	"github.com/graph-gophers/dataloader/v7"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
@@ -19,24 +20,19 @@ func AlbumLoaderProvider(aRepo domain.AlbumRepository) *AlbumLoader {
 }
 
 // BatchGetAlbums は dataloader の BatchGetAlbums に渡す関数です。
-func (l *AlbumLoader) BatchGetAlbums(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {
-	albumIDs := make([]string, len(keys))
-	for ix, key := range keys {
-		albumIDs[ix] = key.String()
-	}
-
-	albumByID, err := l.aRepo.GetMapInIDs(ctx, albumIDs)
+func (l *AlbumLoader) BatchGetAlbums(ctx context.Context, keys []string) []*dataloader.Result[*entity.Album] {
+	albumByID, err := l.aRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result, len(keys))
-	for index, albumKey := range keys {
-		event, ok := albumByID[albumKey.String()]
-		if ok {
-			output[index] = &dataloader.Result{Data: event, Error: nil}
+	output := make([]*dataloader.Result[*entity.Album], len(keys))
+	for index, key := range keys {
+		if album, ok := albumByID[key]; ok {
+			output[index] = &dataloader.Result[*entity.Album]{Data: album, Error: nil}
 		} else {
-			output[index] = &dataloader.Result{Data: nil, Error: nil}
+			err = fmt.Errorf("album not found %s", key)
+			output[index] = &dataloader.Result[*entity.Album]{Data: nil, Error: err}
 		}
 	}
 	return output
@@ -45,11 +41,10 @@ func (l *AlbumLoader) BatchGetAlbums(ctx context.Context, keys dataloader.Keys) 
 // LoadAlbum は Album を dataloader から取得します。
 func LoadAlbum(ctx context.Context, albumID string) (*model.Album, error) {
 	loaders := GetLoaders(ctx)
-	thunk := loaders.aLoader.Load(ctx, dataloader.StringKey(albumID))
+	thunk := loaders.aLoader.Load(ctx, albumID)
 	result, err := thunk()
 	if err != nil {
 		return nil, err
 	}
-	album := result.(*entity.Album)
-	return album.ToGraphQL(), nil
+	return result.ToGraphQL(), nil
 }

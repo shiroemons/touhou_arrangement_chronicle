@@ -11,7 +11,7 @@ require (
 	github.com/go-playground/validator/v10 v10.14.0
 	github.com/goark/kkconv v0.3.3
 	github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
-	github.com/graph-gophers/dataloader v5.0.0+incompatible
+	github.com/graph-gophers/dataloader/v7 v7.1.0
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/k0kubun/pp/v3 v3.2.0
@@ -61,7 +61,6 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
