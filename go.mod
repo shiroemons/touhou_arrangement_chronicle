@@ -10,7 +10,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.14.1
 	github.com/goark/kkconv v0.3.3
-	github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
+	github.com/gocarina/gocsv v0.0.0-20230616125104-99d496ca653d
 	github.com/graph-gophers/dataloader/v7 v7.1.0
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.3.1
