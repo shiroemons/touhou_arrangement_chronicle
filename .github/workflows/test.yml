@@ -8,6 +8,7 @@ on:
     paths:
       - cmd/**/*.go
       - internal/**/*.go
+      - go.mod
   pull_request:
     types:
       - opened
@@ -16,6 +17,7 @@ on:
     paths:
       - cmd/**/*.go
       - internal/**/*.go
+      - go.mod
 permissions:
   contents: read
   # Optional: allow read access to pull request. Use with `only-new-issues` option.
