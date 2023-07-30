@@ -3,7 +3,7 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
-	github.com/99designs/gqlgen v0.17.34
+	github.com/99designs/gqlgen v0.17.36
 	github.com/caarlos0/env/v8 v8.0.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/zap v0.1.0
