@@ -58,16 +58,16 @@ func (r *EventRepository) Delete(ctx context.Context, event *entity.Event) error
 	return nil
 }
 
-func (r *EventRepository) FindByID(ctx context.Context, id string) (*entity.Event, error) {
-	event := new(entity.Event)
-	err := r.db.NewSelect().Model(event).
+func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) (entity.Events, error) {
+	events := make(entity.Events, 0)
+	err := r.db.NewSelect().Model(&events).
 		Relation("EventSeries").
-		Where("e.id = ?", id).
+		Where("e.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return event, nil
+	return events, nil
 }
 
 func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {

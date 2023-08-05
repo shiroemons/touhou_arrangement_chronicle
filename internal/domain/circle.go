@@ -11,12 +11,12 @@ type CircleRepository interface {
 	Create(ctx context.Context, circle *entity.Circle) (*entity.Circle, error)
 	Update(ctx context.Context, circle *entity.Circle) (*entity.Circle, error)
 	Delete(ctx context.Context, circle *entity.Circle) error
-	FindByID(ctx context.Context, id string) (*entity.Circle, error)
+	FindByIDs(ctx context.Context, ids []string) (entity.Circles, error)
 	FindByInitialType(ctx context.Context, initialType string) ([]*entity.Circle, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Circle, error)
 }
 
 type CircleService interface {
-	Get(ctx context.Context, id string) (*entity.Circle, error)
+	GetCirclesByIDs(ctx context.Context, ids []string) (entity.Circles, error)
 	GetAllByInitialLetterType(ctx context.Context, initialType model.InitialLetterType) (entity.Circles, error)
 }

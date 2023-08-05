@@ -10,10 +10,10 @@ type SongRepository interface {
 	Create(ctx context.Context, song *entity.Song) (*entity.Song, error)
 	Update(ctx context.Context, song *entity.Song) (*entity.Song, error)
 	Delete(ctx context.Context, song *entity.Song) error
-	FindByID(ctx context.Context, id string) (*entity.Song, error)
+	FindByIDs(ctx context.Context, ids []string) (entity.Songs, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Song, error)
 }
 
 type SongService interface {
-	Get(ctx context.Context, id string) (*entity.Song, error)
+	GetSongsByIDs(ctx context.Context, ids []string) (entity.Songs, error)
 }

@@ -15,6 +15,10 @@ func AlbumServiceProvider(aRepo domain.AlbumRepository) *AlbumService {
 	return &AlbumService{aRepo: aRepo}
 }
 
-func (s *AlbumService) Get(ctx context.Context, id string) (*entity.Album, error) {
-	return s.aRepo.FindByID(ctx, id)
+func (s *AlbumService) GetAlbumsByIDs(ctx context.Context, ids []string) (entity.Albums, error) {
+	albums, err := s.aRepo.FindByIDs(ctx, ids)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return albums, nil
 }

@@ -40,3 +40,13 @@ func (e *SubEvent) ToGraphQL() *model.SubEvent {
 
 	return subEvent
 }
+
+type SubEvents []*SubEvent
+
+func (arr SubEvents) ToGraphQLs() []*model.SubEvent {
+	res := make([]*model.SubEvent, len(arr))
+	for i, v := range arr {
+		res[i] = v.ToGraphQL()
+	}
+	return res
+}

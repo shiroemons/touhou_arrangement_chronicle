@@ -58,15 +58,15 @@ func (r *ArtistRepository) Delete(ctx context.Context, artist *entity.Artist) er
 	return nil
 }
 
-func (r *ArtistRepository) FindByID(ctx context.Context, id string) (*entity.Artist, error) {
-	artist := new(entity.Artist)
-	err := r.db.NewSelect().Model(artist).
-		Where("id = ?", id).
+func (r *ArtistRepository) FindByIDs(ctx context.Context, ids []string) (entity.Artists, error) {
+	artists := make(entity.Artists, 0)
+	err := r.db.NewSelect().Model(&artists).
+		Where("a.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return artist, nil
+	return artists, nil
 }
 
 func (r *ArtistRepository) FindByInitialType(ctx context.Context, initialType string) ([]*entity.Artist, error) {

@@ -58,15 +58,15 @@ func (r *CircleRepository) Delete(ctx context.Context, circle *entity.Circle) er
 	return nil
 }
 
-func (r *CircleRepository) FindByID(ctx context.Context, id string) (*entity.Circle, error) {
-	circle := new(entity.Circle)
-	err := r.db.NewSelect().Model(circle).
-		Where("id = ?", id).
+func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) (entity.Circles, error) {
+	circles := make(entity.Circles, 0)
+	err := r.db.NewSelect().Model(&circles).
+		Where("c.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return circle, nil
+	return circles, nil
 }
 
 func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType string) ([]*entity.Circle, error) {

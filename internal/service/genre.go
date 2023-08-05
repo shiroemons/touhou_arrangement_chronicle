@@ -16,5 +16,9 @@ func GenreServiceProvider(gRepo domain.GenreRepository) *GenreService {
 }
 
 func (s *GenreService) All(ctx context.Context) (entity.Genres, error) {
-	return s.gRepo.FindAll(ctx)
+	genres, err := s.gRepo.FindAll(ctx)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return genres, nil
 }

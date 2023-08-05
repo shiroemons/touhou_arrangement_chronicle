@@ -58,9 +58,9 @@ func (r *AlbumRepository) Delete(ctx context.Context, album *entity.Album) error
 	return nil
 }
 
-func (r *AlbumRepository) FindByID(ctx context.Context, id string) (*entity.Album, error) {
-	album := new(entity.Album)
-	err := r.db.NewSelect().Model(album).
+func (r *AlbumRepository) FindByIDs(ctx context.Context, ids []string) (entity.Albums, error) {
+	albums := make(entity.Albums, 0)
+	err := r.db.NewSelect().Model(&albums).
 		Relation("Event").
 		Relation("SubEvent").
 		Relation("AlbumConsignmentShops").
@@ -72,12 +72,12 @@ func (r *AlbumRepository) FindByID(ctx context.Context, id string) (*entity.Albu
 		Relation("Genres.Genre").
 		Relation("Tags").
 		Relation("Tags.Tag").
-		Where("al.id = ?", id).
+		Where("al.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return album, nil
+	return albums, nil
 }
 
 // GetMapInIDs is get map in ids

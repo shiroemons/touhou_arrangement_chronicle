@@ -60,148 +60,231 @@ func (r *originalSongResolver) Product(ctx context.Context, obj *model.OriginalS
 	return product, nil
 }
 
-// GetProductByID is the resolver for the getProductById field.
-func (r *queryResolver) GetProductByID(ctx context.Context, id string) (*model.Product, error) {
-	product, err := r.productSrv.Get(ctx, id)
+// ProductsByIds is the resolver for the productsByIds field.
+func (r *queryResolver) ProductsByIds(ctx context.Context, ids []*model.IDClause) (*model.ProductsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	products, err := r.productSrv.GetProductsByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return product.ToGraphQL(), nil
+	//return product.ToGraphQL(), nil
+
+	return &model.ProductsResponse{
+		Products: products.ToGraphQLs(),
+	}, nil
 }
 
-// GetOriginalSongByID is the resolver for the getOriginalSongById field.
-func (r *queryResolver) GetOriginalSongByID(ctx context.Context, id string) (*model.OriginalSong, error) {
-	os, err := r.originalSongSrv.Get(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	return os.ToGraphQL(), nil
-}
-
-// GetProducts is the resolver for the getProducts field.
-func (r *queryResolver) GetProducts(ctx context.Context) ([]*model.Product, error) {
+// Products is the resolver for the products field.
+func (r *queryResolver) Products(ctx context.Context) (*model.ProductsResponse, error) {
 	products, err := r.productSrv.GetAll(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return products.ToGraphQLs(), nil
+	return &model.ProductsResponse{
+		Products: products.ToGraphQLs(),
+	}, nil
 }
 
-// GetOriginalSongs is the resolver for the getOriginalSongs field.
-func (r *queryResolver) GetOriginalSongs(ctx context.Context) ([]*model.OriginalSong, error) {
+// OriginalSongsByIds is the resolver for the originalSongsByIds field.
+func (r *queryResolver) OriginalSongsByIds(ctx context.Context, ids []*model.IDClause) (*model.OriginalSongsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	os, err := r.originalSongSrv.GetOriginalSongsByIDs(ctx, _ids)
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.OriginalSongsResponse{
+		OriginalSongs: os.ToGraphQLs(),
+	}, nil
+}
+
+// OriginalSongs is the resolver for the originalSongs field.
+func (r *queryResolver) OriginalSongs(ctx context.Context) (*model.OriginalSongsResponse, error) {
 	os, err := r.originalSongSrv.GetAll(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return os.ToGraphQLs(), nil
+	return &model.OriginalSongsResponse{
+		OriginalSongs: os.ToGraphQLs(),
+	}, nil
 }
 
-// GetEventSeriesByID is the resolver for the getEventSeriesById field.
-func (r *queryResolver) GetEventSeriesByID(ctx context.Context, id string) (*model.EventSeries, error) {
-	es, err := r.eventSeriesSrv.Get(ctx, id)
+// EventSeriesByIds is the resolver for the eventSeriesByIds field.
+func (r *queryResolver) EventSeriesByIds(ctx context.Context, ids []*model.IDClause) (*model.EventSeriesResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	es, err := r.eventSeriesSrv.GetEventSeriesByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return es.ToGraphQL(), nil
+
+	return &model.EventSeriesResponse{
+		EventSeries: es.ToGraphQLs(),
+	}, nil
 }
 
-// GetEventByID is the resolver for the getEventById field.
-func (r *queryResolver) GetEventByID(ctx context.Context, id string) (*model.Event, error) {
-	e, err := r.eventSrv.Get(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	return e.ToGraphQL(), nil
-}
-
-// GetSubEventByID is the resolver for the getSubEventById field.
-func (r *queryResolver) GetSubEventByID(ctx context.Context, id string) (*model.SubEvent, error) {
-	se, err := r.subEventSrv.Get(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	return se.ToGraphQL(), nil
-}
-
-// GetEventSeries is the resolver for the getEventSeries field.
-func (r *queryResolver) GetEventSeries(ctx context.Context) ([]*model.EventSeries, error) {
+// EventSeries is the resolver for the eventSeries field.
+func (r *queryResolver) EventSeries(ctx context.Context) (*model.EventSeriesResponse, error) {
 	es, err := r.eventSeriesSrv.GetAll(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return es.ToGraphQLs(), nil
+
+	return &model.EventSeriesResponse{
+		EventSeries: es.ToGraphQLs(),
+	}, nil
 }
 
-// GetArtistByID is the resolver for the getArtistById field.
-func (r *queryResolver) GetArtistByID(ctx context.Context, id string) (*model.Artist, error) {
-	artist, err := r.artistSrv.Get(ctx, id)
+// EventsByIds is the resolver for the eventsByIds field.
+func (r *queryResolver) EventsByIds(ctx context.Context, ids []*model.IDClause) (*model.EventsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	e, err := r.eventSrv.GetEventsByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return artist.ToGraphQL(), nil
+
+	return &model.EventsResponse{
+		Events: e.ToGraphQLs(),
+	}, nil
 }
 
-// GetCircleByID is the resolver for the getCircleById field.
-func (r *queryResolver) GetCircleByID(ctx context.Context, id string) (*model.Circle, error) {
-	circle, err := r.circleSrv.Get(ctx, id)
+// SubEventsByIds is the resolver for the subEventsByIds field.
+func (r *queryResolver) SubEventsByIds(ctx context.Context, ids []*model.IDClause) (*model.SubEventsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	se, err := r.subEventSrv.GetSubEventsByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return circle.ToGraphQL(), nil
+
+	return &model.SubEventsResponse{
+		SubEvents: se.ToGraphQLs(),
+	}, nil
+}
+
+// ArtistsByIds is the resolver for the artistsByIds field.
+func (r *queryResolver) ArtistsByIds(ctx context.Context, ids []*model.IDClause) (*model.ArtistsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	artists, err := r.artistSrv.GetArtistsByIDs(ctx, _ids)
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.ArtistsResponse{
+		Artists: artists.ToGraphQLs(),
+	}, nil
 }
 
 // ArtistsByInitialLetterType is the resolver for the artistsByInitialLetterType field.
-func (r *queryResolver) ArtistsByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) ([]*model.Artist, error) {
+func (r *queryResolver) ArtistsByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) (*model.ArtistsResponse, error) {
 	artists, err := r.artistSrv.GetAllByInitialLetterType(ctx, typeArg)
 	if err != nil {
 		return nil, err
 	}
-	return artists.ToGraphQLs(), nil
+
+	return &model.ArtistsResponse{
+		Artists: artists.ToGraphQLs(),
+	}, nil
+}
+
+// CirclesByIds is the resolver for the circlesByIds field.
+func (r *queryResolver) CirclesByIds(ctx context.Context, ids []*model.IDClause) (*model.CirclesResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	circles, err := r.circleSrv.GetCirclesByIDs(ctx, _ids)
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.CirclesResponse{
+		Circles: circles.ToGraphQLs(),
+	}, nil
 }
 
 // CirclesByInitialLetterType is the resolver for the circlesByInitialLetterType field.
-func (r *queryResolver) CirclesByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) ([]*model.Circle, error) {
+func (r *queryResolver) CirclesByInitialLetterType(ctx context.Context, typeArg model.InitialLetterType) (*model.CirclesResponse, error) {
 	circles, err := r.circleSrv.GetAllByInitialLetterType(ctx, typeArg)
 	if err != nil {
 		return nil, err
 	}
-	return circles.ToGraphQLs(), nil
+
+	return &model.CirclesResponse{
+		Circles: circles.ToGraphQLs(),
+	}, nil
 }
 
-// GetAlbumByID is the resolver for the getAlbumById field.
-func (r *queryResolver) GetAlbumByID(ctx context.Context, id string) (*model.Album, error) {
-	album, err := r.albumSrv.Get(ctx, id)
+// AlbumsByIds is the resolver for the albumsByIds field.
+func (r *queryResolver) AlbumsByIds(ctx context.Context, ids []*model.IDClause) (*model.AlbumsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	albums, err := r.albumSrv.GetAlbumsByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return album.ToGraphQL(), nil
+
+	return &model.AlbumsResponse{
+		Albums: albums.ToGraphQLs(),
+	}, nil
 }
 
-// GetSongByID is the resolver for the getSongById field.
-func (r *queryResolver) GetSongByID(ctx context.Context, id string) (*model.Song, error) {
-	song, err := r.songSrv.Get(ctx, id)
+// SongsByIds is the resolver for the songsByIds field.
+func (r *queryResolver) SongsByIds(ctx context.Context, ids []*model.IDClause) (*model.SongsResponse, error) {
+	_ids := make([]string, len(ids))
+	for i, id := range ids {
+		_ids[i] = id.ID
+	}
+	songs, err := r.songSrv.GetSongsByIDs(ctx, _ids)
 	if err != nil {
 		return nil, err
 	}
-	return song.ToGraphQL(), nil
+
+	return &model.SongsResponse{
+		Songs: songs.ToGraphQLs(),
+	}, nil
 }
 
-// GetGenres is the resolver for the getGenres field.
-func (r *queryResolver) GetGenres(ctx context.Context) ([]*model.Genre, error) {
+// Genres is the resolver for the genres field.
+func (r *queryResolver) Genres(ctx context.Context) (*model.GenresResponse, error) {
 	genres, err := r.genreSrv.All(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return genres.ToGraphQLs(), nil
+
+	return &model.GenresResponse{
+		Genres: genres.ToGraphQLs(),
+	}, nil
 }
 
-// GetTags is the resolver for the getTags field.
-func (r *queryResolver) GetTags(ctx context.Context) ([]*model.Tag, error) {
+// Tags is the resolver for the tags field.
+func (r *queryResolver) Tags(ctx context.Context) (*model.TagsResponse, error) {
 	tags, err := r.tagSrv.All(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return tags.ToGraphQLs(), nil
+
+	return &model.TagsResponse{
+		Tags: tags.ToGraphQLs(),
+	}, nil
 }
 
 // Circle is the resolver for the circle field.

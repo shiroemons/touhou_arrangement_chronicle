@@ -15,7 +15,10 @@ func SongServiceProvider(sRepo domain.SongRepository) *SongService {
 	return &SongService{sRepo: sRepo}
 }
 
-// Get is find song by id
-func (srv *SongService) Get(ctx context.Context, id string) (*entity.Song, error) {
-	return srv.sRepo.FindByID(ctx, id)
+func (srv *SongService) GetSongsByIDs(ctx context.Context, ids []string) (entity.Songs, error) {
+	songs, err := srv.sRepo.FindByIDs(ctx, ids)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return songs, nil
 }

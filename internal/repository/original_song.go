@@ -30,16 +30,16 @@ func (r *OriginalSongRepository) All(ctx context.Context) ([]*entity.OriginalSon
 	return originalSongs, nil
 }
 
-func (r *OriginalSongRepository) FindByID(ctx context.Context, id string) (*entity.OriginalSong, error) {
-	originalSong := new(entity.OriginalSong)
-	err := r.db.NewSelect().Model(originalSong).
+func (r *OriginalSongRepository) FindByIDs(ctx context.Context, ids []string) (entity.OriginalSongs, error) {
+	originalSongs := make(entity.OriginalSongs, 0)
+	err := r.db.NewSelect().Model(originalSongs).
 		Relation("Product").
 		Relation("Product.ProductDistributionServiceURLs").
 		Relation("OriginalSongDistributionServiceURLs").
-		Where("os.id = ?", id).
+		Where("os.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return originalSong, nil
+	return originalSongs, nil
 }

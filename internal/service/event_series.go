@@ -23,10 +23,10 @@ func (srv *EventSeriesService) GetAll(ctx context.Context) (entity.EventSeriesAr
 	return eventSeries, nil
 }
 
-func (srv *EventSeriesService) Get(ctx context.Context, id string) (*entity.EventSeries, error) {
-	eventSeries, err := srv.esRepo.FindByID(ctx, id)
+func (srv *EventSeriesService) GetEventSeriesByIDs(ctx context.Context, ids []string) (entity.EventSeriesArr, error) {
+	eventSeries, err := srv.esRepo.FindByIDs(ctx, ids)
 	if err != nil {
-		return &entity.EventSeries{}, SrvErr(ctx, err.Error())
+		return nil, SrvErr(ctx, err.Error())
 	}
 	return eventSeries, nil
 }

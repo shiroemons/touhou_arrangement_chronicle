@@ -16,5 +16,9 @@ func TagServiceProvider(tRepo domain.TagRepository) *TagService {
 }
 
 func (s *TagService) All(ctx context.Context) (entity.Tags, error) {
-	return s.tRepo.FindAll(ctx)
+	tags, err := s.tRepo.FindAll(ctx)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return tags, nil
 }

@@ -23,10 +23,10 @@ func (s *ProductService) GetAll(ctx context.Context) (entity.Products, error) {
 	return products, nil
 }
 
-func (s *ProductService) Get(ctx context.Context, id string) (*entity.Product, error) {
-	product, err := s.pRepo.FindByID(ctx, id)
+func (s *ProductService) GetProductsByIDs(ctx context.Context, ids []string) (entity.Products, error) {
+	products, err := s.pRepo.FindByIDs(ctx, ids)
 	if err != nil {
-		return &entity.Product{}, SrvErr(ctx, err.Error())
+		return nil, SrvErr(ctx, err.Error())
 	}
-	return product, nil
+	return products, nil
 }

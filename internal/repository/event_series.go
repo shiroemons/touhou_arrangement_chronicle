@@ -58,10 +58,12 @@ func (r *EventSeriesRepository) Delete(ctx context.Context, eventSeries *entity.
 	return nil
 }
 
-func (r *EventSeriesRepository) FindByID(ctx context.Context, id string) (*entity.EventSeries, error) {
-	eventSeries := new(entity.EventSeries)
-	err := r.db.NewSelect().Model(eventSeries).
-		Where("id = ?", id).
+func (r *EventSeriesRepository) FindByIDs(ctx context.Context, ids []string) (entity.EventSeriesArr, error) {
+	eventSeries := make(entity.EventSeriesArr, 0)
+	err := r.db.NewSelect().Model(&eventSeries).
+		Relation("Events").
+		Relation("Events.SubEvents").
+		Where("es.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
@@ -72,7 +74,9 @@ func (r *EventSeriesRepository) FindByID(ctx context.Context, id string) (*entit
 func (r *EventSeriesRepository) All(ctx context.Context) ([]*entity.EventSeries, error) {
 	eventSeries := make([]*entity.EventSeries, 0)
 	err := r.db.NewSelect().Model(&eventSeries).
-		Relation("Events").
+		Relation("Events", func(q *bun.SelectQuery) *bun.SelectQuery {
+			return q.Order("e.event_dates DESC")
+		}).
 		Relation("Events.SubEvents").
 		Scan(ctx)
 	if err != nil {
@@ -84,7 +88,9 @@ func (r *EventSeriesRepository) All(ctx context.Context) ([]*entity.EventSeries,
 func (r *EventSeriesRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.EventSeries, error) {
 	eventSeries := make([]*entity.EventSeries, 0)
 	err := r.db.NewSelect().Model(&eventSeries).
-		Relation("Events").
+		Relation("Events", func(q *bun.SelectQuery) *bun.SelectQuery {
+			return q.Order("e.event_dates DESC")
+		}).
 		Relation("Events.SubEvents").
 		Where("es.id IN (?)", bun.In(ids)).
 		Scan(ctx)

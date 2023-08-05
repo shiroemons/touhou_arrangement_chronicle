@@ -23,10 +23,10 @@ func (s *OriginalSongService) GetAll(ctx context.Context) (entity.OriginalSongs,
 	return originalSongs, nil
 }
 
-func (s *OriginalSongService) Get(ctx context.Context, id string) (*entity.OriginalSong, error) {
-	originalSong, err := s.osRepo.FindByID(ctx, id)
+func (s *OriginalSongService) GetOriginalSongsByIDs(ctx context.Context, ids []string) (entity.OriginalSongs, error) {
+	originalSongs, err := s.osRepo.FindByIDs(ctx, ids)
 	if err != nil {
-		return &entity.OriginalSong{}, SrvErr(ctx, err.Error())
+		return nil, SrvErr(ctx, err.Error())
 	}
-	return originalSong, nil
+	return originalSongs, nil
 }

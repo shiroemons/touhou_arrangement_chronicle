@@ -68,6 +68,10 @@ type AlbumTag struct {
 func (AlbumTag) IsEntity()          {}
 func (this AlbumTag) GetID() string { return this.ID }
 
+type AlbumsResponse struct {
+	Albums []*Album `json:"albums,omitempty"`
+}
+
 type Artist struct {
 	ID                  string            `json:"id"`
 	Name                string            `json:"name"`
@@ -84,6 +88,10 @@ type Artist struct {
 
 func (Artist) IsEntity()          {}
 func (this Artist) GetID() string { return this.ID }
+
+type ArtistsResponse struct {
+	Artists []*Artist `json:"artists,omitempty"`
+}
 
 type Circle struct {
 	ID                  string            `json:"id"`
@@ -123,6 +131,10 @@ type CircleTag struct {
 
 func (CircleTag) IsEntity()          {}
 func (this CircleTag) GetID() string { return this.ID }
+
+type CirclesResponse struct {
+	Circles []*Circle `json:"circles,omitempty"`
+}
 
 type ConsignmentShop struct {
 	ID          string `json:"id"`
@@ -169,6 +181,14 @@ type EventSeries struct {
 func (EventSeries) IsEntity()          {}
 func (this EventSeries) GetID() string { return this.ID }
 
+type EventSeriesResponse struct {
+	EventSeries []*EventSeries `json:"eventSeries,omitempty"`
+}
+
+type EventsResponse struct {
+	Events []*Event `json:"events,omitempty"`
+}
+
 type Genre struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
@@ -176,6 +196,14 @@ type Genre struct {
 
 func (Genre) IsEntity()          {}
 func (this Genre) GetID() string { return this.ID }
+
+type GenresResponse struct {
+	Genres []*Genre `json:"Genres,omitempty"`
+}
+
+type IDClause struct {
+	ID string `json:"id"`
+}
 
 type Isrc struct {
 	ID   string `json:"id"`
@@ -209,6 +237,10 @@ type OriginalSongDistributionServiceURL struct {
 func (OriginalSongDistributionServiceURL) IsEntity()          {}
 func (this OriginalSongDistributionServiceURL) GetID() string { return this.ID }
 
+type OriginalSongsResponse struct {
+	OriginalSongs []*OriginalSong `json:"originalSongs,omitempty"`
+}
+
 type Product struct {
 	ID               string                           `json:"id"`
 	Name             string                           `json:"name"`
@@ -230,6 +262,10 @@ type ProductDistributionServiceURL struct {
 
 func (ProductDistributionServiceURL) IsEntity()          {}
 func (this ProductDistributionServiceURL) GetID() string { return this.ID }
+
+type ProductsResponse struct {
+	Products []*Product `json:"products,omitempty"`
+}
 
 type Song struct {
 	ID                  string                        `json:"id"`
@@ -296,6 +332,10 @@ type SongTag struct {
 func (SongTag) IsEntity()          {}
 func (this SongTag) GetID() string { return this.ID }
 
+type SongsResponse struct {
+	Songs []*Song `json:"songs,omitempty"`
+}
+
 type SubEvent struct {
 	ID          string      `json:"id"`
 	Name        string      `json:"name"`
@@ -309,6 +349,10 @@ type SubEvent struct {
 func (SubEvent) IsEntity()          {}
 func (this SubEvent) GetID() string { return this.ID }
 
+type SubEventsResponse struct {
+	SubEvents []*SubEvent `json:"subEvents,omitempty"`
+}
+
 type Tag struct {
 	ID      string  `json:"id"`
 	Name    string  `json:"name"`
@@ -317,6 +361,10 @@ type Tag struct {
 
 func (Tag) IsEntity()          {}
 func (this Tag) GetID() string { return this.ID }
+
+type TagsResponse struct {
+	Tags []*Tag `json:"tags,omitempty"`
+}
 
 type Upc struct {
 	ID    string `json:"id"`

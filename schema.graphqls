@@ -86,22 +86,22 @@ scalar Date
 
 # 各種クエリの定義
 type Query {
-  getProductById(id: ID!): Product
-  getOriginalSongById(id: ID!): OriginalSong
-  getProducts: [Product!]!
-  getOriginalSongs: [OriginalSong!]!
-  getEventSeriesById(id: ID!): EventSeries
-  getEventById(id: ID!): Event
-  getSubEventById(id: ID!): SubEvent
-  getEventSeries: [EventSeries!]!
-  getArtistById(id: ID!): Artist
-  getCircleById(id: ID!): Circle
-  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
-  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
-  getAlbumById(id: ID!): Album
-  getSongById(id: ID!): Song
-  getGenres: [Genre!]!
-  getTags: [Tag!]!
+  productsByIds(ids: [IdClause!]!): ProductsResponse
+  products: ProductsResponse
+  originalSongsByIds(ids: [IdClause!]!): OriginalSongsResponse
+  originalSongs: OriginalSongsResponse
+  eventSeriesByIds(ids: [IdClause!]!): EventSeriesResponse
+  eventSeries: EventSeriesResponse
+  eventsByIds(ids: [IdClause!]!): EventsResponse
+  subEventsByIds(ids: [IdClause!]!): SubEventsResponse
+  artistsByIds(ids: [IdClause!]!): ArtistsResponse
+  artistsByInitialLetterType(type: InitialLetterType!): ArtistsResponse
+  circlesByIds(ids: [IdClause!]!): CirclesResponse
+  circlesByInitialLetterType(type: InitialLetterType!): CirclesResponse
+  albumsByIds(ids: [IdClause!]!): AlbumsResponse
+  songsByIds(ids: [IdClause!]!): SongsResponse
+  genres: GenresResponse
+  tags: TagsResponse
 }
 
 #type Mutation {
@@ -367,4 +367,52 @@ type CircleTag implements Entity {
   locked: Boolean!
 }
 
+type ProductsResponse {
+  products: [Product]
+}
+
+type OriginalSongsResponse {
+  originalSongs: [OriginalSong]
+}
+
+type EventSeriesResponse {
+  eventSeries: [EventSeries]
+}
+
+type EventsResponse {
+  events: [Event]
+}
+
+type SubEventsResponse {
+  subEvents: [SubEvent]
+}
+
+type ArtistsResponse {
+  artists: [Artist]
+}
+
+type CirclesResponse {
+  circles: [Circle]
+}
+
+type AlbumsResponse {
+  albums: [Album]
+}
+
+type SongsResponse {
+  songs: [Song]
+}
+
+type GenresResponse {
+  Genres: [Genre]
+}
+
+type TagsResponse {
+  tags: [Tag]
+}
+
 ### Input objects
+
+input IdClause {
+  id: ID!
+}

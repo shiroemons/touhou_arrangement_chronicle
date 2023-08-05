@@ -10,12 +10,12 @@ type EventSeriesRepository interface {
 	Create(ctx context.Context, eventSeries *entity.EventSeries) (*entity.EventSeries, error)
 	Update(ctx context.Context, eventSeries *entity.EventSeries) (*entity.EventSeries, error)
 	Delete(ctx context.Context, eventSeries *entity.EventSeries) error
-	FindByID(ctx context.Context, id string) (*entity.EventSeries, error)
+	FindByIDs(ctx context.Context, ids []string) (entity.EventSeriesArr, error)
 	All(ctx context.Context) ([]*entity.EventSeries, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.EventSeries, error)
 }
 
 type EventSeriesService interface {
 	GetAll(ctx context.Context) (entity.EventSeriesArr, error)
-	Get(ctx context.Context, id string) (*entity.EventSeries, error)
+	GetEventSeriesByIDs(ctx context.Context, ids []string) (entity.EventSeriesArr, error)
 }

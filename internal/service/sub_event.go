@@ -15,10 +15,10 @@ func SubEventServiceProvider(seRepo domain.SubEventRepository) *SubEventService 
 	return &SubEventService{seRepo: seRepo}
 }
 
-func (s *SubEventService) Get(ctx context.Context, id string) (*entity.SubEvent, error) {
-	subEvent, err := s.seRepo.FindByID(ctx, id)
+func (s *SubEventService) GetSubEventsByIDs(ctx context.Context, ids []string) (entity.SubEvents, error) {
+	subEvents, err := s.seRepo.FindByIDs(ctx, ids)
 	if err != nil {
-		return &entity.SubEvent{}, SrvErr(ctx, err.Error())
+		return nil, SrvErr(ctx, err.Error())
 	}
-	return subEvent, nil
+	return subEvents, nil
 }

@@ -17,8 +17,12 @@ func CircleServiceProvider(cRepo domain.CircleRepository) *CircleService {
 	return &CircleService{cRepo: cRepo}
 }
 
-func (s *CircleService) Get(ctx context.Context, id string) (*entity.Circle, error) {
-	return s.cRepo.FindByID(ctx, id)
+func (s *CircleService) GetCirclesByIDs(ctx context.Context, ids []string) (entity.Circles, error) {
+	circles, err := s.cRepo.FindByIDs(ctx, ids)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return circles, nil
 }
 
 func (s *CircleService) GetAllByInitialLetterType(ctx context.Context, initialType model.InitialLetterType) (entity.Circles, error) {

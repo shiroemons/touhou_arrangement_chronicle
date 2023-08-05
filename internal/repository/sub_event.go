@@ -58,15 +58,15 @@ func (r *SubEventRepository) Delete(ctx context.Context, subEvent *entity.SubEve
 	return nil
 }
 
-func (r *SubEventRepository) FindByID(ctx context.Context, id string) (*entity.SubEvent, error) {
-	subEvent := new(entity.SubEvent)
-	err := r.db.NewSelect().Model(subEvent).
-		Where("id = ?", id).
+func (r *SubEventRepository) FindByIDs(ctx context.Context, ids []string) (entity.SubEvents, error) {
+	subEvents := make(entity.SubEvents, 0)
+	err := r.db.NewSelect().Model(&subEvents).
+		Where("se.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return subEvent, nil
+	return subEvents, nil
 }
 
 // GetMapInIDs は、指定したIDのSubEventを取得します。

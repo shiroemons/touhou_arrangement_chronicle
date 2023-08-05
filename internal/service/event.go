@@ -15,10 +15,10 @@ func EventServiceProvider(eRepo domain.EventRepository) *EventService {
 	return &EventService{eRepo: eRepo}
 }
 
-func (s *EventService) Get(ctx context.Context, id string) (*entity.Event, error) {
-	event, err := s.eRepo.FindByID(ctx, id)
+func (s *EventService) GetEventsByIDs(ctx context.Context, ids []string) (entity.Events, error) {
+	events, err := s.eRepo.FindByIDs(ctx, ids)
 	if err != nil {
-		return &entity.Event{}, SrvErr(ctx, err.Error())
+		return nil, SrvErr(ctx, err.Error())
 	}
-	return event, nil
+	return events, nil
 }

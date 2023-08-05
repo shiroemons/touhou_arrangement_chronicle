@@ -58,9 +58,9 @@ func (r *SongRepository) Delete(ctx context.Context, song *entity.Song) error {
 	return nil
 }
 
-func (r *SongRepository) FindByID(ctx context.Context, id string) (*entity.Song, error) {
-	song := new(entity.Song)
-	err := r.db.NewSelect().Model(song).
+func (r *SongRepository) FindByIDs(ctx context.Context, ids []string) (entity.Songs, error) {
+	songs := make(entity.Songs, 0)
+	err := r.db.NewSelect().Model(&songs).
 		Relation("SongDistributionServiceURLs").
 		Relation("SongISRCs").
 		Relation("Genres.Genre").
@@ -72,12 +72,12 @@ func (r *SongRepository) FindByID(ctx context.Context, id string) (*entity.Song,
 		Relation("Lyricists").
 		Relation("ReArrangers").
 		Relation("Vocalists").
-		Where("s.id = ?", id).
+		Where("s.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return song, nil
+	return songs, nil
 }
 
 // GetMapInIDs は、指定したIDの曲を取得します。

@@ -17,8 +17,12 @@ func ArtistServiceProvider(aRepo domain.ArtistRepository) *ArtistService {
 	return &ArtistService{aRepo: aRepo}
 }
 
-func (s *ArtistService) Get(ctx context.Context, id string) (*entity.Artist, error) {
-	return s.aRepo.FindByID(ctx, id)
+func (s *ArtistService) GetArtistsByIDs(ctx context.Context, ids []string) (entity.Artists, error) {
+	artists, err := s.aRepo.FindByIDs(ctx, ids)
+	if err != nil {
+		return nil, SrvErr(ctx, err.Error())
+	}
+	return artists, nil
 }
 
 func (s *ArtistService) GetAllByInitialLetterType(ctx context.Context, initialType model.InitialLetterType) (entity.Artists, error) {
