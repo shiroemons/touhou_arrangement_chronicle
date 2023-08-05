@@ -34,12 +34,6 @@ make seeder
 make importer
 ```
 
-### Indexer
-
-```shell
-make indexer
-```
-
 ## サーバー起動
 
 ```shell
@@ -55,4 +49,18 @@ make up
 
 ```shell
 make logs
+```
+
+### Meilisearch
+
+- Meilisearchのvolumeを削除
+  ```shell
+  docker volume rm touhou_arrangement_chronicle_meili-data
+  ```
+
+#### Indexer
+
+- Meilisearchにデータを登録する
+```shell
+make indexer
 ```

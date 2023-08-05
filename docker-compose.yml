@@ -105,7 +105,7 @@ services:
       - "cmd/importer/import_album_service_urls.go"
 
   meilisearch:
-    image: getmeili/meilisearch:prototype-japanese-3
+    image: getmeili/meilisearch:prototype-japanese-4
     volumes:
       - meili-data:/meili_data
     ports:
