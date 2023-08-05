@@ -28,7 +28,7 @@ require (
 	go.uber.org/fx v1.20.0
 	go.uber.org/zap v1.24.0
 	golang.org/x/exp v0.0.0-20230728194245-b0cb94b80691
-	golang.org/x/text v0.11.0
+	golang.org/x/text v0.12.0
 )
 
 require (
