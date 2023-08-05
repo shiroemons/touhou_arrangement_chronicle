@@ -1,8 +1,11 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
+### Schema
 
-scalar Date
+schema {
+#  mutation: Mutation
+  query: Query
+}
+
+### Enums
 
 # product_type enum定義
 enum ProductType {
@@ -13,30 +16,6 @@ enum ProductType {
   COMMERCIAL_BOOKS
   TASOFRO
   OTHER
-}
-
-# products tableの定義
-type Product {
-  id: ID!
-  name: String!
-  shortName: String!
-  productType: ProductType!
-  seriesNumber: Float!
-  originalSongs: [OriginalSong!]!
-  distributionUrls: [ProductDistributionServiceURL!]!
-}
-
-# original_songs tableの定義
-type OriginalSong {
-  id: ID!
-  product: Product!
-  name: String!
-  composer: String!
-  arranger: String!
-  trackNumber: Int!
-  isOriginal: Boolean!
-  sourceId: String!
-  distributionUrls: [OriginalSongDistributionServiceURL!]!
 }
 
 # distribution_service enum定義
@@ -51,18 +30,15 @@ enum DistributionService {
   SOUND_CLOUD
 }
 
-# product_distribution_service_urls tableの定義
-type ProductDistributionServiceURL {
-  id: ID!
-  service: DistributionService!
-  url: String!
-}
-
-# original_song_distribution_service_urls tableの定義
-type OriginalSongDistributionServiceURL {
-  id: ID!
-  service: DistributionService!
-  url: String!
+# initial_letter_type enum定義
+enum InitialLetterType {
+  SYMBOL
+  NUMBER
+  ALPHABET
+  HIRAGANA
+  KATAKANA
+  KANJI
+  OTHER
 }
 
 # event_status enum定義
@@ -82,8 +58,104 @@ enum EventFormat {
   MIXED
 }
 
+enum Shop {
+  AKIBA_HOBBY
+  AKIBAOO
+  ANIMATE
+  BOOKMATE
+  BOOTH
+  DIVERSE_DIRECT
+  GREP
+  MELONBOOKS
+  TANOCSTORE
+  TORANOANA
+}
+
+enum TagType {
+  UNKNOWN
+  GENRE
+  AMBIENCE
+  INSTRUMENT
+}
+
+### Custom Scalars
+
+scalar Date
+
+### Query & Mutation
+
+# 各種クエリの定義
+type Query {
+  getProductById(id: ID!): Product
+  getOriginalSongById(id: ID!): OriginalSong
+  getProducts: [Product!]!
+  getOriginalSongs: [OriginalSong!]!
+  getEventSeriesById(id: ID!): EventSeries
+  getEventById(id: ID!): Event
+  getSubEventById(id: ID!): SubEvent
+  getEventSeries: [EventSeries!]!
+  getArtistById(id: ID!): Artist
+  getCircleById(id: ID!): Circle
+  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
+  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
+  getAlbumById(id: ID!): Album
+  getSongById(id: ID!): Song
+  getGenres: [Genre!]!
+  getTags: [Tag!]!
+}
+
+#type Mutation {
+#
+#}
+
+### Interfaces
+
+interface Entity {
+  id: ID!
+}
+
+### Types
+
+# products tableの定義
+type Product implements Entity {
+  id: ID!
+  name: String!
+  shortName: String!
+  productType: ProductType!
+  seriesNumber: Float!
+  originalSongs: [OriginalSong!]!
+  distributionUrls: [ProductDistributionServiceURL!]!
+}
+
+# original_songs tableの定義
+type OriginalSong implements Entity {
+  id: ID!
+  product: Product!
+  name: String!
+  composer: String!
+  arranger: String!
+  trackNumber: Int!
+  isOriginal: Boolean!
+  sourceId: String!
+  distributionUrls: [OriginalSongDistributionServiceURL!]!
+}
+
+# product_distribution_service_urls tableの定義
+type ProductDistributionServiceURL implements Entity {
+  id: ID!
+  service: DistributionService!
+  url: String!
+}
+
+# original_song_distribution_service_urls tableの定義
+type OriginalSongDistributionServiceURL implements Entity {
+  id: ID!
+  service: DistributionService!
+  url: String!
+}
+
 # event_series tableの定義
-type EventSeries {
+type EventSeries implements Entity {
   id: ID!
   name: String!
   displayName: String!
@@ -92,7 +164,7 @@ type EventSeries {
 }
 
 # events tableの定義
-type Event {
+type Event implements Entity {
   id: ID!
   series: EventSeries!
   name: String!
@@ -111,7 +183,7 @@ type Event {
 }
 
 # sub_events tableの定義
-type SubEvent {
+type SubEvent implements Entity {
   id: ID!
   name: String!
   displayName: String!
@@ -121,19 +193,8 @@ type SubEvent {
   description: String!
 }
 
-# initial_letter_type enum定義
-enum InitialLetterType {
-  SYMBOL
-  NUMBER
-  ALPHABET
-  HIRAGANA
-  KATAKANA
-  KANJI
-  OTHER
-}
-
 # artists tableの定義
-type Artist {
+type Artist implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -148,7 +209,7 @@ type Artist {
 }
 
 # circles tableの定義
-type Circle {
+type Circle implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -164,7 +225,7 @@ type Circle {
   tags: [CircleTag!]!
 }
 
-type Album {
+type Album implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -188,20 +249,7 @@ type Album {
   tags: [AlbumTag!]!
 }
 
-enum Shop {
-  AKIBA_HOBBY
-  AKIBAOO
-  ANIMATE
-  BOOKMATE
-  BOOTH
-  DIVERSE_DIRECT
-  GREP
-  MELONBOOKS
-  TANOCSTORE
-  TORANOANA
-}
-
-type ConsignmentShop {
+type ConsignmentShop implements Entity {
   id: ID!
   album: Album!
   shop: Shop!
@@ -211,19 +259,19 @@ type ConsignmentShop {
   currency: String!
 }
 
-type AlbumDistributionServiceUrl {
+type AlbumDistributionServiceUrl implements Entity {
   id: ID!
   service: DistributionService!
   url: String!
 }
 
-type Upc {
+type Upc implements Entity {
   id: ID!
   album: Album!
   upc: String!
 }
 
-type Song {
+type Song implements Entity {
   id: ID!
   circle: Circle
   album: Album!
@@ -257,91 +305,66 @@ type Song {
   tags: [SongTag!]!
 }
 
-type SongDistributionServiceUrl {
+type SongDistributionServiceUrl implements Entity {
   id: ID!
   service: DistributionService!
   url: String!
 }
 
-type Isrc {
+type Isrc implements Entity {
   id: ID!
   isrc: String!
 }
 
-type Genre {
+type Genre implements Entity {
   id: ID!
   name: String!
 }
 
-enum TagType {
-  UNKNOWN
-  GENRE
-  AMBIENCE
-  INSTRUMENT
-}
-
-type Tag {
+type Tag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
 }
 
-type AlbumGenre {
+type AlbumGenre implements Entity {
   id: ID!
   name: String!
   locked: Boolean!
 }
 
-type AlbumTag {
+type AlbumTag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
   locked: Boolean!
 }
 
-type SongGenre {
+type SongGenre implements Entity {
   id: ID!
   name: String!
   locked: Boolean!
 }
 
-type SongTag {
+type SongTag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
   locked: Boolean!
 }
 
-type CircleGenre {
+type CircleGenre implements Entity {
   id: ID!
   circle: Circle!
   genre: Genre!
   locked: Boolean!
 }
 
-type CircleTag {
+type CircleTag implements Entity {
   id: ID!
   circle: Circle!
   tag: Tag!
   locked: Boolean!
 }
 
-# 各種クエリの定義
-type Query {
-  getProductById(id: ID!): Product
-  getOriginalSongById(id: ID!): OriginalSong
-  getProducts: [Product!]!
-  getOriginalSongs: [OriginalSong!]!
-  getEventSeriesById(id: ID!): EventSeries
-  getEventById(id: ID!): Event
-  getSubEventById(id: ID!): SubEvent
-  getEventSeries: [EventSeries!]!
-  getArtistById(id: ID!): Artist
-  getCircleById(id: ID!): Circle
-  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
-  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
-  getAlbumById(id: ID!): Album
-  getSongById(id: ID!): Song
-  getGenres: [Genre!]!
-  getTags: [Tag!]!
-}
+### Input objects

@@ -1803,11 +1803,14 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 }
 
 var sources = []*ast.Source{
-	{Name: "../../schema.graphqls", Input: `# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
+	{Name: "../../schema.graphqls", Input: `### Schema
 
-scalar Date
+schema {
+#  mutation: Mutation
+  query: Query
+}
+
+### Enums
 
 # product_type enum定義
 enum ProductType {
@@ -1818,30 +1821,6 @@ enum ProductType {
   COMMERCIAL_BOOKS
   TASOFRO
   OTHER
-}
-
-# products tableの定義
-type Product {
-  id: ID!
-  name: String!
-  shortName: String!
-  productType: ProductType!
-  seriesNumber: Float!
-  originalSongs: [OriginalSong!]!
-  distributionUrls: [ProductDistributionServiceURL!]!
-}
-
-# original_songs tableの定義
-type OriginalSong {
-  id: ID!
-  product: Product!
-  name: String!
-  composer: String!
-  arranger: String!
-  trackNumber: Int!
-  isOriginal: Boolean!
-  sourceId: String!
-  distributionUrls: [OriginalSongDistributionServiceURL!]!
 }
 
 # distribution_service enum定義
@@ -1856,18 +1835,15 @@ enum DistributionService {
   SOUND_CLOUD
 }
 
-# product_distribution_service_urls tableの定義
-type ProductDistributionServiceURL {
-  id: ID!
-  service: DistributionService!
-  url: String!
-}
-
-# original_song_distribution_service_urls tableの定義
-type OriginalSongDistributionServiceURL {
-  id: ID!
-  service: DistributionService!
-  url: String!
+# initial_letter_type enum定義
+enum InitialLetterType {
+  SYMBOL
+  NUMBER
+  ALPHABET
+  HIRAGANA
+  KATAKANA
+  KANJI
+  OTHER
 }
 
 # event_status enum定義
@@ -1887,8 +1863,104 @@ enum EventFormat {
   MIXED
 }
 
+enum Shop {
+  AKIBA_HOBBY
+  AKIBAOO
+  ANIMATE
+  BOOKMATE
+  BOOTH
+  DIVERSE_DIRECT
+  GREP
+  MELONBOOKS
+  TANOCSTORE
+  TORANOANA
+}
+
+enum TagType {
+  UNKNOWN
+  GENRE
+  AMBIENCE
+  INSTRUMENT
+}
+
+### Custom Scalars
+
+scalar Date
+
+### Query & Mutation
+
+# 各種クエリの定義
+type Query {
+  getProductById(id: ID!): Product
+  getOriginalSongById(id: ID!): OriginalSong
+  getProducts: [Product!]!
+  getOriginalSongs: [OriginalSong!]!
+  getEventSeriesById(id: ID!): EventSeries
+  getEventById(id: ID!): Event
+  getSubEventById(id: ID!): SubEvent
+  getEventSeries: [EventSeries!]!
+  getArtistById(id: ID!): Artist
+  getCircleById(id: ID!): Circle
+  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
+  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
+  getAlbumById(id: ID!): Album
+  getSongById(id: ID!): Song
+  getGenres: [Genre!]!
+  getTags: [Tag!]!
+}
+
+#type Mutation {
+#
+#}
+
+### Interfaces
+
+interface Entity {
+  id: ID!
+}
+
+### Types
+
+# products tableの定義
+type Product implements Entity {
+  id: ID!
+  name: String!
+  shortName: String!
+  productType: ProductType!
+  seriesNumber: Float!
+  originalSongs: [OriginalSong!]!
+  distributionUrls: [ProductDistributionServiceURL!]!
+}
+
+# original_songs tableの定義
+type OriginalSong implements Entity {
+  id: ID!
+  product: Product!
+  name: String!
+  composer: String!
+  arranger: String!
+  trackNumber: Int!
+  isOriginal: Boolean!
+  sourceId: String!
+  distributionUrls: [OriginalSongDistributionServiceURL!]!
+}
+
+# product_distribution_service_urls tableの定義
+type ProductDistributionServiceURL implements Entity {
+  id: ID!
+  service: DistributionService!
+  url: String!
+}
+
+# original_song_distribution_service_urls tableの定義
+type OriginalSongDistributionServiceURL implements Entity {
+  id: ID!
+  service: DistributionService!
+  url: String!
+}
+
 # event_series tableの定義
-type EventSeries {
+type EventSeries implements Entity {
   id: ID!
   name: String!
   displayName: String!
@@ -1897,7 +1969,7 @@ type EventSeries {
 }
 
 # events tableの定義
-type Event {
+type Event implements Entity {
   id: ID!
   series: EventSeries!
   name: String!
@@ -1916,7 +1988,7 @@ type Event {
 }
 
 # sub_events tableの定義
-type SubEvent {
+type SubEvent implements Entity {
   id: ID!
   name: String!
   displayName: String!
@@ -1926,19 +1998,8 @@ type SubEvent {
   description: String!
 }
 
-# initial_letter_type enum定義
-enum InitialLetterType {
-  SYMBOL
-  NUMBER
-  ALPHABET
-  HIRAGANA
-  KATAKANA
-  KANJI
-  OTHER
-}
-
 # artists tableの定義
-type Artist {
+type Artist implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -1953,7 +2014,7 @@ type Artist {
 }
 
 # circles tableの定義
-type Circle {
+type Circle implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -1969,7 +2030,7 @@ type Circle {
   tags: [CircleTag!]!
 }
 
-type Album {
+type Album implements Entity {
   id: ID!
   name: String!
   nameReading: String!
@@ -1993,20 +2054,7 @@ type Album {
   tags: [AlbumTag!]!
 }
 
-enum Shop {
-  AKIBA_HOBBY
-  AKIBAOO
-  ANIMATE
-  BOOKMATE
-  BOOTH
-  DIVERSE_DIRECT
-  GREP
-  MELONBOOKS
-  TANOCSTORE
-  TORANOANA
-}
-
-type ConsignmentShop {
+type ConsignmentShop implements Entity {
   id: ID!
   album: Album!
   shop: Shop!
@@ -2016,19 +2064,19 @@ type ConsignmentShop {
   currency: String!
 }
 
-type AlbumDistributionServiceUrl {
+type AlbumDistributionServiceUrl implements Entity {
   id: ID!
   service: DistributionService!
   url: String!
 }
 
-type Upc {
+type Upc implements Entity {
   id: ID!
   album: Album!
   upc: String!
 }
 
-type Song {
+type Song implements Entity {
   id: ID!
   circle: Circle
   album: Album!
@@ -2062,94 +2110,69 @@ type Song {
   tags: [SongTag!]!
 }
 
-type SongDistributionServiceUrl {
+type SongDistributionServiceUrl implements Entity {
   id: ID!
   service: DistributionService!
   url: String!
 }
 
-type Isrc {
+type Isrc implements Entity {
   id: ID!
   isrc: String!
 }
 
-type Genre {
+type Genre implements Entity {
   id: ID!
   name: String!
 }
 
-enum TagType {
-  UNKNOWN
-  GENRE
-  AMBIENCE
-  INSTRUMENT
-}
-
-type Tag {
+type Tag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
 }
 
-type AlbumGenre {
+type AlbumGenre implements Entity {
   id: ID!
   name: String!
   locked: Boolean!
 }
 
-type AlbumTag {
+type AlbumTag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
   locked: Boolean!
 }
 
-type SongGenre {
+type SongGenre implements Entity {
   id: ID!
   name: String!
   locked: Boolean!
 }
 
-type SongTag {
+type SongTag implements Entity {
   id: ID!
   name: String!
   tagType: TagType!
   locked: Boolean!
 }
 
-type CircleGenre {
+type CircleGenre implements Entity {
   id: ID!
   circle: Circle!
   genre: Genre!
   locked: Boolean!
 }
 
-type CircleTag {
+type CircleTag implements Entity {
   id: ID!
   circle: Circle!
   tag: Tag!
   locked: Boolean!
 }
 
-# 各種クエリの定義
-type Query {
-  getProductById(id: ID!): Product
-  getOriginalSongById(id: ID!): OriginalSong
-  getProducts: [Product!]!
-  getOriginalSongs: [OriginalSong!]!
-  getEventSeriesById(id: ID!): EventSeries
-  getEventById(id: ID!): Event
-  getSubEventById(id: ID!): SubEvent
-  getEventSeries: [EventSeries!]!
-  getArtistById(id: ID!): Artist
-  getCircleById(id: ID!): Circle
-  artistsByInitialLetterType(type: InitialLetterType!): [Artist]
-  circlesByInitialLetterType(type: InitialLetterType!): [Circle]
-  getAlbumById(id: ID!): Album
-  getSongById(id: ID!): Song
-  getGenres: [Genre!]!
-  getTags: [Tag!]!
-}
+### Input objects
 `, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)
@@ -13607,11 +13630,188 @@ func (ec *executionContext) fieldContext___Type_specifiedByURL(ctx context.Conte
 
 // region    ************************** interface.gotpl ***************************
 
+func (ec *executionContext) _Entity(ctx context.Context, sel ast.SelectionSet, obj model.Entity) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.Product:
+		return ec._Product(ctx, sel, &obj)
+	case *model.Product:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Product(ctx, sel, obj)
+	case model.OriginalSong:
+		return ec._OriginalSong(ctx, sel, &obj)
+	case *model.OriginalSong:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._OriginalSong(ctx, sel, obj)
+	case model.ProductDistributionServiceURL:
+		return ec._ProductDistributionServiceURL(ctx, sel, &obj)
+	case *model.ProductDistributionServiceURL:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._ProductDistributionServiceURL(ctx, sel, obj)
+	case model.OriginalSongDistributionServiceURL:
+		return ec._OriginalSongDistributionServiceURL(ctx, sel, &obj)
+	case *model.OriginalSongDistributionServiceURL:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._OriginalSongDistributionServiceURL(ctx, sel, obj)
+	case model.EventSeries:
+		return ec._EventSeries(ctx, sel, &obj)
+	case *model.EventSeries:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._EventSeries(ctx, sel, obj)
+	case model.Event:
+		return ec._Event(ctx, sel, &obj)
+	case *model.Event:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Event(ctx, sel, obj)
+	case model.SubEvent:
+		return ec._SubEvent(ctx, sel, &obj)
+	case *model.SubEvent:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._SubEvent(ctx, sel, obj)
+	case model.Artist:
+		return ec._Artist(ctx, sel, &obj)
+	case *model.Artist:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Artist(ctx, sel, obj)
+	case model.Circle:
+		return ec._Circle(ctx, sel, &obj)
+	case *model.Circle:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Circle(ctx, sel, obj)
+	case model.Album:
+		return ec._Album(ctx, sel, &obj)
+	case *model.Album:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Album(ctx, sel, obj)
+	case model.ConsignmentShop:
+		return ec._ConsignmentShop(ctx, sel, &obj)
+	case *model.ConsignmentShop:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._ConsignmentShop(ctx, sel, obj)
+	case model.AlbumDistributionServiceURL:
+		return ec._AlbumDistributionServiceUrl(ctx, sel, &obj)
+	case *model.AlbumDistributionServiceURL:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._AlbumDistributionServiceUrl(ctx, sel, obj)
+	case model.Upc:
+		return ec._Upc(ctx, sel, &obj)
+	case *model.Upc:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Upc(ctx, sel, obj)
+	case model.Song:
+		return ec._Song(ctx, sel, &obj)
+	case *model.Song:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Song(ctx, sel, obj)
+	case model.SongDistributionServiceURL:
+		return ec._SongDistributionServiceUrl(ctx, sel, &obj)
+	case *model.SongDistributionServiceURL:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._SongDistributionServiceUrl(ctx, sel, obj)
+	case model.Isrc:
+		return ec._Isrc(ctx, sel, &obj)
+	case *model.Isrc:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Isrc(ctx, sel, obj)
+	case model.Genre:
+		return ec._Genre(ctx, sel, &obj)
+	case *model.Genre:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Genre(ctx, sel, obj)
+	case model.Tag:
+		return ec._Tag(ctx, sel, &obj)
+	case *model.Tag:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._Tag(ctx, sel, obj)
+	case model.AlbumGenre:
+		return ec._AlbumGenre(ctx, sel, &obj)
+	case *model.AlbumGenre:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._AlbumGenre(ctx, sel, obj)
+	case model.AlbumTag:
+		return ec._AlbumTag(ctx, sel, &obj)
+	case *model.AlbumTag:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._AlbumTag(ctx, sel, obj)
+	case model.SongGenre:
+		return ec._SongGenre(ctx, sel, &obj)
+	case *model.SongGenre:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._SongGenre(ctx, sel, obj)
+	case model.SongTag:
+		return ec._SongTag(ctx, sel, &obj)
+	case *model.SongTag:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._SongTag(ctx, sel, obj)
+	case model.CircleGenre:
+		return ec._CircleGenre(ctx, sel, &obj)
+	case *model.CircleGenre:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CircleGenre(ctx, sel, obj)
+	case model.CircleTag:
+		return ec._CircleTag(ctx, sel, &obj)
+	case *model.CircleTag:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CircleTag(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 // endregion ************************** interface.gotpl ***************************
 
 // region    **************************** object.gotpl ****************************
 
-var albumImplementors = []string{"Album"}
+var albumImplementors = []string{"Album", "Entity"}
 
 func (ec *executionContext) _Album(ctx context.Context, sel ast.SelectionSet, obj *model.Album) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, albumImplementors)
@@ -13800,7 +14000,7 @@ func (ec *executionContext) _Album(ctx context.Context, sel ast.SelectionSet, ob
 	return out
 }
 
-var albumDistributionServiceUrlImplementors = []string{"AlbumDistributionServiceUrl"}
+var albumDistributionServiceUrlImplementors = []string{"AlbumDistributionServiceUrl", "Entity"}
 
 func (ec *executionContext) _AlbumDistributionServiceUrl(ctx context.Context, sel ast.SelectionSet, obj *model.AlbumDistributionServiceURL) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, albumDistributionServiceUrlImplementors)
@@ -13849,7 +14049,7 @@ func (ec *executionContext) _AlbumDistributionServiceUrl(ctx context.Context, se
 	return out
 }
 
-var albumGenreImplementors = []string{"AlbumGenre"}
+var albumGenreImplementors = []string{"AlbumGenre", "Entity"}
 
 func (ec *executionContext) _AlbumGenre(ctx context.Context, sel ast.SelectionSet, obj *model.AlbumGenre) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, albumGenreImplementors)
@@ -13898,7 +14098,7 @@ func (ec *executionContext) _AlbumGenre(ctx context.Context, sel ast.SelectionSe
 	return out
 }
 
-var albumTagImplementors = []string{"AlbumTag"}
+var albumTagImplementors = []string{"AlbumTag", "Entity"}
 
 func (ec *executionContext) _AlbumTag(ctx context.Context, sel ast.SelectionSet, obj *model.AlbumTag) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, albumTagImplementors)
@@ -13952,7 +14152,7 @@ func (ec *executionContext) _AlbumTag(ctx context.Context, sel ast.SelectionSet,
 	return out
 }
 
-var artistImplementors = []string{"Artist"}
+var artistImplementors = []string{"Artist", "Entity"}
 
 func (ec *executionContext) _Artist(ctx context.Context, sel ast.SelectionSet, obj *model.Artist) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, artistImplementors)
@@ -14041,7 +14241,7 @@ func (ec *executionContext) _Artist(ctx context.Context, sel ast.SelectionSet, o
 	return out
 }
 
-var circleImplementors = []string{"Circle"}
+var circleImplementors = []string{"Circle", "Entity"}
 
 func (ec *executionContext) _Circle(ctx context.Context, sel ast.SelectionSet, obj *model.Circle) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, circleImplementors)
@@ -14140,7 +14340,7 @@ func (ec *executionContext) _Circle(ctx context.Context, sel ast.SelectionSet, o
 	return out
 }
 
-var circleGenreImplementors = []string{"CircleGenre"}
+var circleGenreImplementors = []string{"CircleGenre", "Entity"}
 
 func (ec *executionContext) _CircleGenre(ctx context.Context, sel ast.SelectionSet, obj *model.CircleGenre) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, circleGenreImplementors)
@@ -14194,7 +14394,7 @@ func (ec *executionContext) _CircleGenre(ctx context.Context, sel ast.SelectionS
 	return out
 }
 
-var circleTagImplementors = []string{"CircleTag"}
+var circleTagImplementors = []string{"CircleTag", "Entity"}
 
 func (ec *executionContext) _CircleTag(ctx context.Context, sel ast.SelectionSet, obj *model.CircleTag) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, circleTagImplementors)
@@ -14248,7 +14448,7 @@ func (ec *executionContext) _CircleTag(ctx context.Context, sel ast.SelectionSet
 	return out
 }
 
-var consignmentShopImplementors = []string{"ConsignmentShop"}
+var consignmentShopImplementors = []string{"ConsignmentShop", "Entity"}
 
 func (ec *executionContext) _ConsignmentShop(ctx context.Context, sel ast.SelectionSet, obj *model.ConsignmentShop) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, consignmentShopImplementors)
@@ -14317,7 +14517,7 @@ func (ec *executionContext) _ConsignmentShop(ctx context.Context, sel ast.Select
 	return out
 }
 
-var eventImplementors = []string{"Event"}
+var eventImplementors = []string{"Event", "Entity"}
 
 func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, obj *model.Event) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, eventImplementors)
@@ -14451,7 +14651,7 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 	return out
 }
 
-var eventSeriesImplementors = []string{"EventSeries"}
+var eventSeriesImplementors = []string{"EventSeries", "Entity"}
 
 func (ec *executionContext) _EventSeries(ctx context.Context, sel ast.SelectionSet, obj *model.EventSeries) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, eventSeriesImplementors)
@@ -14510,7 +14710,7 @@ func (ec *executionContext) _EventSeries(ctx context.Context, sel ast.SelectionS
 	return out
 }
 
-var genreImplementors = []string{"Genre"}
+var genreImplementors = []string{"Genre", "Entity"}
 
 func (ec *executionContext) _Genre(ctx context.Context, sel ast.SelectionSet, obj *model.Genre) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, genreImplementors)
@@ -14554,7 +14754,7 @@ func (ec *executionContext) _Genre(ctx context.Context, sel ast.SelectionSet, ob
 	return out
 }
 
-var isrcImplementors = []string{"Isrc"}
+var isrcImplementors = []string{"Isrc", "Entity"}
 
 func (ec *executionContext) _Isrc(ctx context.Context, sel ast.SelectionSet, obj *model.Isrc) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, isrcImplementors)
@@ -14598,7 +14798,7 @@ func (ec *executionContext) _Isrc(ctx context.Context, sel ast.SelectionSet, obj
 	return out
 }
 
-var originalSongImplementors = []string{"OriginalSong"}
+var originalSongImplementors = []string{"OriginalSong", "Entity"}
 
 func (ec *executionContext) _OriginalSong(ctx context.Context, sel ast.SelectionSet, obj *model.OriginalSong) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, originalSongImplementors)
@@ -14708,7 +14908,7 @@ func (ec *executionContext) _OriginalSong(ctx context.Context, sel ast.Selection
 	return out
 }
 
-var originalSongDistributionServiceURLImplementors = []string{"OriginalSongDistributionServiceURL"}
+var originalSongDistributionServiceURLImplementors = []string{"OriginalSongDistributionServiceURL", "Entity"}
 
 func (ec *executionContext) _OriginalSongDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, obj *model.OriginalSongDistributionServiceURL) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, originalSongDistributionServiceURLImplementors)
@@ -14757,7 +14957,7 @@ func (ec *executionContext) _OriginalSongDistributionServiceURL(ctx context.Cont
 	return out
 }
 
-var productImplementors = []string{"Product"}
+var productImplementors = []string{"Product", "Entity"}
 
 func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, obj *model.Product) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, productImplementors)
@@ -14826,7 +15026,7 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 	return out
 }
 
-var productDistributionServiceURLImplementors = []string{"ProductDistributionServiceURL"}
+var productDistributionServiceURLImplementors = []string{"ProductDistributionServiceURL", "Entity"}
 
 func (ec *executionContext) _ProductDistributionServiceURL(ctx context.Context, sel ast.SelectionSet, obj *model.ProductDistributionServiceURL) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, productDistributionServiceURLImplementors)
@@ -15244,7 +15444,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 	return out
 }
 
-var songImplementors = []string{"Song"}
+var songImplementors = []string{"Song", "Entity"}
 
 func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj *model.Song) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, songImplementors)
@@ -15483,7 +15683,7 @@ func (ec *executionContext) _Song(ctx context.Context, sel ast.SelectionSet, obj
 	return out
 }
 
-var songDistributionServiceUrlImplementors = []string{"SongDistributionServiceUrl"}
+var songDistributionServiceUrlImplementors = []string{"SongDistributionServiceUrl", "Entity"}
 
 func (ec *executionContext) _SongDistributionServiceUrl(ctx context.Context, sel ast.SelectionSet, obj *model.SongDistributionServiceURL) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, songDistributionServiceUrlImplementors)
@@ -15532,7 +15732,7 @@ func (ec *executionContext) _SongDistributionServiceUrl(ctx context.Context, sel
 	return out
 }
 
-var songGenreImplementors = []string{"SongGenre"}
+var songGenreImplementors = []string{"SongGenre", "Entity"}
 
 func (ec *executionContext) _SongGenre(ctx context.Context, sel ast.SelectionSet, obj *model.SongGenre) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, songGenreImplementors)
@@ -15581,7 +15781,7 @@ func (ec *executionContext) _SongGenre(ctx context.Context, sel ast.SelectionSet
 	return out
 }
 
-var songTagImplementors = []string{"SongTag"}
+var songTagImplementors = []string{"SongTag", "Entity"}
 
 func (ec *executionContext) _SongTag(ctx context.Context, sel ast.SelectionSet, obj *model.SongTag) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, songTagImplementors)
@@ -15635,7 +15835,7 @@ func (ec *executionContext) _SongTag(ctx context.Context, sel ast.SelectionSet, 
 	return out
 }
 
-var subEventImplementors = []string{"SubEvent"}
+var subEventImplementors = []string{"SubEvent", "Entity"}
 
 func (ec *executionContext) _SubEvent(ctx context.Context, sel ast.SelectionSet, obj *model.SubEvent) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, subEventImplementors)
@@ -15701,7 +15901,7 @@ func (ec *executionContext) _SubEvent(ctx context.Context, sel ast.SelectionSet,
 	return out
 }
 
-var tagImplementors = []string{"Tag"}
+var tagImplementors = []string{"Tag", "Entity"}
 
 func (ec *executionContext) _Tag(ctx context.Context, sel ast.SelectionSet, obj *model.Tag) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, tagImplementors)
@@ -15750,7 +15950,7 @@ func (ec *executionContext) _Tag(ctx context.Context, sel ast.SelectionSet, obj 
 	return out
 }
 
-var upcImplementors = []string{"Upc"}
+var upcImplementors = []string{"Upc", "Entity"}
 
 func (ec *executionContext) _Upc(ctx context.Context, sel ast.SelectionSet, obj *model.Upc) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, upcImplementors)

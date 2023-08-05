@@ -8,6 +8,11 @@ import (
 	"strconv"
 )
 
+type Entity interface {
+	IsEntity()
+	GetID() string
+}
+
 type Album struct {
 	ID                string                         `json:"id"`
 	Name              string                         `json:"name"`
@@ -32,11 +37,17 @@ type Album struct {
 	Tags              []*AlbumTag                    `json:"tags"`
 }
 
+func (Album) IsEntity()          {}
+func (this Album) GetID() string { return this.ID }
+
 type AlbumDistributionServiceURL struct {
 	ID      string              `json:"id"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
+
+func (AlbumDistributionServiceURL) IsEntity()          {}
+func (this AlbumDistributionServiceURL) GetID() string { return this.ID }
 
 type AlbumGenre struct {
 	ID     string `json:"id"`
@@ -44,12 +55,18 @@ type AlbumGenre struct {
 	Locked bool   `json:"locked"`
 }
 
+func (AlbumGenre) IsEntity()          {}
+func (this AlbumGenre) GetID() string { return this.ID }
+
 type AlbumTag struct {
 	ID      string  `json:"id"`
 	Name    string  `json:"name"`
 	TagType TagType `json:"tagType"`
 	Locked  bool    `json:"locked"`
 }
+
+func (AlbumTag) IsEntity()          {}
+func (this AlbumTag) GetID() string { return this.ID }
 
 type Artist struct {
 	ID                  string            `json:"id"`
@@ -64,6 +81,9 @@ type Artist struct {
 	TwitterURL          string            `json:"twitterUrl"`
 	YoutubeChannelURL   string            `json:"youtubeChannelUrl"`
 }
+
+func (Artist) IsEntity()          {}
+func (this Artist) GetID() string { return this.ID }
 
 type Circle struct {
 	ID                  string            `json:"id"`
@@ -81,6 +101,9 @@ type Circle struct {
 	Tags                []*CircleTag      `json:"tags"`
 }
 
+func (Circle) IsEntity()          {}
+func (this Circle) GetID() string { return this.ID }
+
 type CircleGenre struct {
 	ID     string  `json:"id"`
 	Circle *Circle `json:"circle"`
@@ -88,12 +111,18 @@ type CircleGenre struct {
 	Locked bool    `json:"locked"`
 }
 
+func (CircleGenre) IsEntity()          {}
+func (this CircleGenre) GetID() string { return this.ID }
+
 type CircleTag struct {
 	ID     string  `json:"id"`
 	Circle *Circle `json:"circle"`
 	Tag    *Tag    `json:"tag"`
 	Locked bool    `json:"locked"`
 }
+
+func (CircleTag) IsEntity()          {}
+func (this CircleTag) GetID() string { return this.ID }
 
 type ConsignmentShop struct {
 	ID          string `json:"id"`
@@ -104,6 +133,9 @@ type ConsignmentShop struct {
 	ShopPrice   string `json:"shopPrice"`
 	Currency    string `json:"currency"`
 }
+
+func (ConsignmentShop) IsEntity()          {}
+func (this ConsignmentShop) GetID() string { return this.ID }
 
 type Event struct {
 	ID          string       `json:"id"`
@@ -123,6 +155,9 @@ type Event struct {
 	SubEvents   []*SubEvent  `json:"subEvents"`
 }
 
+func (Event) IsEntity()          {}
+func (this Event) GetID() string { return this.ID }
+
 type EventSeries struct {
 	ID          string   `json:"id"`
 	Name        string   `json:"name"`
@@ -131,15 +166,24 @@ type EventSeries struct {
 	Events      []*Event `json:"events"`
 }
 
+func (EventSeries) IsEntity()          {}
+func (this EventSeries) GetID() string { return this.ID }
+
 type Genre struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
+func (Genre) IsEntity()          {}
+func (this Genre) GetID() string { return this.ID }
+
 type Isrc struct {
 	ID   string `json:"id"`
 	Isrc string `json:"isrc"`
 }
+
+func (Isrc) IsEntity()          {}
+func (this Isrc) GetID() string { return this.ID }
 
 type OriginalSong struct {
 	ID               string                                `json:"id"`
@@ -153,11 +197,17 @@ type OriginalSong struct {
 	DistributionUrls []*OriginalSongDistributionServiceURL `json:"distributionUrls"`
 }
 
+func (OriginalSong) IsEntity()          {}
+func (this OriginalSong) GetID() string { return this.ID }
+
 type OriginalSongDistributionServiceURL struct {
 	ID      string              `json:"id"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
+
+func (OriginalSongDistributionServiceURL) IsEntity()          {}
+func (this OriginalSongDistributionServiceURL) GetID() string { return this.ID }
 
 type Product struct {
 	ID               string                           `json:"id"`
@@ -169,11 +219,17 @@ type Product struct {
 	DistributionUrls []*ProductDistributionServiceURL `json:"distributionUrls"`
 }
 
+func (Product) IsEntity()          {}
+func (this Product) GetID() string { return this.ID }
+
 type ProductDistributionServiceURL struct {
 	ID      string              `json:"id"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
+
+func (ProductDistributionServiceURL) IsEntity()          {}
+func (this ProductDistributionServiceURL) GetID() string { return this.ID }
 
 type Song struct {
 	ID                  string                        `json:"id"`
@@ -209,11 +265,17 @@ type Song struct {
 	Tags                []*SongTag                    `json:"tags"`
 }
 
+func (Song) IsEntity()          {}
+func (this Song) GetID() string { return this.ID }
+
 type SongDistributionServiceURL struct {
 	ID      string              `json:"id"`
 	Service DistributionService `json:"service"`
 	URL     string              `json:"url"`
 }
+
+func (SongDistributionServiceURL) IsEntity()          {}
+func (this SongDistributionServiceURL) GetID() string { return this.ID }
 
 type SongGenre struct {
 	ID     string `json:"id"`
@@ -221,12 +283,18 @@ type SongGenre struct {
 	Locked bool   `json:"locked"`
 }
 
+func (SongGenre) IsEntity()          {}
+func (this SongGenre) GetID() string { return this.ID }
+
 type SongTag struct {
 	ID      string  `json:"id"`
 	Name    string  `json:"name"`
 	TagType TagType `json:"tagType"`
 	Locked  bool    `json:"locked"`
 }
+
+func (SongTag) IsEntity()          {}
+func (this SongTag) GetID() string { return this.ID }
 
 type SubEvent struct {
 	ID          string      `json:"id"`
@@ -238,17 +306,26 @@ type SubEvent struct {
 	Description string      `json:"description"`
 }
 
+func (SubEvent) IsEntity()          {}
+func (this SubEvent) GetID() string { return this.ID }
+
 type Tag struct {
 	ID      string  `json:"id"`
 	Name    string  `json:"name"`
 	TagType TagType `json:"tagType"`
 }
 
+func (Tag) IsEntity()          {}
+func (this Tag) GetID() string { return this.ID }
+
 type Upc struct {
 	ID    string `json:"id"`
 	Album *Album `json:"album"`
 	Upc   string `json:"upc"`
 }
+
+func (Upc) IsEntity()          {}
+func (this Upc) GetID() string { return this.ID }
 
 type DistributionService string
 
