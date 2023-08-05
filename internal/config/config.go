@@ -3,7 +3,7 @@ package config
 import (
 	"log"
 
-	"github.com/caarlos0/env/v8"
+	"github.com/caarlos0/env/v9"
 )
 
 type Config struct {
