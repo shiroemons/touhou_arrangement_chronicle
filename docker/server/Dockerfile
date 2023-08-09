@@ -1,5 +1,5 @@
 # Build Stage
-FROM golang:1.20-alpine AS builder
+FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 COPY ../../go.mod go.sum ./
@@ -25,7 +25,7 @@ CMD ["./server"]
 
 
 # Local Stage
-FROM golang:1.20 as devlop
+FROM golang:1.21 as devlop
 
 WORKDIR /app
 
