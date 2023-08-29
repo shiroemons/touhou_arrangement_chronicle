@@ -86,6 +86,7 @@ GEM
       turbo-rails
       view_component (>= 2.54.0)
       zeitwerk (>= 2.6.2)
+    base64 (0.1.1)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -218,7 +219,8 @@ GEM
     reline (0.3.7)
       io-console (~> 0.5)
     rexml (3.2.6)
-    rubocop (1.55.1)
+    rubocop (1.56.2)
+      base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
