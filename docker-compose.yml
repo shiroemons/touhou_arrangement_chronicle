@@ -33,7 +33,7 @@ services:
       - extra
 
   seeder:
-    image: golang:1.20
+    image: golang:1.21
     stdin_open: true
     tty: true
     depends_on:
@@ -53,7 +53,7 @@ services:
       - "cmd/seeder/main.go"
 
   indexer:
-    image: golang:1.20
+    image: golang:1.21
     stdin_open: true
     tty: true
     depends_on:
@@ -80,7 +80,7 @@ services:
       - "cmd/indexer/setup.go"
 
   importer:
-    image: golang:1.20
+    image: golang:1.21
     stdin_open: true
     tty: true
     depends_on:
