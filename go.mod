@@ -20,9 +20,9 @@ require (
 	github.com/samber/lo v1.38.1
 	github.com/shopspring/decimal v1.3.1
 	github.com/spkg/bom v1.0.0
-	github.com/uptrace/bun v1.1.14
-	github.com/uptrace/bun/dialect/pgdialect v1.1.14
-	github.com/uptrace/bun/extra/bundebug v1.1.14
+	github.com/uptrace/bun v1.1.16
+	github.com/uptrace/bun/dialect/pgdialect v1.1.16
+	github.com/uptrace/bun/extra/bundebug v1.1.16
 	github.com/vektah/gqlparser/v2 v2.5.8
 	go.opentelemetry.io/otel/trace v1.17.0
 	go.uber.org/fx v1.20.0
@@ -79,7 +79,7 @@ require (
 	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.14.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
