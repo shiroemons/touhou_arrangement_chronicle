@@ -3,9 +3,12 @@ package server
 import (
 	"context"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	gindump "github.com/tpkeeper/gin-dump"
 	"go.uber.org/fx"
+	"go.uber.org/zap"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
 )
@@ -51,6 +54,12 @@ func InvokeMiddleware(app *gin.Engine, handlers *AppHandlers) {
 
 // InvokeHandler Fx Invoke Handler
 func InvokeHandler(app *gin.Engine, handlers *AppHandlers) {
-	app.POST(graphqlPath, handlers.GQLHandler)
-	app.GET(entry, handlers.Playground)
+	app.POST(graphqlPath, gindump.DumpWithOptions(true, true, true, true, false, func(dumpStr string) {
+		zap.S().Debugw("request/response dump", "dumpStr", dumpStr)
+	}), handlers.GQLHandler)
+
+	env := os.Getenv("ENV")
+	if env != "production" {
+		app.GET(entry, handlers.Playground)
+	}
 }
