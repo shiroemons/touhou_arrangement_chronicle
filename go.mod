@@ -23,7 +23,7 @@ require (
 	github.com/uptrace/bun v1.1.16
 	github.com/uptrace/bun/dialect/pgdialect v1.1.16
 	github.com/uptrace/bun/extra/bundebug v1.1.16
-	github.com/vektah/gqlparser/v2 v2.5.8
+	github.com/vektah/gqlparser/v2 v2.5.10
 	go.opentelemetry.io/otel/trace v1.17.0
 	go.uber.org/fx v1.20.0
 	go.uber.org/zap v1.25.0
