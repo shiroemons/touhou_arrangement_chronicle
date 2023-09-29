@@ -5,12 +5,15 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
+	"github.com/blendle/zapdriver"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/resolver"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
@@ -23,14 +26,18 @@ import (
 
 // inject 関数は、アプリケーションの依存関係を注入します。
 func inject() fx.Option {
+	ctx := func() context.Context {
+		return context.Background()
+	}
+
 	return fx.Options(
 		fx.Provide(
 			// Context
-			context.Background,
+			fx.Annotate(ctx, fx.As(new(context.Context))),
 			// Config
 			config.Provider,
 			// Logger
-			zap.NewProduction,
+			newZapDriverLogger,
 		),
 		// Provide
 		store.Module,
@@ -48,9 +55,9 @@ func inject() fx.Option {
 
 func main() {
 	// ロガーの新しいインスタンスを初期化します。
-	logger, err := zap.NewProduction()
+	logger, err := newZapDriverLogger()
 	if err != nil {
-		log.Fatalf("can't initialize zap logger: %v", err)
+		log.Fatalf("can't initialize zap driver logger: %v", err)
 	}
 	// プログラムが終了する前に、すべてのログがフラッシュされることを保証します。
 	defer func() {
@@ -58,6 +65,7 @@ func main() {
 			log.Printf("Error syncing logger: %v", err)
 		}
 	}()
+	zap.ReplaceGlobals(logger)
 
 	// Fxと互換性を持つように、ロガーをfxevent.ZapLoggerでラップします。
 	fxLogger := fxevent.ZapLogger{Logger: logger}
@@ -89,4 +97,33 @@ func main() {
 		// アプリケーションの停止に失敗した場合、エラーをログに記録します。
 		fxLogger.Logger.Fatal("Failed to stop the application", zap.Error(err))
 	}
+}
+
+func newZapDriverLogger() (*zap.Logger, error) {
+	env := os.Getenv("ENV")
+	logLevel := os.Getenv("LOG_LEVEL")
+
+	var level zapcore.Level
+	if logLevel != "" {
+		if err := level.Set(strings.ToLower(logLevel)); err != nil {
+			return nil, err
+		}
+	} else {
+		if env == "production" {
+			level = zapcore.InfoLevel
+		} else {
+			level = zapcore.DebugLevel
+		}
+	}
+
+	var zapcfg zap.Config
+	if env == "production" {
+		zapcfg = zapdriver.NewProductionConfig()
+	} else {
+		zapcfg = zapdriver.NewDevelopmentConfig()
+	}
+
+	zapcfg.Level = zap.NewAtomicLevelAt(level)
+
+	return zapcfg.Build()
 }
