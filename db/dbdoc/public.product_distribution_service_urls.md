@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  |  |
+| id | text | cuid() | false |  |  |  |
 | product_id | text |  | false |  | [public.products](public.products.md) | 原作ID |
 | service | distribution_service |  | false |  |  | 配信サービス |
 | url | text |  | false |  |  | URL |

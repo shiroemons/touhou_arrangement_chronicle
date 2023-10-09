@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false | [public.sub_events](public.sub_events.md) |  |  |
+| id | text | cuid() | false | [public.sub_events](public.sub_events.md) |  |  |
 | event_series_id | text |  | false |  | [public.event_series](public.event_series.md) | イベントシリーズID |
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |

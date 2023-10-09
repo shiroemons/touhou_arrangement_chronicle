@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false | [public.events](public.events.md) |  |  |
+| id | text | cuid() | false | [public.events](public.events.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |

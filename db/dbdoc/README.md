@@ -42,14 +42,14 @@
 
 | Name | ReturnType | Arguments | Type |
 | ---- | ------- | ------- | ---- |
-| public._xid_machine_id | int4 |  | FUNCTION |
-| public.xid_encode | xid | _id integer[] | FUNCTION |
-| public.xid_decode | _int4 | _xid public.xid | FUNCTION |
-| public.xid | xid | _at timestamp with time zone DEFAULT CURRENT_TIMESTAMP | FUNCTION |
-| public.xid_time | timestamptz | _xid public.xid | FUNCTION |
-| public.xid_machine | _int4 | _xid public.xid | FUNCTION |
-| public.xid_pid | int4 | _xid public.xid | FUNCTION |
-| public.xid_counter | int4 | _xid public.xid | FUNCTION |
+| public.get_cuid_hostid | int4 |  | FUNCTION |
+| public._safecounter | varchar |  | FUNCTION |
+| public._fingerprint | varchar |  | FUNCTION |
+| public.base36enc | varchar | num bigint | FUNCTION |
+| public.pad | varchar | num character varying, size integer | FUNCTION |
+| public._timestamp | varchar |  | FUNCTION |
+| public._randomblock | varchar |  | FUNCTION |
+| public.cuid | varchar |  | FUNCTION |
 
 ## Relations
 

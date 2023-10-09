@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  |  |
+| id | text | cuid() | false |  |  |  |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | shop | shop |  | false |  |  | ショップ |
 | url | text |  | false |  |  | URL |

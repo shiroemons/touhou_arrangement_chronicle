@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  | ID |
+| id | text | cuid() | false |  |  | ID |
 | song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック・削除不可、false: アンロック) |
