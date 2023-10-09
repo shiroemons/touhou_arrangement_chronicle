@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-contrib/cors"
+	"go.uber.org/zap"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
 )
@@ -38,6 +39,10 @@ func allowOrigins(cfg config.Config) []string {
 	var allows []string
 	origins := strings.Split(cfg.AllowOrigins, ",")
 	for _, origin := range origins {
+		if origin == "*" {
+			allows = append(allows, origin)
+			continue
+		}
 		u, err := url.Parse(origin)
 		if err != nil {
 			continue
@@ -47,6 +52,6 @@ func allowOrigins(cfg config.Config) []string {
 			allows = append(allows, fullHostname)
 		}
 	}
-
+	zap.S().Info("allowOrigins", "allows", allows)
 	return allows
 }
