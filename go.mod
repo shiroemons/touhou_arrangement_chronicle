@@ -16,7 +16,7 @@ require (
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.4.3
 	github.com/k0kubun/pp/v3 v3.2.0
-	github.com/meilisearch/meilisearch-go v0.25.0
+	github.com/meilisearch/meilisearch-go v0.25.1
 	github.com/rs/xid v1.5.0
 	github.com/samber/lo v1.38.1
 	github.com/shopspring/decimal v1.3.1
