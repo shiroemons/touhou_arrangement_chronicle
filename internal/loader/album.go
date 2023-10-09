@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type AlbumLoader struct {
 	aRepo domain.AlbumRepository
 }
 
-func AlbumLoaderProvider(aRepo domain.AlbumRepository) *AlbumLoader {
+func AlbumLoaderProvider(db *bun.DB) *AlbumLoader {
+	aRepo := repository.NewAlbumRepository(db)
 	return &AlbumLoader{aRepo: aRepo}
 }
 

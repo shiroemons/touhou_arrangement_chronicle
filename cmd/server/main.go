@@ -42,9 +42,9 @@ func inject() fx.Option {
 		// Provide
 		store.Module,
 		repository.Module,
-		server.Module,
 		loader.InitModule,
 		loader.Module,
+		server.Module,
 		resolver.Module,
 		service.Module,
 

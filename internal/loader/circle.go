@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type CircleLoader struct {
 	cRepo domain.CircleRepository
 }
 
-func CircleLoaderProvider(cRepo domain.CircleRepository) *CircleLoader {
+func CircleLoaderProvider(db *bun.DB) *CircleLoader {
+	cRepo := repository.NewCircleRepository(db)
 	return &CircleLoader{cRepo: cRepo}
 }
 

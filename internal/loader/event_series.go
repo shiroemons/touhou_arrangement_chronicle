@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type EventSeriesLoader struct {
 	esRepo domain.EventSeriesRepository
 }
 
-func EventSeriesLoaderProvider(esRepo domain.EventSeriesRepository) *EventSeriesLoader {
+func EventSeriesLoaderProvider(db *bun.DB) *EventSeriesLoader {
+	esRepo := repository.NewEventSeriesRepository(db)
 	return &EventSeriesLoader{esRepo: esRepo}
 }
 

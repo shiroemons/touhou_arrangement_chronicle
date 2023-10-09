@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type SubEventLoader struct {
 	seRepo domain.SubEventRepository
 }
 
-func SubEventLoaderProvider(seRepo domain.SubEventRepository) *SubEventLoader {
+func SubEventLoaderProvider(db *bun.DB) *SubEventLoader {
+	seRepo := repository.NewSubEventRepository(db)
 	return &SubEventLoader{seRepo: seRepo}
 }
 
