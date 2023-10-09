@@ -10,7 +10,7 @@ import (
 type AlbumTag struct {
 	bun.BaseModel `bun:"table:albums_tags,alias:alt"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	AlbumID   string    `bun:"album_id,nullzero,notnull"`
 	Album     *Album    `bun:"rel:belongs-to,join:album_id=id"`
 	TagID     string    `bun:"tag_id,nullzero,notnull"`

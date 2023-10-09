@@ -9,7 +9,7 @@ import (
 type CircleTag struct {
 	bun.BaseModel `bun:"table:circles_tags,alias:ct"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	CircleID  string    `bun:"circle_id,nullzero,notnull"`
 	Circle    *Circle   `bun:"rel:belongs-to,join:circle_id=id"`
 	TagID     string    `bun:"tag_id,nullzero,notnull"`

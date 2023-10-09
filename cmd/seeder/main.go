@@ -10,7 +10,7 @@ import (
 	"github.com/gocarina/gocsv"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
-	"github.com/rs/xid"
+	"github.com/lucsky/cuid"
 	"github.com/spkg/bom"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
@@ -215,25 +215,25 @@ func importPDSU(ctx context.Context, db *bun.DB) {
 	var pdsus []ProductDistributionServiceUrl
 	for _, l := range lines {
 		am := ProductDistributionServiceUrl{
-			ID:        xid.New().String(),
+			ID:        cuid.New(),
 			ProductID: l.ProductID,
 			Service:   "apple_music",
 			URL:       l.AppleMusicURL,
 		}
 		lm := ProductDistributionServiceUrl{
-			ID:        xid.New().String(),
+			ID:        cuid.New(),
 			ProductID: l.ProductID,
 			Service:   "line_music",
 			URL:       l.LineMusicURL,
 		}
 		s := ProductDistributionServiceUrl{
-			ID:        xid.New().String(),
+			ID:        cuid.New(),
 			ProductID: l.ProductID,
 			Service:   "spotify",
 			URL:       l.SpotifyURL,
 		}
 		ym := ProductDistributionServiceUrl{
-			ID:        xid.New().String(),
+			ID:        cuid.New(),
 			ProductID: l.ProductID,
 			Service:   "youtube_music",
 			URL:       l.YouTubeMusicURL,
@@ -272,25 +272,25 @@ func importOSDSU(ctx context.Context, db *bun.DB) {
 	var osdsus []OriginalSongDistributionServiceUrl
 	for _, l := range lines {
 		am := OriginalSongDistributionServiceUrl{
-			ID:             xid.New().String(),
+			ID:             cuid.New(),
 			OriginalSongID: l.OriginalSongID,
 			Service:        "apple_music",
 			URL:            l.AppleMusicURL,
 		}
 		lm := OriginalSongDistributionServiceUrl{
-			ID:             xid.New().String(),
+			ID:             cuid.New(),
 			OriginalSongID: l.OriginalSongID,
 			Service:        "line_music",
 			URL:            l.LineMusicURL,
 		}
 		s := OriginalSongDistributionServiceUrl{
-			ID:             xid.New().String(),
+			ID:             cuid.New(),
 			OriginalSongID: l.OriginalSongID,
 			Service:        "spotify",
 			URL:            l.SpotifyURL,
 		}
 		ym := OriginalSongDistributionServiceUrl{
-			ID:             xid.New().String(),
+			ID:             cuid.New(),
 			OriginalSongID: l.OriginalSongID,
 			Service:        "youtube_music",
 			URL:            l.YouTubeMusicURL,

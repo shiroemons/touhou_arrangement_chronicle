@@ -9,7 +9,7 @@ import (
 type AlbumUPC struct {
 	bun.BaseModel `bun:"table:album_upcs,alias:alu"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	AlbumID   string    `bun:"album_id,nullzero,notnull"`
 	UPC       string    `bun:"upc,nullzero,notnull"`
 	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`

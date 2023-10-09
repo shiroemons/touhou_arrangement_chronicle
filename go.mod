@@ -17,7 +17,6 @@ require (
 	github.com/jackc/pgx/v5 v5.4.3
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/meilisearch/meilisearch-go v0.25.1
-	github.com/rs/xid v1.5.0
 	github.com/samber/lo v1.38.1
 	github.com/shopspring/decimal v1.3.1
 	github.com/spkg/bom v1.0.0
@@ -59,6 +58,7 @@ require (
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
+	github.com/lucsky/cuid v1.2.1 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect

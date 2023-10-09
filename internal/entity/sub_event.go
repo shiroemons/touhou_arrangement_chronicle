@@ -11,7 +11,7 @@ import (
 type SubEvent struct {
 	bun.BaseModel `bun:"table:sub_events,alias:se"`
 
-	ID          string     `bun:",pk,default:xid()"`
+	ID          string     `bun:",pk,default:cuid()"`
 	EventID     string     `bun:"event_id,nullzero,notnull"`
 	Name        string     `bun:"name,nullzero,notnull"`
 	DisplayName string     `bun:"display_name,nullzero,notnull"`

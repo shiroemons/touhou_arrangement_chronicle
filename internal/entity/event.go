@@ -13,7 +13,7 @@ import (
 type Event struct {
 	bun.BaseModel `bun:"table:events,alias:e"`
 
-	ID            string           `bun:",pk,default:xid()"`
+	ID            string           `bun:",pk,default:cuid()"`
 	EventSeriesID string           `bun:"event_series_id,nullzero,notnull"`
 	EventSeries   *EventSeries     `bun:"rel:belongs-to,join:event_series_id=id"`
 	Name          string           `bun:"name,nullzero,notnull,unique"`

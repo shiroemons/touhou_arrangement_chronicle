@@ -23,7 +23,17 @@ ps: ## Check container status
 	docker compose ps
 
 db-setup: ## db setup
-	cat db/schema/xid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+	cat db/schema/cuid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+
+db-reset: ## db reset
+	docker compose down
+	docker volume rm touhou_arrangement_chronicle_postgres
+	docker compose up -d db
+	sleep 5
+	cat db/schema/cuid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+	docker compose run --rm migrate
+	docker compose run --rm seeder
+#	docker compose run --rm web bin/rails db:seed
 
 migrate: ## db migrate
 	docker compose run --rm migrate

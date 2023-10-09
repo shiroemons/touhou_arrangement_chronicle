@@ -9,7 +9,7 @@ import (
 type CircleGenre struct {
 	bun.BaseModel `bun:"table:circles_genres,alias:cg"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	CircleID  string    `bun:"circle_id,nullzero,notnull"`
 	Circle    *Circle   `bun:"rel:belongs-to,join:circle_id=id"`
 	GenreID   string    `bun:"genre_id,nullzero,notnull"`

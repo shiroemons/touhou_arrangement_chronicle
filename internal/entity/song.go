@@ -12,7 +12,7 @@ import (
 type Song struct {
 	bun.BaseModel `bun:"table:songs,alias:s"`
 
-	ID                          string                        `bun:",pk,default:xid()"`
+	ID                          string                        `bun:",pk,default:cuid()"`
 	CircleID                    string                        `bun:"circle_id,nullzero,notnull,default:''"`
 	Circle                      *Circle                       `bun:"rel:belongs-to,join:circle_id=id"`
 	AlbumID                     string                        `bun:"album_id,nullzero,notnull,default:''"`

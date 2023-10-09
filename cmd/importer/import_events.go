@@ -7,7 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gocarina/gocsv"
 	"github.com/jackc/pgtype"
-	"github.com/rs/xid"
+	"github.com/lucsky/cuid"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
@@ -65,7 +65,7 @@ func (imp *Importer) insertEventSeries(lines []EventCSV) {
 		}
 
 		es := entity.EventSeries{
-			ID:          xid.New().String(),
+			ID:          cuid.New(),
 			Name:        line.EventSeriesName,
 			DisplayName: line.EventSeriesName,
 		}
@@ -98,7 +98,7 @@ func (imp *Importer) insertEvents(lines []EventCSV) {
 		}
 
 		e := entity.Event{
-			ID:            xid.New().String(),
+			ID:            cuid.New(),
 			EventSeriesID: eSeries.ID,
 			Name:          line.EventName,
 			EventDates: pgtype.Daterange{
