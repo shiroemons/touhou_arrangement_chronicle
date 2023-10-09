@@ -8,7 +8,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"go.uber.org/zap"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
 )
 
 func customCorsConfig(cfg config.Config) cors.Config {

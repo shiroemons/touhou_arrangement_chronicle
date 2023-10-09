@@ -10,15 +10,15 @@ import (
 	"time"
 
 	"github.com/blendle/zapdriver"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/server"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/resolver"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/server"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/store"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"

@@ -6,11 +6,12 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func NewDB(connString string) *bun.DB {

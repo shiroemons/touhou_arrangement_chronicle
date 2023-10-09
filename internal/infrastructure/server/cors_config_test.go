@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
 )
 
 func TestArrowOrigins(t *testing.T) {

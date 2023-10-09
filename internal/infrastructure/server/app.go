@@ -10,7 +10,7 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
 )
 
 const (

@@ -9,8 +9,8 @@ import (
 	"github.com/uptrace/bun"
 	"go.uber.org/zap"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/config"
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/middleware"
 )
 
