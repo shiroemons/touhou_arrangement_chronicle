@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type AlbumService struct {
-	aRepo domain.AlbumRepository
+	aRepo repository.AlbumRepository
 }
 
-func AlbumServiceProvider(aRepo domain.AlbumRepository) *AlbumService {
+func AlbumServiceProvider(aRepo repository.AlbumRepository) *AlbumService {
 	return &AlbumService{aRepo: aRepo}
 }
 

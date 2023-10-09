@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type GenreService struct {
-	gRepo domain.GenreRepository
+	gRepo repository.GenreRepository
 }
 
-func GenreServiceProvider(gRepo domain.GenreRepository) *GenreService {
+func GenreServiceProvider(gRepo repository.GenreRepository) *GenreService {
 	return &GenreService{gRepo: gRepo}
 }
 

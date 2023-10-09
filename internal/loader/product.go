@@ -5,16 +5,16 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type ProductLoader struct {
-	pRepo domain.ProductRepository
+	pRepo repository2.ProductRepository
 }
 
 func ProductLoaderProvider(db *bun.DB) *ProductLoader {

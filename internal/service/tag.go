@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type TagService struct {
-	tRepo domain.TagRepository
+	tRepo repository.TagRepository
 }
 
-func TagServiceProvider(tRepo domain.TagRepository) *TagService {
+func TagServiceProvider(tRepo repository.TagRepository) *TagService {
 	return &TagService{tRepo: tRepo}
 }
 

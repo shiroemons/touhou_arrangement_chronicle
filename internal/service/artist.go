@@ -5,15 +5,15 @@ import (
 	"strings"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type ArtistService struct {
-	aRepo domain.ArtistRepository
+	aRepo repository.ArtistRepository
 }
 
-func ArtistServiceProvider(aRepo domain.ArtistRepository) *ArtistService {
+func ArtistServiceProvider(aRepo repository.ArtistRepository) *ArtistService {
 	return &ArtistService{aRepo: aRepo}
 }
 

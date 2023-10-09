@@ -5,15 +5,15 @@ import (
 	"strings"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleService struct {
-	cRepo domain.CircleRepository
+	cRepo repository.CircleRepository
 }
 
-func CircleServiceProvider(cRepo domain.CircleRepository) *CircleService {
+func CircleServiceProvider(cRepo repository.CircleRepository) *CircleService {
 	return &CircleService{cRepo: cRepo}
 }
 

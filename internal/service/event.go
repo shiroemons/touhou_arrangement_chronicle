@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type EventService struct {
-	eRepo domain.EventRepository
+	eRepo repository.EventRepository
 }
 
-func EventServiceProvider(eRepo domain.EventRepository) *EventService {
+func EventServiceProvider(eRepo repository.EventRepository) *EventService {
 	return &EventService{eRepo: eRepo}
 }
 

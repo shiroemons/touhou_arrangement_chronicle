@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type ProductService struct {
-	pRepo domain.ProductRepository
+	pRepo repository.ProductRepository
 }
 
-func ProductServiceProvider(pRepo domain.ProductRepository) *ProductService {
+func ProductServiceProvider(pRepo repository.ProductRepository) *ProductService {
 	return &ProductService{pRepo: pRepo}
 }
 

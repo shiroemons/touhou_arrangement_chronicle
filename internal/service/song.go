@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SongService struct {
-	sRepo domain.SongRepository
+	sRepo repository.SongRepository
 }
 
-func SongServiceProvider(sRepo domain.SongRepository) *SongService {
+func SongServiceProvider(sRepo repository.SongRepository) *SongService {
 	return &SongService{sRepo: sRepo}
 }
 
