@@ -17,7 +17,7 @@ import (
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/resolver"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infra/store"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/store"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/server"
