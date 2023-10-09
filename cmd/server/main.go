@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/blendle/zapdriver"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/app/service"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
@@ -21,7 +22,6 @@ import (
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/server"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/store"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"
 )
 
 // inject 関数は、アプリケーションの依存関係を注入します。
