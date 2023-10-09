@@ -6,6 +6,7 @@ import (
 	"github.com/gin-contrib/cors"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"github.com/uptrace/bun"
 	"go.uber.org/zap"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
@@ -21,10 +22,10 @@ type AppHandlers struct {
 }
 
 // AppHandlersProvider Fx Provider
-func AppHandlersProvider(module generated.Config, logger *zap.Logger, cfg config.Config, l *loader.Loaders) *AppHandlers {
+func AppHandlersProvider(module generated.Config, logger *zap.Logger, cfg config.Config, db *bun.DB) *AppHandlers {
 	return &AppHandlers{
 		Middlewares: []gin.HandlerFunc{
-			loader.Middleware(l),
+			loader.Middleware(db),
 			ginzap.GinzapWithConfig(logger, customGinzapConfig()),
 			ginzap.RecoveryWithZap(logger, true),
 			cors.New(customCorsConfig(cfg)),

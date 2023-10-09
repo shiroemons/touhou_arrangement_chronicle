@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type ProductLoader struct {
 	pRepo domain.ProductRepository
 }
 
-func ProductLoaderProvider(pRepo domain.ProductRepository) *ProductLoader {
+func ProductLoaderProvider(db *bun.DB) *ProductLoader {
+	pRepo := repository.NewProductRepository(db)
 	return &ProductLoader{pRepo: pRepo}
 }
 

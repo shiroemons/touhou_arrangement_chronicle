@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type SongLoader struct {
 	sRepo domain.SongRepository
 }
 
-func SongLoaderProvider(sRepo domain.SongRepository) *SongLoader {
+func SongLoaderProvider(db *bun.DB) *SongLoader {
+	sRepo := repository.NewSongRepository(db)
 	return &SongLoader{sRepo: sRepo}
 }
 

@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type EventLoader struct {
 	eRepo domain.EventRepository
 }
 
-func EventLoaderProvider(eRepo domain.EventRepository) *EventLoader {
+func EventLoaderProvider(db *bun.DB) *EventLoader {
+	eRepo := repository.NewEventRepository(db)
 	return &EventLoader{eRepo: eRepo}
 }
 
