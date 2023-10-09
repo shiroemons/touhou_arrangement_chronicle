@@ -7,8 +7,7 @@ import (
 	"os"
 
 	"github.com/gocarina/gocsv"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type CircleCSV struct {
@@ -31,12 +30,12 @@ func (imp *Importer) importCircles() {
 		log.Fatal(err)
 	}
 
-	var circles []entity.Circle
+	var circles []schema.Circle
 	for _, line := range lines {
-		circle := entity.Circle{}
+		circle := schema.Circle{}
 		err = imp.db.NewSelect().Model(&circle).Where("name = ?", line.CircleName).Limit(1).Scan(imp.ctx)
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
-			c := entity.Circle{
+			c := schema.Circle{
 				Name: line.CircleName,
 			}
 			if line.URL != "" {

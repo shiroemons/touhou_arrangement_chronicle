@@ -7,8 +7,7 @@ import (
 	"os"
 
 	"github.com/gocarina/gocsv"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type ArtistCSV struct {
@@ -30,12 +29,12 @@ func (imp *Importer) importArtists() {
 		log.Fatal(err)
 	}
 
-	var artists []entity.Artist
+	var artists []schema.Artist
 	for _, line := range lines {
-		artist := entity.Artist{}
+		artist := schema.Artist{}
 		err = imp.db.NewSelect().Model(&artist).Where("name = ?", line.ArtistName).Limit(1).Scan(imp.ctx)
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
-			c := entity.Artist{
+			c := schema.Artist{
 				Name: line.ArtistName,
 			}
 			artists = append(artists, c)

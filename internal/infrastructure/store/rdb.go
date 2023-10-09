@@ -6,12 +6,12 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/config"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func NewDB(connString string) *bun.DB {
@@ -48,18 +48,18 @@ func PostgresProvider(cfg config.Config) *bun.DB {
 }
 
 func AddRegisterModels(db *bun.DB) {
-	db.RegisterModel((*entity.AlbumCircle)(nil))
-	db.RegisterModel((*entity.AlbumGenre)(nil))
-	db.RegisterModel((*entity.AlbumTag)(nil))
-	db.RegisterModel((*entity.CircleGenre)(nil))
-	db.RegisterModel((*entity.CircleTag)(nil))
-	db.RegisterModel((*entity.SongOriginalSong)(nil))
-	db.RegisterModel((*entity.SongArrangeCircle)(nil))
-	db.RegisterModel((*entity.SongArranger)(nil))
-	db.RegisterModel((*entity.SongComposer)(nil))
-	db.RegisterModel((*entity.SongLyricist)(nil))
-	db.RegisterModel((*entity.SongRearranger)(nil))
-	db.RegisterModel((*entity.SongVocalist)(nil))
-	db.RegisterModel((*entity.SongGenre)(nil))
-	db.RegisterModel((*entity.SongTag)(nil))
+	db.RegisterModel((*schema.AlbumCircle)(nil))
+	db.RegisterModel((*schema.AlbumGenre)(nil))
+	db.RegisterModel((*schema.AlbumTag)(nil))
+	db.RegisterModel((*schema.CircleGenre)(nil))
+	db.RegisterModel((*schema.CircleTag)(nil))
+	db.RegisterModel((*schema.SongOriginalSong)(nil))
+	db.RegisterModel((*schema.SongArrangeCircle)(nil))
+	db.RegisterModel((*schema.SongArranger)(nil))
+	db.RegisterModel((*schema.SongComposer)(nil))
+	db.RegisterModel((*schema.SongLyricist)(nil))
+	db.RegisterModel((*schema.SongRearranger)(nil))
+	db.RegisterModel((*schema.SongVocalist)(nil))
+	db.RegisterModel((*schema.SongGenre)(nil))
+	db.RegisterModel((*schema.SongTag)(nil))
 }

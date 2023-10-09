@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SubEventRepository struct {
@@ -16,7 +15,7 @@ func NewSubEventRepository(db *bun.DB) *SubEventRepository {
 	return &SubEventRepository{db: db}
 }
 
-func (r *SubEventRepository) Create(ctx context.Context, subEvent *entity.SubEvent) (*entity.SubEvent, error) {
+func (r *SubEventRepository) Create(ctx context.Context, subEvent *schema.SubEvent) (*schema.SubEvent, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(subEvent).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *SubEventRepository) Create(ctx context.Context, subEvent *entity.SubEve
 	return subEvent, nil
 }
 
-func (r *SubEventRepository) Update(ctx context.Context, subEvent *entity.SubEvent) (*entity.SubEvent, error) {
+func (r *SubEventRepository) Update(ctx context.Context, subEvent *schema.SubEvent) (*schema.SubEvent, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewUpdate().Model(subEvent).WherePK().Exec(ctx); err != nil {
@@ -44,7 +43,7 @@ func (r *SubEventRepository) Update(ctx context.Context, subEvent *entity.SubEve
 	return subEvent, nil
 }
 
-func (r *SubEventRepository) Delete(ctx context.Context, subEvent *entity.SubEvent) error {
+func (r *SubEventRepository) Delete(ctx context.Context, subEvent *schema.SubEvent) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(subEvent).WherePK().Exec(ctx); err != nil {
@@ -58,8 +57,8 @@ func (r *SubEventRepository) Delete(ctx context.Context, subEvent *entity.SubEve
 	return nil
 }
 
-func (r *SubEventRepository) FindByIDs(ctx context.Context, ids []string) (entity.SubEvents, error) {
-	subEvents := make(entity.SubEvents, 0)
+func (r *SubEventRepository) FindByIDs(ctx context.Context, ids []string) (schema.SubEvents, error) {
+	subEvents := make(schema.SubEvents, 0)
 	err := r.db.NewSelect().Model(&subEvents).
 		Where("se.id IN (?)", bun.In(ids)).
 		Scan(ctx)
@@ -70,8 +69,8 @@ func (r *SubEventRepository) FindByIDs(ctx context.Context, ids []string) (entit
 }
 
 // GetMapInIDs は、指定したIDのSubEventを取得します。
-func (r *SubEventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.SubEvent, error) {
-	subEvents := make([]*entity.SubEvent, 0)
+func (r *SubEventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.SubEvent, error) {
+	subEvents := make([]*schema.SubEvent, 0)
 	err := r.db.NewSelect().Model(&subEvents).
 		Where("id IN (?)", bun.In(ids)).
 		Scan(ctx)
@@ -79,7 +78,7 @@ func (r *SubEventRepository) GetMapInIDs(ctx context.Context, ids []string) (map
 		return nil, err
 	}
 
-	subEventMap := make(map[string]*entity.SubEvent, len(subEvents))
+	subEventMap := make(map[string]*schema.SubEvent, len(subEvents))
 	for _, v := range subEvents {
 		subEventMap[v.ID] = v
 	}

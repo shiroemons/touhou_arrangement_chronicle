@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleGenreRepository struct {
@@ -16,7 +15,7 @@ func NewCircleGenreRepository(db *bun.DB) *CircleGenreRepository {
 	return &CircleGenreRepository{db: db}
 }
 
-func (r *CircleGenreRepository) Add(ctx context.Context, genre *entity.CircleGenre) (*entity.CircleGenre, error) {
+func (r *CircleGenreRepository) Add(ctx context.Context, genre *schema.CircleGenre) (*schema.CircleGenre, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(genre).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *CircleGenreRepository) Add(ctx context.Context, genre *entity.CircleGen
 	return genre, nil
 }
 
-func (r *CircleGenreRepository) Remove(ctx context.Context, genre *entity.CircleGenre) error {
+func (r *CircleGenreRepository) Remove(ctx context.Context, genre *schema.CircleGenre) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(genre).WherePK().Exec(ctx); err != nil {

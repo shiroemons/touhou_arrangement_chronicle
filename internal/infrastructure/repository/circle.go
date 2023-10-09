@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleRepository struct {
@@ -16,7 +15,7 @@ func NewCircleRepository(db *bun.DB) *CircleRepository {
 	return &CircleRepository{db: db}
 }
 
-func (r *CircleRepository) Create(ctx context.Context, circle *entity.Circle) (*entity.Circle, error) {
+func (r *CircleRepository) Create(ctx context.Context, circle *schema.Circle) (*schema.Circle, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(circle).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *CircleRepository) Create(ctx context.Context, circle *entity.Circle) (*
 	return circle, nil
 }
 
-func (r *CircleRepository) Update(ctx context.Context, circle *entity.Circle) (*entity.Circle, error) {
+func (r *CircleRepository) Update(ctx context.Context, circle *schema.Circle) (*schema.Circle, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewUpdate().Model(circle).WherePK().Exec(ctx); err != nil {
@@ -44,7 +43,7 @@ func (r *CircleRepository) Update(ctx context.Context, circle *entity.Circle) (*
 	return circle, nil
 }
 
-func (r *CircleRepository) Delete(ctx context.Context, circle *entity.Circle) error {
+func (r *CircleRepository) Delete(ctx context.Context, circle *schema.Circle) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(circle).WherePK().Exec(ctx); err != nil {
@@ -58,8 +57,8 @@ func (r *CircleRepository) Delete(ctx context.Context, circle *entity.Circle) er
 	return nil
 }
 
-func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) (entity.Circles, error) {
-	circles := make(entity.Circles, 0)
+func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) (schema.Circles, error) {
+	circles := make(schema.Circles, 0)
 	err := r.db.NewSelect().Model(&circles).
 		Where("c.id IN (?)", bun.In(ids)).
 		Scan(ctx)
@@ -69,8 +68,8 @@ func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) (entity.
 	return circles, nil
 }
 
-func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType string) ([]*entity.Circle, error) {
-	var circles []*entity.Circle
+func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType string) ([]*schema.Circle, error) {
+	var circles []*schema.Circle
 
 	err := r.db.NewSelect().Model(&circles).
 		Where("initial_letter_type = ?", initialType).
@@ -83,15 +82,15 @@ func (r *CircleRepository) FindByInitialType(ctx context.Context, initialType st
 }
 
 // GetMapInIDs は、指定したIDのCircleを取得します。
-func (r *CircleRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Circle, error) {
-	circles := make([]*entity.Circle, 0)
+func (r *CircleRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Circle, error) {
+	circles := make([]*schema.Circle, 0)
 	err := r.db.NewSelect().Model(&circles).
 		Where("c.id IN (?)", bun.In(ids)).
 		Scan(ctx)
 	if err != nil {
 		return nil, err
 	}
-	circleMap := make(map[string]*entity.Circle, len(circles))
+	circleMap := make(map[string]*schema.Circle, len(circles))
 	for _, v := range circles {
 		circleMap[v.ID] = v
 	}

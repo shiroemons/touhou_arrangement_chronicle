@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SongRepository struct {
@@ -16,7 +15,7 @@ func NewSongRepository(db *bun.DB) *SongRepository {
 	return &SongRepository{db: db}
 }
 
-func (r *SongRepository) Create(ctx context.Context, song *entity.Song) (*entity.Song, error) {
+func (r *SongRepository) Create(ctx context.Context, song *schema.Song) (*schema.Song, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(song).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *SongRepository) Create(ctx context.Context, song *entity.Song) (*entity
 	return song, nil
 }
 
-func (r *SongRepository) Update(ctx context.Context, song *entity.Song) (*entity.Song, error) {
+func (r *SongRepository) Update(ctx context.Context, song *schema.Song) (*schema.Song, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewUpdate().Model(song).WherePK().Exec(ctx); err != nil {
@@ -44,7 +43,7 @@ func (r *SongRepository) Update(ctx context.Context, song *entity.Song) (*entity
 	return song, nil
 }
 
-func (r *SongRepository) Delete(ctx context.Context, song *entity.Song) error {
+func (r *SongRepository) Delete(ctx context.Context, song *schema.Song) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(song).WherePK().Exec(ctx); err != nil {
@@ -58,8 +57,8 @@ func (r *SongRepository) Delete(ctx context.Context, song *entity.Song) error {
 	return nil
 }
 
-func (r *SongRepository) FindByIDs(ctx context.Context, ids []string) (entity.Songs, error) {
-	songs := make(entity.Songs, 0)
+func (r *SongRepository) FindByIDs(ctx context.Context, ids []string) (schema.Songs, error) {
+	songs := make(schema.Songs, 0)
 	err := r.db.NewSelect().Model(&songs).
 		Relation("SongDistributionServiceURLs").
 		Relation("SongISRCs").
@@ -81,8 +80,8 @@ func (r *SongRepository) FindByIDs(ctx context.Context, ids []string) (entity.So
 }
 
 // GetMapInIDs は、指定したIDの曲を取得します。
-func (r *SongRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Song, error) {
-	songs := make([]*entity.Song, 0)
+func (r *SongRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Song, error) {
+	songs := make([]*schema.Song, 0)
 	err := r.db.NewSelect().Model(&songs).
 		Relation("SongDistributionServiceURLs").
 		Relation("SongISRCs").
@@ -101,7 +100,7 @@ func (r *SongRepository) GetMapInIDs(ctx context.Context, ids []string) (map[str
 		return nil, err
 	}
 
-	songMap := make(map[string]*entity.Song, len(songs))
+	songMap := make(map[string]*schema.Song, len(songs))
 	for _, v := range songs {
 		songMap[v.ID] = v
 	}

@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type AlbumTagRepository struct {
@@ -16,7 +15,7 @@ func NewAlbumTagRepository(db *bun.DB) *AlbumTagRepository {
 	return &AlbumTagRepository{db: db}
 }
 
-func (r *AlbumTagRepository) Add(ctx context.Context, tag *entity.AlbumTag) (*entity.AlbumTag, error) {
+func (r *AlbumTagRepository) Add(ctx context.Context, tag *schema.AlbumTag) (*schema.AlbumTag, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(tag).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *AlbumTagRepository) Add(ctx context.Context, tag *entity.AlbumTag) (*en
 	return tag, nil
 }
 
-func (r *AlbumTagRepository) Remove(ctx context.Context, tag *entity.AlbumTag) error {
+func (r *AlbumTagRepository) Remove(ctx context.Context, tag *schema.AlbumTag) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(tag).WherePK().Exec(ctx); err != nil {

@@ -3,10 +3,10 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type AlbumGenreRepository interface {
-	Add(ctx context.Context, genre *entity.AlbumGenre) (*entity.AlbumGenre, error)
-	Remove(ctx context.Context, genre *entity.AlbumGenre) error
+	Add(ctx context.Context, genre *schema.AlbumGenre) (*schema.AlbumGenre, error)
+	Remove(ctx context.Context, genre *schema.AlbumGenre) error
 }

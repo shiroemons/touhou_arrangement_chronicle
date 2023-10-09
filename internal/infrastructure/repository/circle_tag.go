@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleTagRepository struct {
@@ -16,7 +15,7 @@ func NewCircleTagRepository(db *bun.DB) *CircleTagRepository {
 	return &CircleTagRepository{db: db}
 }
 
-func (r *CircleTagRepository) Add(ctx context.Context, tag *entity.CircleTag) (*entity.CircleTag, error) {
+func (r *CircleTagRepository) Add(ctx context.Context, tag *schema.CircleTag) (*schema.CircleTag, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(tag).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *CircleTagRepository) Add(ctx context.Context, tag *entity.CircleTag) (*
 	return tag, nil
 }
 
-func (r *CircleTagRepository) Remove(ctx context.Context, tag *entity.CircleTag) error {
+func (r *CircleTagRepository) Remove(ctx context.Context, tag *schema.CircleTag) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(tag).WherePK().Exec(ctx); err != nil {

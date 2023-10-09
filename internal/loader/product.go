@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type ProductLoader struct {
@@ -22,20 +22,20 @@ func ProductLoaderProvider(db *bun.DB) *ProductLoader {
 	return &ProductLoader{pRepo: pRepo}
 }
 
-func (l *ProductLoader) BatchGetProducts(ctx context.Context, keys []string) []*dataloader.Result[*entity.Product] {
+func (l *ProductLoader) BatchGetProducts(ctx context.Context, keys []string) []*dataloader.Result[*schema.Product] {
 	productByID, err := l.pRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result[*entity.Product], len(keys))
+	output := make([]*dataloader.Result[*schema.Product], len(keys))
 	for index, key := range keys {
 		product, ok := productByID[key]
 		if ok {
-			output[index] = &dataloader.Result[*entity.Product]{Data: product, Error: nil}
+			output[index] = &dataloader.Result[*schema.Product]{Data: product, Error: nil}
 		} else {
 			err = fmt.Errorf("product not found %s", key)
-			output[index] = &dataloader.Result[*entity.Product]{Data: nil, Error: err}
+			output[index] = &dataloader.Result[*schema.Product]{Data: nil, Error: err}
 		}
 	}
 	return output

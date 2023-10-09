@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SubEventLoader struct {
@@ -22,20 +22,20 @@ func SubEventLoaderProvider(db *bun.DB) *SubEventLoader {
 	return &SubEventLoader{seRepo: seRepo}
 }
 
-func (l *SubEventLoader) BatchGetSubEvents(ctx context.Context, keys []string) []*dataloader.Result[*entity.SubEvent] {
+func (l *SubEventLoader) BatchGetSubEvents(ctx context.Context, keys []string) []*dataloader.Result[*schema.SubEvent] {
 	subEventByID, err := l.seRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result[*entity.SubEvent], len(keys))
+	output := make([]*dataloader.Result[*schema.SubEvent], len(keys))
 	for index, key := range keys {
 		subEvent, ok := subEventByID[key]
 		if ok {
-			output[index] = &dataloader.Result[*entity.SubEvent]{Data: subEvent, Error: nil}
+			output[index] = &dataloader.Result[*schema.SubEvent]{Data: subEvent, Error: nil}
 		} else {
 			err = fmt.Errorf("subEvent not found %s", key)
-			output[index] = &dataloader.Result[*entity.SubEvent]{Data: nil, Error: err}
+			output[index] = &dataloader.Result[*schema.SubEvent]{Data: nil, Error: err}
 		}
 	}
 	return output

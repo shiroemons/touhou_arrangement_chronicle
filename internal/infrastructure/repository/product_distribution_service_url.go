@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type ProductDistributionServiceURLRepository struct {
@@ -16,7 +15,7 @@ func NewProductDistributionServiceURLRepository(db *bun.DB) *ProductDistribution
 	return &ProductDistributionServiceURLRepository{db: db}
 }
 
-func (r *ProductDistributionServiceURLRepository) Add(ctx context.Context, serviceURL *entity.ProductDistributionServiceURL) (*entity.ProductDistributionServiceURL, error) {
+func (r *ProductDistributionServiceURLRepository) Add(ctx context.Context, serviceURL *schema.ProductDistributionServiceURL) (*schema.ProductDistributionServiceURL, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(serviceURL).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *ProductDistributionServiceURLRepository) Add(ctx context.Context, servi
 	return serviceURL, nil
 }
 
-func (r *ProductDistributionServiceURLRepository) Remove(ctx context.Context, serviceURL *entity.ProductDistributionServiceURL) error {
+func (r *ProductDistributionServiceURLRepository) Remove(ctx context.Context, serviceURL *schema.ProductDistributionServiceURL) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(serviceURL).WherePK().Exec(ctx); err != nil {

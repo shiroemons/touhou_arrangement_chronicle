@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type EventRepository struct {
@@ -16,7 +15,7 @@ func NewEventRepository(db *bun.DB) *EventRepository {
 	return &EventRepository{db: db}
 }
 
-func (r *EventRepository) Create(ctx context.Context, event *entity.Event) (*entity.Event, error) {
+func (r *EventRepository) Create(ctx context.Context, event *schema.Event) (*schema.Event, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(event).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *EventRepository) Create(ctx context.Context, event *entity.Event) (*ent
 	return event, nil
 }
 
-func (r *EventRepository) Update(ctx context.Context, event *entity.Event) (*entity.Event, error) {
+func (r *EventRepository) Update(ctx context.Context, event *schema.Event) (*schema.Event, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewUpdate().Model(event).WherePK().Exec(ctx); err != nil {
@@ -44,7 +43,7 @@ func (r *EventRepository) Update(ctx context.Context, event *entity.Event) (*ent
 	return event, nil
 }
 
-func (r *EventRepository) Delete(ctx context.Context, event *entity.Event) error {
+func (r *EventRepository) Delete(ctx context.Context, event *schema.Event) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(event).WherePK().Exec(ctx); err != nil {
@@ -58,8 +57,8 @@ func (r *EventRepository) Delete(ctx context.Context, event *entity.Event) error
 	return nil
 }
 
-func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) (entity.Events, error) {
-	events := make(entity.Events, 0)
+func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) (schema.Events, error) {
+	events := make(schema.Events, 0)
 	err := r.db.NewSelect().Model(&events).
 		Relation("EventSeries").
 		Where("e.id IN (?)", bun.In(ids)).
@@ -70,8 +69,8 @@ func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) (entity.E
 	return events, nil
 }
 
-func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {
-	events := make([]*entity.Event, 0)
+func (r *EventRepository) All(ctx context.Context) ([]*schema.Event, error) {
+	events := make([]*schema.Event, 0)
 	err := r.db.NewSelect().Model(&events).
 		Relation("SubEvents").
 		Order("event_dates DESC").
@@ -83,8 +82,8 @@ func (r *EventRepository) All(ctx context.Context) ([]*entity.Event, error) {
 }
 
 // GetMapInIDs returns a map of events that match the specified IDs.
-func (r *EventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.Event, error) {
-	events := make([]*entity.Event, 0)
+func (r *EventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Event, error) {
+	events := make([]*schema.Event, 0)
 	err := r.db.NewSelect().Model(&events).
 		Relation("EventSeries").
 		Where("e.id IN (?)", bun.In(ids)).
@@ -93,7 +92,7 @@ func (r *EventRepository) GetMapInIDs(ctx context.Context, ids []string) (map[st
 		return nil, err
 	}
 
-	eventMap := make(map[string]*entity.Event, len(events))
+	eventMap := make(map[string]*schema.Event, len(events))
 	for _, v := range events {
 		eventMap[v.ID] = v
 	}

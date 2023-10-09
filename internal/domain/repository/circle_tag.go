@@ -3,10 +3,10 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type CircleTagRepository interface {
-	Add(ctx context.Context, tag *entity.CircleTag) (*entity.CircleTag, error)
-	Remove(ctx context.Context, tag *entity.CircleTag) error
+	Add(ctx context.Context, tag *schema.CircleTag) (*schema.CircleTag, error)
+	Remove(ctx context.Context, tag *schema.CircleTag) error
 }

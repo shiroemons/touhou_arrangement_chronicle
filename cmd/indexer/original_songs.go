@@ -7,9 +7,8 @@ import (
 
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func setupOriginalSongs(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {
@@ -37,8 +36,8 @@ func getOriginalSongDocs(ctx context.Context, db *bun.DB) []map[string]interface
 	return documents
 }
 
-func getOriginalSongs(ctx context.Context, db *bun.DB) []*entity.OriginalSong {
-	originalSongs := make([]*entity.OriginalSong, 0)
+func getOriginalSongs(ctx context.Context, db *bun.DB) []*schema.OriginalSong {
+	originalSongs := make([]*schema.OriginalSong, 0)
 	err := db.NewSelect().Model(&originalSongs).
 		Relation("Product").
 		Relation("Product.ProductDistributionServiceURLs").
@@ -52,7 +51,7 @@ func getOriginalSongs(ctx context.Context, db *bun.DB) []*entity.OriginalSong {
 	return originalSongs
 }
 
-func osDocConverter(song *entity.OriginalSong) map[string]interface{} {
+func osDocConverter(song *schema.OriginalSong) map[string]interface{} {
 	var pServiceURLs []map[string]interface{}
 	if song.Product.ProductDistributionServiceURLs != nil {
 		for _, pdsu := range song.Product.ProductDistributionServiceURLs {

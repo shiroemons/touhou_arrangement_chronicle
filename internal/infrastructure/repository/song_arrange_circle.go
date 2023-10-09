@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SongArrangeCircleRepository struct {
@@ -16,7 +15,7 @@ func NewSongArrangeCircleRepository(db *bun.DB) *SongArrangeCircleRepository {
 	return &SongArrangeCircleRepository{db: db}
 }
 
-func (r *SongArrangeCircleRepository) Add(ctx context.Context, circle *entity.SongArrangeCircle) (*entity.SongArrangeCircle, error) {
+func (r *SongArrangeCircleRepository) Add(ctx context.Context, circle *schema.SongArrangeCircle) (*schema.SongArrangeCircle, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(circle).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *SongArrangeCircleRepository) Add(ctx context.Context, circle *entity.So
 	return circle, nil
 }
 
-func (r *SongArrangeCircleRepository) Remove(ctx context.Context, circle *entity.SongArrangeCircle) error {
+func (r *SongArrangeCircleRepository) Remove(ctx context.Context, circle *schema.SongArrangeCircle) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(circle).WherePK().Exec(ctx); err != nil {

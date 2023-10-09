@@ -8,8 +8,7 @@ import (
 	"github.com/gocarina/gocsv"
 	"github.com/jackc/pgtype"
 	"github.com/lucsky/cuid"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type EventCSV struct {
@@ -53,9 +52,9 @@ func (imp *Importer) importEvents() {
 }
 
 func (imp *Importer) insertEventSeries(lines []EventCSV) {
-	var eventSeries []entity.EventSeries
+	var eventSeries []schema.EventSeries
 	for _, line := range lines {
-		eSeries := new(entity.EventSeries)
+		eSeries := new(schema.EventSeries)
 		err := imp.db.NewSelect().Model(eSeries).
 			Where("name = ?", line.EventSeriesName).
 			Limit(1).
@@ -64,7 +63,7 @@ func (imp *Importer) insertEventSeries(lines []EventCSV) {
 			continue
 		}
 
-		es := entity.EventSeries{
+		es := schema.EventSeries{
 			ID:          cuid.New(),
 			Name:        line.EventSeriesName,
 			DisplayName: line.EventSeriesName,
@@ -85,9 +84,9 @@ func (imp *Importer) insertEventSeries(lines []EventCSV) {
 }
 
 func (imp *Importer) insertEvents(lines []EventCSV) {
-	var events []entity.Event
+	var events []schema.Event
 	for _, line := range lines {
-		eSeries := new(entity.EventSeries)
+		eSeries := new(schema.EventSeries)
 		err := imp.db.NewSelect().Model(eSeries).
 			Where("name = ?", line.EventSeriesName).
 			Limit(1).
@@ -97,7 +96,7 @@ func (imp *Importer) insertEvents(lines []EventCSV) {
 			continue
 		}
 
-		e := entity.Event{
+		e := schema.Event{
 			ID:            cuid.New(),
 			EventSeriesID: eSeries.ID,
 			Name:          line.EventName,

@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type CircleLoader struct {
@@ -22,20 +22,20 @@ func CircleLoaderProvider(db *bun.DB) *CircleLoader {
 	return &CircleLoader{cRepo: cRepo}
 }
 
-func (l *CircleLoader) BatchGetCircles(ctx context.Context, keys []string) []*dataloader.Result[*entity.Circle] {
+func (l *CircleLoader) BatchGetCircles(ctx context.Context, keys []string) []*dataloader.Result[*schema.Circle] {
 	circleByID, err := l.cRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result[*entity.Circle], len(keys))
+	output := make([]*dataloader.Result[*schema.Circle], len(keys))
 	for index, key := range keys {
 		circle, ok := circleByID[key]
 		if ok {
-			output[index] = &dataloader.Result[*entity.Circle]{Data: circle, Error: nil}
+			output[index] = &dataloader.Result[*schema.Circle]{Data: circle, Error: nil}
 		} else {
 			err = fmt.Errorf("circle not found %s", key)
-			output[index] = &dataloader.Result[*entity.Circle]{Data: nil, Error: err}
+			output[index] = &dataloader.Result[*schema.Circle]{Data: nil, Error: err}
 		}
 	}
 	return output

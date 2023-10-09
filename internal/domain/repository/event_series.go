@@ -3,14 +3,14 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type EventSeriesRepository interface {
-	Create(ctx context.Context, eventSeries *entity.EventSeries) (*entity.EventSeries, error)
-	Update(ctx context.Context, eventSeries *entity.EventSeries) (*entity.EventSeries, error)
-	Delete(ctx context.Context, eventSeries *entity.EventSeries) error
-	FindByIDs(ctx context.Context, ids []string) (entity.EventSeriesArr, error)
-	All(ctx context.Context) ([]*entity.EventSeries, error)
-	GetMapInIDs(ctx context.Context, ids []string) (map[string]*entity.EventSeries, error)
+	Create(ctx context.Context, eventSeries *schema.EventSeries) (*schema.EventSeries, error)
+	Update(ctx context.Context, eventSeries *schema.EventSeries) (*schema.EventSeries, error)
+	Delete(ctx context.Context, eventSeries *schema.EventSeries) error
+	FindByIDs(ctx context.Context, ids []string) (schema.EventSeriesArr, error)
+	All(ctx context.Context) ([]*schema.EventSeries, error)
+	GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.EventSeries, error)
 }

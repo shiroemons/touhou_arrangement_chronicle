@@ -11,10 +11,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
 	"golang.org/x/exp/slices"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type Album struct {
@@ -98,7 +97,7 @@ func (imp *Importer) importAlbums() {
 	log.Println("finish albums import.")
 }
 
-func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album, vTag, tTag *entity.Tag) error {
+func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album, vTag, tTag *schema.Tag) error {
 	if len(albums) == 0 {
 		return nil
 	}
@@ -164,8 +163,8 @@ func importAlbumsData(ctx context.Context, db *bun.DB, albums []Album, vTag, tTa
 	return nil
 }
 
-func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album, bool, error) {
-	existing := new(entity.Album)
+func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*schema.Album, bool, error) {
+	existing := new(schema.Album)
 	err := db.NewSelect().
 		Model(existing).
 		Relation("Circles").
@@ -187,7 +186,7 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 		return nil, false, err
 	}
 
-	var event *entity.Event
+	var event *schema.Event
 	if al.Event.Name != "" {
 		event, err = FindEventByName(ctx, db, al.Event.Name)
 		if err != nil {
@@ -195,7 +194,7 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 		}
 	}
 
-	album := &entity.Album{
+	album := &schema.Album{
 		Name:              al.Name,
 		ReleaseCircleName: al.Circle.Name,
 	}
@@ -223,8 +222,8 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*entity.Album
 	return album, false, nil
 }
 
-func FindEventByName(ctx context.Context, db *bun.DB, name string) (*entity.Event, error) {
-	event := new(entity.Event)
+func FindEventByName(ctx context.Context, db *bun.DB, name string) (*schema.Event, error) {
+	event := new(schema.Event)
 	err := db.NewSelect().Model(event).Where("name = ?", name).Limit(1).Scan(ctx)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -235,7 +234,7 @@ func FindEventByName(ctx context.Context, db *bun.DB, name string) (*entity.Even
 	return event, nil
 }
 
-func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.Album, al Album) error {
+func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *schema.Album, al Album) error {
 	circle, err := FindCircleByName(ctx, db, al.Circle.Name)
 	if err != nil {
 		return err
@@ -261,7 +260,7 @@ func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.A
 				fmt.Println("Not Found circle:", name)
 				continue
 			}
-			albumCircle := &entity.AlbumCircle{
+			albumCircle := &schema.AlbumCircle{
 				AlbumID:  album.ID,
 				CircleID: circle.ID,
 			}
@@ -277,7 +276,7 @@ func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.A
 		return nil
 	}
 
-	albumCircle := &entity.AlbumCircle{
+	albumCircle := &schema.AlbumCircle{
 		AlbumID:  album.ID,
 		CircleID: circle.ID,
 	}
@@ -293,8 +292,8 @@ func createAlbumCirclesRelation(ctx context.Context, db *bun.DB, album *entity.A
 	return nil
 }
 
-func FindCircleByName(ctx context.Context, db *bun.DB, name string) (*entity.Circle, error) {
-	circle := new(entity.Circle)
+func FindCircleByName(ctx context.Context, db *bun.DB, name string) (*schema.Circle, error) {
+	circle := new(schema.Circle)
 	err := db.NewSelect().Model(circle).Where("name = ?", name).Limit(1).Scan(ctx)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -305,8 +304,8 @@ func FindCircleByName(ctx context.Context, db *bun.DB, name string) (*entity.Cir
 	return circle, nil
 }
 
-func createAlbumDistributionServiceURL(ctx context.Context, db *bun.DB, album *entity.Album, link Link) error {
-	albumDS := &entity.AlbumDistributionServiceURL{
+func createAlbumDistributionServiceURL(ctx context.Context, db *bun.DB, album *schema.Album, link Link) error {
+	albumDS := &schema.AlbumDistributionServiceURL{
 		AlbumID: album.ID,
 		Service: link.Label,
 		URL:     link.URL,
@@ -322,8 +321,8 @@ func createAlbumDistributionServiceURL(ctx context.Context, db *bun.DB, album *e
 	return nil
 }
 
-func FindOrCreateSong(ctx context.Context, db *bun.DB, album *entity.Album, track Track) (*entity.Song, error) {
-	existing := new(entity.Song)
+func FindOrCreateSong(ctx context.Context, db *bun.DB, album *schema.Album, track Track) (*schema.Song, error) {
+	existing := new(schema.Song)
 	err := db.NewSelect().
 		Model(existing).
 		Relation("OriginalSongs").
@@ -345,7 +344,7 @@ func FindOrCreateSong(ctx context.Context, db *bun.DB, album *entity.Album, trac
 		return nil, err
 	}
 
-	song := &entity.Song{
+	song := &schema.Song{
 		Name:        track.Name,
 		AlbumID:     album.ID,
 		DiscNumber:  track.DiscNumber,
@@ -365,7 +364,7 @@ func FindOrCreateSong(ctx context.Context, db *bun.DB, album *entity.Album, trac
 	return song, nil
 }
 
-func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Song, track Track) error {
+func createSongArtistRelations(ctx context.Context, db *bun.DB, song *schema.Song, track Track) error {
 	if len(song.Vocalists) != len(track.Vocalists) {
 		for _, vocalist := range track.Vocalists {
 			if vocalist.Name != "" {
@@ -377,7 +376,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found vocalist artist:", vocalist.Name)
 					return nil
 				}
-				songArtist := &entity.SongVocalist{
+				songArtist := &schema.SongVocalist{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -403,7 +402,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found arranger artist:", arranger.Name)
 					return nil
 				}
-				songArtist := &entity.SongArranger{
+				songArtist := &schema.SongArranger{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -429,7 +428,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found lyricist artist:", lyricist.Name)
 					return nil
 				}
-				songArtist := &entity.SongLyricist{
+				songArtist := &schema.SongLyricist{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -484,7 +483,7 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 					fmt.Println("Not Found composer artist:", composer)
 					return nil
 				}
-				songArtist := &entity.SongComposer{
+				songArtist := &schema.SongComposer{
 					SongID:   song.ID,
 					ArtistID: artist.ID,
 				}
@@ -502,8 +501,8 @@ func createSongArtistRelations(ctx context.Context, db *bun.DB, song *entity.Son
 	return nil
 }
 
-func FindArtistByName(ctx context.Context, db *bun.DB, name string) (*entity.Artist, error) {
-	artist := new(entity.Artist)
+func FindArtistByName(ctx context.Context, db *bun.DB, name string) (*schema.Artist, error) {
+	artist := new(schema.Artist)
 	err := db.NewSelect().Model(artist).Where("name = ?", name).Limit(1).Scan(ctx)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -514,7 +513,7 @@ func FindArtistByName(ctx context.Context, db *bun.DB, name string) (*entity.Art
 	return artist, nil
 }
 
-func createSongOriginalSongRelations(ctx context.Context, db *bun.DB, song *entity.Song, track Track) error {
+func createSongOriginalSongRelations(ctx context.Context, db *bun.DB, song *schema.Song, track Track) error {
 	if len(song.OriginalSongs) != len(track.OriginalSongs) {
 		for _, originalSong := range track.OriginalSongs {
 			if originalSong.Title != "" {
@@ -539,7 +538,7 @@ func createSongOriginalSongRelations(ctx context.Context, db *bun.DB, song *enti
 						return nil
 					}
 				}
-				songOS := &entity.SongOriginalSong{
+				songOS := &schema.SongOriginalSong{
 					SongID:         song.ID,
 					OriginalSongID: oSong.ID,
 				}
@@ -556,8 +555,8 @@ func createSongOriginalSongRelations(ctx context.Context, db *bun.DB, song *enti
 	return nil
 }
 
-func FindOriginalSongByName(ctx context.Context, db *bun.DB, name string, isOriginal bool) (*entity.OriginalSong, error) {
-	originalSong := new(entity.OriginalSong)
+func FindOriginalSongByName(ctx context.Context, db *bun.DB, name string, isOriginal bool) (*schema.OriginalSong, error) {
+	originalSong := new(schema.OriginalSong)
 	err := db.NewSelect().Model(originalSong).Where("name = ? and is_original = ?", name, isOriginal).Limit(1).Scan(ctx)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -568,8 +567,8 @@ func FindOriginalSongByName(ctx context.Context, db *bun.DB, name string, isOrig
 	return originalSong, nil
 }
 
-func FindTagByName(ctx context.Context, db *bun.DB, name string) (*entity.Tag, error) {
-	event := new(entity.Tag)
+func FindTagByName(ctx context.Context, db *bun.DB, name string) (*schema.Tag, error) {
+	event := new(schema.Tag)
 	err := db.NewSelect().Model(event).Where("name = ?", name).Limit(1).Scan(ctx)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -580,9 +579,9 @@ func FindTagByName(ctx context.Context, db *bun.DB, name string) (*entity.Tag, e
 	return event, nil
 }
 
-func createAlbumTag(ctx context.Context, db *bun.DB, album *entity.Album, tag *entity.Tag) error {
+func createAlbumTag(ctx context.Context, db *bun.DB, album *schema.Album, tag *schema.Tag) error {
 	if album != nil && tag != nil {
-		albumTag := &entity.AlbumTag{
+		albumTag := &schema.AlbumTag{
 			AlbumID: album.ID,
 			TagID:   tag.ID,
 		}
@@ -597,9 +596,9 @@ func createAlbumTag(ctx context.Context, db *bun.DB, album *entity.Album, tag *e
 	return nil
 }
 
-func createSongTag(ctx context.Context, db *bun.DB, song *entity.Song, tag *entity.Tag) error {
+func createSongTag(ctx context.Context, db *bun.DB, song *schema.Song, tag *schema.Tag) error {
 	if song != nil && tag != nil {
-		songTag := &entity.SongTag{
+		songTag := &schema.SongTag{
 			SongID: song.ID,
 			TagID:  tag.ID,
 		}

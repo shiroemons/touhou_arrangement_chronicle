@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type AlbumConsignmentShopRepository struct {
@@ -16,7 +15,7 @@ func NewAlbumConsignmentShopRepository(db *bun.DB) *AlbumConsignmentShopReposito
 	return &AlbumConsignmentShopRepository{db: db}
 }
 
-func (r *AlbumConsignmentShopRepository) Add(ctx context.Context, shop *entity.AlbumConsignmentShop) (*entity.AlbumConsignmentShop, error) {
+func (r *AlbumConsignmentShopRepository) Add(ctx context.Context, shop *schema.AlbumConsignmentShop) (*schema.AlbumConsignmentShop, error) {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewInsert().Model(shop).Exec(ctx); err != nil {
@@ -30,7 +29,7 @@ func (r *AlbumConsignmentShopRepository) Add(ctx context.Context, shop *entity.A
 	return shop, nil
 }
 
-func (r *AlbumConsignmentShopRepository) Remove(ctx context.Context, shop *entity.AlbumConsignmentShop) error {
+func (r *AlbumConsignmentShopRepository) Remove(ctx context.Context, shop *schema.AlbumConsignmentShop) error {
 	tx, ok := ctx.Value(TxCtxKey).(*bun.Tx)
 	if ok {
 		if _, err := tx.NewDelete().Model(shop).WherePK().Exec(ctx); err != nil {

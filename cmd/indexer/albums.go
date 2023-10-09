@@ -8,9 +8,8 @@ import (
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/samber/lo"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 func setupAlbums(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {
@@ -38,8 +37,8 @@ func getAlbumDocs(ctx context.Context, db *bun.DB) []map[string]interface{} {
 	return documents
 }
 
-func getAlbums(ctx context.Context, db *bun.DB) []*entity.Album {
-	albums := make([]*entity.Album, 0)
+func getAlbums(ctx context.Context, db *bun.DB) []*schema.Album {
+	albums := make([]*schema.Album, 0)
 	err := db.NewSelect().Model(&albums).
 		Relation("Event").
 		Relation("SubEvent").
@@ -59,7 +58,7 @@ func getAlbums(ctx context.Context, db *bun.DB) []*entity.Album {
 	return albums
 }
 
-func albumDocConverter(album *entity.Album) map[string]interface{} {
+func albumDocConverter(album *schema.Album) map[string]interface{} {
 	var serviceURLs []map[string]interface{}
 	if album.AlbumDistributionServiceURLs != nil {
 		for _, dsu := range album.AlbumDistributionServiceURLs {
@@ -96,7 +95,7 @@ func albumDocConverter(album *entity.Album) map[string]interface{} {
 	}
 }
 
-func convertAlbumTags(tags []*entity.AlbumTag) []map[string]interface{} {
+func convertAlbumTags(tags []*schema.AlbumTag) []map[string]interface{} {
 	if len(tags) == 0 {
 		return nil
 	}
@@ -110,7 +109,7 @@ func convertAlbumTags(tags []*entity.AlbumTag) []map[string]interface{} {
 	return maps
 }
 
-func convertAlbumGenres(genres []*entity.AlbumGenre) []map[string]interface{} {
+func convertAlbumGenres(genres []*schema.AlbumGenre) []map[string]interface{} {
 	if len(genres) == 0 {
 		return nil
 	}

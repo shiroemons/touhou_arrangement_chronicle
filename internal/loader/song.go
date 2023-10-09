@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type SongLoader struct {
@@ -22,20 +22,20 @@ func SongLoaderProvider(db *bun.DB) *SongLoader {
 	return &SongLoader{sRepo: sRepo}
 }
 
-func (l *SongLoader) BatchGetSongs(ctx context.Context, keys []string) []*dataloader.Result[*entity.Song] {
+func (l *SongLoader) BatchGetSongs(ctx context.Context, keys []string) []*dataloader.Result[*schema.Song] {
 	songByID, err := l.sRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result[*entity.Song], len(keys))
+	output := make([]*dataloader.Result[*schema.Song], len(keys))
 	for index, key := range keys {
 		song, ok := songByID[key]
 		if ok {
-			output[index] = &dataloader.Result[*entity.Song]{Data: song, Error: nil}
+			output[index] = &dataloader.Result[*schema.Song]{Data: song, Error: nil}
 		} else {
 			err = fmt.Errorf("song not found %s", key)
-			output[index] = &dataloader.Result[*entity.Song]{Data: nil, Error: err}
+			output[index] = &dataloader.Result[*schema.Song]{Data: nil, Error: err}
 		}
 	}
 	return output
