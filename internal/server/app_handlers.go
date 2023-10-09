@@ -11,7 +11,7 @@ import (
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/config"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/loader"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/middleware"
 )
 
 // AppHandlers / Controller
@@ -25,7 +25,7 @@ type AppHandlers struct {
 func AppHandlersProvider(module generated.Config, logger *zap.Logger, cfg config.Config, db *bun.DB) *AppHandlers {
 	return &AppHandlers{
 		Middlewares: []gin.HandlerFunc{
-			loader.Middleware(db),
+			middleware.LoaderMiddleware(db),
 			ginzap.GinzapWithConfig(logger, customGinzapConfig()),
 			ginzap.RecoveryWithZap(logger, true),
 			cors.New(customCorsConfig(cfg)),

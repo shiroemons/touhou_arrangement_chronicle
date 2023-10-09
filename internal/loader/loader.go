@@ -1,9 +1,12 @@
 package loader
 
 import (
+	"context"
+
 	"github.com/graph-gophers/dataloader/v7"
 	"go.uber.org/fx"
 
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/ctxkey"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
@@ -39,4 +42,8 @@ func LoadersProvider(p Params) *Loaders {
 		sLoader:  dataloader.NewBatchedLoader(p.SongLoader.BatchGetSongs),
 		cLoader:  dataloader.NewBatchedLoader(p.CircleLoader.BatchGetCircles),
 	}
+}
+
+func GetLoaders(ctx context.Context) *Loaders {
+	return ctx.Value(ctxkey.LoadersKey).(*Loaders)
 }
