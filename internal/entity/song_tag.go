@@ -11,7 +11,7 @@ import (
 type SongTag struct {
 	bun.BaseModel `bun:"table:songs_tags,alias:st"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	SongID    string    `bun:"song_id,nullzero,notnull"`
 	Song      *Song     `bun:"rel:belongs-to,join:song_id=id"`
 	TagID     string    `bun:"tag_id,nullzero,notnull"`

@@ -12,7 +12,7 @@ import (
 type AlbumConsignmentShop struct {
 	bun.BaseModel `bun:"table:album_consignment_shops,alias:alcs"`
 
-	ID          string              `bun:",pk,default:xid()"`
+	ID          string              `bun:",pk,default:cuid()"`
 	AlbumID     string              `bun:"album_id,nullzero,notnull"`
 	Shop        string              `bun:"shop,nullzero,notnull"`
 	URL         string              `bun:"url,nullzero,notnull"`

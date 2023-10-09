@@ -11,7 +11,7 @@ import (
 type EventSeries struct {
 	bun.BaseModel `bun:"table:event_series,alias:es"`
 
-	ID          string    `bun:",pk,default:xid()"`
+	ID          string    `bun:",pk,default:cuid()"`
 	Name        string    `bun:"name,nullzero,notnull,unique"`
 	DisplayName string    `bun:"display_name,nullzero,notnull"`
 	Slug        string    `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`

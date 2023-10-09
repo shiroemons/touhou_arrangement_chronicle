@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  | ID |
+| id | text | cuid() | false |  |  | ID |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック、false: アンロック) |

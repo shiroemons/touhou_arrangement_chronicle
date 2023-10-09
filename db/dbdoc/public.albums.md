@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
+| id | text | cuid() | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text | ''::text | false |  |  | 名前読み方 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |

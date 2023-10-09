@@ -12,7 +12,7 @@ import (
 type OriginalSongDistributionServiceURL struct {
 	bun.BaseModel `bun:"table:original_song_distribution_service_urls,alias:osdsu"`
 
-	ID             string    `bun:",pk,default:xid()"`
+	ID             string    `bun:",pk,default:cuid()"`
 	OriginalSongID string    `bun:"original_song_id,nullzero,notnull"`
 	Service        string    `bun:"service,nullzero,notnull"`
 	URL            string    `bun:"url,nullzero,notnull"`

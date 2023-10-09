@@ -11,7 +11,7 @@ import (
 type AlbumDistributionServiceURL struct {
 	bun.BaseModel `bun:"table:album_distribution_service_urls,alias:aldsu"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	AlbumID   string    `bun:"album_id,nullzero,notnull"`
 	Service   string    `bun:"service,nullzero,notnull"`
 	URL       string    `bun:"url,nullzero,notnull"`

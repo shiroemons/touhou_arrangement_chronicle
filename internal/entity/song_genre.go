@@ -11,7 +11,7 @@ import (
 type SongGenre struct {
 	bun.BaseModel `bun:"table:songs_genres,alias:sg"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	SongID    string    `bun:"song_id,nullzero,notnull"`
 	Song      *Song     `bun:"rel:belongs-to,join:song_id=id"`
 	GenreID   string    `bun:"genre_id,nullzero,notnull"`

@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) [public.song_isrcs](public.song_isrcs.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) [public.songs_original_songs](public.songs_original_songs.md) [public.songs_circles](public.songs_circles.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) |  |  |
+| id | text | cuid() | false | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) [public.song_isrcs](public.song_isrcs.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) [public.songs_original_songs](public.songs_original_songs.md) [public.songs_circles](public.songs_circles.md) [public.songs_genres](public.songs_genres.md) [public.songs_tags](public.songs_tags.md) |  |  |
 | circle_id | text | ''::text | false |  |  | サークルID |
 | album_id | text | ''::text | false |  |  | アルバムID |
 | name | text |  | false |  |  | 名前 |

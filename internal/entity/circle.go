@@ -11,7 +11,7 @@ import (
 type Circle struct {
 	bun.BaseModel `bun:"table:circles,alias:c"`
 
-	ID                  string    `bun:",pk,default:xid()"`
+	ID                  string    `bun:",pk,default:cuid()"`
 	Name                string    `bun:"name,nullzero,notnull"`
 	NameReading         string    `bun:"name_reading,nullzero,notnull,default:''"`
 	Slug                string    `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`

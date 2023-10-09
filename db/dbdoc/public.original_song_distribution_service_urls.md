@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  |  |
+| id | text | cuid() | false |  |  |  |
 | original_song_id | text |  | false |  | [public.original_songs](public.original_songs.md) | 原曲ID |
 | service | distribution_service |  | false |  |  | 配信サービス |
 | url | text |  | false |  |  | URL |

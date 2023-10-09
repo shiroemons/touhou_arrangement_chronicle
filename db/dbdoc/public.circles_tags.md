@@ -8,7 +8,7 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | xid() | false |  |  | サークルID |
+| id | text | cuid() | false |  |  | サークルID |
 | circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked | boolean | false | false |  |  | ロック有無(true: ロック、false: アンロック) |

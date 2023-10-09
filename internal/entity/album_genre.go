@@ -10,7 +10,7 @@ import (
 type AlbumGenre struct {
 	bun.BaseModel `bun:"table:albums_genres,alias:alg"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	AlbumID   string    `bun:"album_id,nullzero,notnull"`
 	Album     *Album    `bun:"rel:belongs-to,join:album_id=id"`
 	GenreID   string    `bun:"genre_id,nullzero,notnull"`

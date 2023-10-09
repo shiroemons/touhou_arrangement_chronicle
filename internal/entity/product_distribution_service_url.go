@@ -12,7 +12,7 @@ import (
 type ProductDistributionServiceURL struct {
 	bun.BaseModel `bun:"table:product_distribution_service_urls,alias:pdsu"`
 
-	ID        string    `bun:",pk,default:xid()"`
+	ID        string    `bun:",pk,default:cuid()"`
 	ProductID string    `bun:"product_id,nullzero,notnull"`
 	Service   string    `bun:"service,nullzero,notnull"`
 	URL       string    `bun:"url,nullzero,notnull"`

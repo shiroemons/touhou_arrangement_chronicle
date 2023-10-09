@@ -62,7 +62,7 @@ create type distribution_service as enum (
 );
 
 create table product_distribution_service_urls (
-    id           text                     not null primary key default xid(),
+    id           text                     not null primary key default cuid(),
     product_id   text                     not null references products(id),
     service      distribution_service     not null,
     url          text                     not null,
@@ -78,7 +78,7 @@ comment on column product_distribution_service_urls.created_at is '作成日時'
 comment on column product_distribution_service_urls.updated_at is '更新日時';
 
 create table original_song_distribution_service_urls (
-    id               text                     not null primary key default xid(),
+    id               text                     not null primary key default cuid(),
     original_song_id text                     not null references original_songs(id),
     service          distribution_service     not null,
     url              text                     not null,
@@ -94,7 +94,7 @@ comment on column original_song_distribution_service_urls.created_at is '作成�
 comment on column original_song_distribution_service_urls.updated_at is '更新日時';
 
 create table event_series (
-    id           text                     not null primary key default xid(),
+    id           text                     not null primary key default cuid(),
     name         text                     not null unique,
     display_name text                     not null,
     slug         text                     not null unique default gen_random_uuid(),
@@ -124,7 +124,7 @@ create type event_format as enum (
 );
 
 create table events (
-    id              text                     not null primary key default xid(),
+    id              text                     not null primary key default cuid(),
     event_series_id text                     not null references event_series(id),
     name            text                     not null unique,
     display_name    text                     not null,
@@ -157,7 +157,7 @@ comment on column events.created_at is '作成日時';
 comment on column events.updated_at is '更新日時';
 
 create table sub_events (
-    id           text                     not null primary key default xid(),
+    id           text                     not null primary key default cuid(),
     event_id     text                     not null references events(id),
     name         text                     not null unique,
     display_name text                     not null,
@@ -190,7 +190,7 @@ create type initial_letter_type as enum (
 );
 
 create table artists (
-    id                    text                     not null primary key default xid(),
+    id                    text                     not null primary key default cuid(),
     name                  text                     not null,
     name_reading          text                     not null default '',
     slug                  text                     not null unique default gen_random_uuid(),
@@ -219,7 +219,7 @@ comment on column artists.created_at is '作成日時';
 comment on column artists.updated_at is '更新日時';
 
 create table circles (
-    id                    text                     not null primary key default xid(),
+    id                    text                     not null primary key default cuid(),
     name                  text                     not null,
     name_reading          text                     not null default '',
     slug                  text                     not null unique default gen_random_uuid(),
@@ -248,7 +248,7 @@ comment on column circles.created_at is '作成日時';
 comment on column circles.updated_at is '更新日時';
 
 create table albums (
-    id                    text                     not null primary key default xid(),
+    id                    text                     not null primary key default cuid(),
     name                  text                     not null,
     name_reading          text                     not null default '',
     slug                  text                     not null unique default gen_random_uuid(),
@@ -310,7 +310,7 @@ create type shop as enum (
 );
 
 create table album_consignment_shops (
-    id           text                     not null primary key default xid(),
+    id           text                     not null primary key default cuid(),
     album_id     text                     not null references albums(id),
     shop         shop                     not null,
     url          text                     not null,
@@ -331,7 +331,7 @@ comment on column album_consignment_shops.created_at is '作成日時';
 comment on column album_consignment_shops.updated_at is '更新日時';
 
 create table album_distribution_service_urls (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     service    distribution_service     not null,
     url        text                     not null,
@@ -347,7 +347,7 @@ comment on column album_distribution_service_urls.created_at is '作成日時';
 comment on column album_distribution_service_urls.updated_at is '更新日時';
 
 create table album_upcs (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     upc        text                     not null,
     created_at timestamp with time zone not null default current_timestamp,
@@ -361,7 +361,7 @@ comment on column album_upcs.created_at is '作成日時';
 comment on column album_upcs.updated_at is '更新日時';
 
 create table songs (
-    id                    text                     not null primary key default xid(),
+    id                    text                     not null primary key default cuid(),
     circle_id             text                     not null default '',
     album_id              text                     not null default '',
     name                  text                     not null,
@@ -406,7 +406,7 @@ comment on column songs.created_at is '作成日時';
 comment on column songs.updated_at is '更新日時';
 
 create table song_distribution_service_urls (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     service    distribution_service     not null,
     url        text                     not null,
@@ -422,7 +422,7 @@ comment on column song_distribution_service_urls.created_at is '作成日時';
 comment on column song_distribution_service_urls.updated_at is '更新日時';
 
 create table song_isrcs (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     isrc       text                     not null,
     created_at timestamp with time zone not null default current_timestamp,
@@ -540,7 +540,7 @@ comment on column songs_circles.created_at is '作成日時';
 comment on column songs_circles.updated_at is '更新日時';
 
 create table genres (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     name       text                     not null unique,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
@@ -559,7 +559,7 @@ create type tag_type as enum (
 );
 
 create table tags (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     name       text                     not null unique,
     tag_type   tag_type                 not null default 'unknown'::tag_type,
     created_at timestamp with time zone not null default current_timestamp,
@@ -573,7 +573,7 @@ comment on column tags.created_at is '作成日時';
 comment on column tags.updated_at is '更新日時';
 
 create table albums_genres (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     genre_id   text                     not null references genres(id),
     locked     bool                     not null default false,
@@ -590,7 +590,7 @@ comment on column albums_genres.created_at is '作成日時';
 comment on column albums_genres.updated_at is '更新日時';
 
 create table albums_tags (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     tag_id     text                     not null references tags(id),
     locked     bool                     not null default false,
@@ -607,7 +607,7 @@ comment on column albums_tags.created_at is '作成日時';
 comment on column albums_tags.updated_at is '更新日時';
 
 create table songs_genres (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     genre_id   text                     not null references genres(id),
     locked     bool                     not null default false,
@@ -624,7 +624,7 @@ comment on column songs_genres.created_at is '作成日時';
 comment on column songs_genres.updated_at is '更新日時';
 
 create table songs_tags (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     tag_id     text                     not null references tags(id),
     locked     bool                     not null default false,
@@ -641,7 +641,7 @@ comment on column songs_tags.created_at is '作成日時';
 comment on column songs_tags.updated_at is '更新日時';
 
 create table circles_genres (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     circle_id  text                     not null references circles(id),
     genre_id   text                     not null references genres(id),
     locked     bool                     not null default false,
@@ -658,7 +658,7 @@ comment on column circles_genres.created_at is '作成日時';
 comment on column circles_genres.updated_at is '更新日時';
 
 create table circles_tags (
-    id         text                     not null primary key default xid(),
+    id         text                     not null primary key default cuid(),
     circle_id  text                     not null references circles(id),
     tag_id     text                     not null references tags(id),
     locked     bool                     not null default false,
