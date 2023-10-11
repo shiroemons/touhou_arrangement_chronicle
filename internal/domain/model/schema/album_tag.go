@@ -15,7 +15,7 @@ type AlbumTag struct {
 	Album     *Album    `bun:"rel:belongs-to,join:album_id=id"`
 	TagID     string    `bun:"tag_id,nullzero,notnull"`
 	Tag       *Tag      `bun:"rel:belongs-to,join:tag_id=id"`
-	Locked    bool      `bun:"locked,nullzero,notnull,default:false"`
+	Locked    bool      `bun:"locked,notnull"`
 	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt time.Time `bun:"updated_at,notnull,default:current_timestamp"`
 }

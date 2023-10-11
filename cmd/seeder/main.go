@@ -35,9 +35,9 @@ type OriginalSong struct {
 	ProductID   string `csv:"product_id" bun:"product_id,nullzero,notnull"`
 	TrackNumber int    `csv:"track_number" bun:"track_number,nullzero,notnull"`
 	Name        string `csv:"name" bun:"name,nullzero,notnull"`
-	Composer    string `csv:"composer" bun:"composer,nullzero,notnull,default:''"`
-	Arranger    string `csv:"arranger" bun:"arranger,nullzero,notnull,default:''"`
-	SourceID    string `csv:"source_id" bun:"source_id,nullzero,notnull,default:''"`
+	Composer    string `csv:"composer" bun:"composer"`
+	Arranger    string `csv:"arranger" bun:"arranger"`
+	SourceID    string `csv:"source_id" bun:"source_id"`
 	Original    bool   `csv:"is_original" bun:"is_original,notnull"`
 }
 

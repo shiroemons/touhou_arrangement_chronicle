@@ -11,10 +11,8 @@ type CircleTag struct {
 
 	ID        string    `bun:",pk,default:cuid()"`
 	CircleID  string    `bun:"circle_id,nullzero,notnull"`
-	Circle    *Circle   `bun:"rel:belongs-to,join:circle_id=id"`
 	TagID     string    `bun:"tag_id,nullzero,notnull"`
-	Tag       *Tag      `bun:"rel:belongs-to,join:tag_id=id"`
-	Locked    bool      `bun:"locked,nullzero,notnull,default:false"`
+	Locked    bool      `bun:"locked,notnull"`
 	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt time.Time `bun:"updated_at,notnull,default:current_timestamp"`
 }

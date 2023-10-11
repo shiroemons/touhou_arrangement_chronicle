@@ -13,9 +13,9 @@ type Song struct {
 	bun.BaseModel `bun:"table:songs,alias:s"`
 
 	ID                          string                        `bun:",pk,default:cuid()"`
-	CircleID                    string                        `bun:"circle_id,nullzero,notnull,default:''"`
+	CircleID                    string                        `bun:"circle_id"`
 	Circle                      *Circle                       `bun:"rel:belongs-to,join:circle_id=id"`
-	AlbumID                     string                        `bun:"album_id,nullzero,notnull,default:''"`
+	AlbumID                     string                        `bun:"album_id"`
 	Album                       *Album                        `bun:"rel:belongs-to,join:album_id=id"`
 	Name                        string                        `bun:"name,nullzero,notnull"`
 	Slug                        string                        `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
@@ -25,13 +25,13 @@ type Song struct {
 	SearchEnabled               bool                          `bun:"search_enabled,nullzero,notnull,default:true"`
 	Length                      int                           `bun:"length,nullzero"`
 	BPM                         int                           `bun:"bpm,nullzero"`
-	Description                 string                        `bun:"description,nullzero,notnull,default:''"`
-	DisplayComposer             string                        `bun:"display_composer,nullzero,notnull,default:''"`
-	DisplayArranger             string                        `bun:"display_arranger,nullzero,notnull,default:''"`
-	DisplayRearranger           string                        `bun:"display_rearranger,nullzero,notnull,default:''"`
-	DisplayLyricist             string                        `bun:"display_lyricist,nullzero,notnull,default:''"`
-	DisplayVocalist             string                        `bun:"display_vocalist,nullzero,notnull,default:''"`
-	DisplayOriginalSong         string                        `bun:"display_original_song,nullzero,notnull,default:''"`
+	Description                 string                        `bun:"description"`
+	DisplayComposer             string                        `bun:"display_composer"`
+	DisplayArranger             string                        `bun:"display_arranger"`
+	DisplayRearranger           string                        `bun:"display_rearranger"`
+	DisplayLyricist             string                        `bun:"display_lyricist"`
+	DisplayVocalist             string                        `bun:"display_vocalist"`
+	DisplayOriginalSong         string                        `bun:"display_original_song"`
 	SongDistributionServiceURLs []*SongDistributionServiceURL `bun:"rel:has-many,join:id=song_id"`
 	SongISRCs                   []*SongISRC                   `bun:"rel:has-many,join:id=song_id"`
 	Genres                      []*SongGenre                  `bun:"rel:has-many,join:id=song_id"`

@@ -18,7 +18,7 @@ type SubEvent struct {
 	Slug        string     `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	EventDate   *time.Time `bun:"event_date,nullzero,notnull"`
 	EventStatus string     `bun:"event_status,nullzero,notnull,default:'scheduled'::event_status"`
-	Description string     `bun:"description,nullzero,notnull,default:''"`
+	Description string     `bun:"description"`
 	CreatedAt   time.Time  `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt   time.Time  `bun:"updated_at,notnull,default:current_timestamp"`
 }

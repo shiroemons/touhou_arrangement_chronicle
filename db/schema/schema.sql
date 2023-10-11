@@ -30,11 +30,11 @@ create table original_songs (
     id           text                     not null primary key,
     product_id   text                     not null references products(id),
     name         text                     not null,
-    composer     text                     not null default '',
-    arranger     text                     not null default '',
+    composer     text,
+    arranger     text,
     track_number integer                  not null,
     is_original  boolean                  not null default false,
-    source_id    text                     not null default '',
+    source_id    text,
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
@@ -133,10 +133,10 @@ create table events (
     event_status    event_status             not null default 'scheduled'::event_status,
     format          event_format             not null default 'offline'::event_format,
     region_code     text                     not null default 'JP',
-    address         text                     not null default '',
-    description     text                     not null default '',
-    url             text                     not null default '',
-    twitter_url     text                     not null default '',
+    address         text,
+    description     text,
+    url             text,
+    twitter_url     text,
     created_at      timestamp with time zone not null default current_timestamp,
     updated_at      timestamp with time zone not null default current_timestamp
 );
@@ -164,7 +164,7 @@ create table sub_events (
     slug         text                     not null unique default gen_random_uuid(),
     event_date   date,
     event_status event_status             not null default 'scheduled'::event_status,
-    description  text                     not null default '',
+    description  text,
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
@@ -192,15 +192,15 @@ create type initial_letter_type as enum (
 create table artists (
     id                    text                     not null primary key default cuid(),
     name                  text                     not null,
-    name_reading          text                     not null default '',
+    name_reading          text,
     slug                  text                     not null unique default gen_random_uuid(),
     initial_letter_type   initial_letter_type      not null,
-    initial_letter_detail text                     not null default '',
-    description           text                     not null default '',
-    url                   text                     not null default '',
-    blog_url              text                     not null default '',
-    twitter_url           text                     not null default '',
-    youtube_channel_url   text                     not null default '',
+    initial_letter_detail text,
+    description           text,
+    url                   text,
+    blog_url              text,
+    twitter_url           text,
+    youtube_channel_url   text,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -221,15 +221,15 @@ comment on column artists.updated_at is '更新日時';
 create table circles (
     id                    text                     not null primary key default cuid(),
     name                  text                     not null,
-    name_reading          text                     not null default '',
+    name_reading          text,
     slug                  text                     not null unique default gen_random_uuid(),
     initial_letter_type   initial_letter_type      not null,
-    initial_letter_detail text                     not null,
-    description           text                     not null default '',
-    url                   text                     not null default '',
-    blog_url              text                     not null default '',
-    twitter_url           text                     not null default '',
-    youtube_channel_url   text                     not null default '',
+    initial_letter_detail text,
+    description           text,
+    url                   text,
+    blog_url              text,
+    twitter_url           text,
+    youtube_channel_url   text,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -250,19 +250,19 @@ comment on column circles.updated_at is '更新日時';
 create table albums (
     id                    text                     not null primary key default cuid(),
     name                  text                     not null,
-    name_reading          text                     not null default '',
+    name_reading          text,
     slug                  text                     not null unique default gen_random_uuid(),
-    release_circle_name   text                     not null default '',
+    release_circle_name   text,
     release_date          date,
-    event_id              text                     not null default '',
-    sub_event_id          text                     not null default '',
+    event_id              text,
+    sub_event_id          text,
     search_enabled        bool                     not null default true,
-    album_number          text                     not null default '',
+    album_number          text,
     event_price           numeric,
     currency              text                     not null default 'JPY',
-    credit                text                     not null default '',
-    introduction          text                     not null default '',
-    url                   text                     not null default '',
+    credit                text,
+    introduction          text,
+    url                   text,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -362,10 +362,10 @@ comment on column album_upcs.updated_at is '更新日時';
 
 create table songs (
     id                    text                     not null primary key default cuid(),
-    circle_id             text                     not null default '',
-    album_id              text                     not null default '',
+    circle_id             text,
+    album_id              text,
     name                  text                     not null,
-    name_reading          text                     not null default '',
+    name_reading          text,
     slug                  text                     not null unique default gen_random_uuid(),
     disc_number           integer                  not null default 1,
     track_number          integer                  not null,
@@ -373,15 +373,15 @@ create table songs (
     search_enabled        bool                     not null default true,
     length                integer,
     bpm                   integer,
-    description           text                     not null default '',
-    display_composer      text                     not null default '',
-    display_arranger      text                     not null default '',
-    display_rearranger    text                     not null default '',
-    display_lyricist      text                     not null default '',
-    display_vocalist      text                     not null default '',
-    display_original_song text                     not null default '',
-    created_at     timestamp with time zone not null default current_timestamp,
-    updated_at     timestamp with time zone not null default current_timestamp
+    description           text,
+    display_composer      text,
+    display_arranger      text,
+    display_rearranger    text,
+    display_lyricist      text,
+    display_vocalist      text,
+    display_original_song text,
+    created_at            timestamp with time zone not null default current_timestamp,
+    updated_at            timestamp with time zone not null default current_timestamp
 );
 comment on table  songs is '楽曲';
 comment on column songs.circle_id is 'サークルID';
