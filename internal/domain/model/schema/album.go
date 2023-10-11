@@ -15,21 +15,21 @@ type Album struct {
 
 	ID                           string                         `bun:",pk,default:cuid()"`
 	Name                         string                         `bun:"name,nullzero,notnull"`
-	NameReading                  string                         `bun:"name_reading,nullzero,notnull,default:''"`
+	NameReading                  string                         `bun:"name_reading"`
 	Slug                         string                         `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
-	ReleaseCircleName            string                         `bun:"release_circle_name,nullzero,notnull,default:''"`
+	ReleaseCircleName            string                         `bun:"release_circle_name"`
 	ReleaseDate                  *time.Time                     `bun:"release_date"`
-	EventID                      string                         `bun:"event_id,nullzero,notnull,default:''"`
+	EventID                      string                         `bun:"event_id"`
 	Event                        *Event                         `bun:"rel:belongs-to,join:event_id=id"`
-	SubEventID                   string                         `bun:"sub_event_id,nullzero,notnull,default:''"`
+	SubEventID                   string                         `bun:"sub_event_id"`
 	SubEvent                     *SubEvent                      `bun:"rel:belongs-to,join:sub_event_id=id"`
-	SearchEnabled                bool                           `bun:"search_enabled,nullzero,notnull,default:true"`
-	AlbumNumber                  string                         `bun:"album_number,nullzero,notnull,default:''"`
+	SearchEnabled                bool                           `bun:"search_enabled,notnull"`
+	AlbumNumber                  string                         `bun:"album_number"`
 	EventPrice                   decimal.NullDecimal            `bun:"event_price"`
 	Currency                     string                         `bun:"currency,nullzero,notnull,default:'JPY'"`
-	Credit                       string                         `bun:"credit,nullzero,notnull,default:''"`
-	Introduction                 string                         `bun:"introduction,nullzero,notnull,default:''"`
-	URL                          string                         `bun:"url,nullzero,notnull,default:''"`
+	Credit                       string                         `bun:"credit"`
+	Introduction                 string                         `bun:"introduction"`
+	URL                          string                         `bun:"url"`
 	AlbumConsignmentShops        []*AlbumConsignmentShop        `bun:"rel:has-many,join:id=album_id"`
 	AlbumDistributionServiceURLs []*AlbumDistributionServiceURL `bun:"rel:has-many,join:id=album_id"`
 	AlbumUPCs                    []*AlbumUPC                    `bun:"rel:has-many,join:id=album_id"`

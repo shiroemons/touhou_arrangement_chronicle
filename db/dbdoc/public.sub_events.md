@@ -15,7 +15,7 @@
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | event_date | date |  | true |  |  | 開催日 |
 | event_status | event_status | 'scheduled'::event_status | false |  |  | ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled |
-| description | text | ''::text | false |  |  | 説明 |
+| description | text |  | true |  |  | 説明 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

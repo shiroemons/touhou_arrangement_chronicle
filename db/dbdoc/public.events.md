@@ -17,10 +17,10 @@
 | event_status | event_status | 'scheduled'::event_status | false |  |  | ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled |
 | format | event_format | 'offline'::event_format | false |  |  | 形式/offline: オフライン開催, online: オフライン開催, mixed: 両方開催/default: offline |
 | region_code | text | 'JP'::text | false |  |  | リージョンコード/default: JP |
-| address | text | ''::text | false |  |  | 開催場所 |
-| description | text | ''::text | false |  |  | 説明 |
-| url | text | ''::text | false |  |  | URL |
-| twitter_url | text | ''::text | false |  |  | Twitter URL |
+| address | text |  | true |  |  | 開催場所 |
+| description | text |  | true |  |  | 説明 |
+| url | text |  | true |  |  | URL |
+| twitter_url | text |  | true |  |  | Twitter URL |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

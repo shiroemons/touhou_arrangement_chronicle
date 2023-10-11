@@ -16,7 +16,7 @@ type AlbumConsignmentShop struct {
 	AlbumID     string              `bun:"album_id,nullzero,notnull"`
 	Shop        string              `bun:"shop,nullzero,notnull"`
 	URL         string              `bun:"url,nullzero,notnull"`
-	TaxIncluded bool                `bun:"tax_included,nullzero,notnull,default:false"`
+	TaxIncluded bool                `bun:"tax_included,notnull"`
 	ShopPrice   decimal.NullDecimal `bun:"shop_price"`
 	Currency    string              `bun:"currency,nullzero,notnull,default:'JPY'"`
 	CreatedAt   time.Time           `bun:"created_at,notnull,default:current_timestamp"`
