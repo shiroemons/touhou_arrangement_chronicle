@@ -10,15 +10,15 @@
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text | cuid() | false | [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) |  |  |
 | name | text |  | false |  |  | 名前 |
-| name_reading | text | ''::text | false |  |  | 名前読み方 |
+| name_reading | text |  | true |  |  | 名前読み方 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | initial_letter_type | initial_letter_type |  | false |  |  | 頭文字の文字種別(symbol,number,alphabet,kana,kanji,other) |
-| initial_letter_detail | text | ''::text | false |  |  | 頭文字の文字種別詳細 |
-| description | text | ''::text | false |  |  | 説明 |
-| url | text | ''::text | false |  |  | URL |
-| blog_url | text | ''::text | false |  |  | ブログ URL |
-| twitter_url | text | ''::text | false |  |  | Twitter URL |
-| youtube_channel_url | text | ''::text | false |  |  | YouTubeチャンネル URL |
+| initial_letter_detail | text |  | true |  |  | 頭文字の文字種別詳細 |
+| description | text |  | true |  |  | 説明 |
+| url | text |  | true |  |  | URL |
+| blog_url | text |  | true |  |  | ブログ URL |
+| twitter_url | text |  | true |  |  | Twitter URL |
+| youtube_channel_url | text |  | true |  |  | YouTubeチャンネル URL |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

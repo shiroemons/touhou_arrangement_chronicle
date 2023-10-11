@@ -11,11 +11,11 @@
 | id | text |  | false | [public.original_song_distribution_service_urls](public.original_song_distribution_service_urls.md) [public.songs_original_songs](public.songs_original_songs.md) |  | 原曲ID |
 | product_id | text |  | false |  | [public.products](public.products.md) | 原作ID |
 | name | text |  | false |  |  | 名前 |
-| composer | text | ''::text | false |  |  | 作曲者 |
-| arranger | text | ''::text | false |  |  | 編曲者 |
+| composer | text |  | true |  |  | 作曲者 |
+| arranger | text |  | true |  |  | 編曲者 |
 | track_number | integer |  | false |  |  | トラック番号 |
 | is_original | boolean | false | false |  |  | オリジナル有無(true: オリジナル(初出)、false: 再録など) |
-| source_id | text | ''::text | false |  |  | 原曲元の原曲ID |
+| source_id | text |  | true |  |  | 原曲元の原曲ID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
