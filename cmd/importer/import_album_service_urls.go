@@ -5,8 +5,7 @@ import (
 	"os"
 
 	"github.com/gocarina/gocsv"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type AlbumServiceUrlTSV struct {
@@ -43,7 +42,7 @@ func (imp *Importer) importAlbumServiceUrl() {
 			continue
 		}
 		if album.Jan != "" {
-			upc := entity.AlbumUPC{
+			upc := schema.AlbumUPC{
 				AlbumID: appleMusic.AlbumID,
 				UPC:     album.Jan,
 			}
@@ -53,7 +52,7 @@ func (imp *Importer) importAlbumServiceUrl() {
 			}
 		}
 		if album.SpotifyAlbumUrl != "" {
-			spotify := entity.AlbumDistributionServiceURL{
+			spotify := schema.AlbumDistributionServiceURL{
 				AlbumID: appleMusic.AlbumID,
 				Service: "spotify",
 				URL:     album.SpotifyAlbumUrl,
@@ -64,7 +63,7 @@ func (imp *Importer) importAlbumServiceUrl() {
 			}
 		}
 		if album.YTMusicAlbumUrl != "" {
-			ytmusic := entity.AlbumDistributionServiceURL{
+			ytmusic := schema.AlbumDistributionServiceURL{
 				AlbumID: appleMusic.AlbumID,
 				Service: "youtube_music",
 				URL:     album.YTMusicAlbumUrl,
@@ -75,7 +74,7 @@ func (imp *Importer) importAlbumServiceUrl() {
 			}
 		}
 		if album.LineMusicAlbumUrl != "" {
-			lineMusic := entity.AlbumDistributionServiceURL{
+			lineMusic := schema.AlbumDistributionServiceURL{
 				AlbumID: appleMusic.AlbumID,
 				Service: "line_music",
 				URL:     album.LineMusicAlbumUrl,
@@ -90,8 +89,8 @@ func (imp *Importer) importAlbumServiceUrl() {
 	log.Println("finish album service url import.")
 }
 
-func (imp *Importer) findByAppleMusicUrl(url string) *entity.AlbumDistributionServiceURL {
-	existing := new(entity.AlbumDistributionServiceURL)
+func (imp *Importer) findByAppleMusicUrl(url string) *schema.AlbumDistributionServiceURL {
+	existing := new(schema.AlbumDistributionServiceURL)
 	err := imp.db.NewSelect().
 		Model(existing).
 		Where("url = ?", url).
@@ -103,7 +102,7 @@ func (imp *Importer) findByAppleMusicUrl(url string) *entity.AlbumDistributionSe
 	return existing
 }
 
-func (imp *Importer) createAlbumServiceUrl(adsu entity.AlbumDistributionServiceURL) error {
+func (imp *Importer) createAlbumServiceUrl(adsu schema.AlbumDistributionServiceURL) error {
 	_, err := imp.db.NewInsert().Model(&adsu).
 		Ignore().
 		Exec(imp.ctx)
@@ -113,7 +112,7 @@ func (imp *Importer) createAlbumServiceUrl(adsu entity.AlbumDistributionServiceU
 	return nil
 }
 
-func (imp *Importer) createAlbumUPC(aupc entity.AlbumUPC) error {
+func (imp *Importer) createAlbumUPC(aupc schema.AlbumUPC) error {
 	_, err := imp.db.NewInsert().Model(&aupc).
 		Ignore().
 		Exec(imp.ctx)

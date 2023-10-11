@@ -9,9 +9,8 @@ import (
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/samber/lo"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 const (
@@ -50,7 +49,7 @@ func setupSongs(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {
 }
 
 func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]interface{} {
-	var songs []entity.Song
+	var songs []schema.Song
 	err := db.NewSelect().Model(&songs).
 		Relation("Album").
 		Relation("Album.Event").
@@ -135,7 +134,7 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 	return songDocs
 }
 
-func convertCirclesToMaps(circles []*entity.Circle) []map[string]interface{} {
+func convertCirclesToMaps(circles []*schema.Circle) []map[string]interface{} {
 	if len(circles) == 0 {
 		return nil
 	}
@@ -151,7 +150,7 @@ func convertCirclesToMaps(circles []*entity.Circle) []map[string]interface{} {
 	return maps
 }
 
-func convertArtistsToMaps(artists []*entity.Artist) []map[string]interface{} {
+func convertArtistsToMaps(artists []*schema.Artist) []map[string]interface{} {
 	if len(artists) == 0 {
 		return nil
 	}
@@ -167,7 +166,7 @@ func convertArtistsToMaps(artists []*entity.Artist) []map[string]interface{} {
 	return maps
 }
 
-func convertOriginalSongsToMaps(originalSongs []*entity.OriginalSong) []map[string]interface{} {
+func convertOriginalSongsToMaps(originalSongs []*schema.OriginalSong) []map[string]interface{} {
 	if len(originalSongs) == 0 {
 		return nil
 	}
@@ -188,19 +187,19 @@ func convertOriginalSongsToMaps(originalSongs []*entity.OriginalSong) []map[stri
 	return maps
 }
 
-func generateLevel0(song *entity.OriginalSong) string {
+func generateLevel0(song *schema.OriginalSong) string {
 	return ProductTypeMap[song.Product.ProductType]
 }
 
-func generateLevel1(song *entity.OriginalSong) string {
+func generateLevel1(song *schema.OriginalSong) string {
 	return fmt.Sprintf("%s > %04.1f. %s", ProductTypeMap[song.Product.ProductType], song.Product.SeriesNumber, song.Product.ShortName)
 }
 
-func generateLevel2(song *entity.OriginalSong) string {
+func generateLevel2(song *schema.OriginalSong) string {
 	return fmt.Sprintf("%s > %04.1f. %s > %02d. %s", ProductTypeMap[song.Product.ProductType], song.Product.SeriesNumber, song.Product.ShortName, song.TrackNumber, song.Name)
 }
 
-func convertAlbumServiceUrlsToMaps(serviceUrls []*entity.AlbumDistributionServiceURL) []map[string]interface{} {
+func convertAlbumServiceUrlsToMaps(serviceUrls []*schema.AlbumDistributionServiceURL) []map[string]interface{} {
 	if len(serviceUrls) == 0 {
 		return nil
 	}
@@ -217,7 +216,7 @@ func convertAlbumServiceUrlsToMaps(serviceUrls []*entity.AlbumDistributionServic
 	return maps
 }
 
-func convertSongServiceUrlsToMaps(serviceUrls []*entity.SongDistributionServiceURL) []map[string]interface{} {
+func convertSongServiceUrlsToMaps(serviceUrls []*schema.SongDistributionServiceURL) []map[string]interface{} {
 	if len(serviceUrls) == 0 {
 		return nil
 	}
@@ -234,7 +233,7 @@ func convertSongServiceUrlsToMaps(serviceUrls []*entity.SongDistributionServiceU
 	return maps
 }
 
-func convertSongTags(tags []*entity.SongTag) []map[string]interface{} {
+func convertSongTags(tags []*schema.SongTag) []map[string]interface{} {
 	if len(tags) == 0 {
 		return nil
 	}
@@ -248,7 +247,7 @@ func convertSongTags(tags []*entity.SongTag) []map[string]interface{} {
 	return maps
 }
 
-func convertSongGenres(genres []*entity.SongGenre) []map[string]interface{} {
+func convertSongGenres(genres []*schema.SongGenre) []map[string]interface{} {
 	if len(genres) == 0 {
 		return nil
 	}

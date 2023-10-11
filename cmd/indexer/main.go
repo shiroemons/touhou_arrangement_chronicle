@@ -7,7 +7,7 @@ import (
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/uptrace/bun"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infra/store"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/store"
 )
 
 func main() {

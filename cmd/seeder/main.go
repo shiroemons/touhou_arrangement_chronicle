@@ -11,12 +11,11 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/lucsky/cuid"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/spkg/bom"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/extra/bundebug"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
 )
 
 type Product struct {
@@ -326,9 +325,9 @@ func importArtists(ctx context.Context, db *bun.DB) {
 		log.Fatal(err)
 	}
 
-	var artists []entity.Artist
+	var artists []schema.Artist
 	for _, line := range lines {
-		artist := entity.Artist{
+		artist := schema.Artist{
 			Name: line.Name,
 		}
 		artists = append(artists, artist)
@@ -358,9 +357,9 @@ func importGenres(ctx context.Context, db *bun.DB) {
 		log.Fatal(err)
 	}
 
-	var genres []entity.Genre
+	var genres []schema.Genre
 	for _, line := range lines {
-		genre := entity.Genre{
+		genre := schema.Genre{
 			Name: line.Name,
 		}
 		genres = append(genres, genre)
@@ -390,9 +389,9 @@ func importTags(ctx context.Context, db *bun.DB) {
 		log.Fatal(err)
 	}
 
-	var tags []entity.Tag
+	var tags []schema.Tag
 	for _, line := range lines {
-		tag := entity.Tag{
+		tag := schema.Tag{
 			Name:    line.Name,
 			TagType: line.TagType,
 		}

@@ -2,11 +2,11 @@ package resolver
 
 //go:generate go run github.com/99designs/gqlgen generate
 import (
+	service2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/app/service"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/generated"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/service"
 )
 
 // This file will not be regenerated automatically.
@@ -17,32 +17,32 @@ type Params struct {
 	fx.In
 
 	Logger          *zap.Logger
-	ProductSrv      *service.ProductService
-	OriginalSongSrv *service.OriginalSongService
-	EventSeriesSrv  *service.EventSeriesService
-	EventSrv        *service.EventService
-	SubEventSrv     *service.SubEventService
-	CircleSrv       *service.CircleService
-	ArtistSrv       *service.ArtistService
-	TagSrv          *service.TagService
-	GenreSrv        *service.GenreService
-	AlbumSrv        *service.AlbumService
-	SongSrv         *service.SongService
+	ProductSrv      *service2.ProductService
+	OriginalSongSrv *service2.OriginalSongService
+	EventSeriesSrv  *service2.EventSeriesService
+	EventSrv        *service2.EventService
+	SubEventSrv     *service2.SubEventService
+	CircleSrv       *service2.CircleService
+	ArtistSrv       *service2.ArtistService
+	TagSrv          *service2.TagService
+	GenreSrv        *service2.GenreService
+	AlbumSrv        *service2.AlbumService
+	SongSrv         *service2.SongService
 }
 
 type Resolver struct {
 	logger          *zap.Logger
-	productSrv      *service.ProductService
-	originalSongSrv *service.OriginalSongService
-	eventSeriesSrv  *service.EventSeriesService
-	eventSrv        *service.EventService
-	subEventSrv     *service.SubEventService
-	circleSrv       *service.CircleService
-	artistSrv       *service.ArtistService
-	tagSrv          *service.TagService
-	genreSrv        *service.GenreService
-	albumSrv        *service.AlbumService
-	songSrv         *service.SongService
+	productSrv      *service2.ProductService
+	originalSongSrv *service2.OriginalSongService
+	eventSeriesSrv  *service2.EventSeriesService
+	eventSrv        *service2.EventService
+	subEventSrv     *service2.SubEventService
+	circleSrv       *service2.CircleService
+	artistSrv       *service2.ArtistService
+	tagSrv          *service2.TagService
+	genreSrv        *service2.GenreService
+	albumSrv        *service2.AlbumService
+	songSrv         *service2.SongService
 }
 
 // NewResolver Resolver Constructor

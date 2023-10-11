@@ -5,16 +5,16 @@ import (
 	"fmt"
 
 	"github.com/graph-gophers/dataloader/v7"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
+	repository2 "github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/infrastructure/repository"
 	"github.com/uptrace/bun"
 
 	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/entity"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/repository"
 )
 
 type EventLoader struct {
-	eRepo domain.EventRepository
+	eRepo repository2.EventRepository
 }
 
 func EventLoaderProvider(db *bun.DB) *EventLoader {
@@ -22,20 +22,20 @@ func EventLoaderProvider(db *bun.DB) *EventLoader {
 	return &EventLoader{eRepo: eRepo}
 }
 
-func (l *EventLoader) BatchGetEvents(ctx context.Context, keys []string) []*dataloader.Result[*entity.Event] {
+func (l *EventLoader) BatchGetEvents(ctx context.Context, keys []string) []*dataloader.Result[*schema.Event] {
 	eventByID, err := l.eRepo.GetMapInIDs(ctx, keys)
 	if err != nil {
 		return nil
 	}
 
-	output := make([]*dataloader.Result[*entity.Event], len(keys))
+	output := make([]*dataloader.Result[*schema.Event], len(keys))
 	for index, key := range keys {
 		event, ok := eventByID[key]
 		if ok {
-			output[index] = &dataloader.Result[*entity.Event]{Data: event, Error: nil}
+			output[index] = &dataloader.Result[*schema.Event]{Data: event, Error: nil}
 		} else {
 			err = fmt.Errorf("event not found %s", key)
-			output[index] = &dataloader.Result[*entity.Event]{Data: nil, Error: err}
+			output[index] = &dataloader.Result[*schema.Event]{Data: nil, Error: err}
 		}
 	}
 	return output
