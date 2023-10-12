@@ -1,4 +1,4 @@
-.PHONY: help init build-local db-up up down logs ps migrate seeder importer all-clean test generate lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
+.PHONY: help init build-local db-up up down logs ps setup migrate seeder importer all-clean test generate lint server console console-sandbox bundle bash rubocop rubocop-a rubocop-all
 .DEFAULT_GOAL := help
 
 init: ## Initialize environment
@@ -22,18 +22,23 @@ logs: ## Tail docker compose logs
 ps: ## Check container status
 	docker compose ps
 
-db-setup: ## db setup
-	cat db/schema/cuid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+setup:
+	docker compose run --rm web bundle config set clean true
+	docker compose run --rm web bundle install --jobs=4
+	docker compose up -d db
+	sleep 5
+	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
+	docker compose run --rm migrate
+	docker compose run --rm seeder
 
 db-reset: ## db reset
 	docker compose down
 	docker volume rm touhou_arrangement_chronicle_postgres
 	docker compose up -d db
 	sleep 5
-	cat db/schema/cuid.sql | psql -h localhost -p 15432 -U postgres touhou_arrangement_chronicle_development
+	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
-#	docker compose run --rm web bin/rails db:seed
 
 migrate: ## db migrate
 	docker compose run --rm migrate

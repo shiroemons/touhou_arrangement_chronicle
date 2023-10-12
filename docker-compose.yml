@@ -9,6 +9,7 @@ services:
       - '15432:5432'
     volumes:
       - postgres:/var/lib/postgresql/data
+      - ./db/schema:/tmp/db/schema
 
   migrate:
     build:

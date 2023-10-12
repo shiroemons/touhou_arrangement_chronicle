@@ -3,35 +3,8 @@
 
 ## セットアップ
 
-### DBセットアップ
-
-#### 初回のみ
-
-- DB起動
-  ```shell
-  make db-up
-  ```
-- 初期設定
-  ```shell
-  make db-setup
-  ```
-
-#### Migration
-
 ```shell
-make migrate
-```
-
-### Seeder
-
-```shell
-make seeder
-```
-
-### Importer
-
-```shell
-make importer
+make setup
 ```
 
 ## サーバー起動
