@@ -12,37 +12,37 @@
 <!-- public.circles_genres -->
 <g id="node1" class="node">
 <title>public.circles_genres</title>
-<polygon fill="#efefef" stroke="transparent" points="472.5,-784 472.5,-830 869.5,-830 869.5,-784 472.5,-784"/>
-<polygon fill="none" stroke="#000000" points="472.5,-784 472.5,-830 869.5,-830 869.5,-784 472.5,-784"/>
+<polygon fill="#efefef" stroke="transparent" points="512.5,-784 512.5,-830 829.5,-830 829.5,-784 512.5,-784"/>
+<polygon fill="none" stroke="#000000" points="512.5,-784 512.5,-830 829.5,-830 829.5,-784 512.5,-784"/>
 <text text-anchor="start" x="523.2064" y="-807.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.circles_genres</text>
 <text text-anchor="start" x="691.2256" y="-807.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
 <text text-anchor="start" x="725.4304" y="-807.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
 <text text-anchor="start" x="621.2342" y="-793.4" font-family="Arial" font-size="14.00" fill="#333333">サークルタグ</text>
-<polygon fill="none" stroke="#000000" points="472.5,-754 472.5,-784 869.5,-784 869.5,-754 472.5,-754"/>
-<text text-anchor="start" x="479.5" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000">id </text>
-<text text-anchor="start" x="494.2798" y="-765.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="524.6248" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
-<polygon fill="none" stroke="#000000" points="472.5,-724 472.5,-754 869.5,-754 869.5,-724 472.5,-724"/>
-<text text-anchor="start" x="479.5" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000">circle_id </text>
-<text text-anchor="start" x="534.7188" y="-735.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="565.0638" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルID</text>
-<polygon fill="none" stroke="#000000" points="472.5,-694 472.5,-724 869.5,-724 869.5,-694 472.5,-694"/>
-<text text-anchor="start" x="479.5" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000">genre_id </text>
-<text text-anchor="start" x="537.8534" y="-705.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="568.1984" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
-<polygon fill="none" stroke="#000000" points="472.5,-664 472.5,-694 869.5,-694 869.5,-664 472.5,-664"/>
-<text text-anchor="start" x="479.2826" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000">locked </text>
-<text text-anchor="start" x="523.6276" y="-675.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="581.211" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック有無(true: ロック、false: アンロック)</text>
-<polygon fill="none" stroke="#000000" points="472.5,-634 472.5,-664 869.5,-664 869.5,-634 472.5,-634"/>
-<text text-anchor="start" x="479.5" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
-<text text-anchor="start" x="549.528" y="-645.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="715.2124" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
-<polygon fill="none" stroke="#000000" points="472.5,-604 472.5,-634 869.5,-634 869.5,-604 472.5,-604"/>
-<text text-anchor="start" x="479.5" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
-<text text-anchor="start" x="553.4326" y="-615.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="719.117" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
-<polygon fill="none" stroke="#000000" stroke-width="3" points="470.5,-602.5 470.5,-831.5 870.5,-831.5 870.5,-602.5 470.5,-602.5"/>
+<polygon fill="none" stroke="#000000" points="512.5,-754 512.5,-784 829.5,-784 829.5,-754 512.5,-754"/>
+<text text-anchor="start" x="519.5" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000">id </text>
+<text text-anchor="start" x="534.2798" y="-765.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="564.6248" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<polygon fill="none" stroke="#000000" points="512.5,-724 512.5,-754 829.5,-754 829.5,-724 512.5,-724"/>
+<text text-anchor="start" x="519.5" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000">circle_id </text>
+<text text-anchor="start" x="574.7188" y="-735.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="605.0638" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルID</text>
+<polygon fill="none" stroke="#000000" points="512.5,-694 512.5,-724 829.5,-724 829.5,-694 512.5,-694"/>
+<text text-anchor="start" x="519.5" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000">genre_id </text>
+<text text-anchor="start" x="577.8534" y="-705.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="608.1984" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<polygon fill="none" stroke="#000000" points="512.5,-664 512.5,-694 829.5,-694 829.5,-664 512.5,-664"/>
+<text text-anchor="start" x="519.3149" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at </text>
+<text text-anchor="start" x="583.1157" y="-675.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="748.8001" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
+<polygon fill="none" stroke="#000000" points="512.5,-634 512.5,-664 829.5,-664 829.5,-634 512.5,-634"/>
+<text text-anchor="start" x="519.5" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
+<text text-anchor="start" x="589.528" y="-645.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="755.2124" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<polygon fill="none" stroke="#000000" points="512.5,-604 512.5,-634 829.5,-634 829.5,-604 512.5,-604"/>
+<text text-anchor="start" x="519.5" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
+<text text-anchor="start" x="593.4326" y="-615.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="759.117" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<polygon fill="none" stroke="#000000" stroke-width="3" points="510.5,-602.5 510.5,-831.5 830.5,-831.5 830.5,-602.5 510.5,-602.5"/>
 </g>
 <!-- public.circles -->
 <g id="node2" class="node">
@@ -108,9 +108,9 @@
 <!-- public.circles_genres&#45;&gt;public.circles -->
 <g id="edge1" class="edge">
 <title>public.circles_genres:circle_id&#45;&gt;public.circles:id</title>
-<path fill="none" stroke="#000000" d="M462.3093,-738.2911C394.6436,-728.3575 422.6688,-616.4792 472.5,-558 537.8987,-481.2516 631.1013,-598.7484 696.5,-522 726.479,-486.8183 742.7222,-418 696.5,-418"/>
-<polygon fill="#000000" stroke="#000000" points="462.5241,-738.3059 472.1877,-743.4892 467.5121,-738.653 472.5,-739 472.5,-739 472.5,-739 467.5121,-738.653 472.8123,-734.5108 462.5241,-738.3059 462.5241,-738.3059"/>
-<text text-anchor="start" x="234.9555" y="-749" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (circle_id) REFERENCES circles(id)</text>
+<path fill="none" stroke="#000000" d="M502.3153,-738.2961C434.7332,-728.4326 463.666,-617.3144 512.5,-558 565.4639,-493.6694 643.5361,-586.3306 696.5,-522 725.8791,-486.3158 742.7222,-418 696.5,-418"/>
+<polygon fill="#000000" stroke="#000000" points="502.5238,-738.3105 512.1897,-743.4893 507.5119,-738.6552 512.5,-739 512.5,-739 512.5,-739 507.5119,-738.6552 512.8103,-734.5107 502.5238,-738.3105 502.5238,-738.3105"/>
+<text text-anchor="start" x="274.9555" y="-749" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (circle_id) REFERENCES circles(id)</text>
 </g>
 <!-- public.genres -->
 <g id="node3" class="node">
@@ -141,9 +141,9 @@
 <!-- public.circles_genres&#45;&gt;public.genres -->
 <g id="edge2" class="edge">
 <title>public.circles_genres:genre_id&#45;&gt;public.genres:id</title>
-<path fill="none" stroke="#000000" d="M879.5191,-708.5655C1044.7269,-693.3381 612.258,-283 800.5,-283"/>
-<polygon fill="#000000" stroke="#000000" points="879.4906,-708.5666 869.305,-704.5042 874.4953,-708.7833 869.5,-709 869.5,-709 869.5,-709 874.4953,-708.7833 869.695,-713.4958 879.4906,-708.5666 879.4906,-708.5666"/>
-<text text-anchor="start" x="876.7165" y="-719" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (genre_id) REFERENCES genres(id)</text>
+<path fill="none" stroke="#000000" d="M839.9436,-708.5188C1003.5411,-692.5219 614.4349,-283 800.5,-283"/>
+<polygon fill="#000000" stroke="#000000" points="839.4894,-708.5397 829.2928,-704.5048 834.4947,-708.7698 829.5,-709 829.5,-709 829.5,-709 834.4947,-708.7698 829.7072,-713.4952 839.4894,-708.5397 839.4894,-708.5397"/>
+<text text-anchor="start" x="836.7165" y="-719" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (genre_id) REFERENCES genres(id)</text>
 </g>
 </g>
 </svg>

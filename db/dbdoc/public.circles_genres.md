@@ -11,7 +11,7 @@
 | id | text | cuid() | false |  |  | ID |
 | circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 | genre_id | text |  | false |  | [public.genres](public.genres.md) | タグID |
-| locked | boolean | false | false |  |  | ロック有無(true: ロック、false: アンロック) |
+| locked_at | timestamp with time zone |  | true |  |  | ロック日時 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
