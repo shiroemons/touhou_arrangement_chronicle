@@ -576,7 +576,7 @@ create table albums_genres (
     id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     genre_id   text                     not null references genres(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -585,7 +585,7 @@ comment on table  albums_genres is 'アルバムジャンル';
 comment on column albums_genres.id is 'ID';
 comment on column albums_genres.album_id is 'アルバムID';
 comment on column albums_genres.genre_id is 'ジャンルID';
-comment on column albums_genres.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
+comment on column albums_genres.locked_at is 'ロック日時';
 comment on column albums_genres.created_at is '作成日時';
 comment on column albums_genres.updated_at is '更新日時';
 
@@ -593,7 +593,7 @@ create table albums_tags (
     id         text                     not null primary key default cuid(),
     album_id   text                     not null references albums(id),
     tag_id     text                     not null references tags(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -602,7 +602,7 @@ comment on table  albums_tags is 'アルバムタグ';
 comment on column albums_tags.id is 'ID';
 comment on column albums_tags.album_id is 'アルバムID';
 comment on column albums_tags.tag_id is 'タグID';
-comment on column albums_tags.locked is 'ロック有無(true: ロック、false: アンロック)';
+comment on column albums_tags.locked_at is 'ロック日時';
 comment on column albums_tags.created_at is '作成日時';
 comment on column albums_tags.updated_at is '更新日時';
 
@@ -610,7 +610,7 @@ create table songs_genres (
     id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     genre_id   text                     not null references genres(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -619,7 +619,7 @@ comment on table  songs_genres is '楽曲ジャンル';
 comment on column songs_genres.id is '楽曲ID';
 comment on column songs_genres.song_id is '楽曲ID';
 comment on column songs_genres.genre_id is 'ジャンルID';
-comment on column songs_genres.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
+comment on column songs_genres.locked_at is 'ロック日時';
 comment on column songs_genres.created_at is '作成日時';
 comment on column songs_genres.updated_at is '更新日時';
 
@@ -627,7 +627,7 @@ create table songs_tags (
     id         text                     not null primary key default cuid(),
     song_id    text                     not null references songs(id),
     tag_id     text                     not null references tags(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -636,7 +636,7 @@ comment on table  songs_tags is '楽曲タグ';
 comment on column songs_tags.id is 'ID';
 comment on column songs_tags.song_id is '楽曲ID';
 comment on column songs_tags.tag_id is 'タグID';
-comment on column songs_tags.locked is 'ロック有無(true: ロック・削除不可、false: アンロック)';
+comment on column songs_tags.locked_at is 'ロック日時';
 comment on column songs_tags.created_at is '作成日時';
 comment on column songs_tags.updated_at is '更新日時';
 
@@ -644,7 +644,7 @@ create table circles_genres (
     id         text                     not null primary key default cuid(),
     circle_id  text                     not null references circles(id),
     genre_id   text                     not null references genres(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -653,7 +653,7 @@ comment on table  circles_genres is 'サークルタグ';
 comment on column circles_genres.id is 'ID';
 comment on column circles_genres.circle_id is 'サークルID';
 comment on column circles_genres.genre_id is 'タグID';
-comment on column circles_genres.locked is 'ロック有無(true: ロック、false: アンロック)';
+comment on column circles_genres.locked_at is 'ロック日時';
 comment on column circles_genres.created_at is '作成日時';
 comment on column circles_genres.updated_at is '更新日時';
 
@@ -661,7 +661,7 @@ create table circles_tags (
     id         text                     not null primary key default cuid(),
     circle_id  text                     not null references circles(id),
     tag_id     text                     not null references tags(id),
-    locked     bool                     not null default false,
+    locked_at  timestamp with time zone,
     created_at timestamp with time zone not null default current_timestamp,
     updated_at timestamp with time zone not null default current_timestamp
 );
@@ -670,6 +670,6 @@ comment on table  circles_tags is 'サークルタグ';
 comment on column circles_tags.id is 'サークルID';
 comment on column circles_tags.circle_id is 'サークルID';
 comment on column circles_tags.tag_id is 'タグID';
-comment on column circles_tags.locked is 'ロック有無(true: ロック、false: アンロック)';
+comment on column circles_tags.locked_at is 'ロック日時';
 comment on column circles_tags.created_at is '作成日時';
 comment on column circles_tags.updated_at is '更新日時';
