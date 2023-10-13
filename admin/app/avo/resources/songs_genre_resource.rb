@@ -8,5 +8,5 @@ class SongsGenreResource < Avo::BaseResource
   field :id, as: :id
   field :song, as: :belongs_to
   field :genre, as: :belongs_to
-  field :locked, as: :boolean
+  field :locked_at, as: :datetime
 end
