@@ -19,6 +19,7 @@
 | [public.album_distribution_service_urls](public.album_distribution_service_urls.md) | 6 | アルバム配信サービスURL | BASE TABLE |
 | [public.album_upcs](public.album_upcs.md) | 5 | アルバムUPC | BASE TABLE |
 | [public.songs](public.songs.md) | 21 | 楽曲 | BASE TABLE |
+| [public.lyrics](public.lyrics.md) | 6 | 歌詞 | BASE TABLE |
 | [public.song_distribution_service_urls](public.song_distribution_service_urls.md) | 6 | 楽曲配信サービスURL | BASE TABLE |
 | [public.song_isrcs](public.song_isrcs.md) | 5 | 楽曲ISRC | BASE TABLE |
 | [public.songs_arrange_circles](public.songs_arrange_circles.md) | 4 | 楽曲編曲サークル | BASE TABLE |
