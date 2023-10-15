@@ -30,6 +30,7 @@ setup:
 	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
+	docker compose run --rm web bin/rails db:seed
 
 db-reset: ## db reset
 	docker compose down
@@ -39,12 +40,14 @@ db-reset: ## db reset
 	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
+	docker compose run --rm web bin/rails db:seed
 
 migrate: ## db migrate
 	docker compose run --rm migrate
 
 seeder: ## db seed
 	docker compose run --rm seeder
+	docker compose run --rm web bin/rails db:seed
 
 indexer: ## indexer
 	docker compose run --rm indexer
