@@ -17,7 +17,6 @@
 | disc_number | integer | 1 | false |  |  | ディスク番号(default: 1) |
 | track_number | integer |  | false |  |  | トラック番号 |
 | release_date | date |  | true |  |  | 頒布日(アルバムの頒布日と異なる場合に使用する) |
-| search_enabled | boolean | true | false |  |  | 検索対象とするか(default: true) |
 | length | integer |  | true |  |  | 曲の長さ(秒) |
 | bpm | integer |  | true |  |  | BPM |
 | description | text |  | true |  |  | 説明 |
@@ -27,6 +26,8 @@
 | display_lyricist | text |  | true |  |  | 作詞者表示用(1度しか使用しない別名義などで使用する) |
 | display_vocalist | text |  | true |  |  | ボーカリスト表示用(1度しか使用しない別名義などで使用する) |
 | display_original_song | text |  | true |  |  | 原曲表示用(東方以外の原曲などで使用する) |
+| published_at | timestamp with time zone |  | true |  |  | 公開日時 |
+| archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
