@@ -11,6 +11,7 @@ create type product_type as enum (
 create table products (
     id            text                     not null primary key,
     name          text                     not null,
+    name_reading  text,
     short_name    text                     not null,
     product_type  product_type             not null,
     series_number numeric(5,2)             not null,
@@ -20,6 +21,7 @@ create table products (
 comment on table  products is '原作';
 comment on column products.id is '原作ID';
 comment on column products.name is '名前';
+comment on column products.name_reading is '名前読み方';
 comment on column products.short_name is '短い名前';
 comment on column products.product_type is '原作種別';
 comment on column products.series_number is 'シリーズ番号';
@@ -30,6 +32,7 @@ create table original_songs (
     id           text                     not null primary key,
     product_id   text                     not null references products(id),
     name         text                     not null,
+    name_reading text,
     composer     text,
     arranger     text,
     track_number integer                  not null,
@@ -42,6 +45,7 @@ comment on table  original_songs is '原曲';
 comment on column original_songs.product_id is '原作ID';
 comment on column original_songs.id is '原曲ID';
 comment on column original_songs.name is '名前';
+comment on column original_songs.name_reading is '名前読み方';
 comment on column original_songs.composer is '作曲者';
 comment on column original_songs.arranger is '編曲者';
 comment on column original_songs.track_number is 'トラック番号';
@@ -131,6 +135,7 @@ create table events (
     id              text                     not null primary key default cuid(),
     event_series_id text                     not null references event_series(id),
     name            text                     not null unique,
+    name_reading    text,
     display_name    text                     not null,
     slug            text                     not null unique default gen_random_uuid(),
     event_dates     daterange,
@@ -149,6 +154,7 @@ create table events (
 comment on table  events is 'イベント';
 comment on column events.event_series_id is 'イベントシリーズID';
 comment on column events.name is '名前';
+comment on column events.name_reading is '名前読み方';
 comment on column events.display_name is '表示名';
 comment on column events.slug is 'スラッグ';
 comment on column events.event_dates is 'イベント開催期間';
@@ -168,6 +174,7 @@ create table sub_events (
     id           text                     not null primary key default cuid(),
     event_id     text                     not null references events(id),
     name         text                     not null unique,
+    name_reading text,
     display_name text                     not null,
     slug         text                     not null unique default gen_random_uuid(),
     event_date   date,
@@ -181,6 +188,7 @@ create table sub_events (
 comment on table  sub_events is 'サブイベント';
 comment on column sub_events.event_id is 'イベントID';
 comment on column sub_events.name is '名前(例: 〇〇 2日目)';
+comment on column sub_events.name_reading is '名前読み方';
 comment on column sub_events.display_name is '表示名';
 comment on column sub_events.slug is 'スラッグ';
 comment on column sub_events.event_date is '開催日';
