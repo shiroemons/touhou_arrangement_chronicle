@@ -16,13 +16,14 @@
 | release_date | date |  | true |  |  | 頒布日 |
 | event_id | text |  | true |  |  | イベントID |
 | sub_event_id | text |  | true |  |  | サブイベントID |
-| search_enabled | boolean | true | false |  |  | 検索対象とするか |
 | album_number | text |  | true |  |  |  |
 | event_price | numeric |  | true |  |  | イベント価格 |
 | currency | text | 'JPY'::text | false |  |  | 通貨(default: JPY) |
 | credit | text |  | true |  |  | クレジット |
 | introduction | text |  | true |  |  | 紹介 |
 | url | text |  | true |  |  | URL |
+| published_at | timestamp with time zone |  | true |  |  | 公開日時 |
+| archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

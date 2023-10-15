@@ -12,6 +12,8 @@
 | name | text |  | false |  |  | 名前 |
 | display_name | text |  | false |  |  | 表示名 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
+| published_at | timestamp with time zone |  | true |  |  | 公開日時 |
+| archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

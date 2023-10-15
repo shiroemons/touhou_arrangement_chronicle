@@ -16,6 +16,8 @@
 | event_date | date |  | true |  |  | 開催日 |
 | event_status | event_status | 'scheduled'::event_status | false |  |  | ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled |
 | description | text |  | true |  |  | 説明 |
+| published_at | timestamp with time zone |  | true |  |  | 公開日時 |
+| archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 

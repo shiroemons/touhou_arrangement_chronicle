@@ -98,6 +98,8 @@ create table event_series (
     name         text                     not null unique,
     display_name text                     not null,
     slug         text                     not null unique default gen_random_uuid(),
+    published_at timestamp with time zone,
+    archived_at  timestamp with time zone,
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
@@ -105,6 +107,8 @@ comment on table  event_series is 'イベントシリーズ';
 comment on column event_series.name is '名前';
 comment on column event_series.display_name is '表示名';
 comment on column event_series.slug is 'スラッグ';
+comment on column event_series.published_at is '公開日時';
+comment on column event_series.archived_at is 'アーカイブ日時';
 comment on column event_series.created_at is '作成日時';
 comment on column event_series.updated_at is '更新日時';
 
@@ -137,6 +141,8 @@ create table events (
     description     text,
     url             text,
     twitter_url     text,
+    published_at    timestamp with time zone,
+    archived_at     timestamp with time zone,
     created_at      timestamp with time zone not null default current_timestamp,
     updated_at      timestamp with time zone not null default current_timestamp
 );
@@ -153,6 +159,8 @@ comment on column events.address is '開催場所';
 comment on column events.description is '説明';
 comment on column events.url is 'URL';
 comment on column events.twitter_url is 'Twitter URL';
+comment on column events.published_at is '公開日時';
+comment on column events.archived_at is 'アーカイブ日時';
 comment on column events.created_at is '作成日時';
 comment on column events.updated_at is '更新日時';
 
@@ -165,6 +173,8 @@ create table sub_events (
     event_date   date,
     event_status event_status             not null default 'scheduled'::event_status,
     description  text,
+    published_at timestamp with time zone,
+    archived_at  timestamp with time zone,
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp
 );
@@ -176,6 +186,8 @@ comment on column sub_events.slug is 'スラッグ';
 comment on column sub_events.event_date is '開催日';
 comment on column sub_events.event_status is 'ステータス/scheduled: 開催済み, cancelled: 中止, postpone: 延期(開催日未定), rescheduled: 延期(開催日決定), moved_online: オンライン開催に変更, other: その他/default: scheduled';
 comment on column sub_events.description is '説明';
+comment on column sub_events.published_at is '公開日時';
+comment on column sub_events.archived_at is 'アーカイブ日時';
 comment on column sub_events.created_at is '作成日時';
 comment on column sub_events.updated_at is '更新日時';
 
@@ -201,6 +213,8 @@ create table artists (
     blog_url              text,
     twitter_url           text,
     youtube_channel_url   text,
+    published_at          timestamp with time zone,
+    archived_at           timestamp with time zone,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -215,6 +229,8 @@ comment on column artists.url is 'URL';
 comment on column artists.blog_url is 'ブログ URL';
 comment on column artists.twitter_url is 'Twitter URL';
 comment on column artists.youtube_channel_url is 'YouTubeチャンネル URL';
+comment on column artists.published_at is '公開日時';
+comment on column artists.archived_at is 'アーカイブ日時';
 comment on column artists.created_at is '作成日時';
 comment on column artists.updated_at is '更新日時';
 
@@ -230,6 +246,8 @@ create table circles (
     blog_url              text,
     twitter_url           text,
     youtube_channel_url   text,
+    published_at          timestamp with time zone,
+    archived_at           timestamp with time zone,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -244,6 +262,8 @@ comment on column circles.url is 'URL';
 comment on column circles.blog_url is 'ブログ URL';
 comment on column circles.twitter_url is 'Twitter URL';
 comment on column circles.youtube_channel_url is 'YouTubeチャンネル URL';
+comment on column circles.published_at is '公開日時';
+comment on column circles.archived_at is 'アーカイブ日時';
 comment on column circles.created_at is '作成日時';
 comment on column circles.updated_at is '更新日時';
 
@@ -256,13 +276,14 @@ create table albums (
     release_date          date,
     event_id              text,
     sub_event_id          text,
-    search_enabled        bool                     not null default true,
     album_number          text,
     event_price           numeric,
     currency              text                     not null default 'JPY',
     credit                text,
     introduction          text,
     url                   text,
+    published_at          timestamp with time zone,
+    archived_at           timestamp with time zone,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -274,12 +295,13 @@ comment on column albums.release_circle_name is '頒布サークル名';
 comment on column albums.release_date is '頒布日';
 comment on column albums.event_id is 'イベントID';
 comment on column albums.sub_event_id is 'サブイベントID';
-comment on column albums.search_enabled is '検索対象とするか';
 comment on column albums.event_price is 'イベント価格';
 comment on column albums.currency is '通貨(default: JPY)';
 comment on column albums.credit is 'クレジット';
 comment on column albums.introduction is '紹介';
 comment on column albums.url is 'URL';
+comment on column albums.published_at is '公開日時';
+comment on column albums.archived_at is 'アーカイブ日時';
 comment on column albums.created_at is '作成日時';
 comment on column albums.updated_at is '更新日時';
 
@@ -370,7 +392,6 @@ create table songs (
     disc_number           integer                  not null default 1,
     track_number          integer                  not null,
     release_date          date,
-    search_enabled        bool                     not null default true,
     length                integer,
     bpm                   integer,
     description           text,
@@ -380,6 +401,8 @@ create table songs (
     display_lyricist      text,
     display_vocalist      text,
     display_original_song text,
+    published_at          timestamp with time zone,
+    archived_at           timestamp with time zone,
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp
 );
@@ -392,7 +415,6 @@ comment on column songs.slug is 'スラッグ';
 comment on column songs.disc_number is 'ディスク番号(default: 1)';
 comment on column songs.track_number is 'トラック番号';
 comment on column songs.release_date is '頒布日(アルバムの頒布日と異なる場合に使用する)';
-comment on column songs.search_enabled is '検索対象とするか(default: true)';
 comment on column songs.length is '曲の長さ(秒)';
 comment on column songs.bpm is 'BPM';
 comment on column songs.description is '説明';
@@ -402,6 +424,8 @@ comment on column songs.display_rearranger is '再編曲者表示用(1度しか�
 comment on column songs.display_lyricist is '作詞者表示用(1度しか使用しない別名義などで使用する)';
 comment on column songs.display_vocalist is 'ボーカリスト表示用(1度しか使用しない別名義などで使用する)';
 comment on column songs.display_original_song is '原曲表示用(東方以外の原曲などで使用する)';
+comment on column songs.published_at is '公開日時';
+comment on column songs.archived_at is 'アーカイブ日時';
 comment on column songs.created_at is '作成日時';
 comment on column songs.updated_at is '更新日時';
 
