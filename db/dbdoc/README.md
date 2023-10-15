@@ -4,13 +4,13 @@
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
-| [public.products](public.products.md) | 7 | 原作 | BASE TABLE |
-| [public.original_songs](public.original_songs.md) | 10 | 原曲 | BASE TABLE |
+| [public.products](public.products.md) | 8 | 原作 | BASE TABLE |
+| [public.original_songs](public.original_songs.md) | 11 | 原曲 | BASE TABLE |
 | [public.product_distribution_service_urls](public.product_distribution_service_urls.md) | 6 | 原作(音楽)配信サービスURL | BASE TABLE |
 | [public.original_song_distribution_service_urls](public.original_song_distribution_service_urls.md) | 6 | 原曲配信サービスURL | BASE TABLE |
 | [public.event_series](public.event_series.md) | 8 | イベントシリーズ | BASE TABLE |
-| [public.events](public.events.md) | 17 | イベント | BASE TABLE |
-| [public.sub_events](public.sub_events.md) | 12 | サブイベント | BASE TABLE |
+| [public.events](public.events.md) | 18 | イベント | BASE TABLE |
+| [public.sub_events](public.sub_events.md) | 13 | サブイベント | BASE TABLE |
 | [public.artists](public.artists.md) | 15 | アーティスト | BASE TABLE |
 | [public.circles](public.circles.md) | 15 | サークル | BASE TABLE |
 | [public.albums](public.albums.md) | 18 | アルバム | BASE TABLE |
