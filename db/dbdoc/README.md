@@ -4,6 +4,7 @@
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
+| [public.admin_users](public.admin_users.md) | 18 | 管理者ユーザー | BASE TABLE |
 | [public.products](public.products.md) | 8 | 原作 | BASE TABLE |
 | [public.original_songs](public.original_songs.md) | 11 | 原曲 | BASE TABLE |
 | [public.product_distribution_service_urls](public.product_distribution_service_urls.md) | 6 | 原作(音楽)配信サービスURL | BASE TABLE |
