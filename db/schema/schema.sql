@@ -1,3 +1,45 @@
+create table admin_users (
+    id                     text                     not null primary key default cuid(),
+    name                   text,
+    email                  text                     not null default '',
+    encrypted_password     text                     not null default '',
+    reset_password_token   text,
+    reset_password_sent_at timestamp with time zone,
+    remember_created_at    timestamp with time zone,
+    sign_in_count          integer                  not null default 0,
+    current_sign_in_at     timestamp with time zone,
+    last_sign_in_at        timestamp with time zone,
+    current_sign_in_ip     text,
+    last_sign_in_ip        text,
+    confirmation_token     text,
+    confirmed_at           timestamp with time zone,
+    confirmation_sent_at   timestamp with time zone,
+    unconfirmed_email      text,
+    created_at             timestamp with time zone not null default current_timestamp,
+    updated_at             timestamp with time zone not null default current_timestamp
+);
+create unique index index_admin_users_on_email on admin_users(email);
+create unique index index_admin_users_on_reset_password_token on admin_users(reset_password_token);
+create unique index index_admin_users_on_confirmation_token on admin_users(confirmation_token);
+comment on table admin_users is '管理者ユーザー';
+comment on column admin_users.name is '名前';
+comment on column admin_users.email is 'メールアドレス';
+comment on column admin_users.encrypted_password is 'パスワード';
+comment on column admin_users.reset_password_token is 'パスワードリセットトークン';
+comment on column admin_users.reset_password_sent_at is 'パスワードリセット送信日時';
+comment on column admin_users.remember_created_at is 'ログイン情報記憶日時';
+comment on column admin_users.sign_in_count is 'ログイン回数';
+comment on column admin_users.current_sign_in_at is '現在のログイン日時';
+comment on column admin_users.last_sign_in_at is '最後のログイン日時';
+comment on column admin_users.current_sign_in_ip is '現在のログインIPアドレス';
+comment on column admin_users.last_sign_in_ip is '最後のログインIPアドレス';
+comment on column admin_users.confirmation_token is '確認トークン';
+comment on column admin_users.confirmed_at is '確認日時';
+comment on column admin_users.confirmation_sent_at is '確認送信日時';
+comment on column admin_users.unconfirmed_email is '未確認メールアドレス';
+comment on column admin_users.created_at is '作成日時';
+comment on column admin_users.updated_at is '更新日時';
+
 create type product_type as enum (
     'pc98',
     'windows',

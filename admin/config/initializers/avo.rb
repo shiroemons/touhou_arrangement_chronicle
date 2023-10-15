@@ -18,11 +18,8 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  user = Struct.new(:name)
-  config.current_user_method do
-    user.new(name: 'Anonymous user')
-  end
-  # config.current_user_method = {}
+  config.current_user_method = :current_admin_user
+  config.sign_out_path_name = :destroy_admin_user_session_path
   # config.authenticate_with do
   # end
 
@@ -127,6 +124,9 @@ Avo.configure do |config|
         resource(:circle)
         resource(:album)
         resource(:song)
+      end
+      group "Admin" do
+        resource(:admin_user)
       end
     end
 
