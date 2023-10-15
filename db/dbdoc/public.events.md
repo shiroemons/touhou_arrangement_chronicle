@@ -11,6 +11,7 @@
 | id | text | cuid() | false | [public.sub_events](public.sub_events.md) |  |  |
 | event_series_id | text |  | false |  | [public.event_series](public.event_series.md) | イベントシリーズID |
 | name | text |  | false |  |  | 名前 |
+| name_reading | text |  | true |  |  | 名前読み方 |
 | display_name | text |  | false |  |  | 表示名 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | event_dates | daterange |  | true |  |  | イベント開催期間 |

@@ -11,6 +11,7 @@
 | id | text | cuid() | false |  |  |  |
 | event_id | text |  | false |  | [public.events](public.events.md) | イベントID |
 | name | text |  | false |  |  | 名前(例: 〇〇 2日目) |
+| name_reading | text |  | true |  |  | 名前読み方 |
 | display_name | text |  | false |  |  | 表示名 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
 | event_date | date |  | true |  |  | 開催日 |

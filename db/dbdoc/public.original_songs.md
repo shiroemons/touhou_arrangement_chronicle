@@ -11,6 +11,7 @@
 | id | text |  | false | [public.original_song_distribution_service_urls](public.original_song_distribution_service_urls.md) [public.songs_original_songs](public.songs_original_songs.md) |  | 原曲ID |
 | product_id | text |  | false |  | [public.products](public.products.md) | 原作ID |
 | name | text |  | false |  |  | 名前 |
+| name_reading | text |  | true |  |  | 名前読み方 |
 | composer | text |  | true |  |  | 作曲者 |
 | arranger | text |  | true |  |  | 編曲者 |
 | track_number | integer |  | false |  |  | トラック番号 |
