@@ -3,11 +3,14 @@ package main
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gocarina/gocsv"
 	"github.com/jackc/pgtype"
 	"github.com/lucsky/cuid"
+	"github.com/samber/lo"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
@@ -117,6 +120,7 @@ func (imp *Importer) insertEvents(lines []EventCSV) {
 			EventStatus: line.Status,
 			Format:      line.Mode,
 			RegionCode:  line.AddressRegion,
+			PublishedAt: lo.ToPtr(time.Now()),
 		}
 		events = append(events, e)
 	}

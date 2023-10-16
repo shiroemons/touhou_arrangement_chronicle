@@ -5,8 +5,11 @@ import (
 	"errors"
 	"log"
 	"os"
+	"time"
 
 	"github.com/gocarina/gocsv"
+	"github.com/samber/lo"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
@@ -35,7 +38,8 @@ func (imp *Importer) importArtists() {
 		err = imp.db.NewSelect().Model(&artist).Where("name = ?", line.ArtistName).Limit(1).Scan(imp.ctx)
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
 			c := schema.Artist{
-				Name: line.ArtistName,
+				Name:        line.ArtistName,
+				PublishedAt: lo.ToPtr(time.Now()),
 			}
 			artists = append(artists, c)
 		}

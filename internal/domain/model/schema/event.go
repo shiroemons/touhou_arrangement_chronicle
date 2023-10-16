@@ -17,6 +17,7 @@ type Event struct {
 	EventSeriesID string           `bun:"event_series_id,nullzero,notnull"`
 	EventSeries   *EventSeries     `bun:"rel:belongs-to,join:event_series_id=id"`
 	Name          string           `bun:"name,nullzero,notnull,unique"`
+	NameReading   string           `bun:"name_reading"`
 	DisplayName   string           `bun:"display_name,nullzero,notnull"`
 	Slug          string           `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	EventDates    pgtype.Daterange `bun:"event_dates,type:daterange,nullzero"`
@@ -27,9 +28,11 @@ type Event struct {
 	Description   string           `bun:"description"`
 	URL           string           `bun:"url"`
 	TwitterURL    string           `bun:"twitter_url"`
-	SubEvents     []*SubEvent      `bun:"rel:has-many,join:id=event_id"`
+	PublishedAt   *time.Time       `bun:"published_at"`
+	ArchivedAt    *time.Time       `bun:"archived_at"`
 	CreatedAt     time.Time        `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt     time.Time        `bun:"updated_at,notnull,default:current_timestamp"`
+	SubEvents     []*SubEvent      `bun:"rel:has-many,join:id=event_id"`
 }
 
 func (e *Event) ToGraphQL() *model.Event {

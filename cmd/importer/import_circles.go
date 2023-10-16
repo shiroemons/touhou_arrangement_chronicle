@@ -5,8 +5,11 @@ import (
 	"errors"
 	"log"
 	"os"
+	"time"
 
 	"github.com/gocarina/gocsv"
+	"github.com/samber/lo"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
@@ -36,7 +39,8 @@ func (imp *Importer) importCircles() {
 		err = imp.db.NewSelect().Model(&circle).Where("name = ?", line.CircleName).Limit(1).Scan(imp.ctx)
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
 			c := schema.Circle{
-				Name: line.CircleName,
+				Name:        line.CircleName,
+				PublishedAt: lo.ToPtr(time.Now()),
 			}
 			if line.URL != "" {
 				c.URL = line.URL

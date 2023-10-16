@@ -67,7 +67,8 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 		Relation("Genres.Genre").
 		Relation("Tags").
 		Relation("Tags.Tag").
-		Where("s.search_enabled = ?", true).
+		Where("s.published_at IS NOT NULL").
+		Where("s.archived_at IS NULL").
 		Offset(offset).
 		Limit(limit).
 		Scan(ctx)
@@ -102,9 +103,11 @@ func getSongDocs(ctx context.Context, db *bun.DB, offset int) []map[string]inter
 			"id":                  s.ID,
 			"slug":                s.Slug,
 			"name":                s.Name,
+			"name_reading":        s.NameReading,
 			"disc_number":         s.DiscNumber,
 			"track_number":        s.TrackNumber,
 			"album_name":          s.Album.Name,
+			"album_name_reading":  s.Album.NameReading,
 			"album_service_urls":  convertAlbumServiceUrlsToMaps(s.Album.AlbumDistributionServiceURLs),
 			"circle_name":         s.Album.ReleaseCircleName,
 			"circles":             convertCirclesToMaps(s.Album.Circles),
@@ -142,8 +145,9 @@ func convertCirclesToMaps(circles []*schema.Circle) []map[string]interface{} {
 
 	for i, circle := range circles {
 		maps[i] = map[string]interface{}{
-			"id":   circle.ID,
-			"name": circle.Name,
+			"id":           circle.ID,
+			"name":         circle.Name,
+			"name_reading": circle.NameReading,
 		}
 	}
 
@@ -158,8 +162,9 @@ func convertArtistsToMaps(artists []*schema.Artist) []map[string]interface{} {
 
 	for i, artist := range artists {
 		maps[i] = map[string]interface{}{
-			"id":   artist.ID,
-			"name": artist.Name,
+			"id":           artist.ID,
+			"name":         artist.Name,
+			"name_reading": artist.NameReading,
 		}
 	}
 

@@ -18,11 +18,11 @@ type Song struct {
 	AlbumID                     string                        `bun:"album_id"`
 	Album                       *Album                        `bun:"rel:belongs-to,join:album_id=id"`
 	Name                        string                        `bun:"name,nullzero,notnull"`
+	NameReading                 string                        `bun:"name_reading"`
 	Slug                        string                        `bun:"slug,nullzero,notnull,unique,default:gen_random_uuid()"`
 	DiscNumber                  int                           `bun:"disc_number,nullzero,notnull,default:1"`
 	TrackNumber                 int                           `bun:"track_number,nullzero,notnull"`
 	ReleaseDate                 *time.Time                    `bun:"release_date"`
-	SearchEnabled               bool                          `bun:"search_enabled,nullzero,notnull,default:true"`
 	Length                      int                           `bun:"length,nullzero"`
 	BPM                         int                           `bun:"bpm,nullzero"`
 	Description                 string                        `bun:"description"`
@@ -32,6 +32,10 @@ type Song struct {
 	DisplayLyricist             string                        `bun:"display_lyricist"`
 	DisplayVocalist             string                        `bun:"display_vocalist"`
 	DisplayOriginalSong         string                        `bun:"display_original_song"`
+	PublishedAt                 *time.Time                    `bun:"published_at"`
+	ArchivedAt                  *time.Time                    `bun:"archived_at"`
+	CreatedAt                   time.Time                     `bun:"created_at,notnull,default:current_timestamp"`
+	UpdatedAt                   time.Time                     `bun:"updated_at,notnull,default:current_timestamp"`
 	SongDistributionServiceURLs []*SongDistributionServiceURL `bun:"rel:has-many,join:id=song_id"`
 	SongISRCs                   []*SongISRC                   `bun:"rel:has-many,join:id=song_id"`
 	Genres                      []*SongGenre                  `bun:"rel:has-many,join:id=song_id"`
@@ -43,8 +47,6 @@ type Song struct {
 	Lyricists                   []*Artist                     `bun:"m2m:songs_lyricists,join:Song=Artist"`
 	ReArrangers                 []*Artist                     `bun:"m2m:songs_rearrangers,join:Song=Artist"`
 	Vocalists                   []*Artist                     `bun:"m2m:songs_vocalists,join:Song=Artist"`
-	CreatedAt                   time.Time                     `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt                   time.Time                     `bun:"updated_at,notnull,default:current_timestamp"`
 }
 
 // ToGraphQL Convert to GraphQL Schema
@@ -73,7 +75,6 @@ func (e *Song) ToGraphQL() *model.Song {
 		DiscNumber:          e.DiscNumber,
 		TrackNumber:         e.TrackNumber,
 		ReleaseDate:         releaseDate,
-		SearchEnabled:       e.SearchEnabled,
 		Description:         e.Description,
 		DisplayComposer:     e.DisplayComposer,
 		DisplayArranger:     e.DisplayArranger,

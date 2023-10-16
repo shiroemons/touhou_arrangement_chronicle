@@ -48,7 +48,8 @@ func getAlbums(ctx context.Context, db *bun.DB) []*schema.Album {
 		Relation("Genres.Genre").
 		Relation("Circles").
 		Relation("AlbumDistributionServiceURLs").
-		Where("al.search_enabled = ?", true).
+		Where("al.published_at IS NOT NULL").
+		Where("al.archived_at IS NULL").
 		Order("al.id ASC").
 		Scan(ctx)
 	if err != nil {
@@ -86,6 +87,7 @@ func albumDocConverter(album *schema.Album) map[string]interface{} {
 		"slug":                album.Slug,
 		"release_circle_name": album.ReleaseCircleName,
 		"name":                album.Name,
+		"name_reading":        album.NameReading,
 		"event_name":          eventName,
 		"year":                releaseYear,
 		"release_date":        releaseDate,

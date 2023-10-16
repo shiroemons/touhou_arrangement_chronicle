@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/samber/lo"
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
 	"golang.org/x/exp/slices"
@@ -197,6 +198,7 @@ func FindOrCreateAlbum(ctx context.Context, db *bun.DB, al Album) (*schema.Album
 	album := &schema.Album{
 		Name:              al.Name,
 		ReleaseCircleName: al.Circle.Name,
+		PublishedAt:       lo.ToPtr(time.Now()),
 	}
 	if al.ReleaseDate != "" {
 		parsedTime, err := time.Parse("2006-01-02", al.ReleaseDate)
@@ -350,6 +352,7 @@ func FindOrCreateSong(ctx context.Context, db *bun.DB, album *schema.Album, trac
 		DiscNumber:  track.DiscNumber,
 		TrackNumber: track.TrackNumber,
 		ReleaseDate: album.ReleaseDate,
+		PublishedAt: lo.ToPtr(time.Now()),
 	}
 
 	_, err = db.NewInsert().

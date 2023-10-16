@@ -10,23 +10,28 @@ import (
 type AlbumTag struct {
 	bun.BaseModel `bun:"table:albums_tags,alias:alt"`
 
-	ID        string    `bun:",pk,default:cuid()"`
-	AlbumID   string    `bun:"album_id,nullzero,notnull"`
-	Album     *Album    `bun:"rel:belongs-to,join:album_id=id"`
-	TagID     string    `bun:"tag_id,nullzero,notnull"`
-	Tag       *Tag      `bun:"rel:belongs-to,join:tag_id=id"`
-	Locked    bool      `bun:"locked,notnull"`
-	CreatedAt time.Time `bun:"created_at,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `bun:"updated_at,notnull,default:current_timestamp"`
+	ID        string     `bun:",pk,default:cuid()"`
+	AlbumID   string     `bun:"album_id,nullzero,notnull"`
+	Album     *Album     `bun:"rel:belongs-to,join:album_id=id"` // bunのm2mの指定で必要
+	TagID     string     `bun:"tag_id,nullzero,notnull"`
+	Tag       *Tag       `bun:"rel:belongs-to,join:tag_id=id"` // bunのm2mの指定で必要
+	LockedAt  *time.Time `bun:"locked_at"`
+	CreatedAt time.Time  `bun:"created_at,notnull,default:current_timestamp"`
+	UpdatedAt time.Time  `bun:"updated_at,notnull,default:current_timestamp"`
 }
 
 // ToGraphQL Convert to GraphQL Schema
 func (e *AlbumTag) ToGraphQL() *model.AlbumTag {
+	var locked bool
+	if e.LockedAt != nil {
+		locked = true
+	}
+
 	return &model.AlbumTag{
 		ID:      e.ID,
 		Name:    e.Tag.Name,
 		TagType: model.TagType(e.Tag.TagType),
-		Locked:  e.Locked,
+		Locked:  locked,
 	}
 }
 
