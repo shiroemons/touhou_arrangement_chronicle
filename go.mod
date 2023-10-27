@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/99designs/gqlgen v0.17.39
 	github.com/blendle/zapdriver v1.3.1
+	github.com/caarlos0/env/v10 v10.0.0
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/zap v0.2.0
@@ -16,6 +17,7 @@ require (
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.4.3
 	github.com/k0kubun/pp/v3 v3.2.0
+	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.25.1
 	github.com/samber/lo v1.38.1
 	github.com/shopspring/decimal v1.3.1
@@ -58,7 +60,6 @@ require (
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
-	github.com/lucsky/cuid v1.2.1 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
