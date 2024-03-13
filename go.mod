@@ -16,6 +16,7 @@ require (
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.4.3
 	github.com/k0kubun/pp/v3 v3.2.0
+	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.25.1
 	github.com/samber/lo v1.38.1
 	github.com/shopspring/decimal v1.3.1
@@ -26,7 +27,7 @@ require (
 	github.com/uptrace/bun/extra/bundebug v1.1.16
 	github.com/vektah/gqlparser/v2 v2.5.10
 	go.opentelemetry.io/otel/trace v1.19.0
-	go.uber.org/fx v1.20.0
+	go.uber.org/fx v1.21.0
 	go.uber.org/zap v1.26.0
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 	golang.org/x/text v0.13.0
@@ -58,7 +59,6 @@ require (
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
-	github.com/lucsky/cuid v1.2.1 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
@@ -78,7 +78,7 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	go.opentelemetry.io/otel v1.19.0 // indirect
-	go.uber.org/dig v1.17.0 // indirect
+	go.uber.org/dig v1.17.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.5.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
