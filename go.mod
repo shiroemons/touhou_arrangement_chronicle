@@ -6,7 +6,7 @@ require (
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/go-playground/validator/v10 v10.15.5
 	github.com/goark/kkconv v0.3.3
-	github.com/gocarina/gocsv v0.0.0-20230616125104-99d496ca653d
+	github.com/gocarina/gocsv v0.0.0-20231116093920-b87c2d0e983a
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx/v5 v5.4.3
 	github.com/k0kubun/pp/v3 v3.2.0
