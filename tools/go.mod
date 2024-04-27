@@ -15,7 +15,6 @@ require (
 	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.26.2
 	github.com/samber/lo v1.39.0
-	github.com/shiroemons/touhou_arrangement_chronicle v0.0.0-20240427054602-c490d8fda63e
 	github.com/shopspring/decimal v1.4.0
 	github.com/spkg/bom v1.0.0
 	github.com/uptrace/bun v1.2.1
