@@ -50,7 +50,7 @@ services:
     command:
       - "go"
       - "run"
-      - "cmd/seeder/main.go"
+      - "tools/cmd/seeder/main.go"
 
   indexer:
     image: golang:1.22
@@ -73,11 +73,11 @@ services:
     command:
       - "go"
       - "run"
-      - "cmd/indexer/main.go"
-      - "cmd/indexer/original_songs.go"
-      - "cmd/indexer/albums.go"
-      - "cmd/indexer/songs.go"
-      - "cmd/indexer/setup.go"
+      - "tools/cmd/indexer/main.go"
+      - "tools/cmd/indexer/original_songs.go"
+      - "tools/cmd/indexer/albums.go"
+      - "tools/cmd/indexer/songs.go"
+      - "tools/cmd/indexer/setup.go"
 
   importer:
     image: golang:1.22
@@ -97,12 +97,12 @@ services:
     command:
       - "go"
       - "run"
-      - "cmd/importer/main.go"
-      - "cmd/importer/import_events.go"
-      - "cmd/importer/import_circles.go"
-      - "cmd/importer/import_artists.go"
-      - "cmd/importer/import_albums_and_songs.go"
-      - "cmd/importer/import_album_service_urls.go"
+      - "tools/cmd/importer/main.go"
+      - "tools/cmd/importer/import_events.go"
+      - "tools/cmd/importer/import_circles.go"
+      - "tools/cmd/importer/import_artists.go"
+      - "tools/cmd/importer/import_albums_and_songs.go"
+      - "tools/cmd/importer/import_album_service_urls.go"
 
   meilisearch:
     image: getmeili/meilisearch:prototype-japanese-10
