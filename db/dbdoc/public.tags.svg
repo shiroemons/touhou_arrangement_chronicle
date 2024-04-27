@@ -21,23 +21,23 @@
 <polygon fill="none" stroke="#000000" points="511.5,-166 511.5,-196 825.5,-196 825.5,-166 511.5,-166"/>
 <text text-anchor="start" x="518.5" y="-177.4" font-family="Arial" font-size="14.00" fill="#000000">id </text>
 <text text-anchor="start" x="533.2798" y="-177.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="563.6248" y="-177.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<text text-anchor="start" x="563.6248" y="-177.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
 <polygon fill="none" stroke="#000000" points="511.5,-136 511.5,-166 825.5,-166 825.5,-136 511.5,-136"/>
-<text text-anchor="start" x="518.5" y="-147.4" font-family="Arial" font-size="14.00" fill="#000000">name </text>
-<text text-anchor="start" x="557.399" y="-147.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="587.744" y="-147.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
+<text text-anchor="start" x="518.3542" y="-147.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
+<text text-anchor="start" x="588.3822" y="-147.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="754.0666" y="-147.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="511.5,-106 511.5,-136 825.5,-136 825.5,-106 511.5,-106"/>
-<text text-anchor="start" x="518.5" y="-117.4" font-family="Arial" font-size="14.00" fill="#000000">tag_type </text>
-<text text-anchor="start" x="576.0848" y="-117.4" font-family="Arial" font-size="14.00" fill="#666666">[tag_type]</text>
-<text text-anchor="start" x="637.5602" y="-117.4" font-family="Arial" font-size="14.00" fill="#000000"> タグ種別</text>
+<text text-anchor="start" x="518.5" y="-117.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
+<text text-anchor="start" x="592.4326" y="-117.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="758.117" y="-117.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="511.5,-76 511.5,-106 825.5,-106 825.5,-76 511.5,-76"/>
-<text text-anchor="start" x="518.3542" y="-87.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
-<text text-anchor="start" x="588.3822" y="-87.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="754.0666" y="-87.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="518.5" y="-87.4" font-family="Arial" font-size="14.00" fill="#000000">name </text>
+<text text-anchor="start" x="557.399" y="-87.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="587.744" y="-87.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
 <polygon fill="none" stroke="#000000" points="511.5,-46 511.5,-76 825.5,-76 825.5,-46 511.5,-46"/>
-<text text-anchor="start" x="518.5" y="-57.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
-<text text-anchor="start" x="592.4326" y="-57.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="758.117" y="-57.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="518.5" y="-57.4" font-family="Arial" font-size="14.00" fill="#000000">tag_type </text>
+<text text-anchor="start" x="576.0848" y="-57.4" font-family="Arial" font-size="14.00" fill="#666666">[tag_type]</text>
+<text text-anchor="start" x="637.5602" y="-57.4" font-family="Arial" font-size="14.00" fill="#000000"> タグ種別</text>
 <polygon fill="none" stroke="#000000" stroke-width="3" points="510,-44.5 510,-243.5 827,-243.5 827,-44.5 510,-44.5"/>
 </g>
 <!-- public.albums_tags -->
@@ -52,34 +52,34 @@
 <polygon fill="none" stroke="#000000" points="43.5,-517 43.5,-547 390.5,-547 390.5,-517 43.5,-517"/>
 <text text-anchor="start" x="50.5" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
 <text text-anchor="start" x="95.594" y="-528.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="125.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<text text-anchor="start" x="125.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムタグID</text>
 <polygon fill="none" stroke="#000000" points="43.5,-487 43.5,-517 390.5,-517 390.5,-487 43.5,-487"/>
-<text text-anchor="start" x="50.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
-<text text-anchor="start" x="141.4916" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="171.8366" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
+<text text-anchor="start" x="50.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="150.8422" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="316.5266" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="43.5,-457 43.5,-487 390.5,-487 390.5,-457 43.5,-457"/>
-<text text-anchor="start" x="50.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="122.8324" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="153.1774" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<text text-anchor="start" x="50.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="154.7468" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="320.4312" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="43.5,-427 43.5,-457 390.5,-457 390.5,-427 43.5,-427"/>
-<text text-anchor="start" x="50.1578" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
-<text text-anchor="start" x="144.2728" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="309.9572" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
+<text text-anchor="start" x="50.5" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">album_id    </text>
+<text text-anchor="start" x="141.4916" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="171.8366" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
 <polygon fill="none" stroke="#000000" points="43.5,-397 43.5,-427 390.5,-427 390.5,-397 43.5,-397"/>
-<text text-anchor="start" x="50.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="150.8422" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="316.5266" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="50.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
+<text text-anchor="start" x="122.8324" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="153.1774" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
 <polygon fill="none" stroke="#000000" points="43.5,-367 43.5,-397 390.5,-397 390.5,-367 43.5,-367"/>
-<text text-anchor="start" x="50.5" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="154.7468" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="320.4312" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="50.1578" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
+<text text-anchor="start" x="144.2728" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="309.9572" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
 </g>
 <!-- public.albums_tags&#45;&gt;public.tags -->
 <g id="edge1" class="edge">
 <title>public.albums_tags:tag_id&#45;&gt;public.tags:id</title>
-<path fill="none" stroke="#000000" d="M400.5762,-471.3165C455.501,-463.2218 416.2284,-384.8669 441.5,-324 468.634,-258.6475 440.7384,-181 511.5,-181"/>
-<polygon fill="#000000" stroke="#000000" points="400.4771,-471.3231 390.1954,-467.5103 395.4885,-471.6616 390.5,-472 390.5,-472 390.5,-472 395.4885,-471.6616 390.8046,-476.4897 400.4771,-471.3231 400.4771,-471.3231"/>
-<text text-anchor="start" x="397.3845" y="-482" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
+<path fill="none" stroke="#000000" d="M399.0853,-406.7412C430.529,-372.3568 485.1285,-181 511.5,-181"/>
+<polygon fill="#000000" stroke="#000000" points="399.0274,-406.7766 388.1495,-408.1627 394.7637,-409.3883 390.5,-412 390.5,-412 390.5,-412 394.7637,-409.3883 392.8505,-415.8373 399.0274,-406.7766 399.0274,-406.7766"/>
+<text text-anchor="start" x="397.3845" y="-422" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
 </g>
 <!-- public.songs_tags -->
 <g id="node3" class="node">
@@ -93,34 +93,34 @@
 <polygon fill="none" stroke="#000000" points="494.5,-517 494.5,-547 841.5,-547 841.5,-517 494.5,-517"/>
 <text text-anchor="start" x="501.5" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
 <text text-anchor="start" x="546.594" y="-528.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="576.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> ID</text>
+<text text-anchor="start" x="576.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲タグID</text>
 <polygon fill="none" stroke="#000000" points="494.5,-487 494.5,-517 841.5,-517 841.5,-487 494.5,-487"/>
-<text text-anchor="start" x="501.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
-<text text-anchor="start" x="584.7244" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="615.0694" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
+<text text-anchor="start" x="501.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="601.8422" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="767.5266" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="494.5,-457 494.5,-487 841.5,-487 841.5,-457 494.5,-457"/>
-<text text-anchor="start" x="501.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="573.8324" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="604.1774" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<text text-anchor="start" x="501.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="605.7468" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="771.4312" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="494.5,-427 494.5,-457 841.5,-457 841.5,-427 494.5,-427"/>
-<text text-anchor="start" x="501.1578" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
-<text text-anchor="start" x="595.2728" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="760.9572" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
+<text text-anchor="start" x="501.5" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
+<text text-anchor="start" x="584.7244" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="615.0694" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
 <polygon fill="none" stroke="#000000" points="494.5,-397 494.5,-427 841.5,-427 841.5,-397 494.5,-397"/>
-<text text-anchor="start" x="501.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="601.8422" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="767.5266" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="501.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
+<text text-anchor="start" x="573.8324" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="604.1774" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
 <polygon fill="none" stroke="#000000" points="494.5,-367 494.5,-397 841.5,-397 841.5,-367 494.5,-367"/>
-<text text-anchor="start" x="501.5" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="605.7468" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="771.4312" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="501.1578" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
+<text text-anchor="start" x="595.2728" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="760.9572" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
 </g>
 <!-- public.songs_tags&#45;&gt;public.tags -->
 <g id="edge2" class="edge">
 <title>public.songs_tags:tag_id&#45;&gt;public.tags:id</title>
-<path fill="none" stroke="#000000" d="M851.5161,-471.1359C904.8208,-461.3182 883.0158,-370.2911 841.5,-324 792.2474,-269.0822 560.7526,-342.9178 511.5,-288 479.7488,-252.5967 463.9444,-181 511.5,-181"/>
-<polygon fill="#000000" stroke="#000000" points="851.463,-471.1404 841.1132,-467.5167 846.4815,-471.5702 841.5,-472 841.5,-472 841.5,-472 846.4815,-471.5702 841.8868,-476.4833 851.463,-471.1404 851.463,-471.1404"/>
-<text text-anchor="start" x="848.3845" y="-482" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
+<path fill="none" stroke="#000000" d="M851.5038,-410.3979C877.9474,-400.7832 865.063,-350.2733 841.5,-324 792.2474,-269.0822 560.7526,-342.9178 511.5,-288 479.7488,-252.5967 463.9444,-181 511.5,-181"/>
+<polygon fill="#000000" stroke="#000000" points="851.3742,-410.4186 840.7884,-407.5566 846.4371,-411.2093 841.5,-412 841.5,-412 841.5,-412 846.4371,-411.2093 842.2116,-416.4434 851.3742,-410.4186 851.3742,-410.4186"/>
+<text text-anchor="start" x="848.3845" y="-422" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
 </g>
 <!-- public.circles_tags -->
 <g id="node4" class="node">
@@ -134,34 +134,34 @@
 <polygon fill="none" stroke="#000000" points="945.5,-517 945.5,-547 1292.5,-547 1292.5,-517 945.5,-517"/>
 <text text-anchor="start" x="952.5" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
 <text text-anchor="start" x="997.594" y="-528.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="1027.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルID</text>
+<text text-anchor="start" x="1027.939" y="-528.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルタグID</text>
 <polygon fill="none" stroke="#000000" points="945.5,-487 945.5,-517 1292.5,-517 1292.5,-487 945.5,-487"/>
-<text text-anchor="start" x="952.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">circle_id    </text>
-<text text-anchor="start" x="1038.033" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="1068.378" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルID</text>
+<text text-anchor="start" x="952.5" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="1052.8422" y="-498.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="1218.5266" y="-498.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="945.5,-457 945.5,-487 1292.5,-487 1292.5,-457 945.5,-457"/>
-<text text-anchor="start" x="952.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
-<text text-anchor="start" x="1024.8324" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="1055.1774" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<text text-anchor="start" x="952.5" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="1056.7468" y="-468.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="1222.4312" y="-468.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="945.5,-427 945.5,-457 1292.5,-457 1292.5,-427 945.5,-427"/>
-<text text-anchor="start" x="952.1578" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
-<text text-anchor="start" x="1046.2728" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="1211.9572" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
+<text text-anchor="start" x="952.5" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000">circle_id    </text>
+<text text-anchor="start" x="1038.033" y="-438.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="1068.378" y="-438.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルID</text>
 <polygon fill="none" stroke="#000000" points="945.5,-397 945.5,-427 1292.5,-427 1292.5,-397 945.5,-397"/>
-<text text-anchor="start" x="952.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="1052.8422" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="1218.5266" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="952.5" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000">tag_id    </text>
+<text text-anchor="start" x="1024.8324" y="-408.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="1055.1774" y="-408.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
 <polygon fill="none" stroke="#000000" points="945.5,-367 945.5,-397 1292.5,-397 1292.5,-367 945.5,-367"/>
-<text text-anchor="start" x="952.5" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="1056.7468" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="1222.4312" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="952.1578" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at    </text>
+<text text-anchor="start" x="1046.2728" y="-378.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="1211.9572" y="-378.4" font-family="Arial" font-size="14.00" fill="#000000"> ロック日時</text>
 </g>
 <!-- public.circles_tags&#45;&gt;public.tags -->
 <g id="edge3" class="edge">
 <title>public.circles_tags:tag_id&#45;&gt;public.tags:id</title>
-<path fill="none" stroke="#000000" d="M935.3941,-471.3181C880.2537,-463.2423 918.6624,-385.0618 893.5,-324 866.687,-258.9327 895.8754,-181 825.5,-181"/>
-<polygon fill="#000000" stroke="#000000" points="935.5227,-471.3267 945.197,-476.4898 940.5113,-471.6633 945.5,-472 945.5,-472 945.5,-472 940.5113,-471.6633 945.803,-467.5102 935.5227,-471.3267 935.5227,-471.3267"/>
-<text text-anchor="start" x="895.8845" y="-456" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
+<path fill="none" stroke="#000000" d="M936.9478,-406.7412C905.6768,-372.3568 851.8247,-181 825.5,-181"/>
+<polygon fill="#000000" stroke="#000000" points="936.9816,-406.762 943.1429,-415.8333 941.2408,-409.381 945.5,-412 945.5,-412 945.5,-412 941.2408,-409.381 947.8571,-408.1667 936.9816,-406.762 936.9816,-406.762"/>
+<text text-anchor="start" x="895.8845" y="-396" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (tag_id) REFERENCES tags(id)</text>
 </g>
 </g>
 </svg>

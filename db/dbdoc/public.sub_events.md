@@ -8,7 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
+| id | text | cuid() | false |  |  | サブイベントID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | event_id | text |  | false |  | [public.events](public.events.md) | イベントID |
 | name | text |  | false |  |  | 名前(例: 〇〇 2日目) |
 | name_reading | text |  | true |  |  | 名前読み方 |
@@ -19,8 +21,6 @@
 | description | text |  | true |  |  | 説明 |
 | published_at | timestamp with time zone |  | true |  |  | 公開日時 |
 | archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

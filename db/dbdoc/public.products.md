@@ -9,13 +9,13 @@
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
 | id | text |  | false | [public.original_songs](public.original_songs.md) [public.product_distribution_service_urls](public.product_distribution_service_urls.md) |  | 原作ID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text |  | true |  |  | 名前読み方 |
 | short_name | text |  | false |  |  | 短い名前 |
 | product_type | product_type |  | false |  |  | 原作種別 |
 | series_number | numeric(5,2) |  | false |  |  | シリーズ番号 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

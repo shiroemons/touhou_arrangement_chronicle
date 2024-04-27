@@ -8,12 +8,12 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  | 楽曲ID |
+| id | text | cuid() | false |  |  | 楽曲ジャンルID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | genre_id | text |  | false |  | [public.genres](public.genres.md) | ジャンルID |
 | locked_at | timestamp with time zone |  | true |  |  | ロック日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

@@ -8,10 +8,10 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
-| original_song_id | text |  | false |  | [public.original_songs](public.original_songs.md) | 原曲ID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
+| original_song_id | text |  | false |  | [public.original_songs](public.original_songs.md) | 原曲ID |
 
 ## Constraints
 

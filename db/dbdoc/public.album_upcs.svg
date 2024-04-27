@@ -21,22 +21,23 @@
 <polygon fill="none" stroke="#000000" points="85,-874 85,-904 399,-904 399,-874 85,-874"/>
 <text text-anchor="start" x="92" y="-885.4" font-family="Arial" font-size="14.00" fill="#000000">id </text>
 <text text-anchor="start" x="106.7798" y="-885.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="137.1248" y="-885.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムUPCのID</text>
 <polygon fill="none" stroke="#000000" points="85,-844 85,-874 399,-874 399,-844 85,-844"/>
-<text text-anchor="start" x="92" y="-855.4" font-family="Arial" font-size="14.00" fill="#000000">album_id </text>
-<text text-anchor="start" x="152.6774" y="-855.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="183.0224" y="-855.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
+<text text-anchor="start" x="91.8542" y="-855.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
+<text text-anchor="start" x="161.8822" y="-855.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="327.5666" y="-855.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="85,-814 85,-844 399,-844 399,-814 85,-814"/>
-<text text-anchor="start" x="92" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000">upc </text>
-<text text-anchor="start" x="118.4558" y="-825.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="148.8008" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000"> UPC(JAN)コード</text>
+<text text-anchor="start" x="92" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
+<text text-anchor="start" x="165.9326" y="-825.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="331.617" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="85,-784 85,-814 399,-814 399,-784 85,-784"/>
-<text text-anchor="start" x="91.8542" y="-795.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
-<text text-anchor="start" x="161.8822" y="-795.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="327.5666" y="-795.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="92" y="-795.4" font-family="Arial" font-size="14.00" fill="#000000">album_id </text>
+<text text-anchor="start" x="152.6774" y="-795.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="183.0224" y="-795.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
 <polygon fill="none" stroke="#000000" points="85,-754 85,-784 399,-784 399,-754 85,-754"/>
-<text text-anchor="start" x="92" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
-<text text-anchor="start" x="165.9326" y="-765.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="331.617" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="92" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000">upc </text>
+<text text-anchor="start" x="118.4558" y="-765.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="148.8008" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000"> UPC(JAN)コード</text>
 <polygon fill="none" stroke="#000000" stroke-width="3" points="83.5,-752.5 83.5,-951.5 400.5,-951.5 400.5,-752.5 83.5,-752.5"/>
 </g>
 <!-- public.albums -->
@@ -51,80 +52,81 @@
 <polygon fill="none" stroke="#000000" points="43,-553 43,-583 441,-583 441,-553 43,-553"/>
 <text text-anchor="start" x="50" y="-564.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
 <text text-anchor="start" x="95.094" y="-564.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="125.439" y="-564.4" font-family="Arial" font-size="14.00" fill="#000000"> アルバムID</text>
 <polygon fill="none" stroke="#000000" points="43,-523 43,-553 441,-553 441,-523 43,-523"/>
-<text text-anchor="start" x="50" y="-534.4" font-family="Arial" font-size="14.00" fill="#000000">name    </text>
-<text text-anchor="start" x="119.2132" y="-534.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="149.5582" y="-534.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
+<text text-anchor="start" x="50" y="-534.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="150.3422" y="-534.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="316.0266" y="-534.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="43,-493 43,-523 441,-523 441,-493 43,-493"/>
-<text text-anchor="start" x="50" y="-504.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading    </text>
-<text text-anchor="start" x="173.676" y="-504.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="204.021" y="-504.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
+<text text-anchor="start" x="50" y="-504.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="154.2468" y="-504.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="319.9312" y="-504.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="43,-463 43,-493 441,-493 441,-463 43,-463"/>
-<text text-anchor="start" x="50" y="-474.4" font-family="Arial" font-size="14.00" fill="#000000">slug    </text>
-<text text-anchor="start" x="109.8766" y="-474.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="140.2216" y="-474.4" font-family="Arial" font-size="14.00" fill="#000000"> スラッグ</text>
+<text text-anchor="start" x="50" y="-474.4" font-family="Arial" font-size="14.00" fill="#000000">name    </text>
+<text text-anchor="start" x="119.2132" y="-474.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="149.5582" y="-474.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
 <polygon fill="none" stroke="#000000" points="43,-433 43,-463 441,-463 441,-433 43,-433"/>
-<text text-anchor="start" x="50" y="-444.4" font-family="Arial" font-size="14.00" fill="#000000">release_circle_name    </text>
-<text text-anchor="start" x="213.3324" y="-444.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="243.6774" y="-444.4" font-family="Arial" font-size="14.00" fill="#000000"> 頒布サークル名</text>
+<text text-anchor="start" x="50" y="-444.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading    </text>
+<text text-anchor="start" x="173.676" y="-444.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="204.021" y="-444.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
 <polygon fill="none" stroke="#000000" points="43,-403 43,-433 441,-433 441,-403 43,-403"/>
-<text text-anchor="start" x="50" y="-414.4" font-family="Arial" font-size="14.00" fill="#000000">release_date    </text>
-<text text-anchor="start" x="165.1234" y="-414.4" font-family="Arial" font-size="14.00" fill="#666666">[date]</text>
-<text text-anchor="start" x="200.143" y="-414.4" font-family="Arial" font-size="14.00" fill="#000000"> 頒布日</text>
+<text text-anchor="start" x="50" y="-414.4" font-family="Arial" font-size="14.00" fill="#000000">slug    </text>
+<text text-anchor="start" x="109.8766" y="-414.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="140.2216" y="-414.4" font-family="Arial" font-size="14.00" fill="#000000"> スラッグ</text>
 <polygon fill="none" stroke="#000000" points="43,-373 43,-403 441,-403 441,-373 43,-373"/>
-<text text-anchor="start" x="50" y="-384.4" font-family="Arial" font-size="14.00" fill="#000000">event_id    </text>
-<text text-anchor="start" x="137.115" y="-384.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="167.46" y="-384.4" font-family="Arial" font-size="14.00" fill="#000000"> イベントID</text>
+<text text-anchor="start" x="50" y="-384.4" font-family="Arial" font-size="14.00" fill="#000000">release_circle_name    </text>
+<text text-anchor="start" x="213.3324" y="-384.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="243.6774" y="-384.4" font-family="Arial" font-size="14.00" fill="#000000"> 頒布サークル名</text>
 <polygon fill="none" stroke="#000000" points="43,-343 43,-373 441,-373 441,-343 43,-343"/>
-<text text-anchor="start" x="50" y="-354.4" font-family="Arial" font-size="14.00" fill="#000000">sub_event_id    </text>
-<text text-anchor="start" x="167.4628" y="-354.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="197.8078" y="-354.4" font-family="Arial" font-size="14.00" fill="#000000"> サブイベントID</text>
+<text text-anchor="start" x="50" y="-354.4" font-family="Arial" font-size="14.00" fill="#000000">release_date    </text>
+<text text-anchor="start" x="165.1234" y="-354.4" font-family="Arial" font-size="14.00" fill="#666666">[date]</text>
+<text text-anchor="start" x="200.143" y="-354.4" font-family="Arial" font-size="14.00" fill="#000000"> 頒布日</text>
 <polygon fill="none" stroke="#000000" points="43,-313 43,-343 441,-343 441,-313 43,-313"/>
-<text text-anchor="start" x="50" y="-324.4" font-family="Arial" font-size="14.00" fill="#000000">album_number    </text>
-<text text-anchor="start" x="177.554" y="-324.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="50" y="-324.4" font-family="Arial" font-size="14.00" fill="#000000">event_id    </text>
+<text text-anchor="start" x="137.115" y="-324.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="167.46" y="-324.4" font-family="Arial" font-size="14.00" fill="#000000"> イベントID</text>
 <polygon fill="none" stroke="#000000" points="43,-283 43,-313 441,-313 441,-283 43,-283"/>
-<text text-anchor="start" x="50" y="-294.4" font-family="Arial" font-size="14.00" fill="#000000">event_price    </text>
-<text text-anchor="start" x="156.5582" y="-294.4" font-family="Arial" font-size="14.00" fill="#666666">[numeric]</text>
-<text text-anchor="start" x="214.115" y="-294.4" font-family="Arial" font-size="14.00" fill="#000000"> イベント価格</text>
+<text text-anchor="start" x="50" y="-294.4" font-family="Arial" font-size="14.00" fill="#000000">sub_event_id    </text>
+<text text-anchor="start" x="167.4628" y="-294.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="197.8078" y="-294.4" font-family="Arial" font-size="14.00" fill="#000000"> サブイベントID</text>
 <polygon fill="none" stroke="#000000" points="43,-253 43,-283 441,-283 441,-253 43,-253"/>
-<text text-anchor="start" x="50" y="-264.4" font-family="Arial" font-size="14.00" fill="#000000">currency    </text>
-<text text-anchor="start" x="137.8738" y="-264.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="168.2188" y="-264.4" font-family="Arial" font-size="14.00" fill="#000000"> 通貨(default: JPY)</text>
+<text text-anchor="start" x="50" y="-264.4" font-family="Arial" font-size="14.00" fill="#000000">album_number    </text>
+<text text-anchor="start" x="177.554" y="-264.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
 <polygon fill="none" stroke="#000000" points="43,-223 43,-253 441,-253 441,-223 43,-223"/>
-<text text-anchor="start" x="50" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000">credit    </text>
-<text text-anchor="start" x="118.4278" y="-234.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="148.7728" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000"> クレジット</text>
+<text text-anchor="start" x="50" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000">event_price    </text>
+<text text-anchor="start" x="156.5582" y="-234.4" font-family="Arial" font-size="14.00" fill="#666666">[numeric]</text>
+<text text-anchor="start" x="214.115" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000"> イベント価格</text>
 <polygon fill="none" stroke="#000000" points="43,-193 43,-223 441,-223 441,-193 43,-193"/>
-<text text-anchor="start" x="50" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000">introduction    </text>
-<text text-anchor="start" x="156.5554" y="-204.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="186.9004" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000"> 紹介</text>
+<text text-anchor="start" x="50" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000">currency    </text>
+<text text-anchor="start" x="137.8738" y="-204.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="168.2188" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000"> 通貨(default: JPY)</text>
 <polygon fill="none" stroke="#000000" points="43,-163 43,-193 441,-193 441,-163 43,-163"/>
-<text text-anchor="start" x="50" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000">url    </text>
-<text text-anchor="start" x="99.7546" y="-174.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="130.0996" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000"> URL</text>
+<text text-anchor="start" x="50" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000">credit    </text>
+<text text-anchor="start" x="118.4278" y="-174.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="148.7728" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000"> クレジット</text>
 <polygon fill="none" stroke="#000000" points="43,-133 43,-163 441,-163 441,-133 43,-133"/>
-<text text-anchor="start" x="50" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000">published_at    </text>
-<text text-anchor="start" x="163.5694" y="-144.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="329.2538" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000"> 公開日時</text>
+<text text-anchor="start" x="50" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000">introduction    </text>
+<text text-anchor="start" x="156.5554" y="-144.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="186.9004" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000"> 紹介</text>
 <polygon fill="none" stroke="#000000" points="43,-103 43,-133 441,-133 441,-103 43,-103"/>
-<text text-anchor="start" x="49.7464" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000">archived_at    </text>
-<text text-anchor="start" x="156.3046" y="-114.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="321.989" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000"> アーカイブ日時</text>
+<text text-anchor="start" x="50" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000">url    </text>
+<text text-anchor="start" x="99.7546" y="-114.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="130.0996" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000"> URL</text>
 <polygon fill="none" stroke="#000000" points="43,-73 43,-103 441,-103 441,-73 43,-73"/>
-<text text-anchor="start" x="50" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="150.3422" y="-84.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="316.0266" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="50" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">published_at    </text>
+<text text-anchor="start" x="163.5694" y="-84.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="329.2538" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000"> 公開日時</text>
 <polygon fill="none" stroke="#000000" points="43,-43 43,-73 441,-73 441,-43 43,-43"/>
-<text text-anchor="start" x="50" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="154.2468" y="-54.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="319.9312" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="49.7464" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000">archived_at    </text>
+<text text-anchor="start" x="156.3046" y="-54.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="321.989" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000"> アーカイブ日時</text>
 </g>
 <!-- public.album_upcs&#45;&gt;public.albums -->
 <g id="edge1" class="edge">
 <title>public.album_upcs:album_id&#45;&gt;public.albums:id</title>
-<path fill="none" stroke="#000000" d="M408.7621,-856.825C468.3256,-830.1957 503.0189,-568 441,-568"/>
-<polygon fill="#000000" stroke="#000000" points="408.7607,-856.8252 398.0213,-854.6077 403.8803,-857.9126 399,-859 399,-859 399,-859 403.8803,-857.9126 399.9787,-863.3923 408.7607,-856.8252 408.7607,-856.8252"/>
-<text text-anchor="start" x="405.5565" y="-869" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
+<path fill="none" stroke="#000000" d="M408.9392,-796.2448C456.1978,-770.1823 489.8121,-568 441,-568"/>
+<polygon fill="#000000" stroke="#000000" points="408.6366,-796.3286 397.7979,-794.6635 403.8183,-797.6643 399,-799 399,-799 399,-799 403.8183,-797.6643 400.2021,-803.3365 408.6366,-796.3286 408.6366,-796.3286"/>
+<text text-anchor="start" x="405.5565" y="-809" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (album_id) REFERENCES albums(id)</text>
 </g>
 </g>
 </svg>

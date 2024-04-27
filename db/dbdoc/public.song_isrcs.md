@@ -8,11 +8,11 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
-| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
-| isrc | text |  | false |  |  | ISRC(International Standard Recording Code): 国際標準レコーディングコード |
+| id | text | cuid() | false |  |  | 楽曲ISRCのID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
+| isrc | text |  | false |  |  | ISRC(International Standard Recording Code): 国際標準レコーディングコード |
 
 ## Constraints
 

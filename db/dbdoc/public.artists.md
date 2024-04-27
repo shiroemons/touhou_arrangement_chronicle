@@ -8,7 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false | [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) |  |  |
+| id | text | cuid() | false | [public.songs_composers](public.songs_composers.md) [public.songs_arrangers](public.songs_arrangers.md) [public.songs_rearrangers](public.songs_rearrangers.md) [public.songs_lyricists](public.songs_lyricists.md) [public.songs_vocalists](public.songs_vocalists.md) |  | アーティストID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text |  | true |  |  | 名前読み方 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
@@ -21,8 +23,6 @@
 | youtube_channel_url | text |  | true |  |  | YouTubeチャンネル URL |
 | published_at | timestamp with time zone |  | true |  |  | 公開日時 |
 | archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

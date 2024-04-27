@@ -8,12 +8,12 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  | ID |
+| id | text | cuid() | false |  |  | アルバムタグID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | tag_id | text |  | false |  | [public.tags](public.tags.md) | タグID |
 | locked_at | timestamp with time zone |  | true |  |  | ロック日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

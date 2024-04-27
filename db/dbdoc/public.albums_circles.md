@@ -8,10 +8,10 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
-| circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
+| circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
 
 ## Constraints
 

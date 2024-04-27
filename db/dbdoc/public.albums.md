@@ -8,7 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  |  |
+| id | text | cuid() | false | [public.albums_circles](public.albums_circles.md) [public.album_consignment_shops](public.album_consignment_shops.md) [public.album_distribution_service_urls](public.album_distribution_service_urls.md) [public.album_upcs](public.album_upcs.md) [public.albums_genres](public.albums_genres.md) [public.albums_tags](public.albums_tags.md) |  | アルバムID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text |  | true |  |  | 名前読み方 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
@@ -24,8 +26,6 @@
 | url | text |  | true |  |  | URL |
 | published_at | timestamp with time zone |  | true |  |  | 公開日時 |
 | archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

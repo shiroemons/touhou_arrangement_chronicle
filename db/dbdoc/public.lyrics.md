@@ -8,12 +8,12 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
+| id | text | cuid() | false |  |  | 歌詞ID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | song_id | text |  | false |  | [public.songs](public.songs.md) | 楽曲ID |
 | content | text |  | false |  |  | 歌詞 |
 | language | text | 'ja'::text | true |  |  | 言語(default: ja) |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 
