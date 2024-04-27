@@ -10,6 +10,6 @@ type SongRepository interface {
 	Create(ctx context.Context, song *schema.Song) (*schema.Song, error)
 	Update(ctx context.Context, song *schema.Song) (*schema.Song, error)
 	Delete(ctx context.Context, song *schema.Song) error
-	FindByIDs(ctx context.Context, ids []string) (schema.Songs, error)
+	FindByIDs(ctx context.Context, ids []string) ([]*schema.Song, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Song, error)
 }

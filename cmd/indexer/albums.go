@@ -8,8 +8,9 @@ import (
 	"github.com/k0kubun/pp/v3"
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/samber/lo"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 func setupAlbums(ctx context.Context, db *bun.DB, cli *meilisearch.Client) {

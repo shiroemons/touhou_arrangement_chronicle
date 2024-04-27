@@ -3,8 +3,6 @@ package schema
 import (
 	"time"
 
-	"github.com/samber/lo"
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 	"github.com/uptrace/bun"
 )
 
@@ -24,32 +22,4 @@ type SubEvent struct {
 	ArchivedAt  *time.Time `bun:"archived_at"`
 	CreatedAt   time.Time  `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt   time.Time  `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-func (e *SubEvent) ToGraphQL() *model.SubEvent {
-	subEvent := &model.SubEvent{
-		ID:          e.ID,
-		Name:        e.Name,
-		DisplayName: e.DisplayName,
-		Slug:        e.Slug,
-		Description: e.Description,
-	}
-	if e.EventDate != nil {
-		subEvent.Date = lo.ToPtr(e.EventDate.Format("2006-01-02"))
-	}
-	if e.EventStatus != "" {
-		subEvent.Status = model.EventStatus(e.EventStatus)
-	}
-
-	return subEvent
-}
-
-type SubEvents []*SubEvent
-
-func (arr SubEvents) ToGraphQLs() []*model.SubEvent {
-	res := make([]*model.SubEvent, len(arr))
-	for i, v := range arr {
-		res[i] = v.ToGraphQL()
-	}
-	return res
 }

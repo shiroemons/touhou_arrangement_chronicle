@@ -4,8 +4,6 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type OriginalSong struct {
@@ -24,35 +22,4 @@ type OriginalSong struct {
 	Songs                               []*Song                               `bun:"m2m:songs_original_songs,join:OriginalSong=Song"`
 	CreatedAt                           time.Time                             `bun:"created_at,notnull,default:current_timestamp"`
 	UpdatedAt                           time.Time                             `bun:"updated_at,notnull,default:current_timestamp"`
-}
-
-// ToGraphQL Convert to GraphQL Schema
-func (e *OriginalSong) ToGraphQL() *model.OriginalSong {
-	distributionServiceURLs := ConvertSlice(e.OriginalSongDistributionServiceURLs, func(v *OriginalSongDistributionServiceURL) *model.OriginalSongDistributionServiceURL {
-		return v.ToGraphQL()
-	})
-
-	return &model.OriginalSong{
-		ID:               e.ID,
-		Product:          &model.Product{ID: e.ProductID},
-		Name:             e.Name,
-		Composer:         e.Composer,
-		Arranger:         e.Arranger,
-		TrackNumber:      e.TrackNumber,
-		IsOriginal:       e.Original,
-		SourceID:         e.SourceID,
-		DistributionUrls: distributionServiceURLs,
-	}
-}
-
-// OriginalSongs Method Injection
-type OriginalSongs []*OriginalSong
-
-// ToGraphQLs Convert all to GraphQL Schema
-func (arr OriginalSongs) ToGraphQLs() []*model.OriginalSong {
-	res := make([]*model.OriginalSong, len(arr))
-	for i, os := range arr {
-		res[i] = os.ToGraphQL()
-	}
-	return res
 }

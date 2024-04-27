@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type CircleRepository struct {
@@ -57,8 +58,8 @@ func (r *CircleRepository) Delete(ctx context.Context, circle *schema.Circle) er
 	return nil
 }
 
-func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) (schema.Circles, error) {
-	circles := make(schema.Circles, 0)
+func (r *CircleRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.Circle, error) {
+	circles := make([]*schema.Circle, 0)
 	err := r.db.NewSelect().Model(&circles).
 		Where("c.id IN (?)", bun.In(ids)).
 		Scan(ctx)

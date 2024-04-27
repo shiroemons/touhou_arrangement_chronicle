@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type TagRepository struct {
@@ -58,7 +59,7 @@ func (r *TagRepository) Delete(ctx context.Context, tag *schema.Tag) error {
 }
 
 func (r *TagRepository) FindAll(ctx context.Context) ([]*schema.Tag, error) {
-	tags := make(schema.Tags, 0)
+	tags := make([]*schema.Tag, 0)
 	if err := r.db.NewSelect().Model(&tags).Scan(ctx); err != nil {
 		return nil, err
 	}

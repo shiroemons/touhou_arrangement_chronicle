@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type OriginalSongRepository struct {
@@ -29,8 +30,8 @@ func (r *OriginalSongRepository) All(ctx context.Context) ([]*schema.OriginalSon
 	return originalSongs, nil
 }
 
-func (r *OriginalSongRepository) FindByIDs(ctx context.Context, ids []string) (schema.OriginalSongs, error) {
-	originalSongs := make(schema.OriginalSongs, 0)
+func (r *OriginalSongRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.OriginalSong, error) {
+	originalSongs := make([]*schema.OriginalSong, 0)
 	err := r.db.NewSelect().Model(originalSongs).
 		Relation("Product").
 		Relation("Product.ProductDistributionServiceURLs").

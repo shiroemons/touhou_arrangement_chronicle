@@ -3,10 +3,7 @@ package schema
 import (
 	"time"
 
-	"github.com/samber/lo"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type Song struct {
@@ -47,77 +44,4 @@ type Song struct {
 	Lyricists                   []*Artist                     `bun:"m2m:songs_lyricists,join:Song=Artist"`
 	ReArrangers                 []*Artist                     `bun:"m2m:songs_rearrangers,join:Song=Artist"`
 	Vocalists                   []*Artist                     `bun:"m2m:songs_vocalists,join:Song=Artist"`
-}
-
-// ToGraphQL Convert to GraphQL Schema
-func (e *Song) ToGraphQL() *model.Song {
-	var releaseDate *string
-	if e.ReleaseDate != nil {
-		releaseDate = lo.ToPtr(e.ReleaseDate.Format("2006-01-02"))
-	}
-
-	originalSongs := ConvertSlice(e.OriginalSongs, func(v *OriginalSong) *model.OriginalSong { return v.ToGraphQL() })
-	arrangeCircles := ConvertSlice(e.ArrangeCircles, func(v *Circle) *model.Circle { return v.ToGraphQL() })
-	arrangers := ConvertSlice(e.Arrangers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
-	composers := ConvertSlice(e.Composers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
-	lyricists := ConvertSlice(e.Lyricists, func(v *Artist) *model.Artist { return v.ToGraphQL() })
-	reArrangers := ConvertSlice(e.ReArrangers, func(v *Artist) *model.Artist { return v.ToGraphQL() })
-	vocalists := ConvertSlice(e.Vocalists, func(v *Artist) *model.Artist { return v.ToGraphQL() })
-	distributionServiceURLs := ConvertSlice(e.SongDistributionServiceURLs, func(v *SongDistributionServiceURL) *model.SongDistributionServiceURL { return v.ToGraphQL() })
-	isrcs := ConvertSlice(e.SongISRCs, func(v *SongISRC) *model.Isrc { return v.ToGraphQL() })
-	genres := ConvertSlice(e.Genres, func(v *SongGenre) *model.SongGenre { return v.ToGraphQL() })
-	tags := ConvertSlice(e.Tags, func(v *SongTag) *model.SongTag { return v.ToGraphQL() })
-
-	song := &model.Song{
-		ID:                  e.ID,
-		Name:                e.Name,
-		Slug:                e.Slug,
-		DiscNumber:          e.DiscNumber,
-		TrackNumber:         e.TrackNumber,
-		ReleaseDate:         releaseDate,
-		Description:         e.Description,
-		DisplayComposer:     e.DisplayComposer,
-		DisplayArranger:     e.DisplayArranger,
-		DisplayRearranger:   e.DisplayRearranger,
-		DisplayLyricist:     e.DisplayLyricist,
-		DisplayVocalist:     e.DisplayVocalist,
-		DisplayOriginalSong: e.DisplayOriginalSong,
-		OriginalSongs:       originalSongs,
-		ArrangeCircles:      arrangeCircles,
-		Arrangers:           arrangers,
-		Composers:           composers,
-		Lyricists:           lyricists,
-		Rearrangers:         reArrangers,
-		Vocalists:           vocalists,
-		DistributionUrls:    distributionServiceURLs,
-		Isrcs:               isrcs,
-		Genres:              genres,
-		Tags:                tags,
-	}
-	if e.Length != 0 {
-		song.Length = lo.ToPtr(e.Length)
-	}
-	if e.BPM != 0 {
-		song.Bpm = lo.ToPtr(e.BPM)
-	}
-	if e.CircleID != "" {
-		song.Circle = &model.Circle{ID: e.CircleID}
-	}
-	if e.AlbumID != "" {
-		song.Album = &model.Album{ID: e.AlbumID}
-	}
-
-	return song
-}
-
-// Songs is a slice of Song
-type Songs []*Song
-
-// ToGraphQLs Convert to GraphQL Schema
-func (arr Songs) ToGraphQLs() []*model.Song {
-	res := make([]*model.Song, len(arr))
-	for i, v := range arr {
-		res[i] = v.ToGraphQL()
-	}
-	return res
 }

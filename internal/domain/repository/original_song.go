@@ -8,5 +8,5 @@ import (
 
 type OriginalSongRepository interface {
 	All(ctx context.Context) ([]*schema.OriginalSong, error)
-	FindByIDs(ctx context.Context, ids []string) (schema.OriginalSongs, error)
+	FindByIDs(ctx context.Context, ids []string) ([]*schema.OriginalSong, error)
 }
