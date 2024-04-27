@@ -1,4 +1,4 @@
-FROM ruby:3.2.2
+FROM ruby:3.3.1
 
 WORKDIR /app
 
@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
       git \
       nodejs \
       vim
+
+ENV DISABLE_BOOTSNAP 1
 
 # Add yarnpkg for assets:precompile
 RUN npm install -g yarn
