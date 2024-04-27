@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type AlbumRepository struct {
@@ -57,8 +58,8 @@ func (r *AlbumRepository) Delete(ctx context.Context, album *schema.Album) error
 	return nil
 }
 
-func (r *AlbumRepository) FindByIDs(ctx context.Context, ids []string) (schema.Albums, error) {
-	albums := make(schema.Albums, 0)
+func (r *AlbumRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.Album, error) {
+	albums := make([]*schema.Album, 0)
 	err := r.db.NewSelect().Model(&albums).
 		Relation("Event").
 		Relation("SubEvent").

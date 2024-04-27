@@ -10,6 +10,6 @@ type SubEventRepository interface {
 	Create(ctx context.Context, subEvent *schema.SubEvent) (*schema.SubEvent, error)
 	Update(ctx context.Context, subEvent *schema.SubEvent) (*schema.SubEvent, error)
 	Delete(ctx context.Context, subEvent *schema.SubEvent) error
-	FindByIDs(ctx context.Context, ids []string) (schema.SubEvents, error)
+	FindByIDs(ctx context.Context, ids []string) ([]*schema.SubEvent, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.SubEvent, error)
 }

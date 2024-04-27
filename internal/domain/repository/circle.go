@@ -10,7 +10,7 @@ type CircleRepository interface {
 	Create(ctx context.Context, circle *schema.Circle) (*schema.Circle, error)
 	Update(ctx context.Context, circle *schema.Circle) (*schema.Circle, error)
 	Delete(ctx context.Context, circle *schema.Circle) error
-	FindByIDs(ctx context.Context, ids []string) (schema.Circles, error)
+	FindByIDs(ctx context.Context, ids []string) ([]*schema.Circle, error)
 	FindByInitialType(ctx context.Context, initialType string) ([]*schema.Circle, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Circle, error)
 }

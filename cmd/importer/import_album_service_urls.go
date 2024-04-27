@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gocarina/gocsv"
+
 	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 

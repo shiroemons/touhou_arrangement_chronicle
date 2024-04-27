@@ -12,9 +12,10 @@ import (
 	"time"
 
 	"github.com/samber/lo"
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
 	"golang.org/x/exp/slices"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type Album struct {

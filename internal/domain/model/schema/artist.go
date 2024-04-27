@@ -5,8 +5,6 @@ import (
 	"time"
 
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type Artist struct {
@@ -53,34 +51,4 @@ func (e *Artist) BeforeAppendModel(_ context.Context, query bun.Query) error {
 		}
 	}
 	return nil
-}
-
-func (e *Artist) ToGraphQL() *model.Artist {
-	var initialLetterType model.InitialLetterType
-	if e.InitialLetterType != "" {
-		initialLetterType = model.InitialLetterType(e.InitialLetterType)
-	}
-	return &model.Artist{
-		ID:                  e.ID,
-		Name:                e.Name,
-		NameReading:         e.NameReading,
-		Slug:                e.Slug,
-		InitialLetterType:   initialLetterType,
-		InitialLetterDetail: e.InitialLetterDetail,
-		Description:         e.Description,
-		URL:                 e.URL,
-		BlogURL:             e.BlogURL,
-		TwitterURL:          e.TwitterURL,
-		YoutubeChannelURL:   e.YoutubeChannelURL,
-	}
-}
-
-type Artists []*Artist
-
-func (arr Artists) ToGraphQLs() []*model.Artist {
-	res := make([]*model.Artist, len(arr))
-	for i, artist := range arr {
-		res[i] = artist.ToGraphQL()
-	}
-	return res
 }

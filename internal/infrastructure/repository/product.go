@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type ProductRepository struct {
@@ -27,8 +28,8 @@ func (r *ProductRepository) All(ctx context.Context) ([]*schema.Product, error) 
 	return products, nil
 }
 
-func (r *ProductRepository) FindByIDs(ctx context.Context, ids []string) (schema.Products, error) {
-	products := make(schema.Products, 0)
+func (r *ProductRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.Product, error) {
+	products := make([]*schema.Product, 0)
 	err := r.db.NewSelect().Model(&products).
 		Relation("OriginalSongs").
 		Relation("ProductDistributionServiceURLs").

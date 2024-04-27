@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 	"go.uber.org/fx"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/repository"
 )
 
 var Module = fx.Provide(

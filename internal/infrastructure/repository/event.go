@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type EventRepository struct {
@@ -57,8 +58,8 @@ func (r *EventRepository) Delete(ctx context.Context, event *schema.Event) error
 	return nil
 }
 
-func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) (schema.Events, error) {
-	events := make(schema.Events, 0)
+func (r *EventRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.Event, error) {
+	events := make([]*schema.Event, 0)
 	err := r.db.NewSelect().Model(&events).
 		Relation("EventSeries").
 		Where("e.id IN (?)", bun.In(ids)).

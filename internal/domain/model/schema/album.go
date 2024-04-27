@@ -3,11 +3,8 @@ package schema
 import (
 	"time"
 
-	"github.com/samber/lo"
 	"github.com/shopspring/decimal"
 	"github.com/uptrace/bun"
-
-	"github.com/shiroemons/touhou_arrangement_chronicle/graph/model"
 )
 
 type Album struct {
@@ -40,52 +37,4 @@ type Album struct {
 	Genres                       []*AlbumGenre                  `bun:"rel:has-many,join:id=album_id"`
 	Tags                         []*AlbumTag                    `bun:"rel:has-many,join:id=album_id"`
 	Circles                      []*Circle                      `bun:"m2m:albums_circles,join:Album=Circle"`
-}
-
-// ToGraphQL Convert to GraphQL Schema
-func (e *Album) ToGraphQL() *model.Album {
-	circles := ConvertSlice(e.Circles, func(c *Circle) *model.Circle { return c.ToGraphQL() })
-	genres := ConvertSlice(e.Genres, func(g *AlbumGenre) *model.AlbumGenre { return g.ToGraphQL() })
-	tags := ConvertSlice(e.Tags, func(t *AlbumTag) *model.AlbumTag { return t.ToGraphQL() })
-	consignmentShops := ConvertSlice(e.AlbumConsignmentShops, func(a *AlbumConsignmentShop) *model.ConsignmentShop { return a.ToGraphQL() })
-	distributionUrls := ConvertSlice(e.AlbumDistributionServiceURLs, func(u *AlbumDistributionServiceURL) *model.AlbumDistributionServiceURL { return u.ToGraphQL() })
-
-	album := &model.Album{
-		ID:                e.ID,
-		Name:              e.Name,
-		NameReading:       e.NameReading,
-		Slug:              e.Slug,
-		ReleaseCircleName: e.ReleaseCircleName,
-		AlbumNumber:       e.AlbumNumber,
-		Currency:          e.Currency,
-		Credit:            e.Credit,
-		Introduction:      e.Introduction,
-		URL:               e.URL,
-		Circles:           circles,
-		Genres:            genres,
-		Tags:              tags,
-		ConsignmentShops:  consignmentShops,
-		DistributionUrls:  distributionUrls,
-	}
-	if e.ReleaseDate != nil {
-		album.ReleaseDate = lo.ToPtr(e.ReleaseDate.Format("2006-01-02"))
-	}
-	if e.EventID != "" {
-		album.Event = &model.Event{ID: e.EventID}
-	}
-	if e.SubEventID != "" {
-		album.SubEvent = &model.SubEvent{ID: e.SubEventID}
-	}
-
-	return album
-}
-
-type Albums []*Album
-
-func (arr Albums) ToGraphQLs() []*model.Album {
-	res := make([]*model.Album, len(arr))
-	for i, v := range arr {
-		res[i] = v.ToGraphQL()
-	}
-	return res
 }

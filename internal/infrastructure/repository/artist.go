@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 
-	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 	"github.com/uptrace/bun"
+
+	"github.com/shiroemons/touhou_arrangement_chronicle/internal/domain/model/schema"
 )
 
 type ArtistRepository struct {
@@ -57,8 +58,8 @@ func (r *ArtistRepository) Delete(ctx context.Context, artist *schema.Artist) er
 	return nil
 }
 
-func (r *ArtistRepository) FindByIDs(ctx context.Context, ids []string) (schema.Artists, error) {
-	artists := make(schema.Artists, 0)
+func (r *ArtistRepository) FindByIDs(ctx context.Context, ids []string) ([]*schema.Artist, error) {
+	artists := make([]*schema.Artist, 0)
 	err := r.db.NewSelect().Model(&artists).
 		Where("a.id IN (?)", bun.In(ids)).
 		Scan(ctx)
@@ -69,7 +70,7 @@ func (r *ArtistRepository) FindByIDs(ctx context.Context, ids []string) (schema.
 }
 
 func (r *ArtistRepository) FindByInitialType(ctx context.Context, initialType string) ([]*schema.Artist, error) {
-	artists := make(schema.Artists, 0)
+	artists := make([]*schema.Artist, 0)
 
 	err := r.db.NewSelect().Model(&artists).
 		Where("initial_letter_type = ?", initialType).

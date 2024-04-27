@@ -8,6 +8,6 @@ import (
 
 type ProductRepository interface {
 	All(ctx context.Context) ([]*schema.Product, error)
-	FindByIDs(ctx context.Context, ids []string) (schema.Products, error)
+	FindByIDs(ctx context.Context, ids []string) ([]*schema.Product, error)
 	GetMapInIDs(ctx context.Context, ids []string) (map[string]*schema.Product, error)
 }
