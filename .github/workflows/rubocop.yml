@@ -29,7 +29,7 @@ jobs:
           bundler-cache: true
 
       - name: Cache vendor/bundle
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache_gem
         with:
           path: vendor/bundle
