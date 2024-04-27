@@ -17,11 +17,11 @@
 <text text-anchor="start" x="523.2064" y="-867.8" font-family="Arial Bold" font-size="18.00" fill="#000000">public.circles_genres</text>
 <text text-anchor="start" x="691.2256" y="-867.8" font-family="Arial" font-size="14.00" fill="#000000">    </text>
 <text text-anchor="start" x="725.4304" y="-867.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
-<text text-anchor="start" x="621.2342" y="-853.4" font-family="Arial" font-size="14.00" fill="#333333">サークルタグ</text>
+<text text-anchor="start" x="605.1594" y="-853.4" font-family="Arial" font-size="14.00" fill="#333333">サークルジャンル</text>
 <polygon fill="none" stroke="#000000" points="512.5,-814 512.5,-844 829.5,-844 829.5,-814 512.5,-814"/>
 <text text-anchor="start" x="519.5" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000">id </text>
 <text text-anchor="start" x="534.2798" y="-825.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="564.6248" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルタグID</text>
+<text text-anchor="start" x="564.6248" y="-825.4" font-family="Arial" font-size="14.00" fill="#000000"> サークルジャンルID</text>
 <polygon fill="none" stroke="#000000" points="512.5,-784 512.5,-814 829.5,-814 829.5,-784 512.5,-784"/>
 <text text-anchor="start" x="519.5" y="-795.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
 <text text-anchor="start" x="589.528" y="-795.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
@@ -37,7 +37,7 @@
 <polygon fill="none" stroke="#000000" points="512.5,-694 512.5,-724 829.5,-724 829.5,-694 512.5,-694"/>
 <text text-anchor="start" x="519.5" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000">genre_id </text>
 <text text-anchor="start" x="577.8534" y="-705.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="608.1984" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> タグID</text>
+<text text-anchor="start" x="608.1984" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> ジャンルID</text>
 <polygon fill="none" stroke="#000000" points="512.5,-664 512.5,-694 829.5,-694 829.5,-664 512.5,-664"/>
 <text text-anchor="start" x="519.3149" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000">locked_at </text>
 <text text-anchor="start" x="583.1157" y="-675.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
