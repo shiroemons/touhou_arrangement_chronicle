@@ -5,6 +5,7 @@ go 1.21
 toolchain go1.22.2
 
 require (
+	github.com/caarlos0/env/v11 v11.0.0
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/goark/kkconv v0.3.3
