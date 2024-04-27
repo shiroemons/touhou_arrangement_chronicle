@@ -13,7 +13,7 @@ require (
 	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.25.1
 	github.com/samber/lo v1.38.1
-	github.com/shopspring/decimal v1.3.1
+	github.com/shopspring/decimal v1.4.0
 	github.com/spkg/bom v1.0.0
 	github.com/uptrace/bun v1.1.16
 	github.com/uptrace/bun/dialect/pgdialect v1.1.16
