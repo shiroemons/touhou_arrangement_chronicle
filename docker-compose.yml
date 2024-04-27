@@ -163,7 +163,10 @@ services:
       BOOTSNAP_CACHE_DIR: "/app/vendor/bundle"
 
   frontend:
-    image: node:current-slim
+    build:
+      context: .
+      dockerfile: "./docker/frontend/Dockerfile"
+    image: frontend:1.0.0
     stdin_open: true
     tty: true
     expose:
@@ -178,7 +181,7 @@ services:
       TZ: Asia/Tokyo
     depends_on:
       - postgres16
-    command: bash -c "npm install -g npm@latest && npm install && npm run dev"
+    command: bash -c "npm install && npm run dev"
 
 volumes:
   go_pkg:
