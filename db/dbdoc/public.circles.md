@@ -8,7 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false | [public.albums_circles](public.albums_circles.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_circles](public.songs_circles.md) [public.circles_genres](public.circles_genres.md) [public.circles_tags](public.circles_tags.md) |  |  |
+| id | text | cuid() | false | [public.albums_circles](public.albums_circles.md) [public.songs_arrange_circles](public.songs_arrange_circles.md) [public.songs_circles](public.songs_circles.md) [public.circles_genres](public.circles_genres.md) [public.circles_tags](public.circles_tags.md) |  | サークルID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | name | text |  | false |  |  | 名前 |
 | name_reading | text |  | true |  |  | 名前読み方 |
 | slug | text | gen_random_uuid() | false |  |  | スラッグ |
@@ -21,8 +23,6 @@
 | youtube_channel_url | text |  | true |  |  | YouTubeチャンネル URL |
 | published_at | timestamp with time zone |  | true |  |  | 公開日時 |
 | archived_at | timestamp with time zone |  | true |  |  | アーカイブ日時 |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

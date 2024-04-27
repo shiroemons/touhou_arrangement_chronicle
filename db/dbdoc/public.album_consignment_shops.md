@@ -8,15 +8,15 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
+| id | text | cuid() | false |  |  | アルバム委託販売ショップID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
 | shop | shop |  | false |  |  | ショップ |
 | url | text |  | false |  |  | URL |
 | tax_included | boolean | false | false |  |  | 税込みか否か(true: 税込み、false: 税抜き・税別) |
 | shop_price | numeric |  | false |  |  | ショップ価格 |
 | currency | text | 'JPY'::text | false |  |  | 通貨(default: JPY) |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

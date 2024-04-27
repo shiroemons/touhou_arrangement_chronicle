@@ -8,10 +8,10 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false | [public.albums_genres](public.albums_genres.md) [public.songs_genres](public.songs_genres.md) [public.circles_genres](public.circles_genres.md) |  | ID |
-| name | text |  | false |  |  | 名前 |
+| id | text | cuid() | false | [public.albums_genres](public.albums_genres.md) [public.songs_genres](public.songs_genres.md) [public.circles_genres](public.circles_genres.md) |  | ジャンルID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| name | text |  | false |  |  | 名前 |
 
 ## Constraints
 

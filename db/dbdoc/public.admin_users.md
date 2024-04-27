@@ -8,7 +8,9 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
+| id | text | cuid() | false |  |  | 管理者ユーザーID |
+| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
+| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | name | text |  | true |  |  | 名前 |
 | email | text | ''::text | false |  |  | メールアドレス |
 | encrypted_password | text | ''::text | false |  |  | パスワード |
@@ -24,8 +26,6 @@
 | confirmed_at | timestamp with time zone |  | true |  |  | 確認日時 |
 | confirmation_sent_at | timestamp with time zone |  | true |  |  | 確認送信日時 |
 | unconfirmed_email | text |  | true |  |  | 未確認メールアドレス |
-| created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
-| updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 
 ## Constraints
 

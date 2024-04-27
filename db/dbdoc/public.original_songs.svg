@@ -23,45 +23,45 @@
 <text text-anchor="start" x="341.2798" y="-765.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
 <text text-anchor="start" x="371.6248" y="-765.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲ID</text>
 <polygon fill="none" stroke="#000000" points="319.5,-724 319.5,-754 809.5,-754 809.5,-724 319.5,-724"/>
-<text text-anchor="start" x="326.5" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000">product_id </text>
-<text text-anchor="start" x="395.744" y="-735.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="426.089" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000"> 原作ID</text>
+<text text-anchor="start" x="326.5" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
+<text text-anchor="start" x="396.528" y="-735.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="562.2124" y="-735.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="319.5,-694 319.5,-724 809.5,-724 809.5,-694 319.5,-694"/>
-<text text-anchor="start" x="326.5" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000">name </text>
-<text text-anchor="start" x="365.399" y="-705.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="395.744" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
+<text text-anchor="start" x="326.5" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
+<text text-anchor="start" x="400.4326" y="-705.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="566.117" y="-705.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="319.5,-664 319.5,-694 809.5,-694 809.5,-664 319.5,-664"/>
-<text text-anchor="start" x="326.5" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading </text>
-<text text-anchor="start" x="419.8618" y="-675.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="450.2068" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
+<text text-anchor="start" x="326.5" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000">product_id </text>
+<text text-anchor="start" x="395.744" y="-675.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="426.089" y="-675.4" font-family="Arial" font-size="14.00" fill="#000000"> 原作ID</text>
 <polygon fill="none" stroke="#000000" points="319.5,-634 319.5,-664 809.5,-664 809.5,-634 319.5,-634"/>
-<text text-anchor="start" x="326.5" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000">composer </text>
-<text text-anchor="start" x="391.8422" y="-645.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="422.1872" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000"> 作曲者</text>
+<text text-anchor="start" x="326.5" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000">name </text>
+<text text-anchor="start" x="365.399" y="-645.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="395.744" y="-645.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
 <polygon fill="none" stroke="#000000" points="319.5,-604 319.5,-634 809.5,-634 809.5,-604 319.5,-604"/>
-<text text-anchor="start" x="326.5" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000">arranger </text>
-<text text-anchor="start" x="383.2854" y="-615.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="413.6304" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000"> 編曲者</text>
+<text text-anchor="start" x="326.5" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading </text>
+<text text-anchor="start" x="419.8618" y="-615.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="450.2068" y="-615.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
 <polygon fill="none" stroke="#000000" points="319.5,-574 319.5,-604 809.5,-604 809.5,-574 319.5,-574"/>
-<text text-anchor="start" x="326.5" y="-585.4" font-family="Arial" font-size="14.00" fill="#000000">track_number </text>
-<text text-anchor="start" x="415.9586" y="-585.4" font-family="Arial" font-size="14.00" fill="#666666">[integer]</text>
-<text text-anchor="start" x="466.528" y="-585.4" font-family="Arial" font-size="14.00" fill="#000000"> トラック番号</text>
+<text text-anchor="start" x="326.5" y="-585.4" font-family="Arial" font-size="14.00" fill="#000000">composer </text>
+<text text-anchor="start" x="391.8422" y="-585.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="422.1872" y="-585.4" font-family="Arial" font-size="14.00" fill="#000000"> 作曲者</text>
 <polygon fill="none" stroke="#000000" points="319.5,-544 319.5,-574 809.5,-574 809.5,-544 319.5,-544"/>
-<text text-anchor="start" x="326.4818" y="-555.4" font-family="Arial" font-size="14.00" fill="#000000">is_original </text>
-<text text-anchor="start" x="393.3724" y="-555.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
-<text text-anchor="start" x="450.9558" y="-555.4" font-family="Arial" font-size="14.00" fill="#000000"> オリジナル有無(true: オリジナル(初出)、false: 再録など)</text>
+<text text-anchor="start" x="326.5" y="-555.4" font-family="Arial" font-size="14.00" fill="#000000">arranger </text>
+<text text-anchor="start" x="383.2854" y="-555.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="413.6304" y="-555.4" font-family="Arial" font-size="14.00" fill="#000000"> 編曲者</text>
 <polygon fill="none" stroke="#000000" points="319.5,-514 319.5,-544 809.5,-544 809.5,-514 319.5,-514"/>
-<text text-anchor="start" x="326.5" y="-525.4" font-family="Arial" font-size="14.00" fill="#000000">source_id </text>
-<text text-anchor="start" x="391.0708" y="-525.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="421.4158" y="-525.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲元の原曲ID</text>
+<text text-anchor="start" x="326.5" y="-525.4" font-family="Arial" font-size="14.00" fill="#000000">track_number </text>
+<text text-anchor="start" x="415.9586" y="-525.4" font-family="Arial" font-size="14.00" fill="#666666">[integer]</text>
+<text text-anchor="start" x="466.528" y="-525.4" font-family="Arial" font-size="14.00" fill="#000000"> トラック番号</text>
 <polygon fill="none" stroke="#000000" points="319.5,-484 319.5,-514 809.5,-514 809.5,-484 319.5,-484"/>
-<text text-anchor="start" x="326.5" y="-495.4" font-family="Arial" font-size="14.00" fill="#000000">created_at </text>
-<text text-anchor="start" x="396.528" y="-495.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="562.2124" y="-495.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="326.4818" y="-495.4" font-family="Arial" font-size="14.00" fill="#000000">is_original </text>
+<text text-anchor="start" x="393.3724" y="-495.4" font-family="Arial" font-size="14.00" fill="#666666">[boolean]</text>
+<text text-anchor="start" x="450.9558" y="-495.4" font-family="Arial" font-size="14.00" fill="#000000"> オリジナル有無(true: オリジナル(初出)、false: 再録など)</text>
 <polygon fill="none" stroke="#000000" points="319.5,-454 319.5,-484 809.5,-484 809.5,-454 319.5,-454"/>
-<text text-anchor="start" x="326.5" y="-465.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at </text>
-<text text-anchor="start" x="400.4326" y="-465.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="566.117" y="-465.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="326.5" y="-465.4" font-family="Arial" font-size="14.00" fill="#000000">source_id </text>
+<text text-anchor="start" x="391.0708" y="-465.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="421.4158" y="-465.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲元の原曲ID</text>
 <polygon fill="none" stroke="#000000" stroke-width="3" points="318,-452.5 318,-831.5 811,-831.5 811,-452.5 318,-452.5"/>
 </g>
 <!-- public.products -->
@@ -78,40 +78,40 @@
 <text text-anchor="start" x="444.594" y="-264.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
 <text text-anchor="start" x="474.939" y="-264.4" font-family="Arial" font-size="14.00" fill="#000000"> 原作ID</text>
 <polygon fill="none" stroke="#000000" points="392.5,-223 392.5,-253 736.5,-253 736.5,-223 392.5,-223"/>
-<text text-anchor="start" x="399.5" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000">name    </text>
-<text text-anchor="start" x="468.7132" y="-234.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="499.0582" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
+<text text-anchor="start" x="399.1971" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="499.5393" y="-234.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="665.2237" y="-234.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="392.5,-193 392.5,-223 736.5,-223 736.5,-193 392.5,-193"/>
-<text text-anchor="start" x="399.5" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading    </text>
-<text text-anchor="start" x="523.176" y="-204.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="553.521" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
+<text text-anchor="start" x="399.5" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="503.7468" y="-204.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="669.4312" y="-204.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="392.5,-163 392.5,-193 736.5,-193 736.5,-163 392.5,-163"/>
-<text text-anchor="start" x="399.5" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000">short_name    </text>
-<text text-anchor="start" x="507.6122" y="-174.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="537.9572" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000"> 短い名前</text>
+<text text-anchor="start" x="399.5" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000">name    </text>
+<text text-anchor="start" x="468.7132" y="-174.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="499.0582" y="-174.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前</text>
 <polygon fill="none" stroke="#000000" points="392.5,-133 392.5,-163 736.5,-163 736.5,-133 392.5,-133"/>
-<text text-anchor="start" x="399.5" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000">product_type    </text>
-<text text-anchor="start" x="514.6248" y="-144.4" font-family="Arial" font-size="14.00" fill="#666666">[product_type]</text>
-<text text-anchor="start" x="603.326" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000"> 原作種別</text>
+<text text-anchor="start" x="399.5" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000">name_reading    </text>
+<text text-anchor="start" x="523.176" y="-144.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="553.521" y="-144.4" font-family="Arial" font-size="14.00" fill="#000000"> 名前読み方</text>
 <polygon fill="none" stroke="#000000" points="392.5,-103 392.5,-133 736.5,-133 736.5,-103 392.5,-103"/>
-<text text-anchor="start" x="399.5" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000">series_number    </text>
-<text text-anchor="start" x="526.2714" y="-114.4" font-family="Arial" font-size="14.00" fill="#666666">[numeric(5,2)]</text>
-<text text-anchor="start" x="612.6052" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000"> シリーズ番号</text>
+<text text-anchor="start" x="399.5" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000">short_name    </text>
+<text text-anchor="start" x="507.6122" y="-114.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="537.9572" y="-114.4" font-family="Arial" font-size="14.00" fill="#000000"> 短い名前</text>
 <polygon fill="none" stroke="#000000" points="392.5,-73 392.5,-103 736.5,-103 736.5,-73 392.5,-73"/>
-<text text-anchor="start" x="399.1971" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="499.5393" y="-84.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="665.2237" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="399.5" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">product_type    </text>
+<text text-anchor="start" x="514.6248" y="-84.4" font-family="Arial" font-size="14.00" fill="#666666">[product_type]</text>
+<text text-anchor="start" x="603.326" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000"> 原作種別</text>
 <polygon fill="none" stroke="#000000" points="392.5,-43 392.5,-73 736.5,-73 736.5,-43 392.5,-43"/>
-<text text-anchor="start" x="399.5" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="503.7468" y="-54.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="669.4312" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="399.5" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000">series_number    </text>
+<text text-anchor="start" x="526.2714" y="-54.4" font-family="Arial" font-size="14.00" fill="#666666">[numeric(5,2)]</text>
+<text text-anchor="start" x="612.6052" y="-54.4" font-family="Arial" font-size="14.00" fill="#000000"> シリーズ番号</text>
 </g>
 <!-- public.original_songs&#45;&gt;public.products -->
 <g id="edge3" class="edge">
 <title>public.original_songs:product_id&#45;&gt;public.products:id</title>
-<path fill="none" stroke="#000000" d="M819.5187,-738.6371C1018.9441,-723.9436 944.9194,-268 736.5,-268"/>
-<polygon fill="#000000" stroke="#000000" points="819.4934,-738.6379 809.3371,-734.5029 814.4967,-738.8189 809.5,-739 809.5,-739 809.5,-739 814.4967,-738.8189 809.6629,-743.4971 819.4934,-738.6379 819.4934,-738.6379"/>
-<text text-anchor="start" x="816.9375" y="-749" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (product_id) REFERENCES products(id)</text>
+<path fill="none" stroke="#000000" d="M819.561,-678.5808C992.2779,-663.8895 918.5832,-268 736.5,-268"/>
+<polygon fill="#000000" stroke="#000000" points="819.4913,-678.5836 809.3126,-674.5039 814.4957,-678.7918 809.5,-679 809.5,-679 809.5,-679 814.4957,-678.7918 809.6874,-683.4961 819.4913,-678.5836 819.4913,-678.5836"/>
+<text text-anchor="start" x="816.9375" y="-689" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (product_id) REFERENCES products(id)</text>
 </g>
 <!-- public.original_song_distribution_service_urls -->
 <g id="node2" class="node">
@@ -125,33 +125,34 @@
 <polygon fill="none" stroke="#000000" points="43.5,-1105 43.5,-1135 546.5,-1135 546.5,-1105 43.5,-1105"/>
 <text text-anchor="start" x="50.5" y="-1116.4" font-family="Arial" font-size="14.00" fill="#000000">id    </text>
 <text text-anchor="start" x="95.594" y="-1116.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="125.939" y="-1116.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲配信サービスURLのID</text>
 <polygon fill="none" stroke="#000000" points="43.5,-1075 43.5,-1105 546.5,-1105 546.5,-1075 43.5,-1075"/>
-<text text-anchor="start" x="50.5" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000">original_song_id    </text>
-<text text-anchor="start" x="186.6178" y="-1086.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="216.9628" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲ID</text>
+<text text-anchor="start" x="50.5" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="150.8422" y="-1086.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="316.5266" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="43.5,-1045 43.5,-1075 546.5,-1075 546.5,-1045 43.5,-1045"/>
-<text text-anchor="start" x="50.5" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000">service    </text>
-<text text-anchor="start" x="129.0372" y="-1056.4" font-family="Arial" font-size="14.00" fill="#666666">[distribution_service]</text>
-<text text-anchor="start" x="256.608" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000"> 配信サービス</text>
+<text text-anchor="start" x="50.5" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="154.7468" y="-1056.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="320.4312" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="43.5,-1015 43.5,-1045 546.5,-1045 546.5,-1015 43.5,-1015"/>
-<text text-anchor="start" x="50.5" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000">url    </text>
-<text text-anchor="start" x="100.2546" y="-1026.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="130.5996" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000"> URL</text>
+<text text-anchor="start" x="50.5" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000">original_song_id    </text>
+<text text-anchor="start" x="186.6178" y="-1026.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="216.9628" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲ID</text>
 <polygon fill="none" stroke="#000000" points="43.5,-985 43.5,-1015 546.5,-1015 546.5,-985 43.5,-985"/>
-<text text-anchor="start" x="50.5" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="150.8422" y="-996.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="316.5266" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="50.5" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000">service    </text>
+<text text-anchor="start" x="129.0372" y="-996.4" font-family="Arial" font-size="14.00" fill="#666666">[distribution_service]</text>
+<text text-anchor="start" x="256.608" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000"> 配信サービス</text>
 <polygon fill="none" stroke="#000000" points="43.5,-955 43.5,-985 546.5,-985 546.5,-955 43.5,-955"/>
-<text text-anchor="start" x="50.5" y="-966.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="154.7468" y="-966.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="320.4312" y="-966.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="50.5" y="-966.4" font-family="Arial" font-size="14.00" fill="#000000">url    </text>
+<text text-anchor="start" x="100.2546" y="-966.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="130.5996" y="-966.4" font-family="Arial" font-size="14.00" fill="#000000"> URL</text>
 </g>
 <!-- public.original_song_distribution_service_urls&#45;&gt;public.original_songs -->
 <g id="edge1" class="edge">
 <title>public.original_song_distribution_service_urls:original_song_id&#45;&gt;public.original_songs:id</title>
-<path fill="none" stroke="#000000" d="M556.5221,-1089.3025C623.0713,-1079.5294 595.5648,-969.4591 546.5,-912 480.1669,-834.3181 385.8331,-953.6819 319.5,-876 288.6188,-839.8354 271.9444,-769 319.5,-769"/>
-<polygon fill="#000000" stroke="#000000" points="556.4759,-1089.3057 546.1875,-1085.5109 551.4879,-1089.6528 546.5,-1090 546.5,-1090 546.5,-1090 551.4879,-1089.6528 546.8125,-1094.4891 556.4759,-1089.3057 556.4759,-1089.3057"/>
-<text text-anchor="start" x="553.8235" y="-1100" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (original_song_id) REFERENCES original_songs(id)</text>
+<path fill="none" stroke="#000000" d="M556.5311,-1028.8818C596.2811,-1019.2038 578.1614,-949.0783 546.5,-912 480.1669,-834.3181 385.8331,-953.6819 319.5,-876 288.6188,-839.8354 271.9444,-769 319.5,-769"/>
+<polygon fill="#000000" stroke="#000000" points="556.4384,-1028.8921 546.0014,-1025.5277 551.4692,-1029.446 546.5,-1030 546.5,-1030 546.5,-1030 551.4692,-1029.446 546.9986,-1034.4723 556.4384,-1028.8921 556.4384,-1028.8921"/>
+<text text-anchor="start" x="553.8235" y="-1040" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (original_song_id) REFERENCES original_songs(id)</text>
 </g>
 <!-- public.songs_original_songs -->
 <g id="node3" class="node">
@@ -163,28 +164,28 @@
 <text text-anchor="start" x="917.45" y="-1128.8" font-family="Arial" font-size="14.00" fill="#666666">[BASE TABLE]</text>
 <text text-anchor="start" x="799.7637" y="-1114.4" font-family="Arial" font-size="14.00" fill="#333333">楽曲原曲</text>
 <polygon fill="none" stroke="#000000" points="650.5,-1075 650.5,-1105 1017.5,-1105 1017.5,-1075 650.5,-1075"/>
-<text text-anchor="start" x="657.5" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
-<text text-anchor="start" x="740.7244" y="-1086.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="771.0694" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
+<text text-anchor="start" x="657.5" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
+<text text-anchor="start" x="757.8422" y="-1086.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="923.5266" y="-1086.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
 <polygon fill="none" stroke="#000000" points="650.5,-1045 650.5,-1075 1017.5,-1075 1017.5,-1045 650.5,-1045"/>
-<text text-anchor="start" x="657.5" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000">original_song_id    </text>
-<text text-anchor="start" x="793.6178" y="-1056.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
-<text text-anchor="start" x="823.9628" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲ID</text>
+<text text-anchor="start" x="657.5" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
+<text text-anchor="start" x="761.7468" y="-1056.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
+<text text-anchor="start" x="927.4312" y="-1056.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
 <polygon fill="none" stroke="#000000" points="650.5,-1015 650.5,-1045 1017.5,-1045 1017.5,-1015 650.5,-1015"/>
-<text text-anchor="start" x="657.5" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000">created_at    </text>
-<text text-anchor="start" x="757.8422" y="-1026.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="923.5266" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000"> 作成日時</text>
+<text text-anchor="start" x="657.5" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000">song_id    </text>
+<text text-anchor="start" x="740.7244" y="-1026.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="771.0694" y="-1026.4" font-family="Arial" font-size="14.00" fill="#000000"> 楽曲ID</text>
 <polygon fill="none" stroke="#000000" points="650.5,-985 650.5,-1015 1017.5,-1015 1017.5,-985 650.5,-985"/>
-<text text-anchor="start" x="657.5" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000">updated_at    </text>
-<text text-anchor="start" x="761.7468" y="-996.4" font-family="Arial" font-size="14.00" fill="#666666">[timestamp with time zone]</text>
-<text text-anchor="start" x="927.4312" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000"> 更新日時</text>
+<text text-anchor="start" x="657.5" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000">original_song_id    </text>
+<text text-anchor="start" x="793.6178" y="-996.4" font-family="Arial" font-size="14.00" fill="#666666">[text]</text>
+<text text-anchor="start" x="823.9628" y="-996.4" font-family="Arial" font-size="14.00" fill="#000000"> 原曲ID</text>
 </g>
 <!-- public.songs_original_songs&#45;&gt;public.original_songs -->
 <g id="edge2" class="edge">
 <title>public.songs_original_songs:original_song_id&#45;&gt;public.original_songs:id</title>
-<path fill="none" stroke="#000000" d="M640.5369,-1058.9333C601.3642,-1049.692 623.4273,-982.5501 650.5,-942 692.9844,-878.3659 767.0156,-939.6341 809.5,-876 835.9056,-836.4491 857.0556,-769 809.5,-769"/>
-<polygon fill="#000000" stroke="#000000" points="640.5568,-1058.9354 650.0209,-1064.4744 645.5284,-1059.4677 650.5,-1060 650.5,-1060 650.5,-1060 645.5284,-1059.4677 650.9791,-1055.5256 640.5568,-1058.9354 640.5568,-1058.9354"/>
-<text text-anchor="start" x="657.8235" y="-1070" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (original_song_id) REFERENCES original_songs(id)</text>
+<path fill="none" stroke="#000000" d="M640.6679,-997.2759C628.5607,-988.4104 638.535,-959.9215 650.5,-942 692.9844,-878.3659 767.0156,-939.6341 809.5,-876 835.9056,-836.4491 857.0556,-769 809.5,-769"/>
+<polygon fill="#000000" stroke="#000000" points="640.863,-997.3299 649.2985,-1004.3366 645.6815,-998.665 650.5,-1000 650.5,-1000 650.5,-1000 645.6815,-998.665 651.7015,-995.6634 640.863,-997.3299 640.863,-997.3299"/>
+<text text-anchor="start" x="657.8235" y="-1010" font-family="Arial" font-size="10.00" fill="#000000">FOREIGN KEY (original_song_id) REFERENCES original_songs(id)</text>
 </g>
 </g>
 </svg>

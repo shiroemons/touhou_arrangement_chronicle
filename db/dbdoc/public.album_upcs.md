@@ -8,11 +8,11 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  |  |
-| album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
-| upc | text |  | false |  |  | UPC(JAN)コード |
+| id | text | cuid() | false |  |  | アルバムUPCのID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| album_id | text |  | false |  | [public.albums](public.albums.md) | アルバムID |
+| upc | text |  | false |  |  | UPC(JAN)コード |
 
 ## Constraints
 

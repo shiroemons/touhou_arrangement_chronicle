@@ -8,11 +8,11 @@
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false | [public.albums_tags](public.albums_tags.md) [public.songs_tags](public.songs_tags.md) [public.circles_tags](public.circles_tags.md) |  | ID |
-| name | text |  | false |  |  | 名前 |
-| tag_type | tag_type | 'unknown'::tag_type | false |  |  | タグ種別 |
+| id | text | cuid() | false | [public.albums_tags](public.albums_tags.md) [public.songs_tags](public.songs_tags.md) [public.circles_tags](public.circles_tags.md) |  | タグID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
+| name | text |  | false |  |  | 名前 |
+| tag_type | tag_type | 'unknown'::tag_type | false |  |  | タグ種別 |
 
 ## Constraints
 
