@@ -138,7 +138,7 @@ services:
       WD_INSTALL_DIR: "/usr/local/bin"
     depends_on:
       - db
-    command: bash -c "rm -f tmp/pids/server.pid && ./bin/dev"
+    command: bash -c "bundle install --jobs=4 && rm -f tmp/pids/server.pid && ./bin/dev"
     expose: ["3000"]
     ports: ["3000:3000"]
     user: root

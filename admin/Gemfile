@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.2"
+ruby file: '.ruby-version'
 
 gem "bootsnap", require: false
 gem "importmap-rails"
@@ -40,7 +40,7 @@ group :test do
   gem "webdrivers"
 end
 
-gem "avo"
+gem "avo", "~> 2"
 gem "countries"
 gem "devise"
 gem "devise-i18n"
