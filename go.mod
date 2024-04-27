@@ -12,7 +12,7 @@ require (
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.25.1
-	github.com/samber/lo v1.38.1
+	github.com/samber/lo v1.39.0
 	github.com/shopspring/decimal v1.4.0
 	github.com/spkg/bom v1.0.0
 	github.com/uptrace/bun v1.1.16
