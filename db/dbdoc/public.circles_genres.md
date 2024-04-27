@@ -2,17 +2,17 @@
 
 ## Description
 
-サークルタグ
+サークルジャンル
 
 ## Columns
 
 | Name | Type | Default | Nullable | Children | Parents | Comment |
 | ---- | ---- | ------- | -------- | -------- | ------- | ------- |
-| id | text | cuid() | false |  |  | サークルタグID |
+| id | text | cuid() | false |  |  | サークルジャンルID |
 | created_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 作成日時 |
 | updated_at | timestamp with time zone | CURRENT_TIMESTAMP | false |  |  | 更新日時 |
 | circle_id | text |  | false |  | [public.circles](public.circles.md) | サークルID |
-| genre_id | text |  | false |  | [public.genres](public.genres.md) | タグID |
+| genre_id | text |  | false |  | [public.genres](public.genres.md) | ジャンルID |
 | locked_at | timestamp with time zone |  | true |  |  | ロック日時 |
 
 ## Constraints

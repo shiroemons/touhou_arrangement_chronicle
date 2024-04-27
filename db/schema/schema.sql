@@ -758,12 +758,12 @@ create table circles_genres (
     locked_at  timestamp with time zone
 );
 create unique index uk_circles_genres_circle_id_genre_id on circles_genres (circle_id, genre_id);
-comment on table  circles_genres is 'サークルタグ';
-comment on column circles_genres.id is 'サークルタグID';
+comment on table  circles_genres is 'サークルジャンル';
+comment on column circles_genres.id is 'サークルジャンルID';
 comment on column circles_genres.created_at is '作成日時';
 comment on column circles_genres.updated_at is '更新日時';
 comment on column circles_genres.circle_id is 'サークルID';
-comment on column circles_genres.genre_id is 'タグID';
+comment on column circles_genres.genre_id is 'ジャンルID';
 comment on column circles_genres.locked_at is 'ロック日時';
 
 create table circles_tags (

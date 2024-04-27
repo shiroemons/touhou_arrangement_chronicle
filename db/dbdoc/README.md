@@ -37,7 +37,7 @@
 | [public.albums_tags](public.albums_tags.md) | 6 | アルバムタグ | BASE TABLE |
 | [public.songs_genres](public.songs_genres.md) | 6 | 楽曲ジャンル | BASE TABLE |
 | [public.songs_tags](public.songs_tags.md) | 6 | 楽曲タグ | BASE TABLE |
-| [public.circles_genres](public.circles_genres.md) | 6 | サークルタグ | BASE TABLE |
+| [public.circles_genres](public.circles_genres.md) | 6 | サークルジャンル | BASE TABLE |
 | [public.circles_tags](public.circles_tags.md) | 6 | サークルタグ | BASE TABLE |
 
 ## Stored procedures and functions
