@@ -17,20 +17,22 @@ down: ## Do docker compose down
 	docker compose down
 
 logs: ## Tail docker compose logs
-	docker compose logs -f
+	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
+%:
+	@:
 
 ps: ## Check container status
 	docker compose ps
 
 setup:
-	docker compose run --rm web bundle config set clean true
-	docker compose run --rm web bundle install --jobs=4
+	docker compose run --rm admin bundle config set clean true
+	docker compose run --rm admin bundle install --jobs=4
 	docker compose up -d postgres16
 	sleep 5
 	docker compose exec postgres16 psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
-	docker compose run --rm web bin/rails db:seed
+	docker compose run --rm admin bin/rails db:seed
 
 db-reset: ## db reset
 	docker compose down
@@ -40,14 +42,14 @@ db-reset: ## db reset
 	docker compose exec postgres16 psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
-	docker compose run --rm web bin/rails db:seed
+	docker compose run --rm admin bin/rails db:seed
 
 migrate: ## db migrate
 	docker compose run --rm migrate
 
 seeder: ## db seed
 	docker compose run --rm seeder
-	docker compose run --rm web bin/rails db:seed
+	docker compose run --rm admin bin/rails db:seed
 
 indexer: ## indexer
 	docker compose run --rm indexer
@@ -68,29 +70,32 @@ lint:
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:latest golangci-lint run -v --timeout 5m
 
 server: ## Run server
-	docker compose run --rm --service-ports web
+	docker compose run --rm --service-ports admin
 
 console: ## Run console
-	docker compose run --rm web bin/rails console
+	docker compose run --rm admin bin/rails console
 
 console-sandbox: ## Run console(sandbox)
-	docker compose run --rm web bin/rails console --sandbox
+	docker compose run --rm admin bin/rails console --sandbox
 
 bundle: ## Run bundle install
-	docker compose run --rm web bundle config set clean true
-	docker compose run --rm web bundle install --jobs=4
+	docker compose run --rm admin bundle config set clean true
+	docker compose run --rm admin bundle install --jobs=4
 
-bash: ## Run bash in web container
-	docker compose run --rm web bash
+bash-admin: ## Run bash in admin container
+	docker compose run --rm admin bash
+
+bash-frontend: ## Run bash in frontend container
+	docker compose run --rm frontend bash
 
 rubocop: ## Run rubocop
-	docker compose run --rm web bundle exec rubocop
+	docker compose run --rm admin bundle exec rubocop
 
 rubocop-a: ## Run rubocop (auto correct)
-	docker compose run --rm web bundle exec rubocop -a
+	docker compose run --rm admin bundle exec rubocop -a
 
 rubocop-all: ## Run rubocop (auto correct all)
-	docker compose run --rm web bundle exec rubocop -A
+	docker compose run --rm admin bundle exec rubocop -A
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
