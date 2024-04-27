@@ -11,7 +11,7 @@ up: ## Do docker compose up with hot reload
 	docker compose up -d
 
 db-up: ## Run docker compose up db
-	docker compose up db -d
+	docker compose up postgres16 -d
 
 down: ## Do docker compose down
 	docker compose down
@@ -25,9 +25,9 @@ ps: ## Check container status
 setup:
 	docker compose run --rm web bundle config set clean true
 	docker compose run --rm web bundle install --jobs=4
-	docker compose up -d db
+	docker compose up -d postgres16
 	sleep 5
-	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
+	docker compose exec postgres16 psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
 	docker compose run --rm web bin/rails db:seed
@@ -35,9 +35,9 @@ setup:
 db-reset: ## db reset
 	docker compose down
 	docker volume rm touhou_arrangement_chronicle_postgres
-	docker compose up -d db
+	docker compose up -d postgres16
 	sleep 5
-	docker compose exec db psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
+	docker compose exec postgres16 psql -h localhost -p 5432 -U postgres touhou_arrangement_chronicle_development -f /tmp/db/schema/cuid.sql
 	docker compose run --rm migrate
 	docker compose run --rm seeder
 	docker compose run --rm web bin/rails db:seed
