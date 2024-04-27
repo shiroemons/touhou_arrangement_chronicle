@@ -2,8 +2,8 @@ FROM ruby:3.3.1
 
 WORKDIR /app
 
-# Using Node.js v18.x(LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+# Using Node.js v22.x(LTS)
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 
 # Add packages
 RUN apt-get update && apt-get install -y \
