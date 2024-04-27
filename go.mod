@@ -3,6 +3,7 @@ module github.com/shiroemons/touhou_arrangement_chronicle
 go 1.19
 
 require (
+	github.com/caarlos0/env/v11 v11.0.0
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/go-playground/validator/v10 v10.15.5
 	github.com/goark/kkconv v0.3.3
