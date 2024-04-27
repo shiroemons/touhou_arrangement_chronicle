@@ -374,7 +374,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rails
-  selenium-webdriver (= 4.20.1)
+  selenium-webdriver
   stimulus-rails
   tailwindcss-rails
   turbo-rails

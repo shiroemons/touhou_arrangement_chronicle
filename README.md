@@ -1,5 +1,4 @@
-# touhou_arrangement_chronicle
-東方編曲録　〜 Arrangement Chronicle
+# 東方編曲録　〜 Arrangement Chronicle
 
 ## セットアップ
 
@@ -17,12 +16,32 @@ make up
   - http://localhost:3000/
 - Meilisearch
   - http://localhost:17700/
+- フロントエンド
+  - http://localhost:5173/
 
 ### ログ確認
 
 ```shell
 make logs
 ```
+
+#### 個別のログ確認
+
+- 管理画面(Rails)
+  ```shell
+  make logs admin
+  ```
+  ```shell
+  make logs admin-tailwind
+  ```
+- Meilisearch
+  ```shell
+  make logs meilisearch
+  ```
+- フロントエンド
+  ```shell
+  make logs frontend
+  ```
 
 ### Meilisearch
 
