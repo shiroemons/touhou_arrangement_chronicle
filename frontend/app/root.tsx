@@ -1,4 +1,5 @@
 import type { LoaderFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -6,15 +7,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
 
+import { jaJP } from "@clerk/localizations";
+import { ClerkApp } from "@clerk/remix";
 // Import rootAuthLoader
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
-import { ClerkApp } from "@clerk/remix";
-import { jaJP } from "@clerk/localizations";
 
-import tailwindStylesheet from "~/styles/tailwind.css?url";
 import Header from "~/components/Header";
+import tailwindStylesheet from "~/styles/tailwind.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
