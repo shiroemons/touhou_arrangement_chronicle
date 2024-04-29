@@ -103,10 +103,11 @@ generate-schema-ts:
 	docker compose run --rm frontend /bin/bash -c "sed -i -e 's/default(cuid())/default(sql\`cuid()\`)/g' -e 's/default(gen_random_uuid())/default(sql\`gen_random_uuid()\`)/g' app/services/schema.ts"
 	docker compose run --rm frontend /bin/bash -c "mv app/services/schema.ts app/services/schema.server.ts"
 	docker compose run --rm frontend npx @biomejs/biome format --write app/services/schema.server.ts
+	docker compose run --rm frontend npx @biomejs/biome check --apply app/services/schema.server.ts
 
 biome:
 	docker compose run --rm frontend npx @biomejs/biome format --write app
-	docker compose run --rm frontend npx npx @biomejs/biome check --apply app
+	docker compose run --rm frontend npx @biomejs/biome check --apply app
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
