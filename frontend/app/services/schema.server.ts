@@ -1,19 +1,19 @@
-import { sql } from "drizzle-orm";
 import {
-  boolean,
-  date,
-  foreignKey,
-  integer,
-  numeric,
-  pgEnum,
   pgTable,
-  primaryKey,
-  text,
-  timestamp,
   unique,
+  pgEnum,
+  text,
+  integer,
+  date,
+  timestamp,
+  foreignKey,
   uniqueIndex,
+  numeric,
+  boolean,
   varchar,
+  primaryKey,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const productType = pgEnum("product_type", [
   "other",
