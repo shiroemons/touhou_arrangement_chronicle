@@ -97,6 +97,12 @@ rubocop-a: ## Run rubocop (auto correct)
 rubocop-all: ## Run rubocop (auto correct all)
 	docker compose run --rm admin bundle exec rubocop -A
 
+generate-schema-ts:
+	docker compose run --rm frontend npx drizzle-kit introspect:pg --out=app/services/ --connectionString=postgresql://postgres:@postgres16:5432/touhou_arrangement_chronicle_development --driver=pg
+	docker compose run --rm frontend /bin/bash -c "rm -rf app/services/{meta,*.sql}"
+	docker compose run --rm frontend /bin/bash -c "sed -i -e 's/default(cuid())/default(sql\`cuid()\`)/g' -e 's/default(gen_random_uuid())/default(sql\`gen_random_uuid()\`)/g' app/services/schema.ts"
+	docker compose run --rm frontend /bin/bash -c "mv app/services/schema.ts app/services/schema.server.ts"
+
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
