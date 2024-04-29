@@ -11,6 +11,7 @@ import type { LinksFunction } from "@remix-run/node";
 // Import rootAuthLoader
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import { ClerkApp } from "@clerk/remix";
+import { jaJP } from "@clerk/localizations";
 
 import tailwindStylesheet from "~/styles/tailwind.css?url";
 
@@ -43,4 +44,4 @@ export function App() {
   return <Outlet />;
 }
 
-export default ClerkApp(App, { localization: { locale: "ja-JP" } });
+export default ClerkApp(App, { localization: jaJP });
