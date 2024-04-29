@@ -14,6 +14,7 @@ import { ClerkApp } from "@clerk/remix";
 import { jaJP } from "@clerk/localizations";
 
 import tailwindStylesheet from "~/styles/tailwind.css?url";
+import Header from "~/components/Header";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
@@ -41,7 +42,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 }
 
 export default ClerkApp(App, { localization: jaJP });
