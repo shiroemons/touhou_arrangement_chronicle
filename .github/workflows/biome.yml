@@ -1,0 +1,31 @@
+name: biome
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - frontend/**
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - frontend/**
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check all files against format and lint
+        run: npx @biomejs/biome ci app
+        working-directory: frontend
