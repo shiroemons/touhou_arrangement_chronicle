@@ -6,4 +6,4 @@ CSV.table('db/fixtures/artists.tsv', col_sep: "\t", converters: nil).each do |a|
 end
 
 return if artists.blank?
-Artist.import artists, on_duplicate_key_ignore: true
+Artist.import artists, validate: true, on_duplicate_key_ignore: true
