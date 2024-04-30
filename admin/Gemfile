@@ -40,6 +40,7 @@ group :test do
   gem "webdrivers"
 end
 
+gem "activerecord-import"
 gem "avo", '~> 2.49'
 gem "countries"
 gem "devise"

@@ -48,7 +48,6 @@ migrate: ## db migrate
 	docker compose run --rm migrate
 
 seeder: ## db seed
-	docker compose run --rm seeder
 	docker compose run --rm admin bin/rails db:seed
 
 indexer: ## indexer

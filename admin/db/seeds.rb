@@ -10,3 +10,8 @@ AdminUser.find_or_create_by(email: "admin@example.com") do |au|
   au.password = 'adminadmin'
   au.password_confirmation = 'adminadmin'
 end
+
+Dir[Rails.root.join('db/seeds/*.rb')].each do |file|
+  puts "Processing #{file.split('/').last}"
+  require file
+end
