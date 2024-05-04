@@ -22,7 +22,7 @@ require (
 	github.com/uptrace/bun/extra/bundebug v1.2.1
 	go.uber.org/fx v1.21.1
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f
-	golang.org/x/text v0.14.0
+	golang.org/x/text v0.15.0
 )
 
 require (
