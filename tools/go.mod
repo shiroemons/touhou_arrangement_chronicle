@@ -8,7 +8,7 @@ require (
 	github.com/caarlos0/env/v11 v11.0.0
 	github.com/go-playground/validator/v10 v10.20.0
 	github.com/goark/kkconv v0.3.3
-	github.com/gocarina/gocsv v0.0.0-20231116093920-b87c2d0e983a
+	github.com/gocarina/gocsv v0.0.0-20240520201108-78e41c74b4b1
 	github.com/jackc/pgtype v1.14.3
 	github.com/jackc/pgx/v5 v5.5.5
 	github.com/k0kubun/pp/v3 v3.2.0
