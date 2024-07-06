@@ -13,7 +13,7 @@ require (
 	github.com/jackc/pgx/v5 v5.6.0
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/lucsky/cuid v1.2.1
-	github.com/meilisearch/meilisearch-go v0.26.3
+	github.com/meilisearch/meilisearch-go v0.27.0
 	github.com/samber/lo v1.44.0
 	github.com/shopspring/decimal v1.4.0
 	github.com/spkg/bom v1.0.0
