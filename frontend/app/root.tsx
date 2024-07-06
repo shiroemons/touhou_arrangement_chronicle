@@ -7,6 +7,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+// @ts-ignore
+import { ColorModeScript, UIProvider, defaultConfig } from "@yamada-ui/react";
 
 import { jaJP } from "@clerk/localizations";
 import { ClerkApp } from "@clerk/remix";
@@ -33,7 +35,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+        <UIProvider>{children}</UIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
