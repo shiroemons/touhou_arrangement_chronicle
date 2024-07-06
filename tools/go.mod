@@ -10,7 +10,7 @@ require (
 	github.com/goark/kkconv v0.3.3
 	github.com/gocarina/gocsv v0.0.0-20240520201108-78e41c74b4b1
 	github.com/jackc/pgtype v1.14.3
-	github.com/jackc/pgx/v5 v5.5.5
+	github.com/jackc/pgx/v5 v5.6.0
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/lucsky/cuid v1.2.1
 	github.com/meilisearch/meilisearch-go v0.26.3
