@@ -106,7 +106,7 @@ generate-schema-ts:
 
 biome:
 	docker compose run --rm frontend npx @biomejs/biome format --write app
-	docker compose run --rm frontend npx @biomejs/biome check --apply app
+	docker compose run --rm frontend npx @biomejs/biome check --write app
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
