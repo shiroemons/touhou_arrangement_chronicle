@@ -1,14 +1,19 @@
-import type { LoaderFunction } from "@remix-run/node";
-import type { LinksFunction } from "@remix-run/node";
+import { type LinksFunction, type LoaderFunction, json } from "@remix-run/node";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-// @ts-ignore
-import { ColorModeScript, UIProvider, defaultConfig } from "@yamada-ui/react";
+
+import {
+  ColorModeScript,
+  UIProvider,
+  createColorModeManager,
+  defaultConfig,
+} from "@yamada-ui/react";
 
 import { jaJP } from "@clerk/localizations";
 import { ClerkApp } from "@clerk/remix";
@@ -23,9 +28,17 @@ export const links: LinksFunction = () => [
 ];
 
 // Export as the root route loader
-export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+export const loader: LoaderFunction = (args) =>
+  rootAuthLoader(args, ({ request }) => {
+    const cookies = request.headers.get("Cookie");
+
+    return json({ cookies });
+  });
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookies } = useLoaderData<{ cookies: string }>();
+  const colorModeManager = createColorModeManager("ssr", cookies);
+
   return (
     <html lang="en">
       <head>
@@ -35,8 +48,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
-        <UIProvider>{children}</UIProvider>
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <UIProvider colorModeManager={colorModeManager}>{children}</UIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
