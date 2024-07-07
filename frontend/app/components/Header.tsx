@@ -1,10 +1,22 @@
 import { SignedIn, SignedOut, UserButton } from "@clerk/remix";
 import { Link } from "@remix-run/react";
 import { useLocation } from "@remix-run/react";
+import { Moon, Sun } from "@yamada-ui/lucide";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  List,
+  ListItem,
+  Spacer,
+  useColorMode,
+} from "@yamada-ui/react";
 import type { JSX } from "react";
 
 export default function Header() {
   const location = useLocation();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const isAuthPage =
     location.pathname.startsWith("/sign-in") ||
@@ -15,37 +27,54 @@ export default function Header() {
   } else {
     signedOut = (
       <SignedOut>
-        <li>
-          <Link to="/sign-in" className="btn btn-ghost">
-            サインイン
-          </Link>
-        </li>
-        <li>
-          <Link to="/sign-up" className="btn btn-primary">
-            サインアップ
-          </Link>
-        </li>
+        <Flex alignItems="center" gap={4}>
+          <ListItem>
+            <Button colorScheme="secondary" variant="ghost">
+              <Link to="/sign-in">サインイン</Link>
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button colorScheme="primary">
+              <Link to="/sign-up">サインアップ</Link>
+            </Button>
+          </ListItem>
+        </Flex>
       </SignedOut>
     );
   }
 
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          東方編曲録
-        </Link>
-      </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <SignedIn>
-            <li>
-              <UserButton />
-            </li>
-          </SignedIn>
-          {signedOut}
-        </ul>
-      </div>
-    </div>
+    <Box className="navbar bg-base-100" padding={4}>
+      <Flex alignItems="center">
+        <Box>
+          <Link to="/" className="btn btn-ghost text-xl">
+            東方編曲録
+          </Link>
+        </Box>
+        <Spacer />
+        <Flex alignItems="center" gap={4}>
+          <IconButton
+            icon={colorMode === "light" ? <Moon /> : <Sun />}
+            aria-label="Toggle dark mode"
+            variant="primary"
+            onClick={toggleColorMode}
+          />
+          <List
+            styleType="none"
+            display="flex"
+            alignItems="center"
+            px={1}
+            gap={4}
+          >
+            <SignedIn>
+              <ListItem>
+                <UserButton />
+              </ListItem>
+            </SignedIn>
+            {signedOut}
+          </List>
+        </Flex>
+      </Flex>
+    </Box>
   );
 }
