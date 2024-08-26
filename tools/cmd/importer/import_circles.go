@@ -22,7 +22,7 @@ type CircleCSV struct {
 func (imp *Importer) importCircles() {
 	log.Println("start circles import.")
 
-	f, err := os.Open("./tmp/circles.tsv")
+	f, err := os.Open("../tmp/circles.tsv")
 	if err != nil {
 		log.Fatal(err)
 	}

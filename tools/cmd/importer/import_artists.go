@@ -21,7 +21,7 @@ type ArtistCSV struct {
 func (imp *Importer) importArtists() {
 	log.Println("start artists import.")
 
-	f, err := os.Open("./tmp/artists.tsv")
+	f, err := os.Open("../tmp/artists.tsv")
 	if err != nil {
 		log.Fatal(err)
 	}

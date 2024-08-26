@@ -70,7 +70,7 @@ type Link struct {
 func (imp *Importer) importAlbums() {
 	log.Println("start albums import.")
 
-	jsonFile, err := os.ReadFile("./tmp/albums.json")
+	jsonFile, err := os.ReadFile("../tmp/albums.json")
 	if err != nil {
 		log.Fatal("error:", err)
 	}

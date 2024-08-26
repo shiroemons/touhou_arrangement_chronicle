@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gocarina/gocsv"
-	"github.com/jackc/pgtype"
 	"github.com/lucsky/cuid"
 	"github.com/samber/lo"
 
@@ -27,7 +26,7 @@ type EventCSV struct {
 func (imp *Importer) importEvents() {
 	log.Println("start events import.")
 
-	f, err := os.Open("./tmp/events.tsv")
+	f, err := os.Open("../tmp/events.tsv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -103,24 +102,13 @@ func (imp *Importer) insertEvents(lines []EventCSV) {
 			ID:            cuid.New(),
 			EventSeriesID: eSeries.ID,
 			Name:          line.EventName,
-			EventDates: pgtype.Daterange{
-				Lower: pgtype.Date{
-					Time:   line.StartDate.Time,
-					Status: pgtype.Present,
-				},
-				Upper: pgtype.Date{
-					Time:   line.EndDate.Time.AddDate(0, 0, 1),
-					Status: pgtype.Present,
-				},
-				LowerType: pgtype.Inclusive,
-				UpperType: pgtype.Exclusive,
-				Status:    pgtype.Present,
-			},
-			DisplayName: line.EventName,
-			EventStatus: line.Status,
-			Format:      line.Mode,
-			RegionCode:  line.AddressRegion,
-			PublishedAt: lo.ToPtr(time.Now()),
+			StartDate:     lo.ToPtr(line.StartDate.Time),
+			EndDate:       lo.ToPtr(line.EndDate.Time),
+			DisplayName:   line.EventName,
+			EventStatus:   line.Status,
+			Format:        line.Mode,
+			RegionCode:    line.AddressRegion,
+			PublishedAt:   lo.ToPtr(time.Now()),
 		}
 		events = append(events, e)
 	}

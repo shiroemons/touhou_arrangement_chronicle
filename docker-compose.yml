@@ -73,16 +73,16 @@ services:
     volumes:
       - .:/app
       - go_pkg:/go/pkg
-    working_dir: /app
+    working_dir: /app/tools
     command:
       - "go"
       - "run"
-      - "tools/cmd/importer/main.go"
-      - "tools/cmd/importer/import_events.go"
-      - "tools/cmd/importer/import_circles.go"
-      - "tools/cmd/importer/import_artists.go"
-      - "tools/cmd/importer/import_albums_and_songs.go"
-      - "tools/cmd/importer/import_album_service_urls.go"
+      - "cmd/importer/main.go"
+      - "cmd/importer/import_events.go"
+      - "cmd/importer/import_circles.go"
+      - "cmd/importer/import_artists.go"
+      - "cmd/importer/import_albums_and_songs.go"
+      - "cmd/importer/import_album_service_urls.go"
 
   meilisearch:
     image: getmeili/meilisearch:prototype-japanese-12
