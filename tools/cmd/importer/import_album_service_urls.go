@@ -25,7 +25,7 @@ type AlbumServiceUrlTSV struct {
 func (imp *Importer) importAlbumServiceUrl() {
 	log.Println("start album service url import.")
 
-	f, err := os.OpenFile("./tmp/touhou_music_album_only.tsv", os.O_RDWR|os.O_CREATE, os.ModePerm)
+	f, err := os.OpenFile("../tmp/touhou_music_album_only.tsv", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	if err != nil {
 		log.Fatal(err)
 	}
