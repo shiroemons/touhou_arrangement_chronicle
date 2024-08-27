@@ -49,15 +49,15 @@ services:
     volumes:
       - .:/app
       - go_pkg:/go/pkg
-    working_dir: /app
+    working_dir: /app/tools
     command:
       - "go"
       - "run"
-      - "tools/cmd/indexer/main.go"
-      - "tools/cmd/indexer/original_songs.go"
-      - "tools/cmd/indexer/albums.go"
-      - "tools/cmd/indexer/songs.go"
-      - "tools/cmd/indexer/setup.go"
+      - "cmd/indexer/main.go"
+      - "cmd/indexer/original_songs.go"
+      - "cmd/indexer/albums.go"
+      - "cmd/indexer/songs.go"
+      - "cmd/indexer/setup.go"
 
   importer:
     image: golang:1.22
