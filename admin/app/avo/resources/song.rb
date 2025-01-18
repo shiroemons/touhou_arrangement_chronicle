@@ -1,32 +1,32 @@
 class Avo::Resources::Song < Avo::BaseResource
   self.title = :title
   self.translation_key = "activerecord.resources.song"
-  self.includes = [:circle, :album, :album_disc, :original_songs]
+  self.includes = [ :circle, :album, :album_disc, :original_songs ]
 
   def fields
     field :id, as: :id, translation_key: "activerecord.attributes.song.id"
-    field :created_at, as: :date_time, hide_on: [:index]
-    field :updated_at, as: :date_time, hide_on: [:index]
+    field :created_at, as: :date_time, hide_on: [ :index ]
+    field :updated_at, as: :date_time, hide_on: [ :index ]
 
     field :circle, as: :belongs_to
     field :album, as: :belongs_to
-    
+
     field :name, as: :text, required: true,
       translation_key: "activerecord.attributes.song.name",
       help: "楽曲名（正式タイトル）"
-    
+
     field :name_reading, as: :text,
       help: "名前読み方"
-    
+
     field :release_date, as: :date,
       help: "頒布日"
-    
+
     field :release_year, as: :number,
       help: "頒布年"
-    
+
     field :release_month, as: :number,
       help: "頒布月"
-    
+
     field :slug, as: :text, required: true,
       help: "識別用スラッグ"
 
@@ -35,18 +35,18 @@ class Avo::Resources::Song < Avo::BaseResource
     field :track_number, as: :number,
       translation_key: "activerecord.attributes.song.track_number",
       help: "トラック番号"
-    
+
     field :length_time_ms, as: :number,
       translation_key: "activerecord.attributes.song.length",
       help: "曲の長さ(ミリ秒)"
-    
+
     field :bpm, as: :number,
       translation_key: "activerecord.attributes.song.bpm",
       help: "BPM"
-    
+
     field :description, as: :trix,
       help: "楽曲に関する説明文"
-    
+
     field :note, as: :textarea,
       help: "メモ"
 
@@ -60,7 +60,7 @@ class Avo::Resources::Song < Avo::BaseResource
 
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
-    
+
     field :position, as: :number,
       help: "表示順序"
 

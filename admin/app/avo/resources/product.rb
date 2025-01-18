@@ -1,22 +1,22 @@
 class Avo::Resources::Product < Avo::BaseResource
   self.title = :title
   self.translation_key = "activerecord.resources.product"
-  self.includes = [:original_songs]
+  self.includes = [ :original_songs ]
 
   def fields
     field :id, as: :text
-    field :created_at, as: :date_time, hide_on: [:index]
-    field :updated_at, as: :date_time, hide_on: [:index]
+    field :created_at, as: :date_time, hide_on: [ :index ]
+    field :updated_at, as: :date_time, hide_on: [ :index ]
 
     field :name, as: :text, required: true,
       help: "原作作品名（例: 東方紅魔郷）"
-    
+
     field :name_reading, as: :text,
       help: "作品名の読み仮名"
-    
+
     field :short_name, as: :text, required: true,
       help: "短縮名（略称）"
-    
+
     field :product_type, as: :select, required: true,
       options: {
         "PC-98作品": :pc98,
@@ -28,7 +28,7 @@ class Avo::Resources::Product < Avo::BaseResource
         "その他": :other
       },
       help: "作品タイプ"
-    
+
     field :series_number, as: :number, required: true,
       help: "シリーズ中での作品番号（例: 6.00 = 東方紅魔郷）"
 

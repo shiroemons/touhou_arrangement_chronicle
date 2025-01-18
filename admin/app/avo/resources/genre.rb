@@ -5,15 +5,15 @@ class Avo::Resources::Genre < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :created_at, as: :date_time, hide_on: [:index]
-    field :updated_at, as: :date_time, hide_on: [:index]
+    field :created_at, as: :date_time, hide_on: [ :index ]
+    field :updated_at, as: :date_time, hide_on: [ :index ]
 
     field :name, as: :text, required: true,
       help: "ジャンル名（ユニーク）"
-    
+
     field :description, as: :trix,
       help: "ジャンルの簡易説明"
-    
+
     field :note, as: :textarea,
       help: "ジャンルに関する補足情報"
 

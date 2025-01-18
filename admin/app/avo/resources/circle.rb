@@ -5,15 +5,15 @@ class Avo::Resources::Circle < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :created_at, as: :date_time, hide_on: [:index]
-    field :updated_at, as: :date_time, hide_on: [:index]
+    field :created_at, as: :date_time, hide_on: [ :index ]
+    field :updated_at, as: :date_time, hide_on: [ :index ]
 
     field :name, as: :text, required: true,
       help: "サークル名"
-    
+
     field :name_reading, as: :text,
       help: "読み方"
-    
+
     field :slug, as: :text, required: true,
       help: "識別用スラッグ"
 
@@ -27,16 +27,16 @@ class Avo::Resources::Circle < Avo::BaseResource
         "漢字": :kanji,
         "その他": :other
       }
-    
+
     field :first_character, as: :text,
       help: "頭文字詳細 (英字、ひらがな、カタカナの場合のみ)"
-    
+
     field :first_character_row, as: :text,
       help: "頭文字の行 (ひらがな、カタカナの場合のみ)"
-    
+
     field :description, as: :trix,
       help: "サークル説明"
-    
+
     field :note, as: :textarea,
       help: "メモ"
 
