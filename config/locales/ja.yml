@@ -1,0 +1,201 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+      models:
+        album_price:
+          attributes:
+            price:
+              must_be_0_when_is_free: "無料頒布の場合は0円にしてください"
+              must_be_greater_than_0_when_is_free: "有料頒布の場合は0円以上にしてください"
+        event_edition:
+          attributes:
+            end_date:
+              must_be_after_start_date: "開始日より後の日付にしてください"
+        song_bmp:
+          attributes:
+            end_time_ms:
+              must_be_after_start_time: "開始時間より後の時間にしてください"
+        songs_genre:
+          attributes:
+            end_time_ms:
+              must_be_after_start_time: "開始時間より後の時間にしてください"
+
+    attributes:
+      product:
+        id: "ID"
+        name: "名前"
+        short_name: "略称"
+        product_type: "作品タイプ"
+        series_number: "シリーズ番号"
+
+      original_song:
+        id: "ID"
+        name: "名前"
+        track_number: "トラック番号"
+        is_original: "オリジナル曲フラグ"
+
+      distribution_service:
+        service_name: "サービス名"
+        display_name: "表示名"
+        base_urls: "基本URL"
+        position: "表示順"
+
+      distribution_service_url:
+        entity_type: "エンティティタイプ"
+        entity_id: "エンティティID"
+        service_name: "サービス名"
+        url: "URL"
+        position: "表示順"
+
+      event_series:
+        name: "名前"
+        display_name: "表示名"
+        slug: "スラッグ"
+        position: "表示順"
+
+      event_edition:
+        name: "名前"
+        display_name: "表示名"
+        slug: "スラッグ"
+        position: "表示順"
+        start_date: "開始日"
+        end_date: "終了日"
+
+      event_day:
+        region_code: "地域コード"
+        is_cancelled: "中止フラグ"
+        is_online: "オンラインフラグ"
+        position: "表示順"
+
+      artist:
+        name: "名前"
+
+      artist_name:
+        name: "名前"
+        first_character_type: "頭文字タイプ"
+        is_main_name: "本名義フラグ"
+        first_character: "頭文字"
+        first_character_row: "頭文字の行"
+
+      artist_role:
+        name: "名前"
+
+      circle:
+        name: "名前"
+        slug: "スラッグ"
+        first_character_type: "頭文字タイプ"
+        first_character: "頭文字"
+        first_character_row: "頭文字の行"
+
+      album:
+        name: "名前"
+        slug: "スラッグ"
+        position: "表示順"
+
+      album_disc:
+        position: "表示順"
+
+      album_price:
+        price_type: "価格タイプ"
+        is_free: "無料フラグ"
+        price: "価格"
+        currency: "通貨"
+        tax_included: "税込フラグ"
+        position: "表示順"
+
+      album_upc:
+        upc: "UPCコード"
+        position: "表示順"
+
+      albums_circle:
+        position: "表示順"
+
+      entity_url:
+        entity_type: "エンティティタイプ"
+        url_type: "URLタイプ"
+        url: "URL"
+        position: "表示順"
+
+      genre:
+        name: "名前"
+
+      shop:
+        name: "名前"
+        display_name: "表示名"
+        position: "表示順"
+
+      song:
+        name: "名前"
+        slug: "スラッグ"
+        position: "表示順"
+
+      song_bmp:
+        bpm: "BPM"
+        position: "表示順"
+        start_time_ms: "開始時間"
+        end_time_ms: "終了時間"
+
+      song_isrc:
+        isrc: "ISRCコード"
+        position: "表示順"
+
+      song_lyric:
+        content: "歌詞内容"
+        position: "表示順"
+
+      songs_artist_role:
+        position: "表示順"
+
+      songs_arrange_circle:
+        position: "表示順"
+
+      songs_genre:
+        position: "表示順"
+        start_time_ms: "開始時間"
+        end_time_ms: "終了時間"
+
+      songs_original_song:
+        position: "表示順"
+
+      entity_genre:
+        entity_type: "エンティティタイプ"
+        position: "表示順"
+
+      entity_tag:
+        entity_type: "エンティティタイプ"
+
+    enums:
+      product:
+        product_type:
+          pc98: "PC-98作品"
+          windows: "Windows作品"
+          zuns_music_collection: "ZUN's Music Collection"
+          akyus_untouched_score: "幺樂団の歴史"
+          commercial_books: "商業書籍"
+          tasofro: "黄昏フロンティア作品"
+          other: "その他"
+
+      artist_name:
+        first_character_type:
+          symbol: "記号"
+          number: "数字"
+          alphabet: "アルファベット"
+          hiragana: "ひらがな"
+          katakana: "カタカナ"
+          kanji: "漢字"
+          other: "その他"
+
+      circle:
+        first_character_type:
+          symbol: "記号"
+          number: "数字"
+          alphabet: "アルファベット"
+          hiragana: "ひらがな"
+          katakana: "カタカナ"
+          kanji: "漢字"
+          other: "その他" 

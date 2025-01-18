@@ -23,5 +23,11 @@ module Admin
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # データベース管理をRailsから切り離す設定
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+      g.test_framework :test_unit, fixture: false
+    end
   end
 end

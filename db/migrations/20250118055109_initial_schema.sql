@@ -868,7 +868,7 @@ create table entity_genres (
     id           uuid                     not null primary key default gen_random_uuid(),
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp,
-    entity_type  text                     not null check (entity_type in ('album', 'circle', 'artist')),
+    entity_type  text                     not null check (entity_type in ('Album', 'Circle', 'Artist')),
     entity_id    uuid                     not null,
     genre_id     uuid                     not null references genres(id) on delete cascade,
     locked_at    timestamp with time zone,
@@ -881,7 +881,7 @@ comment on table entity_genres is 'アルバム、サークル、アーティス
 comment on column entity_genres.id is 'エンティティジャンルID';
 comment on column entity_genres.created_at is '作成日時';
 comment on column entity_genres.updated_at is '更新日時';
-comment on column entity_genres.entity_type is '対象エンティティ種別（album, circle, artistのいずれか）';
+comment on column entity_genres.entity_type is '対象エンティティ種別（Album, Circle, Artistのいずれか）';
 comment on column entity_genres.entity_id is 'エンティティのID（アルバムID、サークルID、アーティストID）';
 comment on column entity_genres.genre_id is '割り当てるジャンルID';
 comment on column entity_genres.locked_at is 'ジャンル付与情報をロックする日時';
@@ -890,7 +890,7 @@ create table entity_tags (
     id           uuid                     not null primary key default gen_random_uuid(),
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp,
-    entity_type  text                     not null check (entity_type in ('album', 'song', 'circle', 'artist')),
+    entity_type  text                     not null check (entity_type in ('Album', 'Song', 'Circle', 'Artist')),
     entity_id    uuid                     not null,
     tag_id       uuid                     not null references tags(id) on delete cascade,
     locked_at    timestamp with time zone
@@ -901,7 +901,7 @@ comment on table entity_tags is 'アルバム、楽曲、サークル、アー�
 comment on column entity_tags.id is 'エンティティタグID';
 comment on column entity_tags.created_at is '作成日時';
 comment on column entity_tags.updated_at is '更新日時';
-comment on column entity_tags.entity_type is '対象エンティティ種別（album, song, circle, artist）';
+comment on column entity_tags.entity_type is '対象エンティティ種別（Album, Song, Circle, Artist）';
 comment on column entity_tags.entity_id is 'エンティティのID（アルバムID、楽曲ID、サークルID、アーティストID）';
 comment on column entity_tags.tag_id is '付与するタグID';
 comment on column entity_tags.locked_at is 'タグ付与情報をロックする日時';

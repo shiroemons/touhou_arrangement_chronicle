@@ -8,6 +8,10 @@ migrate:
 	docker compose run --rm dbmate up
 	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema up
 
+drop:
+	docker compose run --rm dbmate drop
+	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema drop
+
 rollback:
 	docker compose run --rm dbmate down
 
@@ -36,3 +40,6 @@ rubocop:
 
 rubocop-autocorrect:
 	docker compose run --rm admin bundle exec rubocop -a
+
+test:
+	docker compose run --rm admin bundle exec rails test
