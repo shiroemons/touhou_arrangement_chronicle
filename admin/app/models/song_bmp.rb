@@ -1,0 +1,2 @@
+class SongBmp < ApplicationRecord
+end

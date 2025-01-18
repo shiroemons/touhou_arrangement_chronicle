@@ -1,0 +1,2 @@
+class EntityUrl < ApplicationRecord
+end

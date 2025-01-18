@@ -1,0 +1,2 @@
+class AlbumsCircle < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class SongsArrangeCircle < ApplicationRecord
+end

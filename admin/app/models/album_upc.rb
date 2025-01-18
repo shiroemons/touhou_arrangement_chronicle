@@ -1,0 +1,2 @@
+class AlbumUpc < ApplicationRecord
+end
