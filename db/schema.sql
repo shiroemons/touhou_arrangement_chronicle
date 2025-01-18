@@ -1119,7 +1119,7 @@ CREATE TABLE public.entity_genres (
     genre_id uuid NOT NULL,
     locked_at timestamp with time zone,
     "position" integer DEFAULT 1 NOT NULL,
-    CONSTRAINT entity_genres_entity_type_check CHECK ((entity_type = ANY (ARRAY['album'::text, 'circle'::text, 'artist'::text])))
+    CONSTRAINT entity_genres_entity_type_check CHECK ((entity_type = ANY (ARRAY['Album'::text, 'Circle'::text, 'Artist'::text])))
 );
 
 
@@ -1155,7 +1155,7 @@ COMMENT ON COLUMN public.entity_genres.updated_at IS '更新日時';
 -- Name: COLUMN entity_genres.entity_type; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.entity_genres.entity_type IS '対象エンティティ種別（album, circle, artistのいずれか）';
+COMMENT ON COLUMN public.entity_genres.entity_type IS '対象エンティティ種別（Album, Circle, Artistのいずれか）';
 
 
 --
@@ -1191,7 +1191,7 @@ CREATE TABLE public.entity_tags (
     entity_id uuid NOT NULL,
     tag_id uuid NOT NULL,
     locked_at timestamp with time zone,
-    CONSTRAINT entity_tags_entity_type_check CHECK ((entity_type = ANY (ARRAY['album'::text, 'song'::text, 'circle'::text, 'artist'::text])))
+    CONSTRAINT entity_tags_entity_type_check CHECK ((entity_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'Artist'::text])))
 );
 
 
@@ -1227,7 +1227,7 @@ COMMENT ON COLUMN public.entity_tags.updated_at IS '更新日時';
 -- Name: COLUMN entity_tags.entity_type; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.entity_tags.entity_type IS '対象エンティティ種別（album, song, circle, artist）';
+COMMENT ON COLUMN public.entity_tags.entity_type IS '対象エンティティ種別（Album, Song, Circle, Artist）';
 
 
 --
