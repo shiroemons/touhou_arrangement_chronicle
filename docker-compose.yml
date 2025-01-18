@@ -8,6 +8,33 @@ services:
     volumes:
       - postgres-17:/var/lib/postgresql/data
 
+  admin:
+    build:
+      context: ./admin
+      target: base
+    stdin_open: true
+    tty: true
+    command: bash -c "bundle install --jobs=4 && rm -f tmp/pids/server.pid && ./bin/rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      BUNDLE_PATH: "/usr/local/bundle"
+      BOOTSNAP_CACHE_DIR: "/usr/local/bundle"
+      EDITOR: "vim"
+      HISTFILE: "/app/log/.bash_history"
+      RAILS_MASTER_KEY:
+      WD_INSTALL_DIR: "/usr/local/bin"
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres@postgres17:5432/touhou_arrangement_chronicle_development
+      MEILI_HOST: http://meilisearch:7700
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-masterKey}
+    volumes:
+      - ./admin:/rails
+      - admin_bundle:/usr/local/bundle
+    ports:
+      - "13000:3000"
+    depends_on:
+      - postgres17
+      - meilisearch
+
   dbmate:
     image: ghcr.io/amacneil/dbmate:latest
     depends_on:
@@ -34,3 +61,4 @@ services:
 volumes:
   postgres-17:
   meilisearch_data:
+  admin_bundle:
