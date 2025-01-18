@@ -1,0 +1,24 @@
+services:
+  postgres17:
+    image: postgres:17
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - '15432:5432'
+    volumes:
+      - postgres-17:/var/lib/postgresql/data
+
+  dbmate:
+    image: ghcr.io/amacneil/dbmate:latest
+    depends_on:
+      - postgres17
+    environment:
+      DATABASE_URL: postgres://postgres@postgres17:5432/touhou_arrangement_chronicle_development?sslmode=disable
+      TEST_DATABASE_URL: postgres://postgres@postgres17:5432/touhou_arrangement_chronicle_test?sslmode=disable
+    volumes:
+      - ./db:/db
+    profiles:
+      - dbmate
+
+volumes:
+  postgres-17:
