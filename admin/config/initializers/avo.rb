@@ -158,8 +158,8 @@ Avo.configure do |config|
   #   link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
   # }
 
-  config.home_path = '/admin/resources/albums'
-  
+  config.home_path = "/admin/resources/albums"
+
   # リソースを明示的に登録
   config.resources = [
     "Avo::Resources::Album",
@@ -182,7 +182,7 @@ Avo.configure do |config|
 
   # 1ページあたりの表示件数
   config.per_page = 25
-  
+
   # ID列をクリックしてリソースの詳細を表示
   config.id_links_to_resource = true
 

@@ -30,3 +30,9 @@ bundle:
 
 bash-admin:
 	docker compose run --rm admin bash
+
+rubocop:
+	docker compose run --rm admin bundle exec rubocop
+
+rubocop-autocorrect:
+	docker compose run --rm admin bundle exec rubocop -a
