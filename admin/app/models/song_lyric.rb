@@ -1,0 +1,2 @@
+class SongLyric < ApplicationRecord
+end

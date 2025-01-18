@@ -27,3 +27,6 @@ ps:
 
 bundle:
 	docker compose run --rm admin bundle install --jobs=4
+
+bash-admin:
+	docker compose run --rm admin bash

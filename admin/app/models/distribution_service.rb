@@ -1,0 +1,2 @@
+class DistributionService < ApplicationRecord
+end

@@ -1,0 +1,395 @@
+ja:
+  avo:
+    dashboard: "ダッシュボード"
+    dashboards: "ダッシュボード"
+    resources:
+      album:
+        name: "アルバム"
+        plural: "アルバム"
+      album_disc:
+        name: "ディスク"
+        plural: "ディスク"
+      artist:
+        name: "アーティスト"
+        plural: "アーティスト"
+      artist_name:
+        name: "アーティスト名"
+        plural: "アーティスト名"
+      artist_role:
+        name: "アーティスト役割"
+        plural: "アーティスト役割"
+      circle:
+        name: "サークル"
+        plural: "サークル"
+      distribution_service:
+        name: "配信サービス"
+        plural: "配信サービス"
+      event_day:
+        name: "イベント日"
+        plural: "イベント日"
+      event_edition:
+        name: "イベント回"
+        plural: "イベント回"
+      event_series:
+        name: "イベントシリーズ"
+        plural: "イベントシリーズ"
+      genre:
+        name: "ジャンル"
+        plural: "ジャンル"
+      original_song:
+        name: "原曲"
+        plural: "原曲"
+      product:
+        name: "作品"
+        plural: "作品"
+      shop:
+        name: "ショップ"
+        plural: "ショップ"
+      song:
+        name: "楽曲"
+        plural: "楽曲"
+      tag:
+        name: "タグ"
+        plural: "タグ"
+    action_ran_successfully: "正常に実行されました"
+    actions: "アクション"
+    add_filter: "フィルターを追加"
+    and_x_other_resources: "その他%{count}件のリソース"
+    applied:
+      one: "適用済み"
+      other: "適用済み"
+    are_you_sure: "本当によろしいですか？"
+    are_you_sure_detach_item: "この%{item}を削除してもよろしいですか？"
+    are_you_sure_you_want_to_run_this_option: "実行してもよろしいですか？"
+    attach: "添付"
+    attach_and_attach_another: "添付して次へ"
+    attach_item: "%{item}を添付"
+    attachment_class_attached: "%{attachment_class}を添付しました"
+    attachment_class_detached: "%{attachment_class}を解除しました"
+    attachment_destroyed: "添付ファイルを削除しました"
+    attachment_failed: "%{attachment_class}の添付に失敗しました"
+    cancel: "キャンセル"
+    choose_a_country: "国を選択"
+    choose_an_option: "オプションを選択"
+    choose_item: "%{item}を選択"
+    clear_value: "クリア"
+    click_to_reveal_filters: "クリックしてフィルターを表示"
+    close_modal: "閉じる"
+    confirm: "確認"
+    copy: "コピー"
+    create_new_item: "新しい%{item}を作成"
+    default_scope: "すべて"
+    delete: "削除"
+    delete_file: "ファイルを削除"
+    delete_item: "%{item}を削除"
+    detach_item: "%{item}を解除"
+    details: "詳細"
+    download: "ダウンロード"
+    download_file: "ファイルをダウンロード"
+    download_item: "%{item}をダウンロード"
+    edit: "編集"
+    edit_item: "%{item}を編集"
+    empty_dashboard_message: "ダッシュボードは空です"
+    failed: "失敗"
+    failed_to_find_attachment: "添付ファイルが見つかりません"
+    failed_to_load: "読み込みに失敗しました"
+    file:
+      one: "ファイル"
+      other: "ファイル"
+    filter_by: "フィルター"
+    filters: "フィルター"
+    go_back: "戻る"
+    grid_view: "グリッド表示"
+    hide_content: "内容を非表示"
+    home: "ホーム"
+    key_value_field:
+      add_row: "行を追加"
+      delete_row: "行を削除"
+      key: "キー"
+      reorder_row: "並べ替え"
+      value: "値"
+    loading: "読み込み中..."
+    more: "もっと見る"
+    new: "新規作成"
+    next_page: "次のページ"
+    no_cancel: "いいえ"
+    no_cards_present: "カードがありません"
+    no_item_found: "データが見つかりません"
+    no_options_available: "オプションがありません"
+    no_related_item_found: "関連データが見つかりません"
+    not_authorized: "アクセス権限がありません"
+    number_of_items:
+      one: "%{item}が1件"
+      other: "%{item}が%{count}件"
+      zero: "%{item}がありません"
+    oops_nothing_found: "データが見つかりません"
+    order:
+      higher: "上へ移動"
+      lower: "下へ移動"
+      reorder_record: "並べ替え"
+      to_bottom: "最下部へ"
+      to_top: "最上部へ"
+    per_page: "表示件数"
+    prev_page: "前のページ"
+    remove_selection: "選択を解除"
+    reset: "リセット"
+    reset_filters: "フィルターをリセット"
+    resource_created: "作成しました"
+    resource_destroyed: "削除しました"
+    resource_updated: "更新しました"
+    resources: "リソース"
+    run: "実行"
+    save: "保存"
+    save_and_create_another: "保存して新規作成"
+    save_and_edit: "保存して編集"
+    search:
+      cancel_button: "キャンセル"
+      placeholder: "検索"
+    select_all: "すべて選択"
+    select_all_matching: "すべての一致項目を選択"
+    select_item: "選択"
+    show_content: "内容を表示"
+    sign_out: "ログアウト"
+    sort_asc: "昇順"
+    sort_desc: "降順"
+    sort_reset: "ソートをリセット"
+    switch_to_view: "%{view_type}表示に切り替え"
+    table_view: "テーブル表示"
+    this_field_has_attachments_disabled: "添付ファイルは無効になっています"
+    tools: "ツール"
+    type_to_search: "検索キーワードを入力"
+    unauthorized: "アクセス権限がありません"
+    undo: "元に戻す"
+    view: "表示"
+    view_item: "%{item}を表示"
+    visit_record_on_external_path: "外部リンクで表示"
+    was_successfully_created: "を作成しました"
+    was_successfully_updated: "を更新しました"
+    x_items_more:
+      one: "他1件"
+      other: "他%{count}件"
+      zero: "他の項目はありません"
+    x_records_selected_from_a_total_of_x_html: "全%{count}件中%{selected}件を選択中"
+    x_records_selected_from_all_pages_html: "全%{count}件を選択中"
+    x_records_selected_from_page_html: "このページから%{selected}件を選択中"
+    yes_confirm: "はい"
+    you_cant_upload_new_resource: "保存後にファイルをアップロードしてください"
+    you_havent_set_attachment_key: "添付ファイルのキーが設定されていません"
+    you_missed_something_check_form: "入力内容に不備があります。確認してください"
+    field_translations:
+      id:
+        one: "ID"
+        other: "ID"
+      title:
+        one: "タイトル"
+        other: "タイトル"
+      name:
+        one: "名前"
+        other: "名前"
+      release_date:
+        one: "発売日"
+        other: "発売日"
+      length:
+        one: "曲の長さ"
+        other: "曲の長さ"
+      note:
+        one: "メモ"
+        other: "メモ"
+      description:
+        one: "説明"
+        other: "説明"
+      created_at:
+        one: "作成日時"
+        other: "作成日時"
+      updated_at:
+        one: "更新日時"
+        other: "更新日時"
+      name_reading:
+        one: "読み方"
+        other: "読み方"
+      slug:
+        one: "スラッグ"
+        other: "スラッグ"
+      credit:
+        one: "クレジット"
+        other: "クレジット"
+      introduction:
+        one: "紹介文"
+        other: "紹介文"
+      url:
+        one: "URL"
+        other: "URL"
+      track_number:
+        one: "トラック番号"
+        other: "トラック番号"
+      disc_number:
+        one: "ディスク番号"
+        other: "ディスク番号"
+      bpm:
+        one: "BPM"
+        other: "BPM"
+      display_composer:
+        one: "作曲者表示名"
+        other: "作曲者表示名"
+      display_arranger:
+        one: "編曲者表示名"
+        other: "編曲者表示名"
+      display_rearranger:
+        one: "再編曲者表示名"
+        other: "再編曲者表示名"
+      display_lyricist:
+        one: "作詞者表示名"
+        other: "作詞者表示名"
+      display_vocalist:
+        one: "ボーカル表示名"
+        other: "ボーカル表示名"
+      display_original_song:
+        one: "原曲表示名"
+        other: "原曲表示名"
+      date:
+        one: "開催日"
+        other: "開催日"
+      day_number:
+        one: "日程番号"
+        other: "日程番号"
+      display_name:
+        one: "表示名"
+        other: "表示名"
+      region_code:
+        one: "地域コード"
+        other: "地域コード"
+      is_cancelled:
+        one: "中止フラグ"
+        other: "中止フラグ"
+      is_online:
+        one: "オンライン開催"
+        other: "オンライン開催"
+      product_type:
+        one: "作品タイプ"
+        other: "作品タイプ"
+      series_number:
+        one: "シリーズ番号"
+        other: "シリーズ番号"
+      short_name:
+        one: "略称"
+        other: "略称"
+      position:
+        one: "表示順序"
+        other: "表示順序"
+      published_at:
+        one: "公開日時"
+        other: "公開日時"
+      archived_at:
+        one: "アーカイブ日時"
+        other: "アーカイブ日時"
+      release_circle:
+        one: "頒布サークル"
+        other: "頒布サークル"
+      release_circle_name:
+        one: "頒布サークル名"
+        other: "頒布サークル名"
+      release_year:
+        one: "頒布年"
+        other: "頒布年"
+      release_month:
+        one: "頒布月"
+        other: "頒布月"
+      event_day:
+        one: "イベント日程"
+        other: "イベント日程"
+      album_number:
+        one: "カタログ番号"
+        other: "カタログ番号"
+      artist:
+        one: "アーティスト"
+        other: "アーティスト"
+      role:
+        one: "役割"
+        other: "役割"
+      is_main_name:
+        one: "本名義"
+        other: "本名義"
+      first_character_type:
+        one: "頭文字種別"
+        other: "頭文字種別"
+      first_character:
+        one: "頭文字"
+        other: "頭文字"
+      first_character_row:
+        one: "頭文字行"
+        other: "頭文字行"
+      service_name:
+        one: "サービス名"
+        other: "サービス名"
+      base_urls:
+        one: "基本URL"
+        other: "基本URL"
+      website_url:
+        one: "Webサイト"
+        other: "Webサイト"
+  activerecord:
+    resources:
+      album:
+        zero: "アルバム"
+        one: "アルバム"
+        other: "アルバム"
+      album_disc:
+        zero: "ディスク"
+        one: "ディスク"
+        other: "ディスク"
+      artist:
+        zero: "アーティスト"
+        one: "アーティスト"
+        other: "アーティスト"
+      artist_name:
+        zero: "アーティスト名"
+        one: "アーティスト名"
+        other: "アーティスト名"
+      artist_role:
+        zero: "アーティスト役割"
+        one: "アーティスト役割"
+        other: "アーティスト役割"
+      circle:
+        zero: "サークル"
+        one: "サークル"
+        other: "サークル"
+      distribution_service:
+        zero: "配信サービス"
+        one: "配信サービス"
+        other: "配信サービス"
+      event_day:
+        zero: "イベント日"
+        one: "イベント日"
+        other: "イベント日"
+      event_edition:
+        zero: "イベント回"
+        one: "イベント回"
+        other: "イベント回"
+      event_series:
+        zero: "イベントシリーズ"
+        one: "イベントシリーズ"
+        other: "イベントシリーズ"
+      genre:
+        zero: "ジャンル"
+        one: "ジャンル"
+        other: "ジャンル"
+      original_song:
+        zero: "原曲"
+        one: "原曲"
+        other: "原曲"
+      product:
+        zero: "作品"
+        one: "作品"
+        other: "作品"
+      shop:
+        zero: "ショップ"
+        one: "ショップ"
+        other: "ショップ"
+      song:
+        zero: "楽曲"
+        one: "楽曲"
+        other: "楽曲"
+      tag:
+        zero: "タグ"
+        one: "タグ"
+        other: "タグ"

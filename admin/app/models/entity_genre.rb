@@ -1,0 +1,2 @@
+class EntityGenre < ApplicationRecord
+end
