@@ -17,5 +17,13 @@ dbmate-new:
 dbmate-status:
 	docker compose run --rm dbmate status
 
+logs:
+	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
 %:
 	@:
+
+ps:
+	docker compose ps
+
+bundle:
+	docker compose run --rm admin bundle install --jobs=4

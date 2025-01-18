@@ -1,0 +1,27 @@
+# syntax=docker/dockerfile:1
+
+ARG RUBY_VERSION=3.4.1
+FROM docker.io/library/ruby:$RUBY_VERSION
+
+# 開発環境用のワークディレクトリ
+WORKDIR /app
+
+# Avo gem認証用の環境変数
+ARG BUNDLE_PACKAGER__DEV
+ENV BUNDLE_PACKAGER__DEV=$BUNDLE_PACKAGER__DEV
+
+# 開発環境用の環境変数設定
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT=""
+
+# アプリケーションの依存関係をインストール
+COPY Gemfile Gemfile.lock .ruby-version ./
+RUN bundle install
+
+# エントリーポイントスクリプトをコピー
+COPY bin/docker-entrypoint /usr/bin/
+RUN chmod +x /usr/bin/docker-entrypoint
+
+# デフォルトのコマンド
+EXPOSE 3000
