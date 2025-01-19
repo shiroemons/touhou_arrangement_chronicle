@@ -1,0 +1,8 @@
+service_name	display_name	base_urls	description	position
+spotify	Spotify	https://open.spotify.com/	世界最大級の音楽ストリーミングサービス。	1
+apple_music	Apple Music	https://music.apple.com/	Appleが提供する音楽ストリーミングサービス。	2
+youtube_music	YouTube Music	https://music.youtube.com/	YouTubeの音楽ストリーミングサービス。	3
+amazon_music	Amazon Music	https://music.amazon.com/,https://music.amazon.co.jp/	Amazonが提供する音楽ストリーミングサービス。	4
+line_music	LINE MUSIC	https://music.line.me/	LINEが提供する音楽ストリーミングサービス。	5
+soundcloud	SoundCloud	https://soundcloud.com/	クリエイター主導の音楽配信プラットフォーム。	6
+bandcamp	Bandcamp	https://bandcamp.com/	インディーズアーティスト向けの音楽配信プラットフォーム。	7 
