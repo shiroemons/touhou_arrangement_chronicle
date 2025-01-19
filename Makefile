@@ -46,3 +46,9 @@ test:
 
 seed:
 	docker compose run --rm admin bundle exec rails db:seed
+
+console:
+	docker compose run --rm admin bin/rails console
+
+console-sandbox:
+	docker compose run --rm admin bin/rails console --sandbox
