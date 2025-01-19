@@ -2,6 +2,8 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
   self.title = :name
   self.translation_key = "activerecord.resources.original_song"
   self.includes = [ :product, :origin_original_song ]
+  self.default_sort_column = :id 
+  self.default_sort_direction = :asc
 
   def fields
     field :id, as: :text

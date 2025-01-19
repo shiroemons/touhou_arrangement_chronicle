@@ -5,6 +5,7 @@ class OriginalSong < ApplicationRecord
   has_many :derived_original_songs, class_name: "OriginalSong", foreign_key: "origin_original_song_id"
   has_many :songs_original_songs
   has_many :songs, through: :songs_original_songs
+  has_many :distribution_service_urls, as: :distributable, dependent: :destroy
 
   # バリデーション
   validates :id, presence: true

@@ -106,9 +106,9 @@ create table distribution_service_urls (
     id              uuid                     not null primary key default gen_random_uuid(),
     created_at      timestamp with time zone not null default current_timestamp,
     updated_at      timestamp with time zone not null default current_timestamp,
-    entity_type     text                     not null check (entity_type in ('product', 'original_song', 'album', 'song')), 
-      -- 管理対象の種別: 原作(product)、原曲(original_song)、アルバム(album)、楽曲(song)
-    entity_id       uuid                     not null,  -- 対象エンティティのID
+    entity_type     text                     not null check (entity_type in ('Product', 'OriginalSong', 'Album', 'Song')), 
+      -- 管理対象の種別: 原作(Product)、原曲(OriginalSong)、アルバム(Album)、楽曲(Song)
+    entity_id       text                     not null,  -- 対象エンティティのID
     service_name    text                     not null references distribution_services(service_name) on delete restrict, -- 紐づく配信サービス
     url             text                     not null, -- 実際の配信URL
     description     text,                    -- URLに関する説明（バージョン違いなど）

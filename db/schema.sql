@@ -939,13 +939,13 @@ CREATE TABLE public.distribution_service_urls (
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     entity_type text NOT NULL,
-    entity_id uuid NOT NULL,
+    entity_id text NOT NULL,
     service_name text NOT NULL,
     url text NOT NULL,
     description text,
     note text,
     "position" integer DEFAULT 1 NOT NULL,
-    CONSTRAINT distribution_service_urls_entity_type_check CHECK ((entity_type = ANY (ARRAY['product'::text, 'original_song'::text, 'album'::text, 'song'::text])))
+    CONSTRAINT distribution_service_urls_entity_type_check CHECK ((entity_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])))
 );
 
 

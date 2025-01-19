@@ -1,7 +1,17 @@
 class Avo::Resources::DistributionService < Avo::BaseResource
-  self.title = :name
+  self.title = :service_name
   self.translation_key = "activerecord.resources.distribution_service"
   self.includes = []
+
+  # レコードの検索方法を明示的に定義
+  self.find_record_method = -> {
+    query.find(id)
+  }
+
+  # インデックスクエリを明示的に定義
+  self.index_query = -> {
+    query.all
+  }
 
   def fields
     field :id, as: :id
@@ -26,8 +36,5 @@ class Avo::Resources::DistributionService < Avo::BaseResource
 
     field :position, as: :number,
       help: "表示順序"
-
-    # 関連
-    field :distribution_service_urls, as: :has_many
   end
 end
