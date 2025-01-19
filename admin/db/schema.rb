@@ -206,18 +206,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.unique_constraint ["service_name"], name: "distribution_services_service_name_key"
   end
 
-  create_table "entity_tags", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティタグID" }, comment: "アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル", force: :cascade do |t|
-    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
-    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
-    t.text "entity_type", null: false, comment: "対象エンティティ種別（Album, Song, Circle, Artist）"
-    t.uuid "entity_id", null: false, comment: "エンティティのID（アルバムID、楽曲ID、サークルID、アーティストID）"
-    t.uuid "tag_id", null: false, comment: "付与するタグID"
-    t.timestamptz "locked_at", comment: "タグ付与情報をロックする日時"
-    t.index ["entity_type", "entity_id", "tag_id"], name: "uk_entity_tags_entity_type_entity_id_tag_id", unique: true
-    t.index ["locked_at"], name: "idx_entity_tags_locked_at"
-    t.check_constraint "entity_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'Artist'::text])", name: "entity_tags_entity_type_check"
-  end
-
   create_table "entity_urls", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティURL ID" }, comment: "アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
@@ -501,6 +489,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["song_id"], name: "idx_songs_original_songs_song_id"
   end
 
+  create_table "taggings", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "タグ付けID" }, comment: "アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.text "taggable_type", null: false, comment: "対象の種別（Album, Song, Circle, ArtistName）"
+    t.uuid "taggable_id", null: false, comment: "タグ付け対象のID"
+    t.uuid "tag_id", null: false, comment: "付与するタグID"
+    t.timestamptz "locked_at", comment: "タグ付与情報をロックする日時"
+    t.index ["locked_at"], name: "idx_taggings_locked_at"
+    t.index ["taggable_type", "taggable_id", "tag_id"], name: "uk_taggings_taggable", unique: true
+    t.check_constraint "taggable_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'ArtistName'::text])", name: "taggings_taggable_type_check"
+  end
+
   create_table "tags", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "タグID" }, comment: "タグ情報を管理するテーブル。ジャンル以外の属性や特徴を自由に付与可能", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
@@ -521,7 +521,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "albums_circles", "circles", name: "albums_circles_circle_id_fkey", on_delete: :cascade
   add_foreign_key "artist_names", "artists", name: "artist_names_artist_id_fkey", on_delete: :cascade
   add_foreign_key "distribution_service_urls", "distribution_services", column: "service_name", primary_key: "service_name", name: "distribution_service_urls_service_name_fkey", on_delete: :restrict
-  add_foreign_key "entity_tags", "tags", name: "entity_tags_tag_id_fkey", on_delete: :cascade
   add_foreign_key "event_days", "event_editions", name: "event_days_event_edition_id_fkey", on_delete: :cascade
   add_foreign_key "event_editions", "event_series", name: "event_editions_event_series_id_fkey", on_delete: :restrict
   add_foreign_key "genreable_genres", "genres", name: "genreable_genres_genre_id_fkey", on_delete: :cascade
@@ -542,4 +541,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "songs_genres", "songs", name: "songs_genres_song_id_fkey", on_delete: :cascade
   add_foreign_key "songs_original_songs", "original_songs", name: "songs_original_songs_original_song_id_fkey", on_delete: :cascade
   add_foreign_key "songs_original_songs", "songs", name: "songs_original_songs_song_id_fkey", on_delete: :cascade
+  add_foreign_key "taggings", "tags", name: "taggings_tag_id_fkey", on_delete: :cascade
 end

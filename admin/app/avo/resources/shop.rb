@@ -40,8 +40,5 @@ class Avo::Resources::Shop < Avo::BaseResource
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
     field :position, as: :number
-
-    # 関連
-    field :album_prices, as: :has_many
   end
 end

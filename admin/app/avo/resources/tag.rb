@@ -18,9 +18,9 @@ class Avo::Resources::Tag < Avo::BaseResource
       help: "タグに関する補足情報"
 
     # 関連（ポリモーフィック）
-    field :albums, as: :has_many, through: :entity_tags, polymorphic_as: :album
-    field :songs, as: :has_many, through: :entity_tags, polymorphic_as: :song
-    field :circles, as: :has_many, through: :entity_tags, polymorphic_as: :circle
-    field :artists, as: :has_many, through: :entity_tags, polymorphic_as: :artist
+    field :albums, as: :has_many, through: :taggings, polymorphic_as: :album
+    field :songs, as: :has_many, through: :taggings, polymorphic_as: :song
+    field :circles, as: :has_many, through: :taggings, polymorphic_as: :circle
+    field :artist_names, as: :has_many, through: :taggings, polymorphic_as: :artist_name
   end
 end

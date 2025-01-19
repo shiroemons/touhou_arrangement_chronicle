@@ -15,7 +15,8 @@ class Song < ApplicationRecord
   has_many :artist_roles, through: :songs_artist_roles
   has_many :songs_genres, dependent: :destroy
   has_many :genres, -> { order(position: :asc) }, through: :songs_genres
-  has_many :entity_tags, as: :entity
+  has_many :taggings, as: :taggable, dependent: :destroy
+  has_many :tags, -> { order(position: :asc) }, through: :taggings
   has_many :distribution_service_urls, -> { order(position: :asc) }, as: :entity
 
   acts_as_list scope: :arrange_circles

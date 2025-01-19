@@ -21,6 +21,6 @@ class Avo::Resources::Genre < Avo::BaseResource
     field :songs, as: :has_many, through: :songs_genres
     field :albums, as: :has_many, through: :genreable_genres, polymorphic_as: :album
     field :circles, as: :has_many, through: :genreable_genres, polymorphic_as: :circle
-    field :artist_names, as: :has_many, through: :genreable_genres, polymorphic_as: :artist_name 
+    field :artist_names, as: :has_many, through: :genreable_genres, polymorphic_as: :artist_name
   end
 end

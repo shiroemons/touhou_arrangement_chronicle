@@ -889,30 +889,30 @@ comment on column genreable_genres.genreable_id is '対象のID（アルバムID
 comment on column genreable_genres.genre_id is '割り当てるジャンルID';
 comment on column genreable_genres.locked_at is 'ジャンル付与情報をロックする日時';
 
-create table entity_tags (
-    id           uuid                     not null primary key default gen_random_uuid(),
-    created_at   timestamp with time zone not null default current_timestamp,
-    updated_at   timestamp with time zone not null default current_timestamp,
-    entity_type  text                     not null check (entity_type in ('Album', 'Song', 'Circle', 'Artist')),
-    entity_id    uuid                     not null,
-    tag_id       uuid                     not null references tags(id) on delete cascade,
-    locked_at    timestamp with time zone
+create table taggings (
+    id             uuid                     not null primary key default gen_random_uuid(),
+    created_at     timestamp with time zone not null default current_timestamp,
+    updated_at     timestamp with time zone not null default current_timestamp,
+    taggable_type  text                     not null check (taggable_type in ('Album', 'Song', 'Circle', 'ArtistName')),
+    taggable_id    uuid                     not null,
+    tag_id         uuid                     not null references tags(id) on delete cascade,
+    locked_at      timestamp with time zone
 );
-create unique index uk_entity_tags_entity_type_entity_id_tag_id on entity_tags (entity_type, entity_id, tag_id);
-create index idx_entity_tags_locked_at on entity_tags (locked_at);
-comment on table entity_tags is 'アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル';
-comment on column entity_tags.id is 'エンティティタグID';
-comment on column entity_tags.created_at is '作成日時';
-comment on column entity_tags.updated_at is '更新日時';
-comment on column entity_tags.entity_type is '対象エンティティ種別（Album, Song, Circle, Artist）';
-comment on column entity_tags.entity_id is 'エンティティのID（アルバムID、楽曲ID、サークルID、アーティストID）';
-comment on column entity_tags.tag_id is '付与するタグID';
-comment on column entity_tags.locked_at is 'タグ付与情報をロックする日時';
+create unique index uk_taggings_taggable on taggings (taggable_type, taggable_id, tag_id);
+create index idx_taggings_locked_at on taggings (locked_at);
+comment on table taggings is 'アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル';
+comment on column taggings.id is 'タグ付けID';
+comment on column taggings.created_at is '作成日時';
+comment on column taggings.updated_at is '更新日時';
+comment on column taggings.taggable_type is '対象の種別（Album, Song, Circle, ArtistName）';
+comment on column taggings.taggable_id is 'タグ付け対象のID';
+comment on column taggings.tag_id is '付与するタグID';
+comment on column taggings.locked_at is 'タグ付与情報をロックする日時';
 
 -- migrate:down
 
 -- テーブルの削除は依存関係のある順序で実行
-drop table if exists entity_tags cascade;
+drop table if exists taggings cascade;
 drop table if exists genreable_genres cascade;
 drop table if exists songs_genres cascade;
 drop table if exists songs_artist_roles cascade;

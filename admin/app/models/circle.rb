@@ -9,7 +9,8 @@ class Circle < ApplicationRecord
   has_many :entity_urls, as: :entity
   has_many :genreable_genres, as: :genreable, dependent: :destroy
   has_many :genres, -> { order(position: :asc) }, through: :genreable_genres
-  has_many :entity_tags, as: :entity
+  has_many :taggings, as: :taggable, dependent: :destroy
+  has_many :tags, -> { order(position: :asc) }, through: :taggings
 
   # バリデーション
   validates :name, presence: true

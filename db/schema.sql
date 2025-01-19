@@ -1115,78 +1115,6 @@ COMMENT ON COLUMN public.distribution_services.note IS '備考';
 
 
 --
--- Name: entity_tags; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.entity_tags (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    entity_type text NOT NULL,
-    entity_id uuid NOT NULL,
-    tag_id uuid NOT NULL,
-    locked_at timestamp with time zone,
-    CONSTRAINT entity_tags_entity_type_check CHECK ((entity_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'Artist'::text])))
-);
-
-
---
--- Name: TABLE entity_tags; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.entity_tags IS 'アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル';
-
-
---
--- Name: COLUMN entity_tags.id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.id IS 'エンティティタグID';
-
-
---
--- Name: COLUMN entity_tags.created_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.created_at IS '作成日時';
-
-
---
--- Name: COLUMN entity_tags.updated_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.updated_at IS '更新日時';
-
-
---
--- Name: COLUMN entity_tags.entity_type; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.entity_type IS '対象エンティティ種別（Album, Song, Circle, Artist）';
-
-
---
--- Name: COLUMN entity_tags.entity_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.entity_id IS 'エンティティのID（アルバムID、楽曲ID、サークルID、アーティストID）';
-
-
---
--- Name: COLUMN entity_tags.tag_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.tag_id IS '付与するタグID';
-
-
---
--- Name: COLUMN entity_tags.locked_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_tags.locked_at IS 'タグ付与情報をロックする日時';
-
-
---
 -- Name: entity_urls; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2809,6 +2737,78 @@ COMMENT ON COLUMN public.songs_original_songs."position" IS '楽曲が原曲に�
 
 
 --
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.taggings (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    taggable_type text NOT NULL,
+    taggable_id uuid NOT NULL,
+    tag_id uuid NOT NULL,
+    locked_at timestamp with time zone,
+    CONSTRAINT taggings_taggable_type_check CHECK ((taggable_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'ArtistName'::text])))
+);
+
+
+--
+-- Name: TABLE taggings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.taggings IS 'アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル';
+
+
+--
+-- Name: COLUMN taggings.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.id IS 'タグ付けID';
+
+
+--
+-- Name: COLUMN taggings.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN taggings.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN taggings.taggable_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.taggable_type IS '対象の種別（Album, Song, Circle, ArtistName）';
+
+
+--
+-- Name: COLUMN taggings.taggable_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.taggable_id IS 'タグ付け対象のID';
+
+
+--
+-- Name: COLUMN taggings.tag_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.tag_id IS '付与するタグID';
+
+
+--
+-- Name: COLUMN taggings.locked_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings.locked_at IS 'タグ付与情報をロックする日時';
+
+
+--
 -- Name: tags; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2989,14 +2989,6 @@ ALTER TABLE ONLY public.distribution_services
 
 ALTER TABLE ONLY public.distribution_services
     ADD CONSTRAINT distribution_services_service_name_key UNIQUE (service_name);
-
-
---
--- Name: entity_tags entity_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.entity_tags
-    ADD CONSTRAINT entity_tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -3189,6 +3181,14 @@ ALTER TABLE ONLY public.songs
 
 ALTER TABLE ONLY public.songs
     ADD CONSTRAINT songs_slug_key UNIQUE (slug);
+
+
+--
+-- Name: taggings taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
 
 
 --
@@ -3443,13 +3443,6 @@ CREATE INDEX idx_distribution_services_position ON public.distribution_services 
 --
 
 CREATE INDEX idx_dsu_service_name ON public.distribution_service_urls USING btree (service_name);
-
-
---
--- Name: idx_entity_tags_locked_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_entity_tags_locked_at ON public.entity_tags USING btree (locked_at);
 
 
 --
@@ -3873,6 +3866,13 @@ CREATE INDEX idx_songs_release_year_month ON public.songs USING btree (release_y
 
 
 --
+-- Name: idx_taggings_locked_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_taggings_locked_at ON public.taggings USING btree (locked_at);
+
+
+--
 -- Name: uk_album_upcs_album_id_upc; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3905,13 +3905,6 @@ CREATE UNIQUE INDEX uk_artist_names_artist_id_main_name ON public.artist_names U
 --
 
 CREATE UNIQUE INDEX uk_dsu_entity_id_service ON public.distribution_service_urls USING btree (entity_type, entity_id, service_name);
-
-
---
--- Name: uk_entity_tags_entity_type_entity_id_tag_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX uk_entity_tags_entity_type_entity_id_tag_id ON public.entity_tags USING btree (entity_type, entity_id, tag_id);
 
 
 --
@@ -3961,6 +3954,13 @@ CREATE UNIQUE INDEX uk_songs_arrange_circles_song_id_circle_id ON public.songs_a
 --
 
 CREATE UNIQUE INDEX uk_songs_original_songs_song_id_original_song_id ON public.songs_original_songs USING btree (song_id, original_song_id);
+
+
+--
+-- Name: uk_taggings_taggable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uk_taggings_taggable ON public.taggings USING btree (taggable_type, taggable_id, tag_id);
 
 
 --
@@ -4041,14 +4041,6 @@ ALTER TABLE ONLY public.artist_names
 
 ALTER TABLE ONLY public.distribution_service_urls
     ADD CONSTRAINT distribution_service_urls_service_name_fkey FOREIGN KEY (service_name) REFERENCES public.distribution_services(service_name) ON DELETE RESTRICT;
-
-
---
--- Name: entity_tags entity_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.entity_tags
-    ADD CONSTRAINT entity_tags_tag_id_fkey FOREIGN KEY (tag_id) REFERENCES public.tags(id) ON DELETE CASCADE;
 
 
 --
@@ -4209,6 +4201,14 @@ ALTER TABLE ONLY public.songs_original_songs
 
 ALTER TABLE ONLY public.songs_original_songs
     ADD CONSTRAINT songs_original_songs_song_id_fkey FOREIGN KEY (song_id) REFERENCES public.songs(id) ON DELETE CASCADE;
+
+
+--
+-- Name: taggings taggings_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings
+    ADD CONSTRAINT taggings_tag_id_fkey FOREIGN KEY (tag_id) REFERENCES public.tags(id) ON DELETE CASCADE;
 
 
 --

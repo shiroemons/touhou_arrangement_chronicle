@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :genreable_genre do
+  factory :tagging do
   end
 end
