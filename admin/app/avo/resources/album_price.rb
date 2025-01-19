@@ -3,26 +3,15 @@ class Avo::Resources::AlbumPrice < Avo::BaseResource
   self.translation_key = "activerecord.resources.album_price"
 
   def fields
-    field :id, as: :id, translation_key: "activerecord.attributes.album_price.id"
-    field :created_at, as: :date_time, translation_key: "activerecord.attributes.album_price.created_at"
-    field :updated_at, as: :date_time, translation_key: "activerecord.attributes.album_price.updated_at"
+    field :id, as: :id
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
-    field :album, as: :belongs_to,
-      translation_key: "activerecord.attributes.album_price.album"
-
-    field :shop, as: :belongs_to,
-      translation_key: "activerecord.attributes.album_price.shop"
-
-    field :price, as: :number,
-      translation_key: "activerecord.attributes.album_price.price"
-
-    field :tax_included, as: :boolean,
-      translation_key: "activerecord.attributes.album_price.tax_included"
-
-    field :currency, as: :text,
-      translation_key: "activerecord.attributes.album_price.currency"
-
-    field :position, as: :number,
-      translation_key: "activerecord.attributes.album_price.position"
+    field :album, as: :belongs_to
+    field :shop, as: :belongs_to
+    field :price, as: :number
+    field :tax_included, as: :boolean
+    field :currency, as: :text
+    field :position, as: :number
   end
 end

@@ -5,8 +5,8 @@ class Avo::Resources::Product < Avo::BaseResource
 
   def fields
     field :id, as: :text
-    field :created_at, as: :date_time, hide_on: [ :index ]
-    field :updated_at, as: :date_time, hide_on: [ :index ]
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
     field :name, as: :text, required: true,
       help: "原作作品名（例: 東方紅魔郷）"

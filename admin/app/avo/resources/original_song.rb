@@ -5,8 +5,8 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
 
   def fields
     field :id, as: :text
-    field :created_at, as: :date_time, hide_on: [ :index ]
-    field :updated_at, as: :date_time, hide_on: [ :index ]
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
     field :product, as: :belongs_to, required: true
 

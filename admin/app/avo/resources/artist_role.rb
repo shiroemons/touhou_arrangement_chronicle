@@ -5,8 +5,8 @@ class Avo::Resources::ArtistRole < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :created_at, as: :date_time, hide_on: [ :index ]
-    field :updated_at, as: :date_time, hide_on: [ :index ]
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
     field :name, as: :text, required: true,
       help: "役割名(vocalist, composer等)"

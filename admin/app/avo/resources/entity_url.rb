@@ -3,20 +3,12 @@ class Avo::Resources::EntityUrl < Avo::BaseResource
   self.translation_key = "activerecord.resources.entity_url"
 
   def fields
-    field :id, as: :id, translation_key: "activerecord.attributes.entity_url.id"
-    field :created_at, as: :date_time, translation_key: "activerecord.attributes.entity_url.created_at"
-    field :updated_at, as: :date_time, translation_key: "activerecord.attributes.entity_url.updated_at"
-
-    field :entity_type, as: :text,
-      translation_key: "activerecord.attributes.entity_url.entity_type"
-
-    field :entity_id, as: :text,
-      translation_key: "activerecord.attributes.entity_url.entity_id"
-
-    field :url, as: :text,
-      translation_key: "activerecord.attributes.entity_url.url"
-
-    field :description, as: :text,
-      translation_key: "activerecord.attributes.entity_url.description"
+    field :id, as: :id
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :entity_type, as: :text
+    field :entity_id, as: :text
+    field :url, as: :text
+    field :description, as: :text
   end
 end

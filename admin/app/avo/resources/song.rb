@@ -4,15 +4,14 @@ class Avo::Resources::Song < Avo::BaseResource
   self.includes = [ :circle, :album, :album_disc, :original_songs ]
 
   def fields
-    field :id, as: :id, translation_key: "activerecord.attributes.song.id"
-    field :created_at, as: :date_time, hide_on: [ :index ]
-    field :updated_at, as: :date_time, hide_on: [ :index ]
+    field :id, as: :id
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
     field :circle, as: :belongs_to
     field :album, as: :belongs_to
 
     field :name, as: :text, required: true,
-      translation_key: "activerecord.attributes.song.name",
       help: "楽曲名（正式タイトル）"
 
     field :name_reading, as: :text,
@@ -33,15 +32,12 @@ class Avo::Resources::Song < Avo::BaseResource
     field :album_disc, as: :belongs_to
     field :disc_number, as: :number
     field :track_number, as: :number,
-      translation_key: "activerecord.attributes.song.track_number",
       help: "トラック番号"
 
     field :length_time_ms, as: :number,
-      translation_key: "activerecord.attributes.song.length",
       help: "曲の長さ(ミリ秒)"
 
     field :bpm, as: :number,
-      translation_key: "activerecord.attributes.song.bpm",
       help: "BPM"
 
     field :description, as: :trix,

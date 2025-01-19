@@ -5,8 +5,8 @@ class Avo::Resources::DistributionService < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :created_at, as: :date_time, hide_on: [ :index ]
-    field :updated_at, as: :date_time, hide_on: [ :index ]
+    field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
+    field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
     field :service_name, as: :text, required: true,
       help: "サービス内部名（例: spotify）"
