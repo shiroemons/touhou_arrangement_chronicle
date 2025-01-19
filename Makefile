@@ -43,3 +43,6 @@ rubocop-autocorrect:
 
 test:
 	docker compose run --rm admin bundle exec rails test
+
+seed:
+	docker compose run --rm admin bundle exec rails db:seed

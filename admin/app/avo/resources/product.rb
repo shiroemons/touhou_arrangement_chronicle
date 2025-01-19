@@ -1,5 +1,5 @@
 class Avo::Resources::Product < Avo::BaseResource
-  self.title = :title
+  self.title = :name
   self.translation_key = "activerecord.resources.product"
   self.includes = [ :original_songs ]
 
@@ -19,13 +19,12 @@ class Avo::Resources::Product < Avo::BaseResource
 
     field :product_type, as: :select, required: true,
       options: {
-        "PC-98作品": :pc98,
-        "Windows作品": :windows,
-        "ZUN's Music Collection": :zuns_music_collection,
-        "幺樂団の歴史": :akyus_untouched_score,
-        "商業書籍": :commercial_books,
-        "黄昏フロンティア作品": :tasofro,
-        "その他": :other
+        "PC-98作品" => "pc98",
+        "Windows作品" => "windows",
+        "ZUN's Music Collection" => "zuns_music_collection",
+        "幺樂団の歴史　～ Akyu's Untouched Score" => "akyus_untouched_score",
+        "商業書籍" => "commercial_books",
+        "その他" => "other"
       },
       help: "作品タイプ"
 

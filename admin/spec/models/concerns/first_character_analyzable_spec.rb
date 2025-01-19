@@ -5,7 +5,7 @@ RSpec.describe FirstCharacterAnalyzable do
     Class.new do
       include FirstCharacterAnalyzable
       attr_accessor :name
-      
+
       def initialize(name)
         @name = name
       end
@@ -28,4 +28,4 @@ RSpec.describe FirstCharacterAnalyzable do
     # その他の既存のケースもテストに追加することをお勧めします
     # 例：ひらがな、カタカナ、漢字、アルファベットなど
   end
-end 
+end

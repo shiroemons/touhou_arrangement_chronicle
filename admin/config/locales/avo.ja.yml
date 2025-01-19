@@ -267,6 +267,13 @@ ja:
       product_type:
         one: "作品タイプ"
         other: "作品タイプ"
+        select_options:
+          pc98: "PC-98作品"
+          windows: "Windows作品"
+          zuns_music_collection: "ZUN's Music Collection"
+          akyus_untouched_score: "幺樂団の歴史　～ Akyu's Untouched Score"
+          commercial_books: "商業書籍"
+          other: "その他"
       series_number:
         one: "シリーズ番号"
         other: "シリーズ番号"
@@ -342,6 +349,21 @@ ja:
       event_date:
         one: "イベント開催日"
         other: "イベント開催日"
+      composer:
+        one: "作曲者"
+        other: "作曲者"
+      arranger:
+        one: "編曲者"
+        other: "編曲者"
+      product:
+        one: "作品"
+        other: "作品"
+      is_original:
+        one: "初出"
+        other: "初出"
+      origin_original_song:
+        one: "初出原曲"
+        other: "初出原曲"
   activerecord:
     resources:
       album:
@@ -408,3 +430,12 @@ ja:
         zero: "タグ"
         one: "タグ"
         other: "タグ"
+  enums:
+    product:
+      product_type:
+        pc98: "PC-98作品"
+        windows: "Windows作品"
+        zuns_music_collection: "ZUN's Music Collection"
+        akyus_untouched_score: "幺樂団の歴史　～ Akyu's Untouched Score"
+        commercial_books: "商業書籍"
+        other: "その他"

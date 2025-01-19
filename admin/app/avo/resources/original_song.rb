@@ -1,5 +1,5 @@
 class Avo::Resources::OriginalSong < Avo::BaseResource
-  self.title = :title
+  self.title = :name
   self.translation_key = "activerecord.resources.original_song"
   self.includes = [ :product, :origin_original_song ]
 
@@ -7,9 +7,7 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
     field :id, as: :text
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
-
     field :product, as: :belongs_to, required: true
-
     field :name, as: :text, required: true,
       help: "原曲名"
 
