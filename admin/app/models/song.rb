@@ -17,6 +17,7 @@ class Song < ApplicationRecord
   has_many :genres, -> { order(position: :asc) }, through: :songs_genres
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, -> { order(position: :asc) }, through: :taggings
+  has_many :reference_urls, -> { order(position: :asc) }, as: :referenceable, dependent: :destroy
   has_many :distribution_service_urls, -> { order(position: :asc) }, as: :entity
 
   acts_as_list scope: :arrange_circles

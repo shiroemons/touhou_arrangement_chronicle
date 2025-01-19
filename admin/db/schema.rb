@@ -206,20 +206,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.unique_constraint ["service_name"], name: "distribution_services_service_name_key"
   end
 
-  create_table "entity_urls", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティURL ID" }, comment: "アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル", force: :cascade do |t|
-    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
-    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
-    t.text "entity_type", null: false, comment: "エンティティ種別(artist_name, circleなど)"
-    t.uuid "entity_id", null: false, comment: "エンティティID"
-    t.text "url_type", null: false, comment: "URL種別(例: official, twitter, youtube, blogなど)"
-    t.text "url", null: false, comment: "URL"
-    t.text "note", comment: "備考"
-    t.integer "position", default: 1, null: false, comment: "順序"
-    t.index ["entity_type", "entity_id"], name: "idx_entity_urls_entity_type_entity_id"
-    t.index ["url_type"], name: "idx_entity_urls_url_type"
-    t.check_constraint "entity_type = ANY (ARRAY['artist_name'::text, 'circle'::text])", name: "entity_urls_entity_type_check"
-  end
-
   create_table "event_days", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "イベント日程ID" }, comment: "イベント開催回内の日程（複数日開催の場合など）を管理", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
@@ -339,6 +325,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.decimal "series_number", precision: 5, scale: 2, null: false, comment: "シリーズ中での作品番号（数値順で作品を並べるために使用）"
     t.index ["product_type"], name: "idx_products_product_type"
     t.index ["series_number"], name: "idx_products_series_number"
+  end
+
+  create_table "reference_urls", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティURL ID" }, comment: "アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.text "referenceable_type", null: false, comment: "リファレンス種別(ArtistName, Circle, Album, Songなど)"
+    t.uuid "referenceable_id", null: false, comment: "リファレンスID"
+    t.text "url_type", null: false, comment: "URL種別(例: official, twitter, youtube, blogなど)"
+    t.text "url", null: false, comment: "URL"
+    t.text "note", comment: "備考"
+    t.integer "position", default: 1, null: false, comment: "順序"
+    t.index ["referenceable_type", "referenceable_id"], name: "idx_reference_urls_referenceable"
+    t.index ["url_type"], name: "idx_reference_urls_url_type"
+    t.check_constraint "referenceable_type = ANY (ARRAY['ArtistName'::text, 'Album'::text, 'Circle'::text, 'Song'::text])", name: "reference_urls_referenceable_type_check"
   end
 
   create_table "shops", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "ショップID" }, comment: "CDや関連グッズを扱う各ショップ(販売店/同人ショップ)の情報を管理", force: :cascade do |t|

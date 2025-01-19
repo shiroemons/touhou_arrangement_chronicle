@@ -1115,94 +1115,6 @@ COMMENT ON COLUMN public.distribution_services.note IS '備考';
 
 
 --
--- Name: entity_urls; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.entity_urls (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    entity_type text NOT NULL,
-    entity_id uuid NOT NULL,
-    url_type text NOT NULL,
-    url text NOT NULL,
-    note text,
-    "position" integer DEFAULT 1 NOT NULL,
-    CONSTRAINT entity_urls_entity_type_check CHECK ((entity_type = ANY (ARRAY['artist_name'::text, 'circle'::text])))
-);
-
-
---
--- Name: TABLE entity_urls; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.entity_urls IS 'アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル';
-
-
---
--- Name: COLUMN entity_urls.id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.id IS 'エンティティURL ID';
-
-
---
--- Name: COLUMN entity_urls.created_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.created_at IS '作成日時';
-
-
---
--- Name: COLUMN entity_urls.updated_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.updated_at IS '更新日時';
-
-
---
--- Name: COLUMN entity_urls.entity_type; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.entity_type IS 'エンティティ種別(artist_name, circleなど)';
-
-
---
--- Name: COLUMN entity_urls.entity_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.entity_id IS 'エンティティID';
-
-
---
--- Name: COLUMN entity_urls.url_type; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.url_type IS 'URL種別(例: official, twitter, youtube, blogなど)';
-
-
---
--- Name: COLUMN entity_urls.url; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.url IS 'URL';
-
-
---
--- Name: COLUMN entity_urls.note; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls.note IS '備考';
-
-
---
--- Name: COLUMN entity_urls."position"; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_urls."position" IS '順序';
-
-
---
 -- Name: event_days; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1862,6 +1774,94 @@ COMMENT ON COLUMN public.products.product_type IS '作品の種類を区分す�
 --
 
 COMMENT ON COLUMN public.products.series_number IS 'シリーズ中での作品番号（数値順で作品を並べるために使用）';
+
+
+--
+-- Name: reference_urls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.reference_urls (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    referenceable_type text NOT NULL,
+    referenceable_id uuid NOT NULL,
+    url_type text NOT NULL,
+    url text NOT NULL,
+    note text,
+    "position" integer DEFAULT 1 NOT NULL,
+    CONSTRAINT reference_urls_referenceable_type_check CHECK ((referenceable_type = ANY (ARRAY['ArtistName'::text, 'Album'::text, 'Circle'::text, 'Song'::text])))
+);
+
+
+--
+-- Name: TABLE reference_urls; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.reference_urls IS 'アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル';
+
+
+--
+-- Name: COLUMN reference_urls.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.id IS 'エンティティURL ID';
+
+
+--
+-- Name: COLUMN reference_urls.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN reference_urls.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN reference_urls.referenceable_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.referenceable_type IS 'リファレンス種別(ArtistName, Circle, Album, Songなど)';
+
+
+--
+-- Name: COLUMN reference_urls.referenceable_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.referenceable_id IS 'リファレンスID';
+
+
+--
+-- Name: COLUMN reference_urls.url_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.url_type IS 'URL種別(例: official, twitter, youtube, blogなど)';
+
+
+--
+-- Name: COLUMN reference_urls.url; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.url IS 'URL';
+
+
+--
+-- Name: COLUMN reference_urls.note; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls.note IS '備考';
+
+
+--
+-- Name: COLUMN reference_urls."position"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.reference_urls."position" IS '順序';
 
 
 --
@@ -2992,14 +2992,6 @@ ALTER TABLE ONLY public.distribution_services
 
 
 --
--- Name: entity_urls entity_urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.entity_urls
-    ADD CONSTRAINT entity_urls_pkey PRIMARY KEY (id);
-
-
---
 -- Name: event_days event_days_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3085,6 +3077,14 @@ ALTER TABLE ONLY public.original_songs
 
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reference_urls reference_urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reference_urls
+    ADD CONSTRAINT reference_urls_pkey PRIMARY KEY (id);
 
 
 --
@@ -3446,20 +3446,6 @@ CREATE INDEX idx_dsu_service_name ON public.distribution_service_urls USING btre
 
 
 --
--- Name: idx_entity_urls_entity_type_entity_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_entity_urls_entity_type_entity_id ON public.entity_urls USING btree (entity_type, entity_id);
-
-
---
--- Name: idx_entity_urls_url_type; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_entity_urls_url_type ON public.entity_urls USING btree (url_type);
-
-
---
 -- Name: idx_event_days_archived_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3632,6 +3618,20 @@ CREATE INDEX idx_products_product_type ON public.products USING btree (product_t
 --
 
 CREATE INDEX idx_products_series_number ON public.products USING btree (series_number);
+
+
+--
+-- Name: idx_reference_urls_referenceable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_reference_urls_referenceable ON public.reference_urls USING btree (referenceable_type, referenceable_id);
+
+
+--
+-- Name: idx_reference_urls_url_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_reference_urls_url_type ON public.reference_urls USING btree (url_type);
 
 
 --

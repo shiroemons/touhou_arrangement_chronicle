@@ -376,30 +376,30 @@ comment on column circles.note is '備考';
 comment on column circles.published_at is '公開日時';
 comment on column circles.archived_at is 'アーカイブ日時';
 
--- entity_urlsテーブル: artist_name, circleなどの任意URL(公式、Twitter、YouTube...)を記録
-create table entity_urls (
-    id           uuid                     not null primary key default gen_random_uuid(),
-    created_at   timestamp with time zone not null default current_timestamp,
-    updated_at   timestamp with time zone not null default current_timestamp,
-    entity_type  text                     not null check (entity_type in ('artist_name', 'circle')),
-    entity_id    uuid                     not null,
-    url_type     text                     not null, -- URL種別(official, twitter, youtube等)
-    url          text                     not null, -- 実際のURL
-    note         text,                    -- メモ
-    position     integer not null default 1
+-- reference_urlsテーブル: artist_name, circle, album, songなどの任意URL(公式、Twitter、YouTube...)を記録
+create table reference_urls (
+    id                 uuid                     not null primary key default gen_random_uuid(),
+    created_at         timestamp with time zone not null default current_timestamp,
+    updated_at         timestamp with time zone not null default current_timestamp,
+    referenceable_type text                     not null check (referenceable_type in ('ArtistName', 'Album', 'Circle', 'Song')),
+    referenceable_id   uuid                     not null,
+    url_type           text                     not null, -- URL種別(official, twitter, youtube等)
+    url                text                     not null, -- 実際のURL
+    note               text,                   -- メモ
+    position           integer                  not null default 1
 );
-create index idx_entity_urls_entity_type_entity_id on entity_urls (entity_type, entity_id);
-create index idx_entity_urls_url_type on entity_urls (url_type);
-comment on table entity_urls is 'アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル';
-comment on column entity_urls.id is 'エンティティURL ID';
-comment on column entity_urls.created_at is '作成日時';
-comment on column entity_urls.updated_at is '更新日時';
-comment on column entity_urls.entity_type is 'エンティティ種別(artist_name, circleなど)';
-comment on column entity_urls.entity_id is 'エンティティID';
-comment on column entity_urls.url_type is 'URL種別(例: official, twitter, youtube, blogなど)';
-comment on column entity_urls.url is 'URL';
-comment on column entity_urls.note is '備考';
-comment on column entity_urls.position is '順序';
+create index idx_reference_urls_referenceable on reference_urls (referenceable_type, referenceable_id);
+create index idx_reference_urls_url_type on reference_urls (url_type);
+comment on table reference_urls is 'アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル';
+comment on column reference_urls.id is 'エンティティURL ID';
+comment on column reference_urls.created_at is '作成日時';
+comment on column reference_urls.updated_at is '更新日時';
+comment on column reference_urls.referenceable_type is 'リファレンス種別(ArtistName, Circle, Album, Songなど)';
+comment on column reference_urls.referenceable_id is 'リファレンスID';
+comment on column reference_urls.url_type is 'URL種別(例: official, twitter, youtube, blogなど)';
+comment on column reference_urls.url is 'URL';
+comment on column reference_urls.note is '備考';
+comment on column reference_urls.position is '順序';
 
 -- albumsテーブル: アレンジCDなど、東方アレンジアルバムを管理
 -- イベント頒布日やサークル情報、紹介文などがここに収まる
@@ -927,7 +927,7 @@ drop table if exists album_upcs cascade;
 drop table if exists album_prices cascade;
 drop table if exists albums_circles cascade;
 drop table if exists albums cascade;
-drop table if exists entity_urls cascade;
+drop table if exists reference_urls cascade;
 drop table if exists circles cascade;
 drop table if exists artist_roles cascade;
 drop table if exists artist_names cascade;
