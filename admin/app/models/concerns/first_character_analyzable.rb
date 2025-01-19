@@ -49,7 +49,7 @@ module FirstCharacterAnalyzable
       "kanji"
     when /\A[a-zA-Z]\z/
       "alphabet"
-    when /\A[0-9]\z/
+    when /\A[0-9０-９]\z/
       "number"
     when /\A[!@#$%^&*(),.?":{}|<>]\z/
       "symbol"
