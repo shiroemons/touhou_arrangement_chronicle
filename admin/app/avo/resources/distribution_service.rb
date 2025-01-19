@@ -2,15 +2,15 @@ class Avo::Resources::DistributionService < Avo::BaseResource
   self.title = :service_name
   self.translation_key = "activerecord.resources.distribution_service"
   self.includes = []
-
-  # レコードの検索方法を明示的に定義
-  self.find_record_method = -> {
-    query.find(id)
-  }
-
-  # インデックスクエリを明示的に定義
-  self.index_query = -> {
-    query.all
+  self.ordering = {
+    display_inline: true,
+    visible_on: :index,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
   }
 
   def fields
@@ -28,13 +28,8 @@ class Avo::Resources::DistributionService < Avo::BaseResource
       language: "json",
       help: "サービスの基本URLリスト（例: [\"https://open.spotify.com/\"]）"
 
-    field :description, as: :trix,
-      help: "サービスの説明文"
-
-    field :note, as: :textarea,
-      help: "メモや補足"
-
-    field :position, as: :number,
-      help: "表示順序"
+    field :description, as: :trix
+    field :note, as: :textarea
+    field :position, as: :number
   end
 end

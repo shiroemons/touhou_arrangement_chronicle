@@ -1,10 +1,16 @@
 class Avo::Resources::SongsOriginalSong < Avo::BaseResource
   self.title = :id
   self.includes = [ :song, :original_song ]
-  # self.attachments = []
-  # self.search = {
-  #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
-  # }
+  self.ordering = {
+    display_inline: true,
+    visible_on: :index,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
+  }
 
   def fields
     field :id, as: :id

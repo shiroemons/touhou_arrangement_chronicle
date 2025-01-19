@@ -7,16 +7,21 @@ class Song < ApplicationRecord
   has_many :song_bmps, dependent: :destroy
   has_many :song_isrcs, dependent: :destroy
   has_many :songs_arrange_circles, dependent: :destroy
-  has_many :arrange_circles, through: :songs_arrange_circles, source: :circle
+  has_many :arrange_circles, -> { order(position: :asc) }, through: :songs_arrange_circles, source: :circle
   has_many :songs_original_songs, dependent: :destroy
-  has_many :original_songs, through: :songs_original_songs
+  has_many :original_songs, -> { order(position: :asc) }, through: :songs_original_songs
   has_many :songs_artist_roles, dependent: :destroy
   has_many :artist_names, through: :songs_artist_roles
   has_many :artist_roles, through: :songs_artist_roles
   has_many :songs_genres, dependent: :destroy
-  has_many :genres, through: :songs_genres
+  has_many :genres, -> { order(position: :asc) }, through: :songs_genres
   has_many :entity_tags, as: :entity
-  has_many :distribution_service_urls, as: :entity
+  has_many :distribution_service_urls, -> { order(position: :asc) }, as: :entity
+
+  acts_as_list scope: :arrange_circles
+  acts_as_list scope: :original_songs
+  acts_as_list scope: :genres
+  acts_as_list scope: :distribution_service_urls
 
   # バリデーション
   validates :name, presence: true

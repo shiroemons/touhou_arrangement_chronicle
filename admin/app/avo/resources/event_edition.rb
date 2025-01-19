@@ -2,6 +2,16 @@ class Avo::Resources::EventEdition < Avo::BaseResource
   self.title = :name
   self.translation_key = "activerecord.resources.event_edition"
   self.includes = [ :event_series, :event_days ]
+  self.ordering = {
+    display_inline: true,
+    visible_on: :index,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
+  }
 
   def fields
     field :id, as: :id

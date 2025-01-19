@@ -2,6 +2,16 @@ class Avo::Resources::Song < Avo::BaseResource
   self.title = :title
   self.translation_key = "activerecord.resources.song"
   self.includes = [ :circle, :album, :album_disc, :original_songs ]
+  self.ordering = {
+    display_inline: true,
+    visible_on: :index,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
+  }
 
   def fields
     field :id, as: :id
@@ -57,8 +67,7 @@ class Avo::Resources::Song < Avo::BaseResource
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
 
-    field :position, as: :number,
-      help: "表示順序"
+    field :position, as: :number
 
     # 関連
     field :original_songs, as: :has_many, through: :songs_original_songs
