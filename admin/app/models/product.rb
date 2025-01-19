@@ -12,7 +12,7 @@ class Product < ApplicationRecord
 
   # 関連
   has_many :original_songs, dependent: :restrict_with_error
-  has_many :distribution_service_urls, as: :distributable, dependent: :destroy
+  has_many :streamable_urls, -> { order(position: :asc) }, as: :streamable, dependent: :destroy
 
   # バリデーション
   validates :id, presence: true

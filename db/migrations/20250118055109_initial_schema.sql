@@ -102,32 +102,31 @@ comment on column distribution_services.note is '備考';
 
 -- 配信サービスURLテーブル: 原曲やアルバムなど各エンティティがどの配信サービス上でどのURLなのかを管理
 -- 例えば原曲XがSpotify上でどのURLにあるか、アルバムYがYouTube MusicでどのURLなのか
-create table distribution_service_urls (
+create table streamable_urls (  -- distribution_service_urlsから変更
     id              uuid                     not null primary key default gen_random_uuid(),
     created_at      timestamp with time zone not null default current_timestamp,
     updated_at      timestamp with time zone not null default current_timestamp,
-    entity_type     text                     not null check (entity_type in ('Product', 'OriginalSong', 'Album', 'Song')), 
-      -- 管理対象の種別: 原作(Product)、原曲(OriginalSong)、アルバム(Album)、楽曲(Song)
-    entity_id       text                     not null,  -- 対象エンティティのID
-    service_name    text                     not null references distribution_services(service_name) on delete restrict, -- 紐づく配信サービス
-    url             text                     not null, -- 実際の配信URL
-    description     text,                    -- URLに関する説明（バージョン違いなど）
-    note            text,                    -- メモ
+    streamable_type text                     not null check (streamable_type in ('Product', 'OriginalSong', 'Album', 'Song')), 
+    streamable_id   text                     not null,  
+    service_name    text                     not null references distribution_services(service_name) on delete restrict,
+    url             text                     not null,
+    description     text,
+    note            text,
     position        integer                  not null default 1
-);
-create unique index uk_dsu_entity_id_service on distribution_service_urls (entity_type, entity_id, service_name);
-create index idx_dsu_service_name on distribution_service_urls (service_name);
-comment on table distribution_service_urls is '原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理';
-comment on column distribution_service_urls.id is '配信サービスURLのID';
-comment on column distribution_service_urls.created_at is '作成日時';
-comment on column distribution_service_urls.updated_at is '更新日時';
-comment on column distribution_service_urls.entity_type is 'エンティティのタイプ（原作、原曲、アルバム、楽曲）';
-comment on column distribution_service_urls.entity_id is 'エンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）';
-comment on column distribution_service_urls.service_name is '配信サービスの名称';
-comment on column distribution_service_urls.url is 'URL';
-comment on column distribution_service_urls.description is '説明';
-comment on column distribution_service_urls.note is '備考';
-comment on column distribution_service_urls.position is '順序';
+);  
+create unique index uk_streamable_urls_streamable_id_service on streamable_urls (streamable_type, streamable_id, service_name);
+create index idx_streamable_urls_service_name on streamable_urls (service_name);
+comment on table streamable_urls is '原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理';
+comment on column streamable_urls.id is '配信サービスURLのID';
+comment on column streamable_urls.created_at is '作成日時';
+comment on column streamable_urls.updated_at is '更新日時';
+comment on column streamable_urls.streamable_type is 'ストリーミング可能なエンティティのタイプ（原作、原曲、アルバム、楽曲）';
+comment on column streamable_urls.streamable_id is 'ストリーミング可能なエンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）';
+comment on column streamable_urls.service_name is '配信サービスの名称';
+comment on column streamable_urls.url is 'URL';
+comment on column streamable_urls.description is '説明';
+comment on column streamable_urls.note is '備考';
+comment on column streamable_urls.position is '順序';
 
 -- イベントシリーズテーブル: 例) コミックマーケット、博麗神社例大祭などのシリーズ全体
 create table event_series (
@@ -935,7 +934,7 @@ drop table if exists artists cascade;
 drop table if exists event_days cascade;
 drop table if exists event_editions cascade;
 drop table if exists event_series cascade;
-drop table if exists distribution_service_urls cascade;
+drop table if exists streamable_urls cascade;
 drop table if exists distribution_services cascade;
 drop table if exists original_songs cascade;
 drop table if exists products cascade;

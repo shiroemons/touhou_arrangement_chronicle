@@ -17,13 +17,12 @@ class Song < ApplicationRecord
   has_many :genres, -> { order(position: :asc) }, through: :songs_genres
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, -> { order(position: :asc) }, through: :taggings
-  has_many :reference_urls, -> { order(position: :asc) }, as: :referenceable, dependent: :destroy
-  has_many :distribution_service_urls, -> { order(position: :asc) }, as: :entity
+  has_many :streamable_urls, -> { order(position: :asc) }, as: :streamable, dependent: :destroy
 
   acts_as_list scope: :arrange_circles
   acts_as_list scope: :original_songs
   acts_as_list scope: :genres
-  acts_as_list scope: :distribution_service_urls
+  acts_as_list scope: :streamable_urls
 
   # バリデーション
   validates :name, presence: true

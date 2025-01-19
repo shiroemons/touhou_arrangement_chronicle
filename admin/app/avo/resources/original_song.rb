@@ -35,6 +35,7 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
     field :derived_original_songs, as: :has_many,
       help: "この原曲から派生した原曲"
 
+    # 関連
     field :songs, as: :has_many, through: :songs_original_songs
   end
 end

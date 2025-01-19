@@ -1,6 +1,4 @@
-class Avo::Resources::DistributionServiceUrl < Avo::BaseResource
-  self.title = :id
-  self.translation_key = "activerecord.resources.distribution_service_url"
+class Avo::Resources::StreamableUrl < Avo::BaseResource
   self.includes = [ :distribution_service ]
 
   def fields
@@ -8,12 +6,13 @@ class Avo::Resources::DistributionServiceUrl < Avo::BaseResource
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
-    field :distribution_service,
+    # 関連
+    field :streamable,
           as: :belongs_to,
           searchable: true,
-          foreign_key: :service_name,
-          use_resource: "Avo::Resources::DistributionService"
+          foreign_key: :streamable_type
     field :url, as: :text
     field :description, as: :text
   end
 end
+

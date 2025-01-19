@@ -178,21 +178,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.unique_constraint ["slug"], name: "circles_slug_key"
   end
 
-  create_table "distribution_service_urls", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "配信サービスURLのID" }, comment: "原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理", force: :cascade do |t|
-    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
-    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
-    t.text "entity_type", null: false, comment: "エンティティのタイプ（原作、原曲、アルバム、楽曲）"
-    t.text "entity_id", null: false, comment: "エンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）"
-    t.text "service_name", null: false, comment: "配信サービスの名称"
-    t.text "url", null: false, comment: "URL"
-    t.text "description", comment: "説明"
-    t.text "note", comment: "備考"
-    t.integer "position", default: 1, null: false, comment: "順序"
-    t.index ["entity_type", "entity_id", "service_name"], name: "uk_dsu_entity_id_service", unique: true
-    t.index ["service_name"], name: "idx_dsu_service_name"
-    t.check_constraint "entity_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])", name: "distribution_service_urls_entity_type_check"
-  end
-
   create_table "distribution_services", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "配信サービスID" }, comment: "音楽配信サービス（Spotify, Apple Music等）の基本情報を管理", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
@@ -489,6 +474,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["song_id"], name: "idx_songs_original_songs_song_id"
   end
 
+  create_table "streamable_urls", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "配信サービスURLのID" }, comment: "原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.text "streamable_type", null: false, comment: "ストリーミング可能なエンティティのタイプ（原作、原曲、アルバム、楽曲）"
+    t.text "streamable_id", null: false, comment: "ストリーミング可能なエンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）"
+    t.text "service_name", null: false, comment: "配信サービスの名称"
+    t.text "url", null: false, comment: "URL"
+    t.text "description", comment: "説明"
+    t.text "note", comment: "備考"
+    t.integer "position", default: 1, null: false, comment: "順序"
+    t.index ["service_name"], name: "idx_streamable_urls_service_name"
+    t.index ["streamable_type", "streamable_id", "service_name"], name: "uk_streamable_urls_streamable_id_service", unique: true
+    t.check_constraint "streamable_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])", name: "streamable_urls_streamable_type_check"
+  end
+
   create_table "taggings", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "タグ付けID" }, comment: "アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
@@ -520,7 +520,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "albums_circles", "albums", name: "albums_circles_album_id_fkey", on_delete: :cascade
   add_foreign_key "albums_circles", "circles", name: "albums_circles_circle_id_fkey", on_delete: :cascade
   add_foreign_key "artist_names", "artists", name: "artist_names_artist_id_fkey", on_delete: :cascade
-  add_foreign_key "distribution_service_urls", "distribution_services", column: "service_name", primary_key: "service_name", name: "distribution_service_urls_service_name_fkey", on_delete: :restrict
   add_foreign_key "event_days", "event_editions", name: "event_days_event_edition_id_fkey", on_delete: :cascade
   add_foreign_key "event_editions", "event_series", name: "event_editions_event_series_id_fkey", on_delete: :restrict
   add_foreign_key "genreable_genres", "genres", name: "genreable_genres_genre_id_fkey", on_delete: :cascade
@@ -541,5 +540,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "songs_genres", "songs", name: "songs_genres_song_id_fkey", on_delete: :cascade
   add_foreign_key "songs_original_songs", "original_songs", name: "songs_original_songs_original_song_id_fkey", on_delete: :cascade
   add_foreign_key "songs_original_songs", "songs", name: "songs_original_songs_song_id_fkey", on_delete: :cascade
+  add_foreign_key "streamable_urls", "distribution_services", column: "service_name", primary_key: "service_name", name: "streamable_urls_service_name_fkey", on_delete: :restrict
   add_foreign_key "taggings", "tags", name: "taggings_tag_id_fkey", on_delete: :cascade
 end

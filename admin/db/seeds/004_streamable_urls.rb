@@ -8,8 +8,8 @@ CSV.table('db/fixtures/product_distribution_service_urls.tsv', col_sep: "\t", co
     next if url.blank?
 
     product_urls << {
-      entity_type: 'Product',
-      entity_id: p[:product_id],
+      streamable_type: 'Product',
+      streamable_id: p[:product_id],
       service_name: service,
       url: url,
       position: 1
@@ -25,8 +25,8 @@ CSV.table('db/fixtures/original_song_distribution_service_urls.tsv', col_sep: "\
     next if url.blank?
 
     original_song_urls << {
-      entity_type: 'OriginalSong',
-      entity_id: os[:original_song_id],
+      streamable_type: 'OriginalSong',
+      streamable_id: os[:original_song_id],
       service_name: service,
       url: url,
       position: 1
@@ -37,8 +37,8 @@ end
 urls = product_urls + original_song_urls
 return if urls.blank?
 
-DistributionServiceUrl.import urls,
+StreamableUrl.import urls,
   on_duplicate_key_update: {
-    conflict_target: [ :entity_type, :entity_id, :service_name ],
+    conflict_target: [ :streamable_type, :streamable_id, :service_name ],
     columns: [ :url, :position, :updated_at ]
   }

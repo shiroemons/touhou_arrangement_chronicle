@@ -939,102 +939,6 @@ COMMENT ON COLUMN public.circles.archived_at IS 'アーカイブ日時';
 
 
 --
--- Name: distribution_service_urls; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.distribution_service_urls (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    entity_type text NOT NULL,
-    entity_id text NOT NULL,
-    service_name text NOT NULL,
-    url text NOT NULL,
-    description text,
-    note text,
-    "position" integer DEFAULT 1 NOT NULL,
-    CONSTRAINT distribution_service_urls_entity_type_check CHECK ((entity_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])))
-);
-
-
---
--- Name: TABLE distribution_service_urls; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.distribution_service_urls IS '原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理';
-
-
---
--- Name: COLUMN distribution_service_urls.id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.id IS '配信サービスURLのID';
-
-
---
--- Name: COLUMN distribution_service_urls.created_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.created_at IS '作成日時';
-
-
---
--- Name: COLUMN distribution_service_urls.updated_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.updated_at IS '更新日時';
-
-
---
--- Name: COLUMN distribution_service_urls.entity_type; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.entity_type IS 'エンティティのタイプ（原作、原曲、アルバム、楽曲）';
-
-
---
--- Name: COLUMN distribution_service_urls.entity_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.entity_id IS 'エンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）';
-
-
---
--- Name: COLUMN distribution_service_urls.service_name; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.service_name IS '配信サービスの名称';
-
-
---
--- Name: COLUMN distribution_service_urls.url; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.url IS 'URL';
-
-
---
--- Name: COLUMN distribution_service_urls.description; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.description IS '説明';
-
-
---
--- Name: COLUMN distribution_service_urls.note; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls.note IS '備考';
-
-
---
--- Name: COLUMN distribution_service_urls."position"; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.distribution_service_urls."position" IS '順序';
-
-
---
 -- Name: distribution_services; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2737,6 +2641,102 @@ COMMENT ON COLUMN public.songs_original_songs."position" IS '楽曲が原曲に�
 
 
 --
+-- Name: streamable_urls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.streamable_urls (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    streamable_type text NOT NULL,
+    streamable_id text NOT NULL,
+    service_name text NOT NULL,
+    url text NOT NULL,
+    description text,
+    note text,
+    "position" integer DEFAULT 1 NOT NULL,
+    CONSTRAINT streamable_urls_streamable_type_check CHECK ((streamable_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])))
+);
+
+
+--
+-- Name: TABLE streamable_urls; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.streamable_urls IS '原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理';
+
+
+--
+-- Name: COLUMN streamable_urls.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.id IS '配信サービスURLのID';
+
+
+--
+-- Name: COLUMN streamable_urls.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN streamable_urls.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN streamable_urls.streamable_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.streamable_type IS 'ストリーミング可能なエンティティのタイプ（原作、原曲、アルバム、楽曲）';
+
+
+--
+-- Name: COLUMN streamable_urls.streamable_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.streamable_id IS 'ストリーミング可能なエンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）';
+
+
+--
+-- Name: COLUMN streamable_urls.service_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.service_name IS '配信サービスの名称';
+
+
+--
+-- Name: COLUMN streamable_urls.url; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.url IS 'URL';
+
+
+--
+-- Name: COLUMN streamable_urls.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.description IS '説明';
+
+
+--
+-- Name: COLUMN streamable_urls.note; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls.note IS '備考';
+
+
+--
+-- Name: COLUMN streamable_urls."position"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.streamable_urls."position" IS '順序';
+
+
+--
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2968,14 +2968,6 @@ ALTER TABLE ONLY public.circles
 
 
 --
--- Name: distribution_service_urls distribution_service_urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.distribution_service_urls
-    ADD CONSTRAINT distribution_service_urls_pkey PRIMARY KEY (id);
-
-
---
 -- Name: distribution_services distribution_services_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3181,6 +3173,14 @@ ALTER TABLE ONLY public.songs
 
 ALTER TABLE ONLY public.songs
     ADD CONSTRAINT songs_slug_key UNIQUE (slug);
+
+
+--
+-- Name: streamable_urls streamable_urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.streamable_urls
+    ADD CONSTRAINT streamable_urls_pkey PRIMARY KEY (id);
 
 
 --
@@ -3436,13 +3436,6 @@ CREATE INDEX idx_circles_published_at ON public.circles USING btree (published_a
 --
 
 CREATE INDEX idx_distribution_services_position ON public.distribution_services USING btree ("position");
-
-
---
--- Name: idx_dsu_service_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_dsu_service_name ON public.distribution_service_urls USING btree (service_name);
 
 
 --
@@ -3866,6 +3859,13 @@ CREATE INDEX idx_songs_release_year_month ON public.songs USING btree (release_y
 
 
 --
+-- Name: idx_streamable_urls_service_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_streamable_urls_service_name ON public.streamable_urls USING btree (service_name);
+
+
+--
 -- Name: idx_taggings_locked_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3898,13 +3898,6 @@ CREATE UNIQUE INDEX uk_ap_album_id_shop_id ON public.album_prices USING btree (a
 --
 
 CREATE UNIQUE INDEX uk_artist_names_artist_id_main_name ON public.artist_names USING btree (artist_id, is_main_name) WHERE (is_main_name = true);
-
-
---
--- Name: uk_dsu_entity_id_service; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX uk_dsu_entity_id_service ON public.distribution_service_urls USING btree (entity_type, entity_id, service_name);
 
 
 --
@@ -3954,6 +3947,13 @@ CREATE UNIQUE INDEX uk_songs_arrange_circles_song_id_circle_id ON public.songs_a
 --
 
 CREATE UNIQUE INDEX uk_songs_original_songs_song_id_original_song_id ON public.songs_original_songs USING btree (song_id, original_song_id);
+
+
+--
+-- Name: uk_streamable_urls_streamable_id_service; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uk_streamable_urls_streamable_id_service ON public.streamable_urls USING btree (streamable_type, streamable_id, service_name);
 
 
 --
@@ -4033,14 +4033,6 @@ ALTER TABLE ONLY public.albums
 
 ALTER TABLE ONLY public.artist_names
     ADD CONSTRAINT artist_names_artist_id_fkey FOREIGN KEY (artist_id) REFERENCES public.artists(id) ON DELETE CASCADE;
-
-
---
--- Name: distribution_service_urls distribution_service_urls_service_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.distribution_service_urls
-    ADD CONSTRAINT distribution_service_urls_service_name_fkey FOREIGN KEY (service_name) REFERENCES public.distribution_services(service_name) ON DELETE RESTRICT;
 
 
 --
@@ -4201,6 +4193,14 @@ ALTER TABLE ONLY public.songs_original_songs
 
 ALTER TABLE ONLY public.songs_original_songs
     ADD CONSTRAINT songs_original_songs_song_id_fkey FOREIGN KEY (song_id) REFERENCES public.songs(id) ON DELETE CASCADE;
+
+
+--
+-- Name: streamable_urls streamable_urls_service_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.streamable_urls
+    ADD CONSTRAINT streamable_urls_service_name_fkey FOREIGN KEY (service_name) REFERENCES public.distribution_services(service_name) ON DELETE RESTRICT;
 
 
 --
