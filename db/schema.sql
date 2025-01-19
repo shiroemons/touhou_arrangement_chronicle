@@ -700,6 +700,7 @@ CREATE TABLE public.artist_roles (
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     name text NOT NULL,
+    display_name text NOT NULL,
     description text,
     note text
 );
@@ -738,6 +739,13 @@ COMMENT ON COLUMN public.artist_roles.updated_at IS '更新日時';
 --
 
 COMMENT ON COLUMN public.artist_roles.name IS '役割名 (vocalist, composer, arranger, rearranger, lyricistなど)';
+
+
+--
+-- Name: COLUMN artist_roles.display_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.artist_roles.display_name IS '表示名';
 
 
 --

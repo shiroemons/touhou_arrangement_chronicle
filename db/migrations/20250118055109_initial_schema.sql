@@ -320,6 +320,7 @@ create table artist_roles (
     created_at            timestamp with time zone not null default current_timestamp,
     updated_at            timestamp with time zone not null default current_timestamp,
     name                  text not null unique, -- 役割名(vocalist, composer等)
+    display_name          text not null, -- 表示名(ボーカリスト, 作曲家, 編曲家等)
     description           text, -- 役割の意味説明
     note                  text  -- メモ
 );
@@ -328,6 +329,7 @@ comment on column artist_roles.id is 'アーティスト役割ID';
 comment on column artist_roles.created_at is '作成日時';
 comment on column artist_roles.updated_at is '更新日時';
 comment on column artist_roles.name is '役割名 (vocalist, composer, arranger, rearranger, lyricistなど)';
+comment on column artist_roles.display_name is '表示名';
 comment on column artist_roles.description is '役割の説明';
 comment on column artist_roles.note is '備考';
 

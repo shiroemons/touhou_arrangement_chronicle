@@ -1,0 +1,11 @@
+name	display_name	description	note
+vocalist	ボーカリスト	楽曲の歌唱を担当するアーティスト	
+composer	作曲家	楽曲の作曲を担当するアーティスト	
+arranger	編曲家	楽曲の編曲を担当するアーティスト	
+lyricist	作詞家	楽曲の作詞を担当するアーティスト	
+illustrator	イラストレーター	作品のイラストを担当するアーティスト	
+rearranger	再編曲家	既存楽曲の再編曲を担当するアーティスト	
+performer	演奏者	楽器演奏を担当するアーティスト	
+producer	プロデューサー	作品全体の制作を統括するアーティスト	
+mixer	ミキサー	楽曲のミキシングを担当するアーティスト	
+masterer	マスタリングエンジニア	楽曲のマスタリングを担当するアーティスト	

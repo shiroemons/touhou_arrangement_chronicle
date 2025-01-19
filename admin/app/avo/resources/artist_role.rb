@@ -11,6 +11,9 @@ class Avo::Resources::ArtistRole < Avo::BaseResource
     field :name, as: :text, required: true,
       help: "役割名(vocalist, composer等)"
 
+    field :display_name, as: :text, required: true,
+      help: "表示名(ボーカリスト, 作曲家, 編曲家等)"
+
     field :description, as: :trix,
       help: "役割の意味説明"
 
