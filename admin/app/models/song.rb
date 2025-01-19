@@ -18,11 +18,13 @@ class Song < ApplicationRecord
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, -> { order(position: :asc) }, through: :taggings
   has_many :streamable_urls, -> { order(position: :asc) }, as: :streamable, dependent: :destroy
+  has_many :reference_urls, -> { order(position: :asc) }, as: :referenceable, dependent: :destroy
 
   acts_as_list scope: :arrange_circles
   acts_as_list scope: :original_songs
   acts_as_list scope: :genres
   acts_as_list scope: :streamable_urls
+  acts_as_list scope: :reference_urls
 
   # バリデーション
   validates :name, presence: true

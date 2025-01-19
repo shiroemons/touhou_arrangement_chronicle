@@ -1,4 +1,6 @@
 class Avo::Resources::StreamableUrl < Avo::BaseResource
+  self.title = :id
+  self.translation_key = "activerecord.resources.streamable_url"
   self.includes = [ :distribution_service ]
 
   def fields
@@ -10,9 +12,13 @@ class Avo::Resources::StreamableUrl < Avo::BaseResource
     field :streamable,
           as: :belongs_to,
           searchable: true,
-          foreign_key: :streamable_type
+          polymorphic_as: :streamable,
+          types: [ ::Product, ::OriginalSong, ::Album, ::Song ]
+    field :distribution_service,
+          as: :belongs_to,
+          searchable: true,
+          foreign_key: :service_name
     field :url, as: :text
     field :description, as: :text
   end
 end
-

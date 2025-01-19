@@ -164,6 +164,9 @@ Avo.configure do |config|
   config.resources = [
     "Avo::Resources::Album",
     "Avo::Resources::AlbumDisc",
+    "Avo::Resources::AlbumPrice",
+    "Avo::Resources::AlbumUpc",
+    "Avo::Resources::AlbumsCircle",
     "Avo::Resources::Artist",
     "Avo::Resources::ArtistName",
     "Avo::Resources::ArtistRole",
@@ -173,11 +176,22 @@ Avo.configure do |config|
     "Avo::Resources::EventEdition",
     "Avo::Resources::EventSeries",
     "Avo::Resources::Genre",
+    "Avo::Resources::GenreableGenre",
     "Avo::Resources::OriginalSong",
     "Avo::Resources::Product",
+    "Avo::Resources::ReferenceUrl",
     "Avo::Resources::Shop",
     "Avo::Resources::Song",
-    "Avo::Resources::Tag"
+    "Avo::Resources::SongIsrc",
+    "Avo::Resources::SongLyric",
+    "Avo::Resources::SongBmp",
+    "Avo::Resources::SongsGenre",
+    "Avo::Resources::SongsOriginalSong",
+    "Avo::Resources::SongsArrangeCircle",
+    "Avo::Resources::SongsArtistRole",
+    "Avo::Resources::StreamableUrl",
+    "Avo::Resources::Tag",
+    "Avo::Resources::Tagging"
   ]
 
   # 1ページあたりの表示件数
@@ -213,12 +227,19 @@ Avo.configure do |config|
 
     section "分類", icon: "heroicons/outline/tag" do
       resource :genres
+      resource :genreable_genres
       resource :tags
+      resource :taggings
     end
 
-    section "配信/販売", icon: "heroicons/outline/shopping-cart" do
-      resource :distribution_services
+    section "販売/配信", icon: "heroicons/outline/shopping-cart" do
       resource :shops
+      resource :distribution_services
+      resource :streamable_urls
+    end
+
+    section "リンク", icon: "heroicons/outline/link" do
+      resource :reference_urls
     end
   }
 end

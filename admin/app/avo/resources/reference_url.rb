@@ -6,8 +6,10 @@ class Avo::Resources::ReferenceUrl < Avo::BaseResource
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
-    field :referenceable_type, as: :text
-    field :referenceable_id, as: :text
+    field :referenceable,
+          as: :belongs_to,
+          polymorphic_as: :referenceable,
+          types: [ ::Album, ::Song, ::ArtistName, ::Circle ]
     field :url, as: :text
     field :description, as: :text
   end

@@ -24,6 +24,10 @@ ja:
       shop: ショップ
       song: 楽曲
       tag: タグ
+      reference_url: リンク
+      streamable_url: 配信リンク
+      taggable: タグ付け
+      taggable_genre: ジャンル付け
     attributes:
       album:
         title: タイトル

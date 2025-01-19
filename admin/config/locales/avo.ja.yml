@@ -51,6 +51,18 @@ ja:
       tag:
         name: "タグ"
         plural: "タグ"
+      reference_url:
+        name: "リンク"
+        plural: "リンク"
+      streamable_url:
+        name: "配信リンク"
+        plural: "配信リンク"
+      taggable:
+        name: "タグ付け"
+        plural: "タグ付け"
+      taggable_genre:
+        name: "ジャンル付け"
+        plural: "ジャンル付け"
     action_ran_successfully: "正常に実行されました"
     actions: "アクション"
     add_filter: "フィルターを追加"
@@ -364,6 +376,30 @@ ja:
       origin_original_song:
         one: "初出原曲"
         other: "初出原曲"
+      streamable:
+        one: "配信関連元"
+        other: "配信関連元"
+      referenceable:
+        one: "リンク関連元"
+        other: "リンク関連元"
+      taggable:
+        one: "タグ付け関連元"
+        other: "タグ付け関連元"
+      genreable:
+        one: "ジャンル付け関連元"
+        other: "ジャンル付け関連元"
+      distribution_service:
+        one: "配信サービス"
+        other: "配信サービス"
+      genre:
+        one: "ジャンル"
+        other: "ジャンル"
+      locked_at:
+        one: "ロック日時"
+        other: "ロック日時"
+      tag:
+        one: "タグ"
+        other: "タグ"
   activerecord:
     resources:
       album:
@@ -430,6 +466,22 @@ ja:
         zero: "タグ"
         one: "タグ"
         other: "タグ"
+      streamable_url:
+        zero: "配信リンク"
+        one: "配信リンク"
+        other: "配信リンク"
+      tagging:
+        zero: "タグ付け"
+        one: "タグ付け"
+        other: "タグ付け"
+      genreable_genre:
+        zero: "ジャンル付け"
+        one: "ジャンル付け"
+        other: "ジャンル付け"
+      reference_url:
+        zero: "リンク"
+        one: "リンク"
+        other: "リンク"
   enums:
     product:
       product_type:

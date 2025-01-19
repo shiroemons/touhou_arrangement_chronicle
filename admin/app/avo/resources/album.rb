@@ -40,5 +40,9 @@ class Avo::Resources::Album < Avo::BaseResource
     field :album_discs, as: :has_many
     field :circles, as: :has_many, through: :albums_circles
     field :songs, as: :has_many
+    field :streamable_urls, as: :has_many
+    field :tags, as: :has_many, through: :taggings
+    field :genres, as: :has_many, through: :genreable_genres
+    field :reference_urls, as: :has_many, through: :reference_urls
   end
 end

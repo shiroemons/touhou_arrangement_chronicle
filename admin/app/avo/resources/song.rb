@@ -75,5 +75,9 @@ class Avo::Resources::Song < Avo::BaseResource
     field :lyrics, as: :has_many, class_name: "SongLyric"
     field :bmps, as: :has_many, class_name: "SongBmp"
     field :isrcs, as: :has_many, class_name: "SongIsrc"
+    field :tags, as: :has_many, through: :taggings
+    field :genres, as: :has_many, through: :genreable_genres
+    field :streamable_urls, as: :has_many, through: :streamable_urls
+    field :reference_urls, as: :has_many, through: :reference_urls
   end
 end

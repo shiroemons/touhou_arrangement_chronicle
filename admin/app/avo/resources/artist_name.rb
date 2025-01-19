@@ -43,5 +43,10 @@ class Avo::Resources::ArtistName < Avo::BaseResource
 
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
+
+    # 関連
+    field :tags, as: :has_many, through: :taggings
+    field :genres, as: :has_many, through: :genreable_genres
+    field :reference_urls, as: :has_many, through: :reference_urls
   end
 end

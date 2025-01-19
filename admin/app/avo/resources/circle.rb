@@ -44,5 +44,7 @@ class Avo::Resources::Circle < Avo::BaseResource
     # 関連
     field :albums, as: :has_many, through: :albums_circles
     field :songs, as: :has_many, through: :songs_arrange_circles
+    field :tags, as: :has_many, through: :taggings
+    field :genres, as: :has_many, through: :genreable_genres
   end
 end

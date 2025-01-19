@@ -1,5 +1,5 @@
 class Avo::Resources::DistributionService < Avo::BaseResource
-  self.title = :service_name
+  self.title = :display_name
   self.translation_key = "activerecord.resources.distribution_service"
   self.includes = []
   self.ordering = {

@@ -35,5 +35,6 @@ class Avo::Resources::Product < Avo::BaseResource
 
     # 関連
     field :original_songs, as: :has_many
+    field :streamable_urls, as: :has_many
   end
 end
