@@ -11,8 +11,7 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :name, as: :text, required: true,
       help: "サークル名"
 
-    field :name_reading, as: :text,
-      help: "読み方"
+    field :name_reading, as: :text
 
     field :slug, as: :text, required: true,
       help: "識別用スラッグ"
@@ -37,8 +36,7 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :description, as: :trix,
       help: "サークル説明"
 
-    field :note, as: :textarea,
-      help: "メモ"
+    field :note, as: :textarea
 
     field :published_at, as: :date_time
     field :archived_at, as: :date_time

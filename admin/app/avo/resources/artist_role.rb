@@ -14,8 +14,7 @@ class Avo::Resources::ArtistRole < Avo::BaseResource
     field :description, as: :trix,
       help: "役割の意味説明"
 
-    field :note, as: :textarea,
-      help: "メモ"
+    field :note, as: :textarea
 
     # 関連
     field :songs_artist_roles, as: :has_many

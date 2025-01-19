@@ -50,6 +50,8 @@ ja:
         updated_at: 更新日時
         circles: 所属サークル
         artist_names: アーティスト名義
+        name: 管理名
+        note: メモ
       artist_name:
         name: 名義
         artist: アーティスト
@@ -86,6 +88,8 @@ ja:
         number: 回数
         event_series: イベントシリーズ
         event_days: 開催日
+        start_date: 開催開始日
+        end_date: 開催終了日
         created_at: 作成日時
         updated_at: 更新日時
       event_series:

@@ -32,14 +32,12 @@ class Avo::Resources::EventDay < Avo::BaseResource
     field :description, as: :trix,
       help: "日ごとの説明"
 
-    field :note, as: :textarea,
-      help: "メモ"
+    field :note, as: :textarea
 
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
 
-    field :position, as: :number,
-      help: "表示順序"
+    field :position, as: :number
 
     # 関連
     field :albums, as: :has_many

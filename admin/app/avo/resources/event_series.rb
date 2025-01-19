@@ -20,8 +20,7 @@ class Avo::Resources::EventSeries < Avo::BaseResource
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
 
-    field :position, as: :number,
-      help: "表示順序"
+    field :position, as: :number
 
     # 関連
     field :event_editions, as: :has_many

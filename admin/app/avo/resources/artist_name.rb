@@ -39,8 +39,7 @@ class Avo::Resources::ArtistName < Avo::BaseResource
     field :description, as: :trix,
       help: "名義に関する説明文"
 
-    field :note, as: :textarea,
-      help: "メモ"
+    field :note, as: :textarea
 
     field :published_at, as: :date_time
     field :archived_at, as: :date_time

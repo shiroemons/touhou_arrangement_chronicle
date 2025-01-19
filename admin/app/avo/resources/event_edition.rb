@@ -28,8 +28,7 @@ class Avo::Resources::EventEdition < Avo::BaseResource
     field :description, as: :trix,
       help: "この開催回に関する説明"
 
-    field :note, as: :textarea,
-      help: "メモ"
+    field :note, as: :textarea
 
     field :url, as: :text,
       help: "イベント公式URL"
@@ -40,8 +39,7 @@ class Avo::Resources::EventEdition < Avo::BaseResource
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
 
-    field :position, as: :number,
-      help: "表示順序"
+    field :position, as: :number
 
     # 関連
     field :event_days, as: :has_many

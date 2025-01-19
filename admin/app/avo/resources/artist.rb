@@ -4,7 +4,7 @@ class Avo::Resources::Artist < Avo::BaseResource
   self.includes = [ :artist_names ]
 
   def fields
-    field :id, as: :id, translation_key: "activerecord.attributes.artist.id"
+    field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index ]
     field :updated_at, as: :date_time, hide_on: [ :index ]
 
@@ -12,9 +12,7 @@ class Avo::Resources::Artist < Avo::BaseResource
       translation_key: "activerecord.attributes.artist.name",
       help: "開発・管理用の内部名"
 
-    field :note, as: :textarea,
-      translation_key: "activerecord.attributes.artist.note",
-      help: "補足情報"
+    field :note, as: :textarea
 
     # 関連
     field :artist_names, as: :has_many

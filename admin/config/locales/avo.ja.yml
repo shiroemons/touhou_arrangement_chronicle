@@ -327,6 +327,21 @@ ja:
       website_url:
         one: "Webサイト"
         other: "Webサイト"
+      start_date:
+        one: "開催開始日"
+        other: "開催開始日"
+      end_date:
+        one: "開催終了日"
+        other: "開催終了日"
+      event_series:
+        one: "イベントシリーズ"
+        other: "イベントシリーズ"
+      event_edition:
+        one: "イベント回"
+        other: "イベント回"
+      event_date:
+        one: "イベント開催日"
+        other: "イベント開催日"
   activerecord:
     resources:
       album:
