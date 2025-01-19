@@ -1,2 +1,6 @@
 # ... 他の設定 ...
 .env 
+
+# Test coverage
+admin/coverage
+admin/coverage/*
