@@ -1115,79 +1115,6 @@ COMMENT ON COLUMN public.distribution_services.note IS '備考';
 
 
 --
--- Name: entity_genres; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.entity_genres (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    entity_type text NOT NULL,
-    entity_id uuid NOT NULL,
-    genre_id uuid NOT NULL,
-    locked_at timestamp with time zone,
-    "position" integer DEFAULT 1 NOT NULL,
-    CONSTRAINT entity_genres_entity_type_check CHECK ((entity_type = ANY (ARRAY['Album'::text, 'Circle'::text, 'Artist'::text])))
-);
-
-
---
--- Name: TABLE entity_genres; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.entity_genres IS 'アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル';
-
-
---
--- Name: COLUMN entity_genres.id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.id IS 'エンティティジャンルID';
-
-
---
--- Name: COLUMN entity_genres.created_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.created_at IS '作成日時';
-
-
---
--- Name: COLUMN entity_genres.updated_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.updated_at IS '更新日時';
-
-
---
--- Name: COLUMN entity_genres.entity_type; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.entity_type IS '対象エンティティ種別（Album, Circle, Artistのいずれか）';
-
-
---
--- Name: COLUMN entity_genres.entity_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.entity_id IS 'エンティティのID（アルバムID、サークルID、アーティストID）';
-
-
---
--- Name: COLUMN entity_genres.genre_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.genre_id IS '割り当てるジャンルID';
-
-
---
--- Name: COLUMN entity_genres.locked_at; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.entity_genres.locked_at IS 'ジャンル付与情報をロックする日時';
-
-
---
 -- Name: entity_tags; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1696,6 +1623,79 @@ COMMENT ON COLUMN public.event_series.published_at IS '公開日時';
 --
 
 COMMENT ON COLUMN public.event_series.archived_at IS 'アーカイブ日時';
+
+
+--
+-- Name: genreable_genres; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.genreable_genres (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    genreable_type text NOT NULL,
+    genreable_id uuid NOT NULL,
+    genre_id uuid NOT NULL,
+    locked_at timestamp with time zone,
+    "position" integer DEFAULT 1 NOT NULL,
+    CONSTRAINT genreable_genres_genreable_type_check CHECK ((genreable_type = ANY (ARRAY['Album'::text, 'Circle'::text, 'ArtistName'::text])))
+);
+
+
+--
+-- Name: TABLE genreable_genres; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.genreable_genres IS 'アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル';
+
+
+--
+-- Name: COLUMN genreable_genres.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.id IS 'エンティティジャンルID';
+
+
+--
+-- Name: COLUMN genreable_genres.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN genreable_genres.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN genreable_genres.genreable_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.genreable_type IS '対象の種別（Album, Circle, ArtistNameのいずれか）';
+
+
+--
+-- Name: COLUMN genreable_genres.genreable_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.genreable_id IS '対象のID（アルバムID、サークルID、アーティストネームID）';
+
+
+--
+-- Name: COLUMN genreable_genres.genre_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.genre_id IS '割り当てるジャンルID';
+
+
+--
+-- Name: COLUMN genreable_genres.locked_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.genreable_genres.locked_at IS 'ジャンル付与情報をロックする日時';
 
 
 --
@@ -2992,14 +2992,6 @@ ALTER TABLE ONLY public.distribution_services
 
 
 --
--- Name: entity_genres entity_genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.entity_genres
-    ADD CONSTRAINT entity_genres_pkey PRIMARY KEY (id);
-
-
---
 -- Name: entity_tags entity_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3061,6 +3053,14 @@ ALTER TABLE ONLY public.event_series
 
 ALTER TABLE ONLY public.event_series
     ADD CONSTRAINT event_series_slug_key UNIQUE (slug);
+
+
+--
+-- Name: genreable_genres genreable_genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.genreable_genres
+    ADD CONSTRAINT genreable_genres_pkey PRIMARY KEY (id);
 
 
 --
@@ -3446,20 +3446,6 @@ CREATE INDEX idx_dsu_service_name ON public.distribution_service_urls USING btre
 
 
 --
--- Name: idx_entity_genres_locked_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_entity_genres_locked_at ON public.entity_genres USING btree (locked_at);
-
-
---
--- Name: idx_entity_genres_position; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_entity_genres_position ON public.entity_genres USING btree ("position");
-
-
---
 -- Name: idx_entity_tags_locked_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3597,6 +3583,20 @@ CREATE INDEX idx_event_series_position ON public.event_series USING btree ("posi
 --
 
 CREATE INDEX idx_event_series_published_at ON public.event_series USING btree (published_at);
+
+
+--
+-- Name: idx_genreable_genres_locked_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_genreable_genres_locked_at ON public.genreable_genres USING btree (locked_at);
+
+
+--
+-- Name: idx_genreable_genres_position; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_genreable_genres_position ON public.genreable_genres USING btree ("position");
 
 
 --
@@ -3908,13 +3908,6 @@ CREATE UNIQUE INDEX uk_dsu_entity_id_service ON public.distribution_service_urls
 
 
 --
--- Name: uk_entity_genres_entity_type_entity_id_genre_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX uk_entity_genres_entity_type_entity_id_genre_id ON public.entity_genres USING btree (entity_type, entity_id, genre_id);
-
-
---
 -- Name: uk_entity_tags_entity_type_entity_id_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3933,6 +3926,13 @@ CREATE UNIQUE INDEX uk_event_days_event_edition_id_day_number_is_online ON publi
 --
 
 CREATE UNIQUE INDEX uk_event_editions_event_series_id_name ON public.event_editions USING btree (event_series_id, name);
+
+
+--
+-- Name: uk_genreable_genres_genreable_type_genreable_id_genre_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uk_genreable_genres_genreable_type_genreable_id_genre_id ON public.genreable_genres USING btree (genreable_type, genreable_id, genre_id);
 
 
 --
@@ -4044,14 +4044,6 @@ ALTER TABLE ONLY public.distribution_service_urls
 
 
 --
--- Name: entity_genres entity_genres_genre_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.entity_genres
-    ADD CONSTRAINT entity_genres_genre_id_fkey FOREIGN KEY (genre_id) REFERENCES public.genres(id) ON DELETE CASCADE;
-
-
---
 -- Name: entity_tags entity_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4073,6 +4065,14 @@ ALTER TABLE ONLY public.event_days
 
 ALTER TABLE ONLY public.event_editions
     ADD CONSTRAINT event_editions_event_series_id_fkey FOREIGN KEY (event_series_id) REFERENCES public.event_series(id) ON DELETE RESTRICT;
+
+
+--
+-- Name: genreable_genres genreable_genres_genre_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.genreable_genres
+    ADD CONSTRAINT genreable_genres_genre_id_fkey FOREIGN KEY (genre_id) REFERENCES public.genres(id) ON DELETE CASCADE;
 
 
 --

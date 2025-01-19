@@ -7,7 +7,8 @@ class Circle < ApplicationRecord
   has_many :songs_arrange_circles
   has_many :songs, through: :songs_arrange_circles
   has_many :entity_urls, as: :entity
-  has_many :entity_genres, as: :entity
+  has_many :genreable_genres, as: :genreable, dependent: :destroy
+  has_many :genres, -> { order(position: :asc) }, through: :genreable_genres
   has_many :entity_tags, as: :entity
 
   # バリデーション

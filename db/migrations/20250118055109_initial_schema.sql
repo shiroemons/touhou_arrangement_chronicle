@@ -866,27 +866,28 @@ comment on column songs_genres.end_time_ms is 'このジャンルが適用され
 comment on column songs_genres.locked_at is 'ジャンル情報を固定する日時（再編集不可などの運用制約に使用）';
 comment on column songs_genres.position is '楽曲が持つジャンルの順序';
 
-create table entity_genres (
-    id           uuid                     not null primary key default gen_random_uuid(),
-    created_at   timestamp with time zone not null default current_timestamp,
-    updated_at   timestamp with time zone not null default current_timestamp,
-    entity_type  text                     not null check (entity_type in ('Album', 'Circle', 'Artist')),
-    entity_id    uuid                     not null,
-    genre_id     uuid                     not null references genres(id) on delete cascade,
-    locked_at    timestamp with time zone,
-    position     integer not null default 1
+create table genreable_genres (
+    id             uuid                     not null primary key default gen_random_uuid(),
+    created_at     timestamp with time zone not null default current_timestamp,
+    updated_at     timestamp with time zone not null default current_timestamp,
+    genreable_type text                     not null check (genreable_type in ('Album', 'Circle', 'ArtistName')),
+    genreable_id   uuid                     not null,
+    genre_id       uuid                     not null references genres(id) on delete cascade,
+    locked_at      timestamp with time zone,
+    position       integer not null default 1
 );
-create unique index uk_entity_genres_entity_type_entity_id_genre_id on entity_genres (entity_type, entity_id, genre_id);
-create index idx_entity_genres_locked_at on entity_genres (locked_at);
-create index idx_entity_genres_position on entity_genres (position);
-comment on table entity_genres is 'アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル';
-comment on column entity_genres.id is 'エンティティジャンルID';
-comment on column entity_genres.created_at is '作成日時';
-comment on column entity_genres.updated_at is '更新日時';
-comment on column entity_genres.entity_type is '対象エンティティ種別（Album, Circle, Artistのいずれか）';
-comment on column entity_genres.entity_id is 'エンティティのID（アルバムID、サークルID、アーティストID）';
-comment on column entity_genres.genre_id is '割り当てるジャンルID';
-comment on column entity_genres.locked_at is 'ジャンル付与情報をロックする日時';
+create unique index uk_genreable_genres_genreable_type_genreable_id_genre_id 
+    on genreable_genres (genreable_type, genreable_id, genre_id);
+create index idx_genreable_genres_locked_at on genreable_genres (locked_at);
+create index idx_genreable_genres_position on genreable_genres (position);
+comment on table genreable_genres is 'アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル';
+comment on column genreable_genres.id is 'エンティティジャンルID';
+comment on column genreable_genres.created_at is '作成日時';
+comment on column genreable_genres.updated_at is '更新日時';
+comment on column genreable_genres.genreable_type is '対象の種別（Album, Circle, ArtistNameのいずれか）';
+comment on column genreable_genres.genreable_id is '対象のID（アルバムID、サークルID、アーティストネームID）';
+comment on column genreable_genres.genre_id is '割り当てるジャンルID';
+comment on column genreable_genres.locked_at is 'ジャンル付与情報をロックする日時';
 
 create table entity_tags (
     id           uuid                     not null primary key default gen_random_uuid(),
@@ -912,7 +913,7 @@ comment on column entity_tags.locked_at is 'タグ付与情報をロックする
 
 -- テーブルの削除は依存関係のある順序で実行
 drop table if exists entity_tags cascade;
-drop table if exists entity_genres cascade;
+drop table if exists genreable_genres cascade;
 drop table if exists songs_genres cascade;
 drop table if exists songs_artist_roles cascade;
 drop table if exists songs_original_songs cascade;

@@ -6,6 +6,8 @@ class ArtistName < ApplicationRecord
   has_many :songs_artist_roles
   has_many :songs, through: :songs_artist_roles
   has_many :artist_roles, through: :songs_artist_roles
+  has_many :genreable_genres, as: :genreable, dependent: :destroy
+  has_many :genres, -> { order(position: :asc) }, through: :genreable_genres
 
   # バリデーション
   validates :name, presence: true

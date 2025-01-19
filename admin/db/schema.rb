@@ -142,6 +142,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
     t.text "name", null: false, comment: "役割名 (vocalist, composer, arranger, rearranger, lyricistなど)"
+    t.text "display_name", null: false, comment: "表示名"
     t.text "description", comment: "役割の説明"
     t.text "note", comment: "備考"
 
@@ -181,7 +182,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
     t.text "entity_type", null: false, comment: "エンティティのタイプ（原作、原曲、アルバム、楽曲）"
-    t.uuid "entity_id", null: false, comment: "エンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）"
+    t.text "entity_id", null: false, comment: "エンティティのID（原作ID、原曲ID、アルバムID、楽曲ID）"
     t.text "service_name", null: false, comment: "配信サービスの名称"
     t.text "url", null: false, comment: "URL"
     t.text "description", comment: "説明"
@@ -189,7 +190,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.integer "position", default: 1, null: false, comment: "順序"
     t.index ["entity_type", "entity_id", "service_name"], name: "uk_dsu_entity_id_service", unique: true
     t.index ["service_name"], name: "idx_dsu_service_name"
-    t.check_constraint "entity_type = ANY (ARRAY['product'::text, 'original_song'::text, 'album'::text, 'song'::text])", name: "distribution_service_urls_entity_type_check"
+    t.check_constraint "entity_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])", name: "distribution_service_urls_entity_type_check"
   end
 
   create_table "distribution_services", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "配信サービスID" }, comment: "音楽配信サービス（Spotify, Apple Music等）の基本情報を管理", force: :cascade do |t|
@@ -203,20 +204,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.integer "position", default: 1, null: false
     t.index ["position"], name: "idx_distribution_services_position"
     t.unique_constraint ["service_name"], name: "distribution_services_service_name_key"
-  end
-
-  create_table "entity_genres", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティジャンルID" }, comment: "アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル", force: :cascade do |t|
-    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
-    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
-    t.text "entity_type", null: false, comment: "対象エンティティ種別（Album, Circle, Artistのいずれか）"
-    t.uuid "entity_id", null: false, comment: "エンティティのID（アルバムID、サークルID、アーティストID）"
-    t.uuid "genre_id", null: false, comment: "割り当てるジャンルID"
-    t.timestamptz "locked_at", comment: "ジャンル付与情報をロックする日時"
-    t.integer "position", default: 1, null: false
-    t.index ["entity_type", "entity_id", "genre_id"], name: "uk_entity_genres_entity_type_entity_id_genre_id", unique: true
-    t.index ["locked_at"], name: "idx_entity_genres_locked_at"
-    t.index ["position"], name: "idx_entity_genres_position"
-    t.check_constraint "entity_type = ANY (ARRAY['Album'::text, 'Circle'::text, 'Artist'::text])", name: "entity_genres_entity_type_check"
   end
 
   create_table "entity_tags", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティタグID" }, comment: "アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル", force: :cascade do |t|
@@ -311,6 +298,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["published_at"], name: "idx_event_series_published_at"
     t.unique_constraint ["name"], name: "event_series_name_key"
     t.unique_constraint ["slug"], name: "event_series_slug_key"
+  end
+
+  create_table "genreable_genres", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "エンティティジャンルID" }, comment: "アルバム、サークル、アーティストなどにジャンルを割り当てる中間テーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.text "genreable_type", null: false, comment: "対象の種別（Album, Circle, ArtistNameのいずれか）"
+    t.uuid "genreable_id", null: false, comment: "対象のID（アルバムID、サークルID、アーティストネームID）"
+    t.uuid "genre_id", null: false, comment: "割り当てるジャンルID"
+    t.timestamptz "locked_at", comment: "ジャンル付与情報をロックする日時"
+    t.integer "position", default: 1, null: false
+    t.index ["genreable_type", "genreable_id", "genre_id"], name: "uk_genreable_genres_genreable_type_genreable_id_genre_id", unique: true
+    t.index ["locked_at"], name: "idx_genreable_genres_locked_at"
+    t.index ["position"], name: "idx_genreable_genres_position"
+    t.check_constraint "genreable_type = ANY (ARRAY['Album'::text, 'Circle'::text, 'ArtistName'::text])", name: "genreable_genres_genreable_type_check"
   end
 
   create_table "genres", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "ジャンルID" }, comment: "ジャンル情報を管理するテーブル（ロック、ジャズ、エレクトロなど）", force: :cascade do |t|
@@ -520,10 +521,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "albums_circles", "circles", name: "albums_circles_circle_id_fkey", on_delete: :cascade
   add_foreign_key "artist_names", "artists", name: "artist_names_artist_id_fkey", on_delete: :cascade
   add_foreign_key "distribution_service_urls", "distribution_services", column: "service_name", primary_key: "service_name", name: "distribution_service_urls_service_name_fkey", on_delete: :restrict
-  add_foreign_key "entity_genres", "genres", name: "entity_genres_genre_id_fkey", on_delete: :cascade
   add_foreign_key "entity_tags", "tags", name: "entity_tags_tag_id_fkey", on_delete: :cascade
   add_foreign_key "event_days", "event_editions", name: "event_days_event_edition_id_fkey", on_delete: :cascade
   add_foreign_key "event_editions", "event_series", name: "event_editions_event_series_id_fkey", on_delete: :restrict
+  add_foreign_key "genreable_genres", "genres", name: "genreable_genres_genre_id_fkey", on_delete: :cascade
   add_foreign_key "original_songs", "original_songs", column: "origin_original_song_id", name: "original_songs_origin_original_song_id_fkey", on_delete: :nullify
   add_foreign_key "original_songs", "products", name: "original_songs_product_id_fkey", on_delete: :restrict
   add_foreign_key "song_bmps", "songs", name: "song_bmps_song_id_fkey", on_delete: :cascade

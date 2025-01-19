@@ -1,6 +1,6 @@
-class Avo::Resources::EntityGenre < Avo::BaseResource
+class Avo::Resources::GenreableGenre < Avo::BaseResource
   self.title = :id
-  self.translation_key = "activerecord.resources.entity_genre"
+  self.translation_key = "activerecord.resources.genreable_genre"
   self.ordering = {
     display_inline: true,
     visible_on: :index,
@@ -17,13 +17,13 @@ class Avo::Resources::EntityGenre < Avo::BaseResource
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
-    field :entity_type, as: :text,
-      help: "エンティティ種別"
+    field :genreable_type, as: :text,
+      help: "対象の種別"
 
-    field :entity_id, as: :text,
-      help: "エンティティID"
+    field :genreable_id, as: :text,
+      help: "対象のID"
 
-      field :genre, as: :belongs_to
+    field :genre, as: :belongs_to
     field :locked_at, as: :date_time
     field :position, as: :number
   end
