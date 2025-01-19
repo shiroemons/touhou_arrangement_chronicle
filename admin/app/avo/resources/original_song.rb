@@ -40,4 +40,3 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
     field :songs, as: :has_many, through: :songs_original_songs, name: "楽曲"
   end
 end
-

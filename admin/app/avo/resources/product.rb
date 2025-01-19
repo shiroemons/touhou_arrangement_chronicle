@@ -38,4 +38,3 @@ class Avo::Resources::Product < Avo::BaseResource
     field :streamable_urls, as: :has_many, name: "音楽配信先リンク"
   end
 end
-
