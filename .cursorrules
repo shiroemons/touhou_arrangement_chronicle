@@ -166,18 +166,19 @@ touhou_arrangement_chronicle/
     │   ├── types/
     │   └── routes/+types/
     ├── app/             # ソースコード
-    │   ├── routes/      # ルーティング(ページ) 
     │   ├── components/  # コンポーネント
-    │   │   ├── ui/      # UIコンポーネント
-    │   │   └── layout/  # レイアウトコンポーネント
+    │   ├── layouts/     # レイアウトコンポーネント
+    │   ├── domains/     # ドメインロジック
     │   ├── utils/       # 共通関数
+    │   ├── routes/      # ルーティング(ページ) 
     │   └── routes.ts    # ルーティング定義
     └── public/          # 静的ファイル
 ```
 
 ### 配置ルール
-- UIコンポーネント → `frontend/app/components/ui/`
-- レイアウトコンポーネント → `frontend/app/components/layout/`
+- UIコンポーネント → `frontend/app/components/`
+- レイアウトコンポーネント → `frontend/app/layouts/`
+- ドメインロジック → `frontend/app/domains/`
 - 共通関数 → `frontend/app/utils/`
 - ページ → `frontend/app/routes/`
 
