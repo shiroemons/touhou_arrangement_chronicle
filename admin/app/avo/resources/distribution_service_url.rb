@@ -1,7 +1,7 @@
 class Avo::Resources::DistributionServiceUrl < Avo::BaseResource
   self.title = :id
   self.translation_key = "activerecord.resources.distribution_service_url"
-  self.includes = [:distribution_service]
+  self.includes = [ :distribution_service ]
 
   def fields
     field :id, as: :id

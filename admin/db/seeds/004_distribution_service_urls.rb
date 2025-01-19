@@ -39,6 +39,6 @@ return if urls.blank?
 
 DistributionServiceUrl.import urls,
   on_duplicate_key_update: {
-    conflict_target: [:entity_type, :entity_id, :service_name],
-    columns: [:url, :position, :updated_at]
+    conflict_target: [ :entity_type, :entity_id, :service_name ],
+    columns: [ :url, :position, :updated_at ]
   }
