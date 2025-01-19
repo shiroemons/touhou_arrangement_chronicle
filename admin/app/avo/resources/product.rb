@@ -34,7 +34,8 @@ class Avo::Resources::Product < Avo::BaseResource
       help: "シリーズ中での作品番号（例: 6.00 = 東方紅魔郷）"
 
     # 関連
-    field :original_songs, as: :has_many
-    field :streamable_urls, as: :has_many
+    field :original_songs, as: :has_many, name: "原曲"
+    field :streamable_urls, as: :has_many, name: "音楽配信先リンク"
   end
 end
+

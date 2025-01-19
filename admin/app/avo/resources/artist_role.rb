@@ -1,5 +1,5 @@
 class Avo::Resources::ArtistRole < Avo::BaseResource
-  self.title = :role
+  self.title = :display_name
   self.translation_key = "activerecord.resources.artist_role"
   self.includes = []
 

@@ -17,6 +17,7 @@ class Avo::Resources::Circle < Avo::BaseResource
       help: "識別用スラッグ"
 
     field :first_character_type, as: :select, required: true,
+      hide_on: [ :new ],
       options: {
         "記号": :symbol,
         "数字": :number,
@@ -28,9 +29,11 @@ class Avo::Resources::Circle < Avo::BaseResource
       }
 
     field :first_character, as: :text,
+      hide_on: [ :new ],
       help: "頭文字詳細 (英字、ひらがな、カタカナの場合のみ)"
 
     field :first_character_row, as: :text,
+      hide_on: [ :new ],
       help: "頭文字の行 (ひらがな、カタカナの場合のみ)"
 
     field :description, as: :trix,

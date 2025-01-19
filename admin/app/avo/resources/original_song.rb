@@ -36,7 +36,8 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
       help: "この原曲から派生した原曲"
 
     # 関連
-    field :streamable_urls, as: :has_many
-    field :songs, as: :has_many, through: :songs_original_songs
+    field :streamable_urls, as: :has_many, name: "音楽配信先リンク"
+    field :songs, as: :has_many, through: :songs_original_songs, name: "楽曲"
   end
 end
+
