@@ -130,15 +130,16 @@ comment on column streamable_urls.position is '順序';
 
 -- イベントシリーズテーブル: 例) コミックマーケット、博麗神社例大祭などのシリーズ全体
 create table event_series (
-    id           uuid                     not null primary key default gen_random_uuid(),
-    created_at   timestamp with time zone not null default current_timestamp,
-    updated_at   timestamp with time zone not null default current_timestamp,
-    name         text                     not null unique,  -- システム管理名(内部名)
-    display_name text                     not null,         -- ユーザー向け表示名
-    slug         text                     not null unique default gen_random_uuid(), -- 外部公開用の簡易識別子
-    published_at timestamp with time zone, -- 公開日時
-    archived_at  timestamp with time zone, -- アーカイブ日時
-    position     integer                  not null default 1
+    id                   uuid                     not null primary key default gen_random_uuid(),
+    created_at           timestamp with time zone not null default current_timestamp,
+    updated_at           timestamp with time zone not null default current_timestamp,
+    name                 text                     not null unique,  -- システム管理名(内部名)
+    display_name         text                     not null,         -- ユーザー向け表示名
+    display_name_reading text, -- ユーザー向け表示名読み仮名
+    slug                 text                     not null unique default gen_random_uuid(), -- 外部公開用の簡易識別子
+    published_at         timestamp with time zone, -- 公開日時
+    archived_at          timestamp with time zone, -- アーカイブ日時
+    position             integer                  not null default 1
 );
 create index idx_event_series_published_at on event_series (published_at);
 create index idx_event_series_archived_at on event_series (archived_at);
@@ -149,28 +150,30 @@ comment on column event_series.created_at is '作成日時';
 comment on column event_series.updated_at is '更新日時';
 comment on column event_series.name is '管理名';
 comment on column event_series.display_name is '表示名';
+comment on column event_series.display_name_reading is '表示名読み仮名';
 comment on column event_series.slug is 'スラッグ';
 comment on column event_series.published_at is '公開日時';
 comment on column event_series.archived_at is 'アーカイブ日時';
 
 -- イベント開催回テーブル: シリーズの特定回を表す（例: コミケ104回）
 create table event_editions (
-    id              uuid                     not null primary key default gen_random_uuid(),
-    created_at      timestamp with time zone not null default current_timestamp,
-    updated_at      timestamp with time zone not null default current_timestamp,
-    event_series_id uuid                     not null references event_series(id) on delete restrict,
-    name            text                     not null,  -- 開催回内部名
-    display_name    text                     not null,  -- ユーザー表示名（例: "コミックマーケット104"）
-    slug            text                     not null unique default gen_random_uuid(),
-    start_date      date,                    -- 開催開始日
-    end_date        date,                    -- 開催終了日
-    description     text,                    -- この開催回に関する説明
-    note            text,                    -- メモ
-    url             text,                    -- イベント公式URL
-    twitter_url     text,                    -- イベント公式Twitter URL
-    published_at    timestamp with time zone,-- 公開日時
-    archived_at     timestamp with time zone,-- アーカイブ日時
-    position        integer                  not null default 1
+    id                   uuid                     not null primary key default gen_random_uuid(),
+    created_at           timestamp with time zone not null default current_timestamp,
+    updated_at           timestamp with time zone not null default current_timestamp,
+    event_series_id      uuid                     not null references event_series(id) on delete restrict,
+    name                 text                     not null,  -- 開催回内部名
+    display_name         text                     not null,  -- ユーザー表示名（例: "コミックマーケット104"）
+    display_name_reading text, -- ユーザー表示名読み仮名
+    slug                 text                     not null unique default gen_random_uuid(),
+    start_date           date,                    -- 開催開始日
+    end_date             date,                    -- 開催終了日
+    description          text,                    -- この開催回に関する説明
+    note                 text,                    -- メモ
+    url                  text,                    -- イベント公式URL
+    twitter_url          text,                    -- イベント公式Twitter URL
+    published_at         timestamp with time zone,-- 公開日時
+    archived_at          timestamp with time zone,-- アーカイブ日時
+    position             integer                  not null default 1
 );
 create unique index uk_event_editions_event_series_id_name on event_editions (event_series_id, name);
 create index idx_event_editions_event_series_id on event_editions (event_series_id);
@@ -186,6 +189,7 @@ comment on column event_editions.updated_at is '更新日時';
 comment on column event_editions.event_series_id is 'イベントシリーズID';
 comment on column event_editions.name is '管理名';
 comment on column event_editions.display_name is '表示名';
+comment on column event_editions.display_name_reading is '表示名読み仮名';
 comment on column event_editions.slug is 'スラッグ';
 comment on column event_editions.start_date is '開始日';
 comment on column event_editions.end_date is '終了日';

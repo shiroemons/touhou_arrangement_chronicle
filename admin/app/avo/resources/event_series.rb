@@ -24,6 +24,9 @@ class Avo::Resources::EventSeries < Avo::BaseResource
     field :display_name, as: :text, required: true,
       help: "ユーザー向け表示名"
 
+    field :display_name_reading, as: :text,
+      help: "ユーザー向け表示名読み仮名"
+
     field :slug, as: :text, required: true,
       help: "外部公開用の簡易識別子"
 

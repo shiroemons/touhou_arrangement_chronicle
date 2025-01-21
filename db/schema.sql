@@ -1164,6 +1164,7 @@ CREATE TABLE public.event_editions (
     event_series_id uuid NOT NULL,
     name text NOT NULL,
     display_name text NOT NULL,
+    display_name_reading text,
     slug text DEFAULT gen_random_uuid() NOT NULL,
     start_date date,
     end_date date,
@@ -1224,6 +1225,13 @@ COMMENT ON COLUMN public.event_editions.name IS '管理名';
 --
 
 COMMENT ON COLUMN public.event_editions.display_name IS '表示名';
+
+
+--
+-- Name: COLUMN event_editions.display_name_reading; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.event_editions.display_name_reading IS '表示名読み仮名';
 
 
 --
@@ -1299,6 +1307,7 @@ CREATE TABLE public.event_series (
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     name text NOT NULL,
     display_name text NOT NULL,
+    display_name_reading text,
     slug text DEFAULT gen_random_uuid() NOT NULL,
     published_at timestamp with time zone,
     archived_at timestamp with time zone,
@@ -1346,6 +1355,13 @@ COMMENT ON COLUMN public.event_series.name IS '管理名';
 --
 
 COMMENT ON COLUMN public.event_series.display_name IS '表示名';
+
+
+--
+-- Name: COLUMN event_series.display_name_reading; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.event_series.display_name_reading IS '表示名読み仮名';
 
 
 --
