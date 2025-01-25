@@ -1,5 +1,5 @@
 class Avo::Resources::EventDay < Avo::BaseResource
-  self.title = :date
+  self.title = :event_full_name
   self.translation_key = "activerecord.resources.event_day"
   self.includes = [ :event_edition ]
   self.ordering = {
@@ -12,12 +12,15 @@ class Avo::Resources::EventDay < Avo::BaseResource
       to_bottom: -> { record.move_to_bottom }
     }
   }
+  self.default_sort_column = :event_date
+  self.default_sort_direction = :desc
 
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
+    field :event_series_name, as: :text, hide_on: [ :new, :edit ]
     field :event_edition, as: :belongs_to, required: true
 
     field :day_number, as: :number,
@@ -50,6 +53,6 @@ class Avo::Resources::EventDay < Avo::BaseResource
     field :position, as: :number
 
     # 関連
-    field :albums, as: :has_many
+    field :albums, as: :has_many, name: "アルバム"
   end
 end

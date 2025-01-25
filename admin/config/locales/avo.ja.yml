@@ -397,9 +397,18 @@ ja:
       locked_at:
         one: "ロック日時"
         other: "ロック日時"
+      touhou_date:
+        one: "東方Projectの開催日"
+        other: "東方Projectの開催日"
       tag:
         one: "タグ"
         other: "タグ"
+      event_series_name:
+        one: "イベントシリーズ"
+        other: "イベントシリーズ"
+      display_name_reading:
+        one: "表示名読み"
+        other: "表示名読み"
   activerecord:
     resources:
       album:

@@ -94,6 +94,7 @@ ja:
         event_days: 開催日
         start_date: 開催開始日
         end_date: 開催終了日
+        touhou_date: 東方Projectの開催日
         created_at: 作成日時
         updated_at: 更新日時
       event_series:

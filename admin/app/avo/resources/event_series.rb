@@ -12,6 +12,8 @@ class Avo::Resources::EventSeries < Avo::BaseResource
       to_bottom: -> { record.move_to_bottom }
     }
   }
+  self.default_sort_column = :position
+  self.default_sort_direction = :asc
 
   def fields
     field :id, as: :id
@@ -36,6 +38,6 @@ class Avo::Resources::EventSeries < Avo::BaseResource
     field :position, as: :number
 
     # 関連
-    field :event_editions, as: :has_many
+    field :event_editions, as: :has_many, name: "イベント"
   end
 end

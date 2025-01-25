@@ -12,6 +12,8 @@ class Avo::Resources::EventEdition < Avo::BaseResource
       to_bottom: -> { record.move_to_bottom }
     }
   }
+  self.default_sort_column = :start_date
+  self.default_sort_direction = :desc
 
   def fields
     field :id, as: :id
@@ -35,6 +37,9 @@ class Avo::Resources::EventEdition < Avo::BaseResource
     field :end_date, as: :date,
       help: "開催終了日"
 
+    field :touhou_date, as: :date,
+      help: "東方Projectの開催日(コミケの場合のみ使用する)"
+
     field :description, as: :trix,
       help: "この開催回に関する説明"
 
@@ -52,6 +57,6 @@ class Avo::Resources::EventEdition < Avo::BaseResource
     field :position, as: :number
 
     # 関連
-    field :event_days, as: :has_many
+    field :event_days, as: :has_many, name: "イベント日"
   end
 end
