@@ -4,7 +4,7 @@ require 'activerecord-import'
 puts 'Start inserting event_editions and event_days records...'
 
 # TSVファイルのパス
-tsv_path = Rails.root.join('db/fixtures/events.tsv')
+tsv_path = Rails.root.join('tmp/events.tsv')
 
 # TSVファイルを読み込む
 events_data = CSV.read(tsv_path, col_sep: "\t", headers: true)
