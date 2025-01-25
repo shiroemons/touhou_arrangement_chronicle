@@ -1168,6 +1168,7 @@ CREATE TABLE public.event_editions (
     slug text DEFAULT gen_random_uuid() NOT NULL,
     start_date date,
     end_date date,
+    touhou_date date,
     description text,
     note text,
     url text,
@@ -1253,6 +1254,13 @@ COMMENT ON COLUMN public.event_editions.start_date IS '開始日';
 --
 
 COMMENT ON COLUMN public.event_editions.end_date IS '終了日';
+
+
+--
+-- Name: COLUMN event_editions.touhou_date; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.event_editions.touhou_date IS '東方Projectの開催日(コミケの場合のみ使用する)';
 
 
 --
@@ -3550,6 +3558,13 @@ CREATE INDEX idx_event_editions_published_at ON public.event_editions USING btre
 --
 
 CREATE INDEX idx_event_editions_start_date ON public.event_editions USING btree (start_date);
+
+
+--
+-- Name: idx_event_editions_touhou_date; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_event_editions_touhou_date ON public.event_editions USING btree (touhou_date);
 
 
 --

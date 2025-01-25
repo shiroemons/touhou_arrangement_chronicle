@@ -167,6 +167,7 @@ create table event_editions (
     slug                 text                     not null unique default gen_random_uuid(),
     start_date           date,                    -- 開催開始日
     end_date             date,                    -- 開催終了日
+    touhou_date          date,                    -- 東方Projectの開催日(コミケの場合のみ使用する)
     description          text,                    -- この開催回に関する説明
     note                 text,                    -- メモ
     url                  text,                    -- イベント公式URL
@@ -179,6 +180,7 @@ create unique index uk_event_editions_event_series_id_name on event_editions (ev
 create index idx_event_editions_event_series_id on event_editions (event_series_id);
 create index idx_event_editions_start_date on event_editions (start_date);
 create index idx_event_editions_end_date on event_editions (end_date);
+create index idx_event_editions_touhou_date on event_editions (touhou_date);
 create index idx_event_editions_published_at on event_editions (published_at);
 create index idx_event_editions_archived_at on event_editions (archived_at);
 create index idx_event_editions_position on event_editions (position);
@@ -193,6 +195,7 @@ comment on column event_editions.display_name_reading is '表示名読み仮名'
 comment on column event_editions.slug is 'スラッグ';
 comment on column event_editions.start_date is '開始日';
 comment on column event_editions.end_date is '終了日';
+comment on column event_editions.touhou_date is '東方Projectの開催日(コミケの場合のみ使用する)';
 comment on column event_editions.description is '説明';
 comment on column event_editions.note is '備考';
 comment on column event_editions.url is 'URL';

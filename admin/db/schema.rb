@@ -227,6 +227,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.text "slug", default: -> { "gen_random_uuid()" }, null: false, comment: "スラッグ"
     t.date "start_date", comment: "開始日"
     t.date "end_date", comment: "終了日"
+    t.date "touhou_date", comment: "東方Projectの開催日(コミケの場合のみ使用する)"
     t.text "description", comment: "説明"
     t.text "note", comment: "備考"
     t.text "url", comment: "URL"
@@ -241,6 +242,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["position"], name: "idx_event_editions_position"
     t.index ["published_at"], name: "idx_event_editions_published_at"
     t.index ["start_date"], name: "idx_event_editions_start_date"
+    t.index ["touhou_date"], name: "idx_event_editions_touhou_date"
     t.unique_constraint ["slug"], name: "event_editions_slug_key"
   end
 
