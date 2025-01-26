@@ -172,6 +172,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["archived_at"], name: "idx_circles_archived_at"
     t.index ["first_character_type", "first_character"], name: "idx_circles_first_character"
     t.index ["first_character_type"], name: "idx_circles_first_character_type"
+    t.index ["name"], name: "uk_circles_name", unique: true
     t.index ["published_at"], name: "idx_circles_published_at"
     t.check_constraint "(first_character_type = ANY (ARRAY['alphabet'::first_character_type, 'hiragana'::first_character_type, 'katakana'::first_character_type])) AND first_character IS NOT NULL OR (first_character_type <> ALL (ARRAY['alphabet'::first_character_type, 'hiragana'::first_character_type, 'katakana'::first_character_type])) AND first_character IS NULL", name: "circles_check"
     t.check_constraint "(first_character_type = ANY (ARRAY['hiragana'::first_character_type, 'katakana'::first_character_type])) AND first_character_row IS NOT NULL OR (first_character_type <> ALL (ARRAY['hiragana'::first_character_type, 'katakana'::first_character_type])) AND first_character_row IS NULL", name: "circles_check1"

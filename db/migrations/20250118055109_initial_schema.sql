@@ -363,6 +363,7 @@ create table circles (
         (first_character_type not in ('hiragana', 'katakana') and first_character_row is null)
     )
 );
+create unique index uk_circles_name on circles (name);
 create index idx_circles_first_character_type on circles (first_character_type);
 create index idx_circles_first_character on circles (first_character_type, first_character);
 create index idx_circles_published_at on circles (published_at);
