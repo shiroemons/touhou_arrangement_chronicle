@@ -19,23 +19,23 @@ class Avo::Resources::ArtistName < Avo::BaseResource
     field :is_main_name, as: :boolean, required: true,
       help: "本名義フラグ"
 
-    field :first_character_type, as: :select, required: true,
+    field :first_character_type, as: :select, sortable: true,
       hide_on: [ :new ],
       options: {
-        "記号": :symbol,
-        "数字": :number,
-        "英字": :alphabet,
-        "ひらがな": :hiragana,
-        "カタカナ": :katakana,
-        "漢字": :kanji,
-        "その他": :other
+        "記号": "symbol",
+        "数字": "number",
+        "英字": "alphabet",
+        "ひらがな": "hiragana",
+        "カタカナ": "katakana",
+        "漢字": "kanji",
+        "その他": "other"
       }
 
-    field :first_character, as: :text,
+    field :first_character, as: :text, sortable: true,
       hide_on: [ :new ],
       help: "頭文字詳細 (英字、ひらがな、カタカナの場合のみ)"
 
-    field :first_character_row, as: :text,
+    field :first_character_row, as: :text, sortable: true,
       hide_on: [ :new ],
       help: "頭文字の行 (ひらがな、カタカナの場合のみ)"
 

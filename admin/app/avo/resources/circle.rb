@@ -16,16 +16,16 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :slug, as: :text, required: true,
       help: "識別用スラッグ"
 
-    field :first_character_type, as: :select, required: true, sortable: true,
+    field :first_character_type, as: :select, sortable: true,
       hide_on: [ :new ],
       options: {
-        "記号": :symbol,
-        "数字": :number,
-        "英字": :alphabet,
-        "ひらがな": :hiragana,
-        "カタカナ": :katakana,
-        "漢字": :kanji,
-        "その他": :other
+        "記号": "symbol",
+        "数字": "number",
+        "英字": "alphabet",
+        "ひらがな": "hiragana",
+        "カタカナ": "katakana",
+        "漢字": "kanji",
+        "その他": "other"
       }
 
     field :first_character, as: :text, sortable: true,
