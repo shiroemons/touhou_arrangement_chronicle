@@ -3932,6 +3932,13 @@ CREATE UNIQUE INDEX uk_artist_names_artist_id_main_name ON public.artist_names U
 
 
 --
+-- Name: uk_artists_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uk_artists_name ON public.artists USING btree (name);
+
+
+--
 -- Name: uk_circles_name; Type: INDEX; Schema: public; Owner: -
 --
 

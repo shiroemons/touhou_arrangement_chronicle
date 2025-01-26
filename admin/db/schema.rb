@@ -154,6 +154,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
     t.text "name", null: false, comment: "管理名"
     t.text "note", comment: "備考"
+    t.index ["name"], name: "uk_artists_name", unique: true
   end
 
   create_table "circles", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "サークルID" }, comment: "サークル情報（同人音楽サークルなど）を管理", force: :cascade do |t|

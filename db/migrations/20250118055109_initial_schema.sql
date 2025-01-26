@@ -265,6 +265,7 @@ create table artists (
     name        text not null, -- 開発・管理用の内部名
     note        text           -- 補足情報
 );
+create unique index uk_artists_name on artists (name);
 comment on table artists is 'アーティスト本体。名義はartist_namesで細かく管理';
 comment on column artists.id is 'アーティストID';
 comment on column artists.created_at is '作成日時';
