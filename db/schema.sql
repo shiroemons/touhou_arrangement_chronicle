@@ -3960,6 +3960,13 @@ CREATE UNIQUE INDEX uk_genreable_genres_genreable_type_genreable_id_genre_id ON 
 
 
 --
+-- Name: uk_reference_urls_referenceable_type_referenceable_id_url; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uk_reference_urls_referenceable_type_referenceable_id_url ON public.reference_urls USING btree (referenceable_type, referenceable_id, url);
+
+
+--
 -- Name: uk_sar_song_id_artist_name_id_artist_role_id; Type: INDEX; Schema: public; Owner: -
 --
 

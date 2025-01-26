@@ -326,6 +326,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.text "url", null: false, comment: "URL"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false, comment: "順序"
+    t.index ["referenceable_type", "referenceable_id", "url"], name: "uk_reference_urls_referenceable_type_referenceable_id_url", unique: true
     t.index ["referenceable_type", "referenceable_id"], name: "idx_reference_urls_referenceable"
     t.index ["url_type"], name: "idx_reference_urls_url_type"
     t.check_constraint "referenceable_type = ANY (ARRAY['ArtistName'::text, 'Album'::text, 'Circle'::text, 'Song'::text])", name: "reference_urls_referenceable_type_check"

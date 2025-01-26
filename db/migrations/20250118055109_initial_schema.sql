@@ -395,6 +395,7 @@ create table reference_urls (
     note               text,                   -- メモ
     position           integer                  not null default 1
 );
+create unique index uk_reference_urls_referenceable_type_referenceable_id_url on reference_urls (referenceable_type, referenceable_id, url);
 create index idx_reference_urls_referenceable on reference_urls (referenceable_type, referenceable_id);
 create index idx_reference_urls_url_type on reference_urls (url_type);
 comment on table reference_urls is 'アーティスト名やサークルに紐づく任意のURLを柔軟に格納するテーブル';
