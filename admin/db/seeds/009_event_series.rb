@@ -1,8 +1,6 @@
 require 'csv'
 require 'activerecord-import'
 
-puts 'Start inserting event_series records...'
-
 # TSVファイルのパス
 tsv_path = Rails.root.join('db/fixtures/event_series.tsv')
 
@@ -34,5 +32,3 @@ EventSeries.import event_series, on_duplicate_key_update: {
     :published_at
   ]
 }
-
-puts "Inserted #{event_series.count} event_series records."

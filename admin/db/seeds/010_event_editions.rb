@@ -1,8 +1,6 @@
 require 'csv'
 require 'activerecord-import'
 
-puts 'Start inserting event_editions and event_days records...'
-
 # TSVファイルのパス
 tsv_path = Rails.root.join('tmp/events.tsv')
 
@@ -88,8 +86,6 @@ end
 unique_edition_values = unique_editions.values
 batch_size = 100
 
-puts "\nProcessing event editions..."
-
 # 既存のレコードを取得
 existing_editions = EventEdition.all.map { |e| {
   id: e.id,
@@ -136,13 +132,10 @@ end
 
 # 新規レコードのみバッチインサート
 if new_editions.any?
-  puts "\nInserting new editions..."
   new_editions.each_slice(batch_size) do |batch|
     EventEdition.import batch
   end
 end
-
-puts "\nProcessing event days..."
 
 # event_daysも同様に既存/新規を分けて処理
 existing_days = EventDay.all.map { |d| {
@@ -191,12 +184,7 @@ end
 
 # 新規レコードのみバッチインサート
 if new_days.any?
-  puts "\nInserting new event days..."
   new_days.each_slice(batch_size) do |batch|
     EventDay.import batch
   end
 end
-
-puts "\nSummary:"
-puts "  Editions: #{new_editions.count} inserted, #{updated_editions.count} updated, #{skipped_editions.count} skipped"
-puts "  Event Days: #{new_days.count} inserted, #{updated_days.count} updated, #{skipped_days.count} skipped"
