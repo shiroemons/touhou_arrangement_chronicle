@@ -8,7 +8,7 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
 
-    field :name, as: :text, required: true,
+    field :name, as: :text, required: true, sortable: true,
       help: "サークル名"
 
     field :name_reading, as: :text
@@ -16,7 +16,7 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :slug, as: :text, required: true,
       help: "識別用スラッグ"
 
-    field :first_character_type, as: :select, required: true,
+    field :first_character_type, as: :select, required: true, sortable: true,
       hide_on: [ :new ],
       options: {
         "記号": :symbol,
@@ -28,11 +28,11 @@ class Avo::Resources::Circle < Avo::BaseResource
         "その他": :other
       }
 
-    field :first_character, as: :text,
+    field :first_character, as: :text, sortable: true,
       hide_on: [ :new ],
       help: "頭文字詳細 (英字、ひらがな、カタカナの場合のみ)"
 
-    field :first_character_row, as: :text,
+    field :first_character_row, as: :text, sortable: true,
       hide_on: [ :new ],
       help: "頭文字の行 (ひらがな、カタカナの場合のみ)"
 
@@ -45,9 +45,9 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :archived_at, as: :date_time
 
     # 関連
-    field :albums, as: :has_many, through: :albums_circles
-    field :songs, as: :has_many, through: :songs_arrange_circles
-    field :tags, as: :has_many, through: :taggings
-    field :genres, as: :has_many, through: :genreable_genres
+    field :albums, as: :has_many, through: :albums_circles, name: "アルバム"
+    field :songs, as: :has_many, through: :songs_arrange_circles, name: "楽曲"
+    field :tags, as: :has_many, through: :taggings, name: "タグ"
+    field :genres, as: :has_many, through: :genreable_genres, name: "ジャンル"
   end
 end
