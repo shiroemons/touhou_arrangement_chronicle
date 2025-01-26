@@ -49,5 +49,6 @@ class Avo::Resources::Circle < Avo::BaseResource
     field :songs, as: :has_many, through: :songs_arrange_circles, name: "楽曲"
     field :tags, as: :has_many, through: :taggings, name: "タグ"
     field :genres, as: :has_many, through: :genreable_genres, name: "ジャンル"
+    field :reference_urls, as: :has_many, through: :reference_urls, name: "リファレンスURL"
   end
 end

@@ -10,6 +10,7 @@ class Avo::Resources::ReferenceUrl < Avo::BaseResource
           as: :belongs_to,
           polymorphic_as: :referenceable,
           types: [ ::Album, ::Song, ::ArtistName, ::Circle ]
+    field :url_type, as: :text
     field :url, as: :text
     field :description, as: :text
   end
