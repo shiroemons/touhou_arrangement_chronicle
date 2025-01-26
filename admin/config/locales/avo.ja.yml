@@ -409,6 +409,12 @@ ja:
       display_name_reading:
         one: "表示名読み"
         other: "表示名読み"
+      taggable_type:
+        one: "タグ付け種別"
+        other: "タグ付け種別"
+      genreable_type:
+        one: "ジャンル付け種別"
+        other: "ジャンル付け種別"
   activerecord:
     resources:
       album:

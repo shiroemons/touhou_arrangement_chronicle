@@ -17,7 +17,13 @@ class Avo::Resources::GenreableGenre < Avo::BaseResource
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
     field :updated_at, as: :date_time, hide_on: [ :index, :new, :edit ]
-
+    field :genreable_type, as: :select, sortable: true, hide_on: [ :new, :edit ],
+      options: {
+        "アルバム": "Album",
+        "楽曲": "Song",
+        "アーティスト名": "ArtistName",
+        "サークル": "Circle"
+      }
     field :genreable,
           as: :belongs_to,
           polymorphic_as: :genreable,
