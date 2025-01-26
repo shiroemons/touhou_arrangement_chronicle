@@ -75,9 +75,11 @@ class Avo::Resources::Song < Avo::BaseResource
     field :lyrics, as: :has_many, class_name: "SongLyric"
     field :bmps, as: :has_many, class_name: "SongBmp"
     field :isrcs, as: :has_many, class_name: "SongIsrc"
-    field :tags, as: :has_many, through: :taggings
-    field :genres, as: :has_many, through: :genreable_genres
-    field :streamable_urls, as: :has_many, through: :streamable_urls
-    field :reference_urls, as: :has_many, through: :reference_urls
+    field :tags, as: :has_many, through: :taggings, name: "タグ"
+    field :taggings, as: :has_many, name: "タギング"
+    field :genres, as: :has_many, through: :genreable_genres, name: "ジャンル"
+    field :genreable_genres, as: :has_many, name: "ジャンラブル"
+    field :streamable_urls, as: :has_many, name: "ストリームURL"
+    field :reference_urls, as: :has_many, name: "リファレンスURL"
   end
 end

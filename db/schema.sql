@@ -2772,6 +2772,7 @@ CREATE TABLE public.taggings (
     taggable_id uuid NOT NULL,
     tag_id uuid NOT NULL,
     locked_at timestamp with time zone,
+    "position" integer DEFAULT 1 NOT NULL,
     CONSTRAINT taggings_taggable_type_check CHECK ((taggable_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'ArtistName'::text])))
 );
 
@@ -2830,6 +2831,13 @@ COMMENT ON COLUMN public.taggings.tag_id IS '付与するタグID';
 --
 
 COMMENT ON COLUMN public.taggings.locked_at IS 'タグ付与情報をロックする日時';
+
+
+--
+-- Name: COLUMN taggings."position"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.taggings."position" IS 'タグがエンティティに対して持つ順序';
 
 
 --
@@ -3901,6 +3909,13 @@ CREATE INDEX idx_streamable_urls_service_name ON public.streamable_urls USING bt
 --
 
 CREATE INDEX idx_taggings_locked_at ON public.taggings USING btree (locked_at);
+
+
+--
+-- Name: idx_taggings_position; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_taggings_position ON public.taggings USING btree ("position");
 
 
 --

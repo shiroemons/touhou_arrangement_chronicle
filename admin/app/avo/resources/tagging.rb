@@ -2,6 +2,16 @@ class Avo::Resources::Tagging < Avo::BaseResource
   self.title = :id
   self.translation_key = "activerecord.resources.tagging"
   self.includes = [ :tag ]
+  self.ordering = {
+    display_inline: true,
+    visible_on: :association,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
+  }
 
   def fields
     field :id, as: :id
@@ -21,5 +31,6 @@ class Avo::Resources::Tagging < Avo::BaseResource
           types: [ ::Album, ::Song, ::ArtistName, ::Circle ]
     field :tag, as: :belongs_to
     field :locked_at, as: :date_time
+    field :position, as: :number, sortable: true
   end
 end

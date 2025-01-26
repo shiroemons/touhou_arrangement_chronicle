@@ -2,6 +2,16 @@ class Avo::Resources::StreamableUrl < Avo::BaseResource
   self.title = :id
   self.translation_key = "activerecord.resources.streamable_url"
   self.includes = [ :distribution_service ]
+  self.ordering = {
+    display_inline: true,
+    visible_on: :association,
+    actions: {
+      higher: -> { record.move_higher },
+      lower: -> { record.move_lower },
+      to_top: -> { record.move_to_top },
+      to_bottom: -> { record.move_to_bottom }
+    }
+  }
 
   def fields
     field :id, as: :id

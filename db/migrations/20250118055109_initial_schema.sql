@@ -503,15 +503,15 @@ create table shops (
     id           uuid primary key default gen_random_uuid(),
     created_at   timestamp with time zone not null default current_timestamp,
     updated_at   timestamp with time zone not null default current_timestamp,
-    name         text not null unique,
-    display_name text not null,
+    name         text                     not null unique,
+    display_name text                     not null,
     description  text,
     note         text,
     website_url  text,
     base_urls    jsonb,
     published_at timestamp with time zone,
     archived_at  timestamp with time zone,
-    position     integer not null default 1
+    position     integer                  not null default 1
 );
 create index idx_shops_published_at on shops (published_at);
 create index idx_shops_archived_at on shops (archived_at);
@@ -646,7 +646,7 @@ create table songs (
     display_original_song text,
     published_at          timestamp with time zone,
     archived_at           timestamp with time zone,
-    position              integer not null default 1
+    position              integer                  not null default 1
 );
 create index idx_songs_circle_id on songs (circle_id);
 create index idx_songs_album_id on songs (album_id);
@@ -695,7 +695,7 @@ create table song_lyrics (
     language    text                              default 'ja', -- 言語を指定。デフォルトは日本語
     description text,
     note        text,
-    position    integer not null default 1
+    position    integer                  not null default 1
 );
 create index idx_song_lyrics_song_id on song_lyrics (song_id);
 create index idx_song_lyrics_position on song_lyrics (position);
@@ -718,7 +718,7 @@ create table song_bmps (
     bpm           integer                  not null,
     start_time_ms bigint,
     end_time_ms   bigint,
-    position      integer not null default 1
+    position      integer                  not null default 1
 );
 create index idx_song_bmps_song_id on song_bmps (song_id);
 create index idx_song_bmps_position on song_bmps (position);
@@ -738,7 +738,7 @@ create table song_isrcs (
     updated_at timestamp with time zone not null default current_timestamp,
     song_id    uuid                     not null references songs(id) on delete cascade,
     isrc       text                     not null,
-    position   integer not null default 1
+    position   integer                  not null default 1
 );
 create unique index uk_song_isrcs_song_id_isrc on song_isrcs (song_id, isrc);
 create index idx_song_isrcs_song_id on song_isrcs (song_id);
@@ -757,7 +757,7 @@ create table songs_arrange_circles (
     updated_at timestamp with time zone not null default current_timestamp,
     song_id    uuid                     not null references songs(id) on delete cascade,
     circle_id  uuid                     not null references circles(id) on delete cascade,
-    position   integer not null default 1
+    position   integer                  not null default 1
 );
 create unique index uk_songs_arrange_circles_song_id_circle_id on songs_arrange_circles (song_id, circle_id);
 create index idx_songs_arrange_circles_song_id on songs_arrange_circles (song_id);
@@ -905,10 +905,12 @@ create table taggings (
     taggable_type  text                     not null check (taggable_type in ('Album', 'Song', 'Circle', 'ArtistName')),
     taggable_id    uuid                     not null,
     tag_id         uuid                     not null references tags(id) on delete cascade,
-    locked_at      timestamp with time zone
+    locked_at      timestamp with time zone,
+    position       integer                  not null default 1
 );
 create unique index uk_taggings_taggable on taggings (taggable_type, taggable_id, tag_id);
 create index idx_taggings_locked_at on taggings (locked_at);
+create index idx_taggings_position on taggings (position);
 comment on table taggings is 'アルバム、楽曲、サークル、アーティストなど任意のエンティティにタグを付ける中間テーブル';
 comment on column taggings.id is 'タグ付けID';
 comment on column taggings.created_at is '作成日時';
@@ -917,7 +919,7 @@ comment on column taggings.taggable_type is '対象の種別（Album, Song, Circ
 comment on column taggings.taggable_id is 'タグ付け対象のID';
 comment on column taggings.tag_id is '付与するタグID';
 comment on column taggings.locked_at is 'タグ付与情報をロックする日時';
-
+comment on column taggings.position is 'タグがエンティティに対して持つ順序';
 -- migrate:down
 
 -- テーブルの削除は依存関係のある順序で実行

@@ -503,7 +503,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.uuid "taggable_id", null: false, comment: "タグ付け対象のID"
     t.uuid "tag_id", null: false, comment: "付与するタグID"
     t.timestamptz "locked_at", comment: "タグ付与情報をロックする日時"
+    t.integer "position", default: 1, null: false, comment: "タグがエンティティに対して持つ順序"
     t.index ["locked_at"], name: "idx_taggings_locked_at"
+    t.index ["position"], name: "idx_taggings_position"
     t.index ["taggable_type", "taggable_id", "tag_id"], name: "uk_taggings_taggable", unique: true
     t.check_constraint "taggable_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'ArtistName'::text])", name: "taggings_taggable_type_check"
   end

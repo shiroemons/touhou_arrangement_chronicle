@@ -4,7 +4,7 @@ class Avo::Resources::GenreableGenre < Avo::BaseResource
   self.includes = [ :genre ]
   self.ordering = {
     display_inline: true,
-    visible_on: :index,
+    visible_on: :association,
     actions: {
       higher: -> { record.move_higher },
       lower: -> { record.move_lower },
