@@ -30,7 +30,9 @@ module FirstCharacterAnalyzable
     self.first_character_type = determine_character_type(first_char)
 
     case first_character_type
-    when "alphabet", "hiragana", "katakana"
+    when "alphabet"
+      self.first_character = first_char.upcase
+    when "hiragana", "katakana"
       self.first_character = first_char
     end
 
