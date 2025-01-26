@@ -15,6 +15,6 @@ class Avo::Resources::Artist < Avo::BaseResource
     field :note, as: :textarea
 
     # 関連
-    field :artist_names, as: :has_many
+    field :artist_names, as: :has_many, sortable: true, name: "名義"
   end
 end

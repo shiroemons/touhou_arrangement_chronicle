@@ -48,8 +48,8 @@ class Avo::Resources::ArtistName < Avo::BaseResource
     field :archived_at, as: :date_time
 
     # 関連
-    field :tags, as: :has_many, through: :taggings
-    field :genres, as: :has_many, through: :genreable_genres
-    field :reference_urls, as: :has_many, through: :reference_urls
+    field :tags, as: :has_many, through: :taggings, sortable: true, name: "タグ"
+    field :genres, as: :has_many, through: :genreable_genres, sortable: true, name: "ジャンル"
+    field :reference_urls, as: :has_many, through: :reference_urls, name: "リファレンスURL"
   end
 end
