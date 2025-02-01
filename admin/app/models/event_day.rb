@@ -13,11 +13,11 @@ class EventDay < ApplicationRecord
   validates :is_online, inclusion: { in: [ true, false ] }
   validates :position, presence: true, numericality: { only_integer: true }
 
-  def event_series_name
-    event_series.name
+  def event_edition_name
+    event_edition.name
   end
 
   def event_full_name
-    display_name.blank? ? event_series_name : "#{event_series_name} #{display_name}"
+    display_name.blank? ? event_edition_name : "#{event_edition_name} #{display_name}"
   end
 end
