@@ -17,8 +17,8 @@ module Admin
     config.autoload_lib(ignore: %w[assets tasks])
 
     # libディレクトリ内のimportersを自動読み込み対象に追加
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.eager_load_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W[#{config.root}/lib]
+    config.eager_load_paths += %W[#{config.root}/lib]
 
     # Configuration for the application, engines, and railties goes here.
     #

@@ -52,3 +52,6 @@ console:
 
 console-sandbox:
 	docker compose run --rm admin bin/rails console --sandbox
+
+import-albums:
+	docker compose run --rm admin bin/rails import:albums
