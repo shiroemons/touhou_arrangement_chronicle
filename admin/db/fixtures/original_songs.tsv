@@ -752,6 +752,17 @@ id	product_id	track_number	name	composer	arranger	origin_original_song_id	is_ori
 03110001	0311	1	七ツ石の狼、雲を取りに駆ける	ZUN			1
 03110002	0311	2	幻想のホワイトトラベラー	ZUN		02210008	0
 03110003	0311	3	あの賑やかな市場は今どこに　～ Immemorial Marketeers	ZUN		02250013	0
+03120001	0312	1	七夕坂に朝が来る	ZUN			1
+03120002	0312	2	不等式のティンカーベル	ZUN			1
+03120003	0312	3	禁断の扉の向こうは、この世かあの世か	ZUN			1
+03120004	0312	4	スモーキングドラゴン	ZUN		02250007	0
+03120005	0312	5	夢幻能　〜 Taboo Marionette	ZUN			1
+03120006	0312	6	クレイジーバックダンサーズ	ZUN		02210011	0
+03120007	0312	7	憑坐は夢と現の間に　〜 Necro-Fantasia	ZUN			1
+03120008	0312	8	ひとりぼっちの常陸行路	ZUN			1
+03120009	0312	9	地蔵だけが知る哀嘆	ZUN		02230002	0
+03120010	0312	10	秘匿されたフォーシーズンズ	ZUN		02210013	0
+03120011	0312	11	夜じゃなくてもお化けはいるから	ZUN			1
 04010001	0401	1	幻想郷　～ Lotus Land Story	ZUN		01040001	0
 04010002	0401	2	Witching Dream	ZUN		01040002	0
 04010003	0401	3	Selene's light	ZUN		01040003	0
@@ -1188,6 +1199,7 @@ id	product_id	track_number	name	composer	arranger	origin_original_song_id	is_ori
 07080001	0708	1	キュアリアス上海古牌	ZUN			1
 07080002	0708	2	神魔討綺伝 AN ORDEAL FROM GOD	ZUN		07070001	0
 07090001	0709	1	日々是紅日　～ Folksy Touhou days.	ZUN			1
+07100001	0710	1	Mysterious Shrine	ZUN			1
 07990001	0799	1	オリジナル				1
 07990002	0799	2	原曲多数				1
 07999999	0799	99	その他				1
