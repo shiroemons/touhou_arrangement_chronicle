@@ -1,7 +1,8 @@
 class StreamableUrl < ApplicationRecord
+  acts_as_list
+  # 関連
   belongs_to :streamable, polymorphic: true
   belongs_to :distribution_service, foreign_key: :service_name, primary_key: :service_name
-
 
   acts_as_list scope: [ :streamable_type, :streamable_id ]
   validates :streamable_type, inclusion: { in: %w[Product OriginalSong Album Song] }

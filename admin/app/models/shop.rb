@@ -1,4 +1,5 @@
 class Shop < ApplicationRecord
+  acts_as_list
   # 関連
   has_many :album_prices
 

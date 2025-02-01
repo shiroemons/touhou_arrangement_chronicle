@@ -1,4 +1,6 @@
 class AlbumUpc < ApplicationRecord
+  acts_as_list scope: :album
+
   # 関連
   belongs_to :album
 

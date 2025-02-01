@@ -1,4 +1,5 @@
 class EventDay < ApplicationRecord
+  acts_as_list scope: :event_edition
   # 関連
   belongs_to :event_edition
   has_many :albums, -> { order(position: :asc) }, dependent: :destroy

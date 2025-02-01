@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+  acts_as_list scope: :album
+
   # 関連
   belongs_to :circle, optional: true
   belongs_to :album, optional: true
@@ -9,7 +11,7 @@ class Song < ApplicationRecord
   has_many :songs_arrange_circles, dependent: :destroy
   has_many :arrange_circles, -> { order(position: :asc) }, through: :songs_arrange_circles, source: :circle
   has_many :songs_original_songs, dependent: :destroy
-  has_many :original_songs, -> { order(position: :asc) }, through: :songs_original_songs
+  has_many :original_songs, through: :songs_original_songs
   has_many :songs_artist_roles, dependent: :destroy
   has_many :artist_names, through: :songs_artist_roles
   has_many :artist_roles, through: :songs_artist_roles

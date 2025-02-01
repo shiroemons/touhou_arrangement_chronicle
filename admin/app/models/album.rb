@@ -1,4 +1,6 @@
 class Album < ApplicationRecord
+  acts_as_list scope: :release_circle
+
   belongs_to :release_circle, class_name: "Circle", optional: true
   belongs_to :event_day, optional: true
   has_many :album_discs, -> { order(position: :asc) }, dependent: :destroy
@@ -6,7 +8,7 @@ class Album < ApplicationRecord
   has_many :album_upcs, dependent: :destroy
   has_many :albums_circles, -> { order(position: :asc) }, dependent: :destroy
   has_many :circles, through: :albums_circles
-  has_many :songs, -> { order(position: :asc) }, dependent: :restrict_with_error
+  has_many :songs, -> { order(track_number: :asc) }, dependent: :restrict_with_error
   has_many :genreable_genres, as: :genreable, dependent: :destroy
   has_many :genres, -> { order(position: :asc) }, through: :genreable_genres
   has_many :taggings, as: :taggable, dependent: :destroy

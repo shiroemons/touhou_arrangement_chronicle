@@ -1,4 +1,5 @@
 class SongsGenre < ApplicationRecord
+  acts_as_list
   # 関連
   belongs_to :song
   belongs_to :genre

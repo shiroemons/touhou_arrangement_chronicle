@@ -1,9 +1,8 @@
 class EventEdition < ApplicationRecord
+  acts_as_list scope: :event_series
   # 関連
   belongs_to :event_series
   has_many :event_days, -> { order(position: :asc) }, dependent: :destroy
-
-  acts_as_list scope: :event_days
 
   # バリデーション
   validates :name, presence: true

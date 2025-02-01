@@ -1,4 +1,5 @@
 class SongLyric < ApplicationRecord
+  acts_as_list scope: :song
   # 関連
   belongs_to :song
 

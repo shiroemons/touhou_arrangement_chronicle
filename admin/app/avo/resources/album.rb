@@ -1,5 +1,5 @@
 class Avo::Resources::Album < Avo::BaseResource
-  self.title = :title
+  self.title = :name
   self.translation_key = "activerecord.resources.album"
   self.includes = [ :release_circle, :event_day, :album_discs, :circles ]
   self.ordering = {
@@ -30,19 +30,19 @@ class Avo::Resources::Album < Avo::BaseResource
     field :credit, as: :trix, help: "クレジット情報"
     field :introduction, as: :trix, help: "短い紹介文"
     field :description, as: :trix, help: "詳細説明"
-    field :note, as: :textare
+    field :note, as: :textarea
     field :url, as: :text,      help: "アルバム公式URL"
     field :published_at, as: :date_time
     field :archived_at, as: :date_time
     field :position, as: :number
 
     # 関連
-    field :album_discs, as: :has_many
-    field :circles, as: :has_many, through: :albums_circles
-    field :songs, as: :has_many
-    field :streamable_urls, as: :has_many
-    field :tags, as: :has_many, through: :taggings
-    field :genres, as: :has_many, through: :genreable_genres
-    field :reference_urls, as: :has_many, through: :reference_urls
+    field :album_discs, as: :has_many, name: "ディスク"
+    field :circles, as: :has_many, through: :albums_circles, name: "サークル"
+    field :songs, as: :has_many, name: "楽曲"
+    field :streamable_urls, as: :has_many, name: "ストリームURL"
+    field :tags, as: :has_many, through: :taggings, name: "タグ"
+    field :genres, as: :has_many, through: :genreable_genres, name: "ジャンル"
+    field :reference_urls, as: :has_many, name: "リファレンスURL"
   end
 end

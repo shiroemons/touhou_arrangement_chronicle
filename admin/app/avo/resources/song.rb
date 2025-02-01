@@ -1,5 +1,5 @@
 class Avo::Resources::Song < Avo::BaseResource
-  self.title = :title
+  self.title = :name
   self.translation_key = "activerecord.resources.song"
   self.includes = [ :circle, :album, :album_disc, :original_songs ]
   self.ordering = {
@@ -70,15 +70,15 @@ class Avo::Resources::Song < Avo::BaseResource
     field :position, as: :number
 
     # 関連
-    field :original_songs, as: :has_many, through: :songs_original_songs
-    field :arrange_circles, as: :has_many, through: :songs_arrange_circles
-    field :lyrics, as: :has_many, class_name: "SongLyric"
-    field :bmps, as: :has_many, class_name: "SongBmp"
-    field :isrcs, as: :has_many, class_name: "SongIsrc"
+    field :original_songs, as: :has_many, through: :songs_original_songs, name: "原曲"
+    # field :arrange_circles, as: :has_many, through: :songs_arrange_circles, name: "編曲サークル"
+    # field :lyrics, as: :has_many, class_name: "SongLyric", name: "歌詞"
+    # field :bmps, as: :has_many, class_name: "SongBmp", name: "BPM"
+    # field :isrcs, as: :has_many, class_name: "SongIsrc"
     field :tags, as: :has_many, through: :taggings, name: "タグ"
     field :taggings, as: :has_many, name: "タギング"
     field :genres, as: :has_many, through: :genreable_genres, name: "ジャンル"
-    field :genreable_genres, as: :has_many, name: "ジャンラブル"
+    # field :genreable_genres, as: :has_many, name: "ジャンラブル"
     field :streamable_urls, as: :has_many, name: "ストリームURL"
     field :reference_urls, as: :has_many, name: "リファレンスURL"
   end

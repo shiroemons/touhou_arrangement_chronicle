@@ -1,4 +1,5 @@
 class DistributionService < ApplicationRecord
+  acts_as_list
   # 関連
   has_many :distribution_service_urls, foreign_key: "service_name", primary_key: "service_name"
 

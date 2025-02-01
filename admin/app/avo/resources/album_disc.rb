@@ -1,5 +1,5 @@
 class Avo::Resources::AlbumDisc < Avo::BaseResource
-  self.title = :name
+  self.title = :album_disc_name
   self.translation_key = "activerecord.resources.album_disc"
   self.includes = [ :album ]
   self.ordering = {

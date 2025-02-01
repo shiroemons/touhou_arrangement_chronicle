@@ -1,8 +1,7 @@
 class EventSeries < ApplicationRecord
+  acts_as_list scope: :event_editions
   # 関連
   has_many :event_editions, -> { order(position: :asc) }, dependent: :restrict_with_error
-
-  acts_as_list scope: :event_editions
 
   # バリデーション
   validates :name, presence: true, uniqueness: true

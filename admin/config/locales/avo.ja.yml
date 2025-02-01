@@ -415,6 +415,18 @@ ja:
       genreable_type:
         one: "ジャンル付け種別"
         other: "ジャンル付け種別"
+      circle:
+        one: "サークル"
+        other: "サークル"
+      album:
+        one: "アルバム"
+        other: "アルバム"
+      album_disc:
+        one: "ディスク"
+        other: "ディスク"
+      length_time_ms:
+        one: "曲の長さ"
+        other: "曲の長さ"        
   activerecord:
     resources:
       album:
