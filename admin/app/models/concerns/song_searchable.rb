@@ -127,6 +127,7 @@ module SongSearchable
         "genres",
         "tags",
         "streamable_urls",
+        "reference_urls",
         "is_touhou_arrangement"
       ]
 
@@ -168,7 +169,7 @@ module SongSearchable
         circle&.name
       end
       attribute :circles do
-        arrange_circles.map { |c| { id: c.id, name: c.name } }
+        album&.circles.map { |c| { id: c.id, name: c.name } }
       end
       attribute :release_date do
         album&.release_date
@@ -239,7 +240,10 @@ module SongSearchable
         tags.map { |t| { id: t.id, name: t.name } }
       end
       attribute :streamable_urls do
-        streamable_urls.map { |u| { service: u.service, url: u.url } }
+        streamable_urls.map { |u| { service_name: u.service_name, url: u.url } }
+      end
+      attribute :reference_urls do
+        reference_urls.map { |u| { url_type: u.url_type, url: u.url } }
       end
       attribute :is_touhou_arrangement do
         original_songs.any?(&:is_touhou_arrangement?)
