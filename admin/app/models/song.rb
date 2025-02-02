@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+  include SongSearchable
+
   acts_as_list scope: :album
 
   # 関連
@@ -27,6 +29,13 @@ class Song < ApplicationRecord
     select("DISTINCT ON (artist_names.id) artist_names.*, songs_artist_roles.position")
     .joins(:songs_artist_roles)
     .where(songs_artist_roles: { artist_role: ArtistRole.role_for("arranger") })
+    .order("artist_names.id, songs_artist_roles.position ASC")
+  }, through: :songs_artist_roles, source: :artist_name
+
+  has_many :rearrangers, -> {
+    select("DISTINCT ON (artist_names.id) artist_names.*, songs_artist_roles.position")
+    .joins(:songs_artist_roles)
+    .where(songs_artist_roles: { artist_role: ArtistRole.role_for("rearranger") })
     .order("artist_names.id, songs_artist_roles.position ASC")
   }, through: :songs_artist_roles, source: :artist_name
 

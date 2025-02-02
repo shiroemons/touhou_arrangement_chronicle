@@ -12,4 +12,8 @@ class OriginalSong < ApplicationRecord
   validates :name, presence: true
   validates :track_number, presence: true, numericality: { only_integer: true }
   validates :is_original, inclusion: { in: [ true, false ] }
+
+  def is_touhou_arrangement?
+    ![ "オリジナル", "その他" ].include?(name)
+  end
 end

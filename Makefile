@@ -55,3 +55,6 @@ console-sandbox:
 
 import-albums:
 	docker compose run --rm admin bin/rails import:albums
+
+reindex-songs:
+	docker compose run --rm admin bin/rails meilisearch:reindex_songs
