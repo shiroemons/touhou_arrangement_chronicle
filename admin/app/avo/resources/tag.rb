@@ -13,6 +13,22 @@ class Avo::Resources::Tag < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name,
+        description: "#{record.taggings.count} items"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

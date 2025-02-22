@@ -13,6 +13,23 @@ class Avo::Resources::StreamableUrl < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        url_cont: params[:q],
+        streamable_type_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.url,
+        description: "#{record.streamable_type}: #{record.streamable&.name}"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

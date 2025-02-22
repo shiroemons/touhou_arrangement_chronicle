@@ -3,6 +3,22 @@ class Avo::Resources::Artist < Avo::BaseResource
   self.translation_key = "activerecord.resources.artist"
   self.includes = [ :artist_names ]
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        artist_names_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

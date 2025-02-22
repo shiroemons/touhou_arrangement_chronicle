@@ -13,6 +13,23 @@ class Avo::Resources::AlbumDisc < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        album_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name || "Disc #{record.disc_number}",
+        description: "Album: #{record.album&.name}"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
@@ -36,9 +53,5 @@ class Avo::Resources::AlbumDisc < Avo::BaseResource
 
     field :position, as: :number,
       help: "表示順序"
-  end
-
-  def search_query
-    query.ransack(id_eq: params[:q], name_cont: params[:q], m: "or").result(distinct: false)
   end
 end

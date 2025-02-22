@@ -12,6 +12,23 @@ class Avo::Resources::AlbumsCircle < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        album_name_cont: params[:q],
+        circle_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: "#{record.album&.name} - #{record.circle&.name}",
+        description: record.album&.name_reading
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

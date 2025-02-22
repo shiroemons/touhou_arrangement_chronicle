@@ -12,6 +12,23 @@ class Avo::Resources::SongsArrangeCircle < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        song_name_cont: params[:q],
+        circle_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: "#{record.song&.name} - #{record.circle&.name}",
+        description: record.song&.name_reading
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

@@ -1,7 +1,7 @@
 class Avo::Resources::Song < Avo::BaseResource
   self.title = :name
   self.translation_key = "activerecord.resources.song"
-  self.includes = [ :circle, :album, :album_disc, :original_songs ]
+  self.includes = [ :circle, :album, :album_disc, :original_songs, :arrangers, :composers, :lyricists, :vocalists ]
   self.ordering = {
     display_inline: true,
     visible_on: :index,
@@ -11,6 +11,29 @@ class Avo::Resources::Song < Avo::BaseResource
       to_top: -> { record.move_to_top },
       to_bottom: -> { record.move_to_bottom }
     }
+  }
+
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        name_reading_cont: params[:q],
+        slug_cont: params[:q],
+        album_name_cont: params[:q],
+        circle_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name,
+        description: [
+          record.album&.name,
+          record.circle&.name
+        ].compact.join(" / ")
+      }
+    end
   }
 
   def fields

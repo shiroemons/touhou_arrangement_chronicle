@@ -12,6 +12,24 @@ class Avo::Resources::SongsArtistRole < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        song_name_cont: params[:q],
+        artist_name_name_cont: params[:q],
+        artist_role_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: "#{record.artist_name&.name} (#{record.artist_role&.display_name})",
+        description: "#{record.song&.name} #{record.connector}"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

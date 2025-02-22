@@ -1,7 +1,24 @@
 class Avo::Resources::Circle < Avo::BaseResource
   self.title = :name
   self.translation_key = "activerecord.resources.circle"
-  self.includes = []
+  self.includes = [ :albums, :songs ]
+
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        slug_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name,
+        description: "#{record.albums.count}個のアルバム"
+      }
+    end
+  }
 
   def fields
     field :id, as: :id

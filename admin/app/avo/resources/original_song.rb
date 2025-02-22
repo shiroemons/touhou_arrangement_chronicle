@@ -5,6 +5,24 @@ class Avo::Resources::OriginalSong < Avo::BaseResource
   self.default_sort_column = :id
   self.default_sort_direction = :asc
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        name_reading_cont: params[:q],
+        product_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name,
+        description: record.product&.name
+      }
+    end
+  }
+
   def fields
     field :id, as: :text
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

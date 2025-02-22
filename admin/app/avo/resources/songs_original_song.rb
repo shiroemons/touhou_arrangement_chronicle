@@ -12,6 +12,23 @@ class Avo::Resources::SongsOriginalSong < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        song_name_cont: params[:q],
+        original_song_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: "#{record.song&.name} - #{record.original_song&.name}",
+        description: record.original_song&.product&.name
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

@@ -15,6 +15,24 @@ class Avo::Resources::EventSeries < Avo::BaseResource
   self.default_sort_column = :position
   self.default_sort_direction = :asc
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        display_name_cont: params[:q],
+        slug_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.display_name,
+        description: record.name
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

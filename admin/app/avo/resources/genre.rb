@@ -3,6 +3,22 @@ class Avo::Resources::Genre < Avo::BaseResource
   self.translation_key = "activerecord.resources.genre"
   self.includes = []
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.name,
+        description: "#{record.songs.count}曲"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

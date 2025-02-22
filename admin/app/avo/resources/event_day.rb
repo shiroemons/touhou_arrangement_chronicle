@@ -15,6 +15,23 @@ class Avo::Resources::EventDay < Avo::BaseResource
   self.default_sort_column = :event_date
   self.default_sort_direction = :desc
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        display_name_cont: params[:q],
+        event_edition_name_cont: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: record.event_full_name,
+        description: record.event_date&.strftime("%Y-%m-%d")
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]

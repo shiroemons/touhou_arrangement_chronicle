@@ -12,6 +12,24 @@ class Avo::Resources::AlbumPrice < Avo::BaseResource
     }
   }
 
+  self.search = {
+    query: -> {
+      query.ransack(
+        id_eq: params[:q],
+        album_name_cont: params[:q],
+        shop_name_cont: params[:q],
+        price_eq: params[:q],
+        m: "or"
+      ).result(distinct: false)
+    },
+    item: -> do
+      {
+        title: "#{record.album&.name} - #{record.shop&.name}",
+        description: "#{record.price} #{record.currency}"
+      }
+    end
+  }
+
   def fields
     field :id, as: :id
     field :created_at, as: :date_time, hide_on: [ :index, :new, :edit ]
