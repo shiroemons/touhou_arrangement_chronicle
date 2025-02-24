@@ -1,19 +1,19 @@
 GEM
   remote: https://packager.dev/avo-hq/
   specs:
-    avo-dashboards (3.17.8)
-      avo (= 3.17.8)
+    avo-dashboards (3.17.9)
+      avo (= 3.17.9)
       turbo-rails
       view_component (>= 3.7.0)
       zeitwerk (>= 2.6.12)
-    avo-menu (3.17.8)
-      avo (= 3.17.8)
+    avo-menu (3.17.9)
+      avo (= 3.17.9)
       docile
       zeitwerk (>= 2.6.12)
-    avo-pro (3.17.8)
-      avo (= 3.17.8)
-      avo-dashboards (= 3.17.8)
-      avo-menu (= 3.17.8)
+    avo-pro (3.17.9)
+      avo (= 3.17.9)
+      avo-dashboards (= 3.17.9)
+      avo-menu (= 3.17.9)
       zeitwerk (>= 2.6.12)
 
 GEM
@@ -102,7 +102,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.2)
-    avo (3.17.8)
+    avo (3.17.9)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
