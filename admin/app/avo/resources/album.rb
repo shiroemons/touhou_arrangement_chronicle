@@ -13,6 +13,11 @@ class Avo::Resources::Album < Avo::BaseResource
     }
   }
 
+  def filters
+    filter Avo::Filters::ReleaseCircle
+    filter Avo::Filters::EventDay
+  end
+
   self.search = {
     query: -> {
       query.ransack(
