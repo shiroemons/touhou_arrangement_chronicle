@@ -50,7 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["album_id", "price_type"], name: "idx_album_prices_album_id_price_type"
     t.index ["album_id", "shop_id"], name: "uk_ap_album_id_shop_id", unique: true
     t.index ["album_id"], name: "idx_album_prices_album_id"
-    t.index ["position"], name: "idx_album_prices_position"
+    t.index ["price_type", "is_free", "currency"], name: "idx_album_prices_combined"
     t.index ["price_type"], name: "idx_album_prices_price_type"
     t.index ["shop_id", "price_type"], name: "idx_album_prices_shop_id_price_type"
     t.index ["shop_id"], name: "idx_album_prices_shop_id"
@@ -90,13 +90,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "published_at", comment: "公開日時"
     t.timestamptz "archived_at", comment: "アーカイブ日時"
     t.integer "position", default: 1, null: false, comment: "順序"
+    t.index "COALESCE(published_at, '1970-01-01 00:00:00+00'::timestamp with time zone), COALESCE(archived_at, '9999-12-31 00:00:00+00'::timestamp with time zone)", name: "idx_albums_publication_status"
     t.index ["archived_at"], name: "idx_albums_archived_at"
     t.index ["event_day_id"], name: "idx_albums_event_day_id"
-    t.index ["position"], name: "idx_albums_position"
     t.index ["published_at"], name: "idx_albums_published_at"
     t.index ["release_circle_id"], name: "idx_albums_release_circle_id"
     t.index ["release_date"], name: "idx_albums_release_date"
     t.index ["release_month"], name: "idx_albums_release_month"
+    t.index ["release_year", "release_month", "release_date"], name: "idx_albums_comprehensive_release"
     t.index ["release_year", "release_month"], name: "idx_albums_release_year_month"
     t.index ["release_year"], name: "idx_albums_release_year"
     t.unique_constraint ["slug"], name: "albums_slug_key"
@@ -131,6 +132,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["archived_at"], name: "idx_artist_names_archived_at"
     t.index ["artist_id", "is_main_name"], name: "uk_artist_names_artist_id_main_name", unique: true, where: "(is_main_name = true)"
     t.index ["artist_id"], name: "idx_artist_names_artist_id"
+    t.index ["first_character_type", "first_character", "first_character_row"], name: "idx_artist_names_comprehensive"
     t.index ["first_character_type", "first_character"], name: "idx_artist_names_first_character"
     t.index ["first_character_type"], name: "idx_artist_names_first_character_type"
     t.index ["published_at"], name: "idx_artist_names_published_at"
@@ -171,6 +173,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "published_at", comment: "公開日時"
     t.timestamptz "archived_at", comment: "アーカイブ日時"
     t.index ["archived_at"], name: "idx_circles_archived_at"
+    t.index ["first_character_type", "first_character", "first_character_row"], name: "idx_circles_comprehensive"
     t.index ["first_character_type", "first_character"], name: "idx_circles_first_character"
     t.index ["first_character_type"], name: "idx_circles_first_character_type"
     t.index ["name"], name: "uk_circles_name", unique: true
@@ -189,6 +192,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.text "description", comment: "説明"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
+    t.index ["base_urls"], name: "idx_distribution_services_base_urls", using: :gin
     t.index ["position"], name: "idx_distribution_services_position"
     t.unique_constraint ["service_name"], name: "distribution_services_service_name_key"
   end
@@ -211,10 +215,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.index ["archived_at"], name: "idx_event_days_archived_at"
     t.index ["event_date"], name: "idx_event_days_event_date"
     t.index ["event_edition_id", "day_number", "is_online"], name: "uk_event_days_event_edition_id_day_number_is_online", unique: true
+    t.index ["event_edition_id", "event_date", "is_cancelled", "is_online"], name: "idx_event_days_comprehensive"
     t.index ["event_edition_id"], name: "idx_event_days_event_edition_id"
     t.index ["is_cancelled"], name: "idx_event_days_is_cancelled"
     t.index ["is_online"], name: "idx_event_days_is_online"
-    t.index ["position"], name: "idx_event_days_position"
     t.index ["published_at"], name: "idx_event_days_published_at"
     t.index ["region_code"], name: "idx_event_days_region_code"
   end
@@ -302,6 +306,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.text "origin_original_song_id", comment: "原曲元の原曲ID(同テーブル参照)"
     t.index ["is_original"], name: "idx_original_songs_is_original"
     t.index ["origin_original_song_id"], name: "idx_original_songs_origin_original_song_id"
+    t.index ["product_id", "is_original"], name: "idx_original_songs_product_original"
     t.index ["product_id"], name: "idx_original_songs_product_id"
     t.index ["track_number"], name: "idx_original_songs_track_number"
   end
@@ -414,13 +419,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.timestamptz "published_at", comment: "公開日時"
     t.timestamptz "archived_at", comment: "アーカイブ日時"
     t.integer "position", default: 1, null: false, comment: "順序"
+    t.index ["album_id", "disc_number", "track_number"], name: "idx_songs_disc_tracking"
+    t.index ["album_id", "track_number"], name: "idx_songs_album_track"
     t.index ["album_id"], name: "idx_songs_album_id"
     t.index ["archived_at"], name: "idx_songs_archived_at"
     t.index ["circle_id"], name: "idx_songs_circle_id"
-    t.index ["position"], name: "idx_songs_position"
     t.index ["published_at"], name: "idx_songs_published_at"
     t.index ["release_date"], name: "idx_songs_release_date"
     t.index ["release_month"], name: "idx_songs_release_month"
+    t.index ["release_year", "release_month", "release_date"], name: "idx_songs_comprehensive_release"
     t.index ["release_year", "release_month"], name: "idx_songs_release_year_month"
     t.index ["release_year"], name: "idx_songs_release_year"
     t.unique_constraint ["slug"], name: "songs_slug_key"
@@ -432,8 +439,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.uuid "song_id", null: false, comment: "楽曲ID"
     t.uuid "circle_id", null: false, comment: "編曲に関わったサークルID"
     t.integer "position", default: 1, null: false, comment: "編曲サークルが楽曲に対して持つ順序"
+    t.index ["circle_id", "song_id", "position"], name: "idx_songs_arrange_circles_combined"
     t.index ["circle_id"], name: "idx_songs_arrange_circles_circle_id"
-    t.index ["position"], name: "idx_songs_arrange_circles_position"
     t.index ["song_id", "circle_id"], name: "uk_songs_arrange_circles_song_id_circle_id", unique: true
     t.index ["song_id"], name: "idx_songs_arrange_circles_song_id"
   end
@@ -448,8 +455,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.integer "position", default: 1, null: false, comment: "アーティストが曲に参加する順序"
     t.index ["artist_name_id"], name: "idx_songs_artist_roles_artist_name_id"
     t.index ["artist_role_id"], name: "idx_songs_artist_roles_artist_role_id"
-    t.index ["position"], name: "idx_songs_artist_roles_position"
     t.index ["song_id", "artist_name_id", "artist_role_id"], name: "uk_sar_song_id_artist_name_id_artist_role_id", unique: true
+    t.index ["song_id", "artist_role_id", "position"], name: "idx_songs_artist_roles_combined"
     t.index ["song_id"], name: "idx_songs_artist_roles_song_id"
   end
 
@@ -492,6 +499,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false, comment: "順序"
     t.index ["service_name"], name: "idx_streamable_urls_service_name"
+    t.index ["streamable_type", "service_name"], name: "idx_streamable_urls_type_service"
     t.index ["streamable_type", "streamable_id", "service_name"], name: "uk_streamable_urls_streamable_id_service", unique: true
     t.check_constraint "streamable_type = ANY (ARRAY['Product'::text, 'OriginalSong'::text, 'Album'::text, 'Song'::text])", name: "streamable_urls_streamable_type_check"
   end

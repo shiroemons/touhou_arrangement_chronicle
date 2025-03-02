@@ -52,6 +52,7 @@ create index idx_original_songs_product_id on original_songs (product_id);
 create index idx_original_songs_track_number on original_songs (track_number);
 create index idx_original_songs_is_original on original_songs (is_original);
 create index idx_original_songs_origin_original_song_id on original_songs (origin_original_song_id);
+create index idx_original_songs_product_original on original_songs (product_id, is_original);
 comment on table original_songs is '東方Projectの原曲データ（初出曲や既存曲の再録元など）を管理';
 comment on column original_songs.id is '原曲ID';
 comment on column original_songs.product_id is '原作ID';
@@ -90,6 +91,7 @@ create table distribution_services (
     position     integer not null default 1
 );
 create index idx_distribution_services_position on distribution_services (position);
+create index idx_distribution_services_base_urls on distribution_services using gin (base_urls);
 comment on table distribution_services is '音楽配信サービス（Spotify, Apple Music等）の基本情報を管理';
 comment on column distribution_services.id is '配信サービスID';
 comment on column distribution_services.created_at is '作成日時';
@@ -116,6 +118,7 @@ create table streamable_urls (  -- distribution_service_urlsから変更
 );  
 create unique index uk_streamable_urls_streamable_id_service on streamable_urls (streamable_type, streamable_id, service_name);
 create index idx_streamable_urls_service_name on streamable_urls (service_name);
+create index idx_streamable_urls_type_service on streamable_urls (streamable_type, service_name);
 comment on table streamable_urls is '原作・原曲・アルバム・楽曲ごとに各配信サービスでのURLを管理';
 comment on column streamable_urls.id is '配信サービスURLのID';
 comment on column streamable_urls.created_at is '作成日時';
@@ -229,7 +232,7 @@ create index idx_event_days_is_cancelled on event_days (is_cancelled);
 create index idx_event_days_is_online on event_days (is_online);
 create index idx_event_days_published_at on event_days (published_at);
 create index idx_event_days_archived_at on event_days (archived_at);
-create index idx_event_days_position on event_days (position);
+create index idx_event_days_comprehensive on event_days (event_edition_id, event_date, is_cancelled, is_online);
 comment on table event_days is 'イベント開催回内の日程（複数日開催の場合など）を管理';
 comment on column event_days.id is 'イベント日程ID';
 comment on column event_days.created_at is '作成日時';
@@ -305,6 +308,7 @@ create index idx_artist_names_first_character_type on artist_names (first_charac
 create index idx_artist_names_first_character on artist_names (first_character_type, first_character);
 create index idx_artist_names_published_at on artist_names (published_at);
 create index idx_artist_names_archived_at on artist_names (archived_at);
+create index idx_artist_names_comprehensive on artist_names (first_character_type, first_character, first_character_row);
 comment on table artist_names is 'アーティストの本名義・別名義を一元管理するテーブル';
 comment on column artist_names.id is 'アーティスト名ID';
 comment on column artist_names.created_at is '作成日時';
@@ -369,6 +373,7 @@ create index idx_circles_first_character_type on circles (first_character_type);
 create index idx_circles_first_character on circles (first_character_type, first_character);
 create index idx_circles_published_at on circles (published_at);
 create index idx_circles_archived_at on circles (archived_at);
+create index idx_circles_comprehensive on circles (first_character_type, first_character, first_character_row);
 comment on table circles is 'サークル情報（同人音楽サークルなど）を管理';
 comment on column circles.id is 'サークルID';
 comment on column circles.created_at is '作成日時';
@@ -443,7 +448,10 @@ create index idx_albums_release_year_month on albums (release_year, release_mont
 create index idx_albums_event_day_id on albums (event_day_id);
 create index idx_albums_published_at on albums (published_at);
 create index idx_albums_archived_at on albums (archived_at);
-create index idx_albums_position on albums (position);
+create index idx_albums_comprehensive_release on albums (release_year, release_month, release_date);
+create index idx_albums_publication_status on albums 
+  (coalesce(published_at, '1970-01-01'::timestamp with time zone), 
+   coalesce(archived_at, '9999-12-31'::timestamp with time zone));
 comment on table albums is '東方アレンジアルバム情報を管理';
 comment on column albums.id is 'アルバムID';
 comment on column albums.created_at is '作成日時';
@@ -558,7 +566,7 @@ create index idx_album_prices_shop_id on album_prices (shop_id);
 create index idx_album_prices_price_type on album_prices (price_type);
 create index idx_album_prices_album_id_price_type on album_prices (album_id, price_type);
 create index idx_album_prices_shop_id_price_type on album_prices (shop_id, price_type);
-create index idx_album_prices_position on album_prices (position);
+create index idx_album_prices_combined on album_prices (price_type, is_free, currency);
 comment on table album_prices is 'アルバム価格情報を管理（イベント価格、ショップ価格、無料頒布など）';
 comment on column album_prices.id is 'アルバム価格のID';
 comment on column album_prices.created_at is '作成日時';
@@ -656,7 +664,9 @@ create index idx_songs_release_month on songs (release_month);
 create index idx_songs_release_year_month on songs (release_year, release_month);
 create index idx_songs_published_at on songs (published_at);
 create index idx_songs_archived_at on songs (archived_at);
-create index idx_songs_position on songs (position);
+create index idx_songs_album_track on songs (album_id, track_number);
+create index idx_songs_comprehensive_release on songs (release_year, release_month, release_date);
+create index idx_songs_disc_tracking on songs (album_id, disc_number, track_number);
 comment on table songs is '楽曲情報を管理するテーブル（アルバム収録曲や単独頒布曲などの基本情報）';
 comment on column songs.id is '楽曲ID';
 comment on column songs.created_at is '作成日時';
@@ -762,7 +772,7 @@ create table songs_arrange_circles (
 create unique index uk_songs_arrange_circles_song_id_circle_id on songs_arrange_circles (song_id, circle_id);
 create index idx_songs_arrange_circles_song_id on songs_arrange_circles (song_id);
 create index idx_songs_arrange_circles_circle_id on songs_arrange_circles (circle_id);
-create index idx_songs_arrange_circles_position on songs_arrange_circles (position);
+create index idx_songs_arrange_circles_combined on songs_arrange_circles (circle_id, song_id, position);
 comment on table songs_arrange_circles is '楽曲の編曲に関わったサークルを関連付けるテーブル（複数サークルが関与する場合に対応）';
 comment on column songs_arrange_circles.id is '楽曲編曲サークルID';
 comment on column songs_arrange_circles.created_at is '作成日時';
@@ -805,7 +815,7 @@ create unique index uk_sar_song_id_artist_name_id_artist_role_id on songs_artist
 create index idx_songs_artist_roles_song_id on songs_artist_roles (song_id);
 create index idx_songs_artist_roles_artist_name_id on songs_artist_roles (artist_name_id);
 create index idx_songs_artist_roles_artist_role_id on songs_artist_roles (artist_role_id);
-create index idx_songs_artist_roles_position on songs_artist_roles (position);
+create index idx_songs_artist_roles_combined on songs_artist_roles (song_id, artist_role_id, position);
 comment on table songs_artist_roles is '楽曲に参加するアーティストの名義と役割（作曲、編曲、ボーカルなど）を関連付けるテーブル';
 comment on column songs_artist_roles.id is '主キーID';
 comment on column songs_artist_roles.created_at is '作成日時';

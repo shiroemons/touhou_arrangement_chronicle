@@ -3275,10 +3275,10 @@ CREATE INDEX idx_album_prices_album_id_price_type ON public.album_prices USING b
 
 
 --
--- Name: idx_album_prices_position; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_album_prices_combined; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_album_prices_position ON public.album_prices USING btree ("position");
+CREATE INDEX idx_album_prices_combined ON public.album_prices USING btree (price_type, is_free, currency);
 
 
 --
@@ -3345,6 +3345,13 @@ CREATE INDEX idx_albums_circles_position ON public.albums_circles USING btree ("
 
 
 --
+-- Name: idx_albums_comprehensive_release; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_albums_comprehensive_release ON public.albums USING btree (release_year, release_month, release_date);
+
+
+--
 -- Name: idx_albums_event_day_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3352,10 +3359,10 @@ CREATE INDEX idx_albums_event_day_id ON public.albums USING btree (event_day_id)
 
 
 --
--- Name: idx_albums_position; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_albums_publication_status; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_albums_position ON public.albums USING btree ("position");
+CREATE INDEX idx_albums_publication_status ON public.albums USING btree (COALESCE(published_at, '1970-01-01 00:00:00+00'::timestamp with time zone), COALESCE(archived_at, '9999-12-31 00:00:00+00'::timestamp with time zone));
 
 
 --
@@ -3415,6 +3422,13 @@ CREATE INDEX idx_artist_names_artist_id ON public.artist_names USING btree (arti
 
 
 --
+-- Name: idx_artist_names_comprehensive; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_artist_names_comprehensive ON public.artist_names USING btree (first_character_type, first_character, first_character_row);
+
+
+--
 -- Name: idx_artist_names_first_character; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3443,6 +3457,13 @@ CREATE INDEX idx_circles_archived_at ON public.circles USING btree (archived_at)
 
 
 --
+-- Name: idx_circles_comprehensive; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_circles_comprehensive ON public.circles USING btree (first_character_type, first_character, first_character_row);
+
+
+--
 -- Name: idx_circles_first_character; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3464,6 +3485,13 @@ CREATE INDEX idx_circles_published_at ON public.circles USING btree (published_a
 
 
 --
+-- Name: idx_distribution_services_base_urls; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_distribution_services_base_urls ON public.distribution_services USING gin (base_urls);
+
+
+--
 -- Name: idx_distribution_services_position; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3475,6 +3503,13 @@ CREATE INDEX idx_distribution_services_position ON public.distribution_services 
 --
 
 CREATE INDEX idx_event_days_archived_at ON public.event_days USING btree (archived_at);
+
+
+--
+-- Name: idx_event_days_comprehensive; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_event_days_comprehensive ON public.event_days USING btree (event_edition_id, event_date, is_cancelled, is_online);
 
 
 --
@@ -3503,13 +3538,6 @@ CREATE INDEX idx_event_days_is_cancelled ON public.event_days USING btree (is_ca
 --
 
 CREATE INDEX idx_event_days_is_online ON public.event_days USING btree (is_online);
-
-
---
--- Name: idx_event_days_position; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_event_days_position ON public.event_days USING btree ("position");
 
 
 --
@@ -3632,6 +3660,13 @@ CREATE INDEX idx_original_songs_product_id ON public.original_songs USING btree 
 
 
 --
+-- Name: idx_original_songs_product_original; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_original_songs_product_original ON public.original_songs USING btree (product_id, is_original);
+
+
+--
 -- Name: idx_original_songs_track_number; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3737,6 +3772,13 @@ CREATE INDEX idx_songs_album_id ON public.songs USING btree (album_id);
 
 
 --
+-- Name: idx_songs_album_track; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_songs_album_track ON public.songs USING btree (album_id, track_number);
+
+
+--
 -- Name: idx_songs_archived_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3751,10 +3793,10 @@ CREATE INDEX idx_songs_arrange_circles_circle_id ON public.songs_arrange_circles
 
 
 --
--- Name: idx_songs_arrange_circles_position; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_songs_arrange_circles_combined; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_songs_arrange_circles_position ON public.songs_arrange_circles USING btree ("position");
+CREATE INDEX idx_songs_arrange_circles_combined ON public.songs_arrange_circles USING btree (circle_id, song_id, "position");
 
 
 --
@@ -3779,10 +3821,10 @@ CREATE INDEX idx_songs_artist_roles_artist_role_id ON public.songs_artist_roles 
 
 
 --
--- Name: idx_songs_artist_roles_position; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_songs_artist_roles_combined; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_songs_artist_roles_position ON public.songs_artist_roles USING btree ("position");
+CREATE INDEX idx_songs_artist_roles_combined ON public.songs_artist_roles USING btree (song_id, artist_role_id, "position");
 
 
 --
@@ -3797,6 +3839,20 @@ CREATE INDEX idx_songs_artist_roles_song_id ON public.songs_artist_roles USING b
 --
 
 CREATE INDEX idx_songs_circle_id ON public.songs USING btree (circle_id);
+
+
+--
+-- Name: idx_songs_comprehensive_release; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_songs_comprehensive_release ON public.songs USING btree (release_year, release_month, release_date);
+
+
+--
+-- Name: idx_songs_disc_tracking; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_songs_disc_tracking ON public.songs USING btree (album_id, disc_number, track_number);
 
 
 --
@@ -3856,13 +3912,6 @@ CREATE INDEX idx_songs_original_songs_song_id ON public.songs_original_songs USI
 
 
 --
--- Name: idx_songs_position; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_songs_position ON public.songs USING btree ("position");
-
-
---
 -- Name: idx_songs_published_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3902,6 +3951,13 @@ CREATE INDEX idx_songs_release_year_month ON public.songs USING btree (release_y
 --
 
 CREATE INDEX idx_streamable_urls_service_name ON public.streamable_urls USING btree (service_name);
+
+
+--
+-- Name: idx_streamable_urls_type_service; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_streamable_urls_type_service ON public.streamable_urls USING btree (streamable_type, service_name);
 
 
 --
