@@ -58,3 +58,12 @@ import-albums:
 
 reindex-songs:
 	docker compose run --rm admin bin/rails meilisearch:reindex_songs
+
+db-reset:
+	docker compose down
+	docker compose run --rm dbmate drop
+	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema drop
+	docker compose run --rm dbmate up
+	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema up
+	docker compose up -d
+	docker compose run --rm admin bin/rails db:migrate
