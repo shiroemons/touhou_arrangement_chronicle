@@ -2,7 +2,7 @@ module SongSearchable
   extend ActiveSupport::Concern
 
   included do
-    include MeiliSearch::Rails
+    include Meilisearch::Rails
 
     meilisearch index_uid: "songs" do
       # 検索可能なフィールドの設定
