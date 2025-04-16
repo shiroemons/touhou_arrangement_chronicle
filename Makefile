@@ -58,3 +58,30 @@ import-albums:
 
 reindex-songs:
 	docker compose run --rm admin bin/rails meilisearch:reindex_songs
+
+update-meilisearch:
+	docker compose pull meilisearch
+	docker compose up -d meilisearch
+
+meilisearch-create-dump:
+	docker compose exec meilisearch curl -X POST 'http://localhost:7700/dumps' -H 'Authorization: Bearer ${MEILI_MASTER_KEY:-masterKey}'
+
+meilisearch-upgrade-dumpless:
+	docker compose down meilisearch
+	docker compose run --rm -e MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-masterKey} meilisearch meilisearch --experimental-dumpless-upgrade
+	docker compose up -d meilisearch
+
+meilisearch-reset:
+	docker compose down meilisearch
+	docker volume rm touhou_arrangement_chronicle_meilisearch_data
+	docker compose up -d meilisearch
+	docker compose run --rm admin bin/rails meilisearch:reindex_songs
+
+db-reset:
+	docker compose down
+	docker compose run --rm dbmate drop
+	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema drop
+	docker compose run --rm dbmate up
+	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema up
+	docker compose up -d
+	docker compose run --rm admin bin/rails db:migrate
