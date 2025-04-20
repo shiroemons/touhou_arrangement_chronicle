@@ -1,14 +1,40 @@
 import {
+  Link,
   isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  useLocation,
 } from "react-router";
+import type { LoaderFunctionArgs } from "react-router";
+import { authenticator, isAuthenticated } from "~/services/auth.server";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  // ユーザーの認証状態を確認
+  try {
+    // まずセッションからユーザー情報を取得
+    let user = await isAuthenticated(request);
+    
+    if (user) {
+      return { user, isAuthenticated: true };
+    }
+
+    try {
+      user = await authenticator.authenticate("auth0", request);
+      return { user, isAuthenticated: true };
+    } catch (authError) { 
+      return { user: null, isAuthenticated: false };
+    }
+  } catch (error) {
+    return { user: null, isAuthenticated: false };
+  }
+}
 
 import type { Route } from "./+types/root";
-import stylesheet from "./app.css?url";
+import "./app.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -21,12 +47,15 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
-  { rel: "stylesheet", href: stylesheet },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useLoaderData<typeof loader>();
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
   return (
-    <html lang="en">
+    <html lang="ja">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,6 +63,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <header>
+          <nav>
+            <Link to="/">ホーム</Link>
+            {isAuthenticated ? (
+              <Link to="/logout">ログアウト</Link>
+            ) : (
+              !isLoginPage && <Link to="/login">ログイン</Link>
+            )}
+          </nav>
+        </header>
         {children}
         <ScrollRestoration />
         <Scripts />
