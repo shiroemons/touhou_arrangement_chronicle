@@ -26,7 +26,7 @@
     "remix-auth-auth0": "^2.2.0"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.5.1",
+    "@react-router/dev": "^7.5.2",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^22",
     "@types/pg": "^8.11.14",
