@@ -24,16 +24,6 @@ make drizzle-pull
 
 このコマンドは、PostgreSQLデータベースからスキーマを取得し、SQLファイルとともにDrizzleのスキーマ定義を更新します。また、PostgreSQL関数（gen_random_uuid()など）を自動的に修正します。
 
-### スキーマの手動修正
-
-通常は自動的に修正されますが、必要に応じて手動でスキーマ修正を実行できます：
-
-```bash
-make drizzle-fix-schema
-```
-
-このコマンドは、`gen_random_uuid()`関数の呼び出しを`sql`タグ付きテンプレートリテラル（`sql\`gen_random_uuid()\``）に変換します。
-
 ### 注意事項
 
 - スキーマの更新は、`frontend/app/schema/index.ts`ファイルを基に行われます

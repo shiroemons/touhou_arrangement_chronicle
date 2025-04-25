@@ -85,9 +85,6 @@ drizzle-pull:
 	docker compose run --rm frontend npm run drizzle:pull
 	sed -i '' 's/default(gen_random_uuid())/default(sql`gen_random_uuid()`)/g' frontend/drizzle/schema.ts
 
-drizzle-fix-schema:
-	sed -i '' 's/default(gen_random_uuid())/default(sql`gen_random_uuid()`)/g' frontend/drizzle/schema.ts
-
 db-reset:
 	docker compose down
 	docker compose run --rm dbmate drop
