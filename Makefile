@@ -77,6 +77,14 @@ meilisearch-reset:
 	docker compose up -d meilisearch
 	docker compose run --rm admin bin/rails meilisearch:reindex_songs
 
+drizzle-introspect:
+	docker compose run --rm frontend npm run drizzle:introspect
+	sed -i '' 's/default(gen_random_uuid())/default(sql`gen_random_uuid()`)/g' frontend/drizzle/schema.ts
+
+drizzle-pull:
+	docker compose run --rm frontend npm run drizzle:pull
+	sed -i '' 's/default(gen_random_uuid())/default(sql`gen_random_uuid()`)/g' frontend/drizzle/schema.ts
+
 db-reset:
 	docker compose down
 	docker compose run --rm dbmate drop
