@@ -1,4 +1,5 @@
 import { uuid, varchar, text, integer, boolean, timestamp, pgEnum, pgTable } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
 // 列挙型の定義
 export const firstCharacterTypeEnum = pgEnum('first_character_type', [
@@ -73,6 +74,7 @@ export const songs = pgTable('songs', {
   releaseDate: timestamp('release_date'),
   releaseYear: integer('release_year'),
   releaseMonth: integer('release_month'),
+  slug: text('slug').notNull().default(sql`gen_random_uuid()`),
   description: text('description'),
   note: text('note'),
   circleId: uuid('circle_id'),

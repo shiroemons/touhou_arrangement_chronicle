@@ -54,6 +54,10 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=postgres://postgres@postgres17:5432/touhou_arrangement_chronicle_development
       - AUTH0_CALLBACK_URL=http://localhost:15173/auth/auth0/callback
+      - POSTGRES_HOST=postgres17
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=touhou_arrangement_chronicle_development
     depends_on:
       - postgres17
 

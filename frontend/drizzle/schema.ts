@@ -93,7 +93,7 @@ export const streamable_urls = pgTable("streamable_urls", {
 ]);
 
 export const event_series = pgTable("event_series", {
-	id: uuid().primaryKey().notNull(),
+	id: uuid().defaultRandom().primaryKey().notNull(),
 	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	name: text().notNull(),
@@ -138,7 +138,7 @@ export const event_editions = pgTable("event_editions", {
 	index("idx_event_editions_published_at").using("btree", table.published_at.asc().nullsLast().op("timestamptz_ops")),
 	index("idx_event_editions_start_date").using("btree", table.start_date.asc().nullsLast().op("date_ops")),
 	index("idx_event_editions_touhou_date").using("btree", table.touhou_date.asc().nullsLast().op("date_ops")),
-	index("idx_event_editions_event_series_id_name").using("btree", table.event_series_id.asc().nullsLast().op("uuid_ops"), table.name.asc().nullsLast().op("uuid_ops")),
+	uniqueIndex("uk_event_editions_event_series_id_name").using("btree", table.event_series_id.asc().nullsLast().op("uuid_ops"), table.name.asc().nullsLast().op("uuid_ops")),
 	foreignKey({
 			columns: [table.event_series_id],
 			foreignColumns: [event_series.id],
