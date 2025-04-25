@@ -85,3 +85,7 @@ db-reset:
 	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema up
 	docker compose up -d
 	docker compose run --rm admin bin/rails db:migrate
+	docker compose run --rm admin bin/rails db:seed
+
+db-seed:
+	docker compose run --rm admin bin/rails db:seed
