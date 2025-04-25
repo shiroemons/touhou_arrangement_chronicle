@@ -82,6 +82,41 @@ Make sure to deploy the output of `npm run build`
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
+## Drizzle ORMを使用したデータベース接続
+
+フロントエンドからPostgreSQLデータベースに接続するために、Drizzle ORMを使用しています。
+
+### セットアップ済みのファイル
+
+- `app/schema/index.ts` - PostgreSQLのテーブル定義
+- `app/services/db.server.ts` - データベース接続設定
+- `app/services/songs.server.ts` - 曲情報を取得するサービス
+- `drizzle.config.ts` - Drizzle ORMの設定ファイル
+
+### 設定について
+
+PostgreSQL接続には以下の環境変数を使用します（すべてオプション、デフォルト値あり）：
+
+- `POSTGRES_HOST` - ホスト名（デフォルト: postgres17）
+- `POSTGRES_PORT` - ポート番号（デフォルト: 5432）  
+- `POSTGRES_USER` - ユーザー名（デフォルト: postgres）
+- `POSTGRES_PASSWORD` - パスワード（デフォルト: 空文字）
+- `POSTGRES_DB` - データベース名（デフォルト: touhou_arrangement_chronicle_development）
+
+### 使用方法
+
+データベースからデータを取得するには以下のようにします：
+
+```typescript
+import { db } from '../services/db.server';
+import { songs } from '../schema';
+
+// 曲一覧を取得する例
+const songList = await db.select().from(songs).limit(10);
+```
+
+より詳しい使い方は `app/services/songs.server.ts` を参照してください。
+
 ---
 
 Built with ❤️ using React Router.
