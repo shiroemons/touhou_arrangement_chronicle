@@ -38,6 +38,25 @@ services:
       - postgres17
       - meilisearch
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development-env
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    ports:
+      - "15173:5173"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://postgres@postgres17:5432/touhou_arrangement_chronicle_development
+      - AUTH0_CALLBACK_URL=http://localhost:15173/auth/auth0/callback
+    depends_on:
+      - postgres17
+
   dbmate:
     image: ghcr.io/amacneil/dbmate:latest
     depends_on:
@@ -65,3 +84,4 @@ volumes:
   postgres-17:
   meilisearch_data:
   admin_bundle:
+  frontend_node_modules:
