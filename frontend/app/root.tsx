@@ -11,6 +11,7 @@ import {
 } from "react-router";
 import type { LoaderFunctionArgs } from "react-router";
 import { authenticator, isAuthenticated } from "~/services/auth.server";
+import { Header } from "./components/layouts/header";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // ユーザーの認証状態を確認
@@ -63,16 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <header>
-          <nav>
-            <Link to="/">ホーム</Link>
-            {isAuthenticated ? (
-              <Link to="/logout">ログアウト</Link>
-            ) : (
-              !isLoginPage && <Link to="/login">ログイン</Link>
-            )}
-          </nav>
-        </header>
+        <Header />
         {children}
         <ScrollRestoration />
         <Scripts />
