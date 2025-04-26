@@ -1,5 +1,4 @@
 import {
-  Link,
   isRouteErrorResponse,
   Links,
   Meta,
@@ -12,6 +11,7 @@ import {
 import type { LoaderFunctionArgs } from "react-router";
 import { authenticator, isAuthenticated } from "~/services/auth.server";
 import { Header } from "./components/layouts/header";
+import { Footer } from "./components/layouts/footer";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // ユーザーの認証状態を確認
@@ -63,9 +63,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <Header />
-        {children}
+        <div className="flex-1">
+          {children}
+        </div>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
