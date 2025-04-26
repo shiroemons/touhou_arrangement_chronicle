@@ -97,3 +97,21 @@ db-reset:
 
 db-seed:
 	docker compose run --rm admin bin/rails db:seed
+
+# フロントエンド関連コマンド
+frontend-rebuild: # フロントエンドコンテナを再ビルドして再起動
+	docker compose build frontend
+	docker compose up -d frontend
+
+frontend-restart: # フロントエンドコンテナを再起動
+	docker compose restart frontend
+
+# パッケージ管理コマンド
+npm-update: # npmを最新バージョンに更新
+	docker compose exec frontend npm install -g npm@latest && echo "npm updated to: $$(docker compose exec frontend npm -v)"
+
+frontend-packages: # package.jsonの変更を反映
+	@echo "パッケージを同期しています..."
+	docker compose exec frontend npm install
+	docker compose restart frontend
+	@echo "パッケージを同期し、フロントエンドを再起動しました。"

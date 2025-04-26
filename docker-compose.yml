@@ -46,8 +46,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./frontend:/app
-      - frontend_node_modules:/app/node_modules
+      - ./frontend:/app:cached
+      - /app/node_modules
     ports:
       - "15173:5173"
     environment:
@@ -60,6 +60,7 @@ services:
       - POSTGRES_DB=touhou_arrangement_chronicle_development
     depends_on:
       - postgres17
+    restart: unless-stopped
 
   dbmate:
     image: ghcr.io/amacneil/dbmate:latest
@@ -88,4 +89,3 @@ volumes:
   postgres-17:
   meilisearch_data:
   admin_bundle:
-  frontend_node_modules:

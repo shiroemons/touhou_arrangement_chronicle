@@ -1,12 +1,13 @@
 FROM node:22-alpine AS development-dependencies-env
-COPY . /app
+RUN npm install -g npm@latest
+COPY package*.json /app/
 WORKDIR /app
-RUN npm ci
+RUN npm install
 
 FROM node:22-alpine AS development-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
+RUN npm install -g npm@latest
 WORKDIR /app
+COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 FROM node:22-alpine AS production-dependencies-env
