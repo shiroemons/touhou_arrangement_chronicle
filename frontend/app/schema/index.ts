@@ -90,4 +90,19 @@ export const songsArtistRoles = pgTable('songs_artist_roles', {
   artistRoleId: uuid('artist_role_id').notNull().references(() => artistRoles.id),
   artistNameId: uuid('artist_name_id').notNull(),
   position: integer('position').default(1).notNull()
+});
+
+// Newsテーブル定義
+export const news = pgTable('news', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  title: text('title').notNull(),
+  content: text('content').notNull(),
+  summary: text('summary'),
+  slug: text('slug').notNull().unique().default(sql`gen_random_uuid()`),
+  publishedAt: timestamp('published_at', { withTimezone: true }).notNull(),
+  expiredAt: timestamp('expired_at', { withTimezone: true }),
+  isImportant: boolean('is_important').notNull().default(false),
+  category: text('category'),
 }); 

@@ -5,5 +5,7 @@ export default [
   route("login", "routes/login.tsx"),
   route("logout", "routes/logout.tsx"),
   route("auth/auth0", "routes/auth.auth0.tsx"),
-  route("auth/auth0/callback", "routes/auth.auth0.callback.tsx")
+  route("auth/auth0/callback", "routes/auth.auth0.callback.tsx"),
+  route("news", "routes/news/index.tsx"),
+  route("news/:slug", "routes/news/$slug.tsx")
 ] satisfies RouteConfig;
