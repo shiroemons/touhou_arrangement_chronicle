@@ -12,7 +12,6 @@ import type { LoaderFunctionArgs } from "react-router";
 import { authenticator, isAuthenticated } from "~/services/auth.server";
 import { Header } from "./components/layouts/header";
 import { Footer } from "./components/layouts/footer";
-import { useTheme } from "./lib/theme";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // ユーザーの認証状態を確認
@@ -55,9 +54,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useLoaderData<typeof loader>();
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
-  
-  // テーマフックを使用して初期化（テーマの状態は内部で維持）
-  useTheme();
 
   return (
     <html lang="ja">
