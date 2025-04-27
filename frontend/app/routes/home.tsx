@@ -1,21 +1,17 @@
 import type { Route } from "./+types/home";
+import { useLoaderData } from "react-router";
 import { Link } from "react-router";
 import { 
-  MusicIcon, 
   BookOpenIcon, 
   UsersIcon, 
   CalendarIcon, 
   SearchIcon, 
   ArrowRightIcon, 
   ChevronDownIcon, 
-  BellIcon, 
   AlbumIcon, 
   Building2Icon, 
-  SparklesIcon,
   Disc3Icon,
   TrendingUpIcon,
-  StarIcon,
-  HeadphonesIcon
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import {
@@ -32,6 +28,20 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../components/ui/hover-card";
+import { getHomeNews } from "../services/news.server";
+import { NewsCard, type NewsItemType } from "../components/NewsCard";
+
+export async function loader() {
+  // お知らせデータを取得
+  const newsItems = await getHomeNews(3); // 3件表示
+  
+  return { 
+    newsItems,
+    stats: {
+      songsCount: 123456 // この値は後でDBから取得するように変更予定
+    }
+  };
+}
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,9 +51,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  // 仮のデータ: 実際のアプリケーションでは、APIから取得するなど適切に実装する
-  const stats = {
-    songsCount: 123456
+  const { newsItems, stats } = useLoaderData() as { 
+    newsItems: NewsItemType[];
+    stats: { songsCount: number } 
   };
 
   return (
@@ -256,40 +266,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* お知らせ */}
-            <Card className="backdrop-blur-sm bg-background/50 border-foreground/5 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center text-lg">
-                  <BellIcon className="mr-3 h-5 w-5 text-primary" />
-                  <span>お知らせ</span>
-                </CardTitle>
-              </CardHeader>
-              <Separator className="mb-3" />
-              <CardContent className="space-y-4 pb-6">
-                <NewsItem 
-                  title="サイトリニューアルのお知らせ" 
-                  date="2024.05.15"
-                  href="/news/renewal"
-                />
-                <NewsItem 
-                  title="データベース更新情報" 
-                  date="2024.05.10"
-                  href="/news/db-update"
-                />
-                <NewsItem 
-                  title="検索機能の強化について" 
-                  date="2024.05.01"
-                  href="/news/search-improvement"
-                />
-              </CardContent>
-              <CardFooter>
-                <Button variant="ghost" size="sm" asChild className="group">
-                  <Link to="/news">
-                    <span className="group-hover:mr-2 transition-all">すべてのお知らせを見る</span> 
-                    <ArrowRightIcon className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <NewsCard newsItems={newsItems} />
             
             {/* 最近追加されたアルバム */}
             <Card className="backdrop-blur-sm bg-background/50 border-foreground/5 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
@@ -409,17 +386,21 @@ export default function Home() {
 }
 
 // お知らせアイテム
-function NewsItem({ title, date, href }: { 
+function NewsItem({ title, date, href, isImportant = false }: { 
   title: string; 
   date: string; 
-  href: string 
+  href: string;
+  isImportant?: boolean;
 }) {
   return (
     <div className="group">
       <Link to={href} className="block">
-        <div className="flex flex-col py-3 border-b border-foreground/10 group-hover:border-foreground/20 transition-colors">
+        <div className={`flex flex-col py-3 border-b border-foreground/10 group-hover:border-foreground/20 transition-colors ${isImportant ? 'bg-primary/5 -mx-4 px-4' : ''}`}>
           <span className="text-xs text-foreground/50 mb-1">{date}</span>
-          <h4 className="font-medium group-hover:text-primary transition-colors">{title}</h4>
+          <h4 className={`font-medium group-hover:text-primary transition-colors ${isImportant ? 'text-primary/90' : ''}`}>
+            {isImportant && <span className="inline-block bg-primary/10 text-primary/90 text-xs font-semibold px-2 py-0.5 rounded mr-2">重要</span>}
+            {title}
+          </h4>
         </div>
       </Link>
     </div>

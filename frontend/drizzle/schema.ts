@@ -734,6 +734,27 @@ export const taggings = pgTable("taggings", {
 	check("taggings_taggable_type_check", sql`taggable_type = ANY (ARRAY['Album'::text, 'Song'::text, 'Circle'::text, 'ArtistName'::text])`),
 ]);
 
+export const news = pgTable("news", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	title: text().notNull(),
+	content: text().notNull(),
+	summary: text(),
+	slug: text().default(sql`gen_random_uuid()`).notNull(),
+	published_at: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
+	expired_at: timestamp({ withTimezone: true, mode: 'string' }),
+	is_important: boolean().default(false).notNull(),
+	category: text(),
+}, (table) => [
+	index("idx_news_category").using("btree", table.category.asc().nullsLast().op("text_ops")),
+	index("idx_news_expired_at").using("btree", table.expired_at.asc().nullsLast().op("timestamptz_ops")),
+	index("idx_news_is_important").using("btree", table.is_important.asc().nullsLast().op("bool_ops")),
+	index("idx_news_publication_status").using("btree", sql`published_at`, sql`COALESCE(expired_at, '9999-12-31 00:00:00+00'::timestamp with t`),
+	index("idx_news_published_at").using("btree", table.published_at.asc().nullsLast().op("timestamptz_ops")),
+	unique("news_slug_key").on(table.slug),
+]);
+
 export const ar_internal_metadata = pgTable("ar_internal_metadata", {
 	key: varchar().primaryKey().notNull(),
 	value: varchar(),

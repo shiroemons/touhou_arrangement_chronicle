@@ -293,6 +293,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.unique_constraint ["name"], name: "genres_name_key"
   end
 
+  create_table "news", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "お知らせID" }, comment: "サイトのお知らせ情報を管理するテーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.text "title", null: false, comment: "お知らせタイトル"
+    t.text "content", null: false, comment: "お知らせ本文"
+    t.text "summary", comment: "お知らせ概要（一覧表示用）"
+    t.text "slug", default: -> { "gen_random_uuid()" }, null: false, comment: "URLフレンドリーな識別子"
+    t.timestamptz "published_at", null: false, comment: "公開日時（この日時以降に表示される）"
+    t.timestamptz "expired_at", comment: "有効期限（この日時以降は表示されない、NULLの場合は無期限）"
+    t.boolean "is_important", default: false, null: false, comment: "重要なお知らせかどうか（強調表示などに使用）"
+    t.text "category", comment: "お知らせのカテゴリ（更新情報、メンテナンス情報など）"
+    t.index "published_at, COALESCE(expired_at, '9999-12-31 00:00:00+00'::timestamp with time zone)", name: "idx_news_publication_status"
+    t.index ["category"], name: "idx_news_category"
+    t.index ["expired_at"], name: "idx_news_expired_at"
+    t.index ["is_important"], name: "idx_news_is_important"
+    t.index ["published_at"], name: "idx_news_published_at"
+    t.unique_constraint ["slug"], name: "news_slug_key"
+  end
+
   create_table "original_songs", id: { type: :text, comment: "原曲ID" }, comment: "東方Projectの原曲データ（初出曲や既存曲の再録元など）を管理", force: :cascade do |t|
     t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
     t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"

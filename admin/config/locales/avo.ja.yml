@@ -426,7 +426,15 @@ ja:
         other: "ディスク"
       length_time_ms:
         one: "曲の長さ"
-        other: "曲の長さ"        
+        other: "曲の長さ"
+    update: 更新情報
+    maintenance: メンテナンス情報
+    event: イベント情報
+    other: その他
+    status:
+      upcoming: 公開予定
+      active: 公開中
+      expired: 期間終了
   activerecord:
     resources:
       album:

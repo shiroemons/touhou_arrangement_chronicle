@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      news: お知らせ
+    attributes:
+      news:
+        id: ID
+        created_at: 作成日時
+        updated_at: 更新日時
+        title: タイトル
+        content: 本文
+        summary: 概要
+        slug: スラッグ
+        published_at: 公開日時
+        expired_at: 有効期限
+        is_important: 重要なお知らせ
+        category: カテゴリ
+    resources:
+      news: お知らせ 

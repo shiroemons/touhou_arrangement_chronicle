@@ -191,7 +191,8 @@ Avo.configure do |config|
     "Avo::Resources::SongsArtistRole",
     "Avo::Resources::StreamableUrl",
     "Avo::Resources::Tag",
-    "Avo::Resources::Tagging"
+    "Avo::Resources::Tagging",
+    "Avo::Resources::News"
   ]
 
   # 1ページあたりの表示件数
@@ -202,6 +203,10 @@ Avo.configure do |config|
 
   # メインメニューの設定
   config.main_menu = -> {
+    section "お知らせ", icon: "heroicons/outline/newspaper" do
+      resource :news
+    end
+
     section "原作", icon: "heroicons/outline/book-open" do
       resource :products
       resource :original_songs

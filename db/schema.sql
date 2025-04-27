@@ -1530,6 +1530,109 @@ COMMENT ON COLUMN public.genres.note IS 'ジャンルに関する補足情報';
 
 
 --
+-- Name: news; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.news (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    title text NOT NULL,
+    content text NOT NULL,
+    summary text,
+    slug text DEFAULT gen_random_uuid() NOT NULL,
+    published_at timestamp with time zone NOT NULL,
+    expired_at timestamp with time zone,
+    is_important boolean DEFAULT false NOT NULL,
+    category text
+);
+
+
+--
+-- Name: TABLE news; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.news IS 'サイトのお知らせ情報を管理するテーブル';
+
+
+--
+-- Name: COLUMN news.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.id IS 'お知らせID';
+
+
+--
+-- Name: COLUMN news.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN news.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN news.title; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.title IS 'お知らせタイトル';
+
+
+--
+-- Name: COLUMN news.content; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.content IS 'お知らせ本文';
+
+
+--
+-- Name: COLUMN news.summary; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.summary IS 'お知らせ概要（一覧表示用）';
+
+
+--
+-- Name: COLUMN news.slug; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.slug IS 'URLフレンドリーな識別子';
+
+
+--
+-- Name: COLUMN news.published_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.published_at IS '公開日時（この日時以降に表示される）';
+
+
+--
+-- Name: COLUMN news.expired_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.expired_at IS '有効期限（この日時以降は表示されない、NULLの場合は無期限）';
+
+
+--
+-- Name: COLUMN news.is_important; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.is_important IS '重要なお知らせかどうか（強調表示などに使用）';
+
+
+--
+-- Name: COLUMN news.category; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.news.category IS 'お知らせのカテゴリ（更新情報、メンテナンス情報など）';
+
+
+--
 -- Name: original_songs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3088,6 +3191,22 @@ ALTER TABLE ONLY public.genres
 
 
 --
+-- Name: news news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news news_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.news
+    ADD CONSTRAINT news_slug_key UNIQUE (slug);
+
+
+--
 -- Name: original_songs original_songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3636,6 +3755,41 @@ CREATE INDEX idx_genreable_genres_locked_at ON public.genreable_genres USING btr
 --
 
 CREATE INDEX idx_genreable_genres_position ON public.genreable_genres USING btree ("position");
+
+
+--
+-- Name: idx_news_category; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_news_category ON public.news USING btree (category);
+
+
+--
+-- Name: idx_news_expired_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_news_expired_at ON public.news USING btree (expired_at);
+
+
+--
+-- Name: idx_news_is_important; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_news_is_important ON public.news USING btree (is_important);
+
+
+--
+-- Name: idx_news_publication_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_news_publication_status ON public.news USING btree (published_at, COALESCE(expired_at, '9999-12-31 00:00:00+00'::timestamp with time zone));
+
+
+--
+-- Name: idx_news_published_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_news_published_at ON public.news USING btree (published_at);
 
 
 --

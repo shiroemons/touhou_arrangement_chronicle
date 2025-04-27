@@ -930,9 +930,42 @@ comment on column taggings.taggable_id is 'タグ付け対象のID';
 comment on column taggings.tag_id is '付与するタグID';
 comment on column taggings.locked_at is 'タグ付与情報をロックする日時';
 comment on column taggings.position is 'タグがエンティティに対して持つ順序';
+
+create table news (
+    id            uuid                     not null primary key default gen_random_uuid(),
+    created_at    timestamp with time zone not null default current_timestamp,
+    updated_at    timestamp with time zone not null default current_timestamp,
+    title         text                     not null,
+    content       text                     not null,
+    summary       text,
+    slug          text                     not null unique default gen_random_uuid(),
+    published_at  timestamp with time zone not null,
+    expired_at    timestamp with time zone,
+    is_important  boolean                  not null default false,
+    category      text
+);
+create index idx_news_published_at on news (published_at);
+create index idx_news_expired_at on news (expired_at);
+create index idx_news_is_important on news (is_important);
+create index idx_news_category on news (category);
+create index idx_news_publication_status on news (published_at, coalesce(expired_at, '9999-12-31'::timestamp with time zone));
+comment on table news is 'サイトのお知らせ情報を管理するテーブル';
+comment on column news.id is 'お知らせID';
+comment on column news.created_at is '作成日時';
+comment on column news.updated_at is '更新日時';
+comment on column news.title is 'お知らせタイトル';
+comment on column news.content is 'お知らせ本文';
+comment on column news.summary is 'お知らせ概要（一覧表示用）';
+comment on column news.slug is 'URLフレンドリーな識別子';
+comment on column news.published_at is '公開日時（この日時以降に表示される）';
+comment on column news.expired_at is '有効期限（この日時以降は表示されない、NULLの場合は無期限）';
+comment on column news.is_important is '重要なお知らせかどうか（強調表示などに使用）';
+comment on column news.category is 'お知らせのカテゴリ（更新情報、メンテナンス情報など）';
+
 -- migrate:down
 
 -- テーブルの削除は依存関係のある順序で実行
+drop table if exists news cascade;
 drop table if exists taggings cascade;
 drop table if exists genreable_genres cascade;
 drop table if exists songs_genres cascade;
