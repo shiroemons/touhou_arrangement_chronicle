@@ -67,16 +67,10 @@ export default function Home() {
           <div className="absolute top-1/2 -right-20 w-[35rem] h-[35rem] rounded-full bg-indigo-500/10 blur-[10rem] opacity-50"></div>
           <div className="absolute -bottom-20 left-1/3 w-[30rem] h-[30rem] rounded-full bg-blue-500/10 blur-[10rem] opacity-30"></div>
           
-          {/* 背景に東方Projectっぽい要素を追加 */}
-          <div className="absolute inset-0 bg-[url('/images/touhou-pattern.png')] bg-repeat opacity-5"></div>
-          
           {/* 魔法陣のような円形パターン */}
           <div className="absolute top-[20%] right-[15%] w-64 h-64 border border-primary/20 rounded-full opacity-30 animate-[spin_60s_linear_infinite]"></div>
           <div className="absolute top-[20%] right-[15%] w-80 h-80 border border-primary/15 rounded-full opacity-20 animate-[spin_80s_linear_infinite_reverse]"></div>
           <div className="absolute top-[20%] right-[15%] w-96 h-96 border border-primary/10 rounded-full opacity-10 animate-[spin_100s_linear_infinite]"></div>
-          
-          {/* 左側に東方風の装飾的なシルエット */}
-          <div className="absolute left-0 bottom-0 w-full h-full opacity-10 bg-[url('/images/touhou-silhouette.png')] bg-no-repeat bg-left-bottom bg-contain"></div>
         </div>
         
         {/* コンテンツコンテナ */}
