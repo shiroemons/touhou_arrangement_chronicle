@@ -17,6 +17,7 @@ import { cn } from "../../lib/utils"
 import { MenuIcon, LogIn, LogOut, User, ChevronDown, Settings, GitBranch, Bell } from "lucide-react"
 import type { loader } from "../../root"
 import type { User as UserType } from "../../types/auth"
+import { ThemeToggle } from "../ui/theme-toggle"
 
 interface Route {
   href: string
@@ -59,6 +60,7 @@ export function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <NotificationBadge />
             {isAuthenticated ? (
               <UserNav user={user} />
@@ -110,6 +112,10 @@ function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
                 {route.label}
               </Link>
             ))}
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-neutral-600 dark:text-neutral-400">テーマ設定</span>
+              <ThemeToggle />
+            </div>
             <div className="mt-4 border-t pt-4 dark:border-neutral-800">
               {isAuthenticated ? (
                 <Link
