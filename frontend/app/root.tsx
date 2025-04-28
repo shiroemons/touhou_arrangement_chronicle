@@ -13,6 +13,9 @@ import { authenticator, isAuthenticated } from "~/services/auth.server";
 import { Header } from "./components/layouts/header";
 import { Footer } from "./components/layouts/footer";
 import { ThemeProvider } from "./components/theme-provider";
+import { ClientOnlyCssLink } from "./components/ClientOnlyCssLink";
+import type { Route } from "./+types/root";
+
 export async function loader({ request }: LoaderFunctionArgs) {
   // ユーザーの認証状態を確認
   try {
@@ -33,9 +36,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return { user: null, isAuthenticated: false };
   }
 }
-
-import type { Route } from "./+types/root";
-import "./app.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -64,6 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="min-h-screen flex flex-col">
+        <ClientOnlyCssLink />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <div className="flex-1">{children}</div>
