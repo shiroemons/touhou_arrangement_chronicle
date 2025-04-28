@@ -12,7 +12,7 @@ import type { LoaderFunctionArgs } from "react-router";
 import { authenticator, isAuthenticated } from "~/services/auth.server";
 import { Header } from "./components/layouts/header";
 import { Footer } from "./components/layouts/footer";
-
+import { ThemeProvider } from "./components/theme-provider";
 export async function loader({ request }: LoaderFunctionArgs) {
   // ユーザーの認証状態を確認
   try {
@@ -56,7 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const isLoginPage = location.pathname === "/login";
 
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,11 +64,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <div className="flex-1">
-          {children}
-        </div>
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

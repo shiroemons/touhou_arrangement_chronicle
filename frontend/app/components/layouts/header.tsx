@@ -12,11 +12,11 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "../../components/ui/avatar"
-import { Badge } from "../../components/ui/badge"
 import { cn } from "../../lib/utils"
-import { MenuIcon, LogIn, LogOut, User, ChevronDown, Settings, GitBranch, Bell } from "lucide-react"
+import { MenuIcon, LogIn, LogOut, User, ChevronDown, Settings, Bell } from "lucide-react"
 import type { loader } from "../../root"
 import type { User as UserType } from "../../types/auth"
+import { ThemeSwitch } from "../../components/theme-switch"
 
 interface Route {
   href: string
@@ -60,6 +60,7 @@ export function Header() {
           </div>
           <div className="flex items-center gap-3">
             <NotificationBadge />
+            <ThemeSwitch />
             {isAuthenticated ? (
               <UserNav user={user} />
             ) : (
@@ -111,6 +112,10 @@ function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
               </Link>
             ))}
             <div className="mt-4 border-t pt-4 dark:border-neutral-800">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-neutral-600 dark:text-neutral-400">テーマ</span>
+                <ThemeSwitch />
+              </div>
               {isAuthenticated ? (
                 <Link
                   to="/logout"
