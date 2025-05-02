@@ -7,6 +7,8 @@ down:
 migrate:
 	docker compose run --rm dbmate up
 	docker compose run --rm dbmate -e TEST_DATABASE_URL --no-dump-schema up
+	docker compose run --rm admin bin/rails db:migrate
+	make drizzle-pull
 
 drop:
 	docker compose run --rm dbmate drop
