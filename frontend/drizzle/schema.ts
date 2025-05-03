@@ -761,3 +761,64 @@ export const ar_internal_metadata = pgTable("ar_internal_metadata", {
 	created_at: timestamp({ precision: 6, mode: 'string' }).notNull(),
 	updated_at: timestamp({ precision: 6, mode: 'string' }).notNull(),
 });
+
+export const users = pgTable("users", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const user_authentications = pgTable("user_authentications", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	user_id: uuid().notNull(),
+	auth0_user_id: text().notNull(),
+	last_login_at: timestamp({ withTimezone: true, mode: 'string' }),
+}, (table) => [
+	index("idx_user_authentications_auth0_user_id").using("btree", table.auth0_user_id.asc().nullsLast().op("text_ops")),
+	index("idx_user_authentications_user_id").using("btree", table.user_id.asc().nullsLast().op("uuid_ops")),
+	foreignKey({
+			columns: [table.user_id],
+			foreignColumns: [users.id],
+			name: "user_authentications_user_id_fkey"
+		}).onDelete("cascade"),
+	unique("user_authentications_user_id_key").on(table.user_id),
+	unique("user_authentications_auth0_user_id_key").on(table.auth0_user_id),
+]);
+
+export const user_profiles = pgTable("user_profiles", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	user_id: uuid().notNull(),
+	username: text().notNull(),
+	display_name: text().notNull(),
+	bio: text(),
+	avatar_url: text(),
+}, (table) => [
+	index("idx_user_profiles_user_id").using("btree", table.user_id.asc().nullsLast().op("uuid_ops")),
+	foreignKey({
+			columns: [table.user_id],
+			foreignColumns: [users.id],
+			name: "user_profiles_user_id_fkey"
+		}).onDelete("cascade"),
+	unique("user_profiles_user_id_key").on(table.user_id),
+	unique("user_profiles_username_key").on(table.username),
+]);
+
+export const user_settings = pgTable("user_settings", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	created_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updated_at: timestamp({ withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	user_id: uuid().notNull(),
+	is_public_profile: boolean().default(false).notNull(),
+}, (table) => [
+	index("idx_user_settings_user_id").using("btree", table.user_id.asc().nullsLast().op("uuid_ops")),
+	foreignKey({
+			columns: [table.user_id],
+			foreignColumns: [users.id],
+			name: "user_settings_user_id_fkey"
+		}).onDelete("cascade"),
+	unique("user_settings_user_id_key").on(table.user_id),
+]);

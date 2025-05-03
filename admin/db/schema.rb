@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_01_143011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -547,6 +547,45 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
     t.unique_constraint ["name"], name: "tags_name_key"
   end
 
+  create_table "user_authentications", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "認証情報ID" }, comment: "ユーザーの外部認証（Auth0など）情報を管理するテーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.uuid "user_id", null: false, comment: "関連するアプリケーションユーザーID"
+    t.text "auth0_user_id", null: false, comment: "Auth0から払い出されるユーザーID"
+    t.timestamptz "last_login_at", comment: "アプリケーションでの最終ログイン日時（Auth0のデータと同期するか検討）"
+    t.index ["auth0_user_id"], name: "idx_user_authentications_auth0_user_id"
+    t.index ["user_id"], name: "idx_user_authentications_user_id"
+    t.unique_constraint ["auth0_user_id"], name: "user_authentications_auth0_user_id_key"
+    t.unique_constraint ["user_id"], name: "user_authentications_user_id_key"
+  end
+
+  create_table "user_profiles", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "プロフィール情報ID" }, comment: "ユーザーのプロフィール情報を管理するテーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.uuid "user_id", null: false, comment: "関連するユーザーID"
+    t.text "username", null: false
+    t.text "display_name", null: false, comment: "表示名"
+    t.text "bio", comment: "自己紹介"
+    t.text "avatar_url", comment: "アバター画像のURL"
+    t.index ["user_id"], name: "idx_user_profiles_user_id"
+    t.unique_constraint ["user_id"], name: "user_profiles_user_id_key"
+    t.unique_constraint ["username"], name: "user_profiles_username_key"
+  end
+
+  create_table "user_settings", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "設定情報ID" }, comment: "ユーザーのアプリケーション設定を管理するテーブル", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+    t.uuid "user_id", null: false, comment: "関連するユーザーID"
+    t.boolean "is_public_profile", default: false, null: false, comment: "プロフィールを公開するかどうか"
+    t.index ["user_id"], name: "idx_user_settings_user_id"
+    t.unique_constraint ["user_id"], name: "user_settings_user_id_key"
+  end
+
+  create_table "users", id: { type: :uuid, default: -> { "gen_random_uuid()" }, comment: "ユーザーID" }, comment: "サイトのユーザー基本情報を管理するテーブル（最小限の情報のみ）", force: :cascade do |t|
+    t.timestamptz "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "作成日時"
+    t.timestamptz "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "更新日時"
+  end
+
   add_foreign_key "album_discs", "albums", name: "album_discs_album_id_fkey", on_delete: :cascade
   add_foreign_key "album_prices", "albums", name: "album_prices_album_id_fkey", on_delete: :cascade
   add_foreign_key "album_prices", "shops", name: "album_prices_shop_id_fkey", on_delete: :restrict
@@ -578,4 +617,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_18_055109) do
   add_foreign_key "songs_original_songs", "songs", name: "songs_original_songs_song_id_fkey", on_delete: :cascade
   add_foreign_key "streamable_urls", "distribution_services", column: "service_name", primary_key: "service_name", name: "streamable_urls_service_name_fkey", on_delete: :restrict
   add_foreign_key "taggings", "tags", name: "taggings_tag_id_fkey", on_delete: :cascade
+  add_foreign_key "user_authentications", "users", name: "user_authentications_user_id_fkey", on_delete: :cascade
+  add_foreign_key "user_profiles", "users", name: "user_profiles_user_id_fkey", on_delete: :cascade
+  add_foreign_key "user_settings", "users", name: "user_settings_user_id_fkey", on_delete: :cascade
 end

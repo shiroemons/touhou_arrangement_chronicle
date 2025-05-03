@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { products, original_songs, distribution_services, streamable_urls, event_series, event_editions, event_days, artists, artist_names, circles, albums, albums_circles, album_prices, shops, album_upcs, album_discs, songs, song_lyrics, song_bmps, song_isrcs, songs_arrange_circles, songs_original_songs, songs_artist_roles, artist_roles, songs_genres, genres, genreable_genres, tags, taggings } from "./schema";
+import { products, original_songs, distribution_services, streamable_urls, event_series, event_editions, event_days, artists, artist_names, circles, albums, albums_circles, album_prices, shops, album_upcs, album_discs, songs, song_lyrics, song_bmps, song_isrcs, songs_arrange_circles, songs_original_songs, songs_artist_roles, artist_roles, songs_genres, genres, genreable_genres, tags, taggings, users, user_authentications, user_profiles, user_settings } from "./schema";
 
 export const original_songsRelations = relations(original_songs, ({one, many}) => ({
 	product: one(products, {
@@ -244,4 +244,31 @@ export const taggingsRelations = relations(taggings, ({one}) => ({
 
 export const tagsRelations = relations(tags, ({many}) => ({
 	taggings: many(taggings),
+}));
+
+export const user_authenticationsRelations = relations(user_authentications, ({one}) => ({
+	user: one(users, {
+		fields: [user_authentications.user_id],
+		references: [users.id]
+	}),
+}));
+
+export const usersRelations = relations(users, ({many}) => ({
+	user_authentications: many(user_authentications),
+	user_profiles: many(user_profiles),
+	user_settings: many(user_settings),
+}));
+
+export const user_profilesRelations = relations(user_profiles, ({one}) => ({
+	user: one(users, {
+		fields: [user_profiles.user_id],
+		references: [users.id]
+	}),
+}));
+
+export const user_settingsRelations = relations(user_settings, ({one}) => ({
+	user: one(users, {
+		fields: [user_settings.user_id],
+		references: [users.id]
+	}),
 }));

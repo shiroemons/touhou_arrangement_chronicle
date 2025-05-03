@@ -563,6 +563,18 @@ COMMENT ON COLUMN public.albums_circles."position" IS '複数サークルが関�
 
 
 --
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: artist_names; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3007,6 +3019,235 @@ COMMENT ON COLUMN public.tags.note IS 'タグに関する補足情報';
 
 
 --
+-- Name: user_authentications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_authentications (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    user_id uuid NOT NULL,
+    auth0_user_id text NOT NULL,
+    last_login_at timestamp with time zone
+);
+
+
+--
+-- Name: TABLE user_authentications; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.user_authentications IS 'ユーザーの外部認証（Auth0など）情報を管理するテーブル';
+
+
+--
+-- Name: COLUMN user_authentications.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.id IS '認証情報ID';
+
+
+--
+-- Name: COLUMN user_authentications.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN user_authentications.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN user_authentications.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.user_id IS '関連するアプリケーションユーザーID';
+
+
+--
+-- Name: COLUMN user_authentications.auth0_user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.auth0_user_id IS 'Auth0から払い出されるユーザーID';
+
+
+--
+-- Name: COLUMN user_authentications.last_login_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_authentications.last_login_at IS 'アプリケーションでの最終ログイン日時（Auth0のデータと同期するか検討）';
+
+
+--
+-- Name: user_profiles; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_profiles (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    user_id uuid NOT NULL,
+    username text NOT NULL,
+    display_name text NOT NULL,
+    bio text,
+    avatar_url text
+);
+
+
+--
+-- Name: TABLE user_profiles; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.user_profiles IS 'ユーザーのプロフィール情報を管理するテーブル';
+
+
+--
+-- Name: COLUMN user_profiles.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.id IS 'プロフィール情報ID';
+
+
+--
+-- Name: COLUMN user_profiles.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN user_profiles.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN user_profiles.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.user_id IS '関連するユーザーID';
+
+
+--
+-- Name: COLUMN user_profiles.display_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.display_name IS '表示名';
+
+
+--
+-- Name: COLUMN user_profiles.bio; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.bio IS '自己紹介';
+
+
+--
+-- Name: COLUMN user_profiles.avatar_url; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_profiles.avatar_url IS 'アバター画像のURL';
+
+
+--
+-- Name: user_settings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_settings (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    user_id uuid NOT NULL,
+    is_public_profile boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: TABLE user_settings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.user_settings IS 'ユーザーのアプリケーション設定を管理するテーブル';
+
+
+--
+-- Name: COLUMN user_settings.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_settings.id IS '設定情報ID';
+
+
+--
+-- Name: COLUMN user_settings.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_settings.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN user_settings.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_settings.updated_at IS '更新日時';
+
+
+--
+-- Name: COLUMN user_settings.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_settings.user_id IS '関連するユーザーID';
+
+
+--
+-- Name: COLUMN user_settings.is_public_profile; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_settings.is_public_profile IS 'プロフィールを公開するかどうか';
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: TABLE users; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.users IS 'サイトのユーザー基本情報を管理するテーブル（最小限の情報のみ）';
+
+
+--
+-- Name: COLUMN users.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.id IS 'ユーザーID';
+
+
+--
+-- Name: COLUMN users.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.created_at IS '作成日時';
+
+
+--
+-- Name: COLUMN users.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.updated_at IS '更新日時';
+
+
+--
 -- Name: album_discs album_discs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3052,6 +3293,14 @@ ALTER TABLE ONLY public.albums
 
 ALTER TABLE ONLY public.albums
     ADD CONSTRAINT albums_slug_key UNIQUE (slug);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
@@ -3356,6 +3605,78 @@ ALTER TABLE ONLY public.tags
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_authentications user_authentications_auth0_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_authentications
+    ADD CONSTRAINT user_authentications_auth0_user_id_key UNIQUE (auth0_user_id);
+
+
+--
+-- Name: user_authentications user_authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_authentications
+    ADD CONSTRAINT user_authentications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_authentications user_authentications_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_authentications
+    ADD CONSTRAINT user_authentications_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: user_profiles user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_profiles
+    ADD CONSTRAINT user_profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_profiles user_profiles_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_profiles
+    ADD CONSTRAINT user_profiles_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: user_profiles user_profiles_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_profiles
+    ADD CONSTRAINT user_profiles_username_key UNIQUE (username);
+
+
+--
+-- Name: user_settings user_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_settings
+    ADD CONSTRAINT user_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_settings user_settings_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_settings
+    ADD CONSTRAINT user_settings_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
@@ -4129,6 +4450,34 @@ CREATE INDEX idx_taggings_position ON public.taggings USING btree ("position");
 
 
 --
+-- Name: idx_user_authentications_auth0_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_authentications_auth0_user_id ON public.user_authentications USING btree (auth0_user_id);
+
+
+--
+-- Name: idx_user_authentications_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_authentications_user_id ON public.user_authentications USING btree (user_id);
+
+
+--
+-- Name: idx_user_profiles_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_profiles_user_id ON public.user_profiles USING btree (user_id);
+
+
+--
+-- Name: idx_user_settings_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_settings_user_id ON public.user_settings USING btree (user_id);
+
+
+--
 -- Name: uk_album_upcs_album_id_upc; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4489,6 +4838,30 @@ ALTER TABLE ONLY public.taggings
 
 
 --
+-- Name: user_authentications user_authentications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_authentications
+    ADD CONSTRAINT user_authentications_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: user_profiles user_profiles_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_profiles
+    ADD CONSTRAINT user_profiles_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: user_settings user_settings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_settings
+    ADD CONSTRAINT user_settings_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -4498,4 +4871,5 @@ ALTER TABLE ONLY public.taggings
 --
 
 INSERT INTO public.schema_migrations (version) VALUES
-    ('20250118055109');
+    ('20250118055109'),
+    ('20250501143011');
