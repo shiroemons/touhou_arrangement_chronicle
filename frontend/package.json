@@ -40,7 +40,7 @@
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.5.2",
+    "@react-router/dev": "^7.6.3",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^22",
     "@types/pg": "^8.11.14",
