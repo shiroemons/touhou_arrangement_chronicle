@@ -12,8 +12,8 @@ on:
 
 jobs:
   claude-review:
-    # Skip dependabot PRs
-    if: github.actor != 'dependabot[bot]'
+    # Skip dependency bot PRs
+    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
     
     runs-on: ubuntu-latest
     permissions:
