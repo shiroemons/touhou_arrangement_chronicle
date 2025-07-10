@@ -13,7 +13,8 @@ on:
 jobs:
   claude-review:
     # Skip dependency bot PRs
-    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    if: |
+      !contains(fromJSON('["dependabot[bot]", "renovate[bot]"]'), github.actor)
     
     runs-on: ubuntu-latest
     permissions:
