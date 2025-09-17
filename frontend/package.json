@@ -42,7 +42,7 @@
   "devDependencies": {
     "@react-router/dev": "^7.5.2",
     "@tailwindcss/vite": "^4.0.0",
-    "@types/node": "^22",
+    "@types/node": "^24",
     "@types/pg": "^8.11.14",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
